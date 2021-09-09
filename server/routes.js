@@ -49,31 +49,31 @@ router.put('/reviews/:review_id/report', (req, res) => { helpers.reportReview(re
 
 // GET request that retrieves a list of questions for a particular product. This list does not include 
 // any reported questions. product_id required; other params: page count (default 1) & count per page (default 5)
-router.get('/qa/questions', ()=>{});
+router.get('/qa/questions', (req, res) => { helpers.getQuestions(req, res) });
 
 // GET request that returns answers for a given question. This list does not include any reported answers.
-router.get('/qa/questions/:question_id/answers', ()=>{});
+router.get('/qa/questions/:question_id/answers', (req, res) => { helpers.getAnswers(req, res) });
 
 // POST request that adds a question for a given product; req.body should include: body, name, email, product_id
-router.post('/qa/questions', ()=>{});
+router.post('/qa/questions', (req, res) => { helpers.createQuestion(req, res) });
 
 // POST request that adds an answer for the given question; param = question_id, req.body should include: body,
 // name, email, photos.
-router.post('/qa/questions/:question_id/answers', ()=>{});
+router.post('/qa/questions/:question_id/answers', (req, res) => { helpers.createAnswer(req, res) });
 
 // PUT request that updates a question to show it was found helpful.
-router.put('/qa/questions/:question_id/helpful', ()=>{});
+router.put('/qa/questions/:question_id/helpful', (req, res) => { helpers.markQuestionAsHelpful(req, res) });
 
 // PUT request that updates a question to show it was reported. Note, this action does not delete the question, 
 // but the question will not be returned in the above GET request.
-router.put('/qa/questions/:question_id/report', ()=>{});
+router.put('/qa/questions/:question_id/report', (req, res) => { helpers.reportQuestion(req, res) });
 
 // PUT request that updates an answer to show it was found helpful.
-router.put('/qa/answers/:answer_id/helpful', ()=>{});
+router.put('/qa/answers/:answer_id/helpful', (req, res) => { helpers.markAnswerAsHelpful(req, res) });
 
 // PUT request that updates an answer to show it has been reported. Note, this action does not delete the answer, 
 // but the answer will not be returned in the above GET request.
-router.put('/qa/answers/:answer_id/report', ()=>{});
+router.put('/qa/answers/:answer_id/report', (req, res) => { helpers.reportAnswer(req, res) });
 
 
 ////////////////////////////////////////////

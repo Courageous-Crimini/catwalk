@@ -168,4 +168,163 @@ module.exports = {
                 console.log('ERROR: ', err.response.data);
             });
     },
+    getQuestions: (req, res) => {
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/qa/questions',
+            method: 'get',
+            params: {
+                page: 1,
+                count: 5,
+                product_id: req.body.product_id,
+              }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(200).send(response.data);
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    getAnswers: (req, res) => {
+        const id = req.params.question_id
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/questions/${id}/answers`,
+            method: 'get',
+            params: {
+                page: 1,
+                count: 5,
+              }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(200).send(response.data);
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    createQuestion: (req, res) => {
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/qa/questions',
+            method: 'post',
+            data: { 
+                product_id: req.body.product_id,
+                name: req.body.name,
+                email: req.body.email,
+                body: req.body.body
+            }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(201).send('Question Posted!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    createAnswer: (req, res) => {
+        const id = req.params.question_id;
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/questions/${id}/answers`,
+            method: 'post',
+            data: { 
+                name: req.body.name,
+                email: req.body.email,
+                body: req.body.body,
+                photos: req.body.photos
+            }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(201).send('Answer Posted!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    markQuestionAsHelpful: (req, res) => {
+        const id = req.params.question_id;
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/questions/${id}/helpful`,
+            method: 'put',
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Question marked as helpful!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    reportQuestion: (req, res) => {
+        const id = req.params.question_id;
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/questions/${id}/report`,
+            method: 'put',
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Question reported!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    markAnswerAsHelpful: (req, res) => {
+        const id = req.params.answer_id;
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/answers/${id}/helpful`,
+            method: 'put',
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Answer marked as helpful!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    reportAnswer: (req, res) => {
+        const id = req.params.answer_id;
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/qa/answers/${id}/report`,
+            method: 'put',
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Answer reported!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
 }
