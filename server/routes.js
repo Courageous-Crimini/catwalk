@@ -33,7 +33,7 @@ router.get('/reviews/meta', (req, res) => { helpers.getReviewsMeta(req, res) });
 
 // POST request that creates a new review; req.body should include: product_id, rating, summary, body,
 // recommend, name, email, photos, characteristics
-router.post('/reviews', ()=>{});
+router.post('/reviews', (req, res) => { helpers.createReview(req, res) });
 
 // PUT request that marks a review as helpful
 router.put('/reviews/:review_id/helpful', ()=>{});

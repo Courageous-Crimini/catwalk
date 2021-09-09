@@ -1,10 +1,6 @@
 const axios = require('axios');
 const TOKEN = require('./config.js');
 
-// https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo/
-
-// API Helper functions will go here
-
 // url, method, data
 module.exports = {
     getProducts: (req, res) => {
@@ -23,7 +19,7 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
             });
     },
     getProductInfo: (req, res) => {
@@ -39,7 +35,7 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
             });
     },
     getProductStyles: (req, res) => {
@@ -55,7 +51,7 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
             });
     },
     getRelatedProducts: (req, res) => {
@@ -71,7 +67,7 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
             });
     },
     getReviews: (req, res) => {
@@ -93,7 +89,7 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
             });
     },
     getReviewsMeta: (req, res) => {
@@ -109,7 +105,36 @@ module.exports = {
                 res.status(200).send(response.data);
             })
             .catch((err) => {
-                console.log('ERROR: ', err);
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    createReview: (req, res) => {
+        const options = {
+            headers: { 
+                Authorization: TOKEN,
+                'Content-Type': "application/json"
+            },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/reviews',
+            method: 'post',
+            data: { 
+                product_id: req.body.product_id,
+                rating: req.body.rating,
+                summary: req.body.summary,
+                body: req.body.body,
+                recommend: req.body.recommend,
+                name: req.body.name,
+                email: req.body.email,
+                photos: req.body.photos,
+                characteristics: req.body.characteristics || {}
+            }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(201).send('Review Posted!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
             });
     },
 }
