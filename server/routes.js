@@ -81,10 +81,10 @@ router.put('/qa/answers/:answer_id/report', (req, res) => { helpers.reportAnswer
 //////////////////////////////////////////// 
 
 // General GET request that retrieves list of products added to the cart by a user.
-router.get('/cart', ()=>{});
+router.get('/cart', (req, res) => { helpers.getCart(req, res) });
 
 // POST request that adds a product to the cart; sku_id is required in req.body
-router.post('/cart', ()=>{});
+router.post('/cart', (req, res) => { helpers.addToCart(req, res) });
 
 
 ////////////////////////////////////////////

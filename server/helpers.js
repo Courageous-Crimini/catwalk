@@ -327,4 +327,37 @@ module.exports = {
                 console.log('ERROR: ', err.response.data);
             });
     },
+    getCart: (req, res) => {
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/cart',
+            method: 'get',
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(200).send(response.data);
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    addToCart: (req, res) => {
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/cart',
+            method: 'post',
+            data: {
+                sku_id: req.body.sku_id
+            }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(201).send('Item added to cart!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
 }
