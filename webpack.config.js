@@ -4,10 +4,10 @@ const SRC_DIR = '/client';
 const DIST_DIR = './public';
 
 module.exports = {
-  entry: path.join(__dirname, `${SRC_DIR}/index.js`),
+  entry: path.join(__dirname, `${SRC_DIR}/src/index.jsx`),
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, DIST_DIR)
+    path: path.join(__dirname, SRC_DIR, DIST_DIR)
   },
   devtool: 'eval-source-map',
   watch: true,
