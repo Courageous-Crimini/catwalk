@@ -152,4 +152,20 @@ module.exports = {
                 console.log('ERROR: ', err.response.data);
             });
     },
+    reportReview: (req, res) => {
+        const id = req.params.review_id;
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/reviews/${id}/report`,
+            method: 'put'
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Review Reported!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
 }

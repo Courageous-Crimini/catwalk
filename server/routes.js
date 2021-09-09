@@ -40,7 +40,7 @@ router.put('/reviews/:review_id/helpful', (req, res) => { helpers.markReviewHelp
 
 // PUT request that updates a review to show it was reported. Note: this action does not delete the 
 // review, but the review will not be returned in the above GET request.
-router.put('/reviews/:review_id/report', ()=>{});
+router.put('/reviews/:review_id/report', (req, res) => { helpers.reportReview(req, res) });
 
 
 ////////////////////////////////////////////
