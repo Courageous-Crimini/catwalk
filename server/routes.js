@@ -1,12 +1,14 @@
 const express = require('express');
 const router = express.Router();
+const helpers = require('./helpers.js');
+const TOKEN = require('./config.js');
 
 ////////////////////////////////////////////
 ///////////     PRODUCTS API     ///////////
 ////////////////////////////////////////////
 
 // General GET request for the products API, default params are 1 page and 5 results per page
-router.get('/products', ()=>{});
+router.get('/products', (req, res) => { helpers.getProducts(req, res) });
 
 // GET request that returns all product level information for a specified product id.
 router.get('/products/:product_id', ()=>{});
