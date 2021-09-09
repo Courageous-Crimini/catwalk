@@ -13,7 +13,7 @@ When working on a new feature, add a new branch by running the following:
 
     git checkout -b <your-branch-name> //Adds a new branch to your local repo
 
-Make sure to replace `<your-branch-name>` with your actual branch name. E.g. `git check -u origin sick-feature`
+Make sure to replace `<your-branch-name>` with your actual branch name e.g. `git checkout -u origin sick-feature`.
 
 ## Updating the repository:
 When you are finished working on your feature and are ready to push, run the following:
