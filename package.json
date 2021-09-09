@@ -5,7 +5,8 @@
   "main": "server/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server/index.js"
+    "start": "nodemon server/index.js",
+    "react-dev": "webpack --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -18,10 +19,15 @@
   },
   "homepage": "https://github.com/Courageous-Crimini/catwalk#readme",
   "dependencies": {
+    "@babel/cli": "^7.15.4",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-react": "^7.14.5",
     "axios": "^0.21.4",
     "express": "^4.17.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.12"
+    "nodemon": "^2.0.12",
+    "webpack": "^5.52.0",
+    "webpack-cli": "^4.8.0"
   }
 }
