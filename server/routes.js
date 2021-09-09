@@ -13,8 +13,8 @@ router.get('/products', (req, res) => { helpers.getProducts(req, res) });
 // GET request that returns all product level information for a specified product id.
 router.get('/products/:product_id', (req, res) => { helpers.getProductInfo(req, res) });
 
-// GET request that returns the all styles available for the given product.
-router.get('/products/:product_id/styles', ()=>{});
+// GET request that returns all the styles available for the given product.
+router.get('/products/:product_id/styles', (req, res) => { helpers.getProductStyles(req, res) });
 
 // GET request that returns the id's of products related to the product specified.
 router.get('/products/:product_id/related', ()=>{});
