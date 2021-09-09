@@ -5,10 +5,8 @@ Welcome to Project Catwalk.
 1. Fork and clone this repo to your local machine.
 2. Run `npm install` in the terminal.
 3. Run `npm run react-dev` to startup webpack.
-4. Run `npm start` to start server.
-
-## Enter your own Github API Key:
-Inside the `server` directory, follow the instructions in `example.config.js`.
+4. Inside the `server` directory, follow the instructions in `example.config.js`.
+5. Run `npm start` to start server.
 
 ## Working on the repository:
 When working on a new feature, add a new branch by running the following:
