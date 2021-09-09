@@ -17,7 +17,7 @@ router.get('/products/:product_id', (req, res) => { helpers.getProductInfo(req, 
 router.get('/products/:product_id/styles', (req, res) => { helpers.getProductStyles(req, res) });
 
 // GET request that returns the id's of products related to the product specified.
-router.get('/products/:product_id/related', ()=>{});
+router.get('/products/:product_id/related', (req, res) => { helpers.getRelatedProducts(req, res) });
 
 
 ////////////////////////////////////////////
