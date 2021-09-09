@@ -11,7 +11,7 @@ const TOKEN = require('./config.js');
 router.get('/products', (req, res) => { helpers.getProducts(req, res) });
 
 // GET request that returns all product level information for a specified product id.
-router.get('/products/:product_id', ()=>{});
+router.get('/products/:product_id', (req, res) => { helpers.getProductInfo(req, res) });
 
 // GET request that returns the all styles available for the given product.
 router.get('/products/:product_id/styles', ()=>{});
