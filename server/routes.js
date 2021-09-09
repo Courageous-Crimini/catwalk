@@ -26,14 +26,14 @@ router.get('/products/:product_id/related', (req, res) => { helpers.getRelatedPr
 
 // General GET request for the reviews API, default params are 1 page and 5 results per page;
 // sort & product_id are also required; sort can equal "newest", "helpful", or "relevant"
-router.get('/reviews/', ()=>{});
+router.get('/reviews', (req, res) => { helpers.getReviews(req, res) });
 
 // GET request that returns reviews metadata for a given product; product_id required query param
-router.get('/reviews/meta', ()=>{});
+router.get('/reviews/meta', (req, res) => { helpers.getReviewsMeta(req, res) });
 
 // POST request that creates a new review; req.body should include: product_id, rating, summary, body,
 // recommend, name, email, photos, characteristics
-router.post('/reviews/', ()=>{});
+router.post('/reviews', ()=>{});
 
 // PUT request that marks a review as helpful
 router.put('/reviews/:review_id/helpful', ()=>{});

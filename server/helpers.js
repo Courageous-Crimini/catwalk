@@ -74,4 +74,42 @@ module.exports = {
                 console.log('ERROR: ', err);
             });
     },
+    getReviews: (req, res) => {
+        const sortType = req.body.sortType || 'newest';
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/reviews',
+            method: 'get',
+            params: {
+                page: 1,
+                count: 5,
+                sort: sortType,
+                product_id: req.body.product_id
+              }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(200).send(response.data);
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err);
+            });
+    },
+    getReviewsMeta: (req, res) => {
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: '/reviews/meta',
+            method: 'get',
+            params: { product_id: req.body.product_id }
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(200).send(response.data);
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err);
+            });
+    },
 }
