@@ -36,7 +36,7 @@ router.get('/reviews/meta', (req, res) => { helpers.getReviewsMeta(req, res) });
 router.post('/reviews', (req, res) => { helpers.createReview(req, res) });
 
 // PUT request that marks a review as helpful
-router.put('/reviews/:review_id/helpful', ()=>{});
+router.put('/reviews/:review_id/helpful', (req, res) => { helpers.markReviewHelpful(req, res) });
 
 // PUT request that updates a review to show it was reported. Note: this action does not delete the 
 // review, but the review will not be returned in the above GET request.

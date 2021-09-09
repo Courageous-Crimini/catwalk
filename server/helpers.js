@@ -112,7 +112,6 @@ module.exports = {
         const options = {
             headers: { 
                 Authorization: TOKEN,
-                'Content-Type': "application/json"
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
             url: '/reviews',
@@ -132,6 +131,22 @@ module.exports = {
         axios.request(options)
             .then((response) => {
                 res.status(201).send('Review Posted!');
+            })
+            .catch((err) => {
+                console.log('ERROR: ', err.response.data);
+            });
+    },
+    markReviewHelpful: (req, res) => {
+        const id = req.params.review_id;
+        const options = {
+            headers: { Authorization: TOKEN },
+            baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
+            url: `/reviews/${id}/helpful`,
+            method: 'put'
+        };
+        axios.request(options)
+            .then((response) => {
+                res.status(204).send('Marked Helpful!');
             })
             .catch((err) => {
                 console.log('ERROR: ', err.response.data);
