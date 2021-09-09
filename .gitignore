@@ -1,0 +1,8 @@
+# DS Store
+.DS_STORE
+
+# Installed Packages
+/node_modules
+
+# Config File
+/server/config.js

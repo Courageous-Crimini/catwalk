@@ -1,0 +1,27 @@
+{
+  "name": "hack_reactor_front_end_capstone",
+  "version": "1.0.0",
+  "description": "The frontend capstone project for Hack Reactor cohort SFO137 Group 2: Courageous Crimini",
+  "main": "server/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Courageous-Crimini/catwalk.git"
+  },
+  "author": "Jacques Dubois, Fikri Anuar, Tim Jordan, Nick Wai",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Courageous-Crimini/catwalk/issues"
+  },
+  "homepage": "https://github.com/Courageous-Crimini/catwalk#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
