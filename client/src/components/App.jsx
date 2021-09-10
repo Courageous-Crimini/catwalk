@@ -20,8 +20,8 @@ const App = () => {
         <Container>
             <Header />
             <Overview />
-            <QA/>
             <RelatedProducts/>
+            <QA/>
             <Reviews/>
         </Container>
     );
