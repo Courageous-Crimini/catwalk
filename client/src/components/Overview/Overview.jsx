@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Header = () => {
+const Overview = () => {
     return (
         <div>
-            <h1> Header Template </h1>
+            <h2> Overview </h2>
         </div>
     )
 };
 
-export default Header;
+export default Overview;
