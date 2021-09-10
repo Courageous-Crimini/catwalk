@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Header from './Header/Header.jsx';
 import Overview from './Overview/Overview.jsx';
-import RelatedProducts from './RelatedProducts/RelatedProducts.jsx';
+import RelatedAndComparison from './RelatedAndComparison/RelatedAndComparison.jsx';
 import QA from './QA/QA.jsx';
 import Reviews from './Reviews/Reviews.jsx';
 
@@ -20,7 +20,7 @@ const App = () => {
         <Container>
             <Header />
             <Overview />
-            <RelatedProducts/>
+            <RelatedAndComparison />
             <QA/>
             <Reviews/>
         </Container>

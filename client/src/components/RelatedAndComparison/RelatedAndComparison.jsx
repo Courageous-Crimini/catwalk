@@ -7,12 +7,13 @@ padding: 20em;
 background: #DF9EF6;
 `;
 
-const RelatedProducts= () => {
+const RelatedAndComparison= () => {
     return (
         <Wrapper>
             <h2> Related Products </h2>
+            <h2>Your Outfits</h2>
         </Wrapper>
     )
 };
 
-export default RelatedProducts;
+export default RelatedAndComparison;
