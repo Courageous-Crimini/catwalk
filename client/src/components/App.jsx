@@ -12,19 +12,16 @@ display: flex;
 flex-direction: column;
 justify-content: flex-start;
 align-items: center;
-font-family: Valera Round, sans-serif;
-`
+font-family: Valera Round, sans-serif;`;
 
-const App = () => {
-    return (
-        <Container>
-            <Header />
-            <Overview />
-            <RelatedAndComparison />
-            <QA/>
-            <Reviews/>
-        </Container>
-    );
-};
+const App = () => (
+  <Container>
+    <Header />
+    <Overview />
+    <RelatedAndComparison />
+    <QA />
+    <Reviews />
+  </Container>
+);
 
 export default App;

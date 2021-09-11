@@ -1,5 +1,5 @@
 import React from 'react';
-import RelatedCard from './Card';
+import RelatedCard from './Card.jsx';
 
 const RelatedProducts = () => {
   <RelatedCard />;

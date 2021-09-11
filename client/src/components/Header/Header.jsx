@@ -6,16 +6,12 @@ const Wrapper = styled.section`
 // text-align: center;
 // background: #1abc9c;
 // color: white;
-// font-size: 30px;
+// font-size: 30px;`;
 
-`;
-
-const Header = () => {
-    return (
-        <Wrapper>
-            <h1> Header Template </h1>
-        </Wrapper>
-    )
-};
+const Header = () => (
+  <Wrapper>
+    <h1 id="header"> Header Template </h1>
+  </Wrapper>
+);
 
 export default Header;

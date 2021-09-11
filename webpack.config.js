@@ -1,4 +1,3 @@
-
 const path = require('path');
 const SRC_DIR = '/client';
 const DIST_DIR = './public';
@@ -28,12 +27,12 @@ module.exports = {
               ["@babel/plugin-transform-runtime",
                 {
                   "regenerator": true
-                }
-              ]
-            ]
-          }
-        }
-      }
-    ]
-  }
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
 };
