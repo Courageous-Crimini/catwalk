@@ -1,4 +1,3 @@
-
 const path = require('path');
 const SRC_DIR = '/client';
 const DIST_DIR = './public';
@@ -7,7 +6,7 @@ module.exports = {
   entry: path.join(__dirname, `${SRC_DIR}/src/index.jsx`),
   output: {
     filename: 'bundle.js',
-    path: path.join(__dirname, SRC_DIR, DIST_DIR)
+    path: path.join(__dirname, SRC_DIR, DIST_DIR),
   },
   devtool: 'eval-source-map',
   watch: true,
@@ -28,12 +27,12 @@ module.exports = {
               ["@babel/plugin-transform-runtime",
                 {
                   "regenerator": true
-                }
-              ]
-            ]
-          }
-        }
-      }
-    ]
-  }
+                },
+              ],
+            ],
+          },
+        },
+      },
+    ],
+  },
 };
