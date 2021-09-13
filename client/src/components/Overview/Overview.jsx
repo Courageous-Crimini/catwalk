@@ -6,7 +6,7 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ProductOverview from './ProductOverview.jsx';
-import ACTIONS from '../App.jsx';
+// import ACTIONS from '../App.jsx';
 
 const Wrapper = styled.section`
 display: inline-block;
@@ -15,21 +15,21 @@ height: 30em;
 background: #BAEFD5;
 `;
 
-export const ACTION = {
-  SELECT_ITEM: 'select-item',
-};
+// export const ACTIONS = {
+//     SELECT_ITEM: 'select-item',
+//   };
 
-function reducer(state, action) {
-  switch (action.type) {
-    case ACTIONS.SELECT_ITEM:
-      return {
-        ...state,
-        selectedItem: action.payload,
-      };
-    default:
-      return state;
-  }
-}
+//   function reducer(state, action) {
+//     switch (action.type) {
+//       case ACTIONS.SELECT_ITEM:
+//         return {
+//           ...state,
+//           selectedItem: action.payload,
+//         };
+//       default:
+//         return state;
+//     }
+//   }
 
 const Overview = ({ products, selected, dispatch }) => (
   <Wrapper>
