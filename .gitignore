@@ -6,3 +6,6 @@
 
 # Config File
 /server/config.js
+
+#Bundle File
+/public/bundle.js
