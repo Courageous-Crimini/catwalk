@@ -17,22 +17,32 @@ font-family: Valera Round, sans-serif;`;
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     axios.get('/api/products')
       .then((response) => {
         setProducts(response.data);
+      })
+      .then(() => {
+        setLoaded(true);
       });
   }, []);
 
   return (
-    <Container>
-      <Header />
-      <Overview products={products} />
-      <RelatedAndComparison />
-      <QA />
-      <Reviews />
-    </Container>
+    <div>
+      { loaded
+        ? (
+          <Container>
+            <Header />
+            <Overview products={products} />
+            <RelatedAndComparison />
+            <QA />
+            <Reviews />
+          </Container>
+        )
+        : <h4>Loading...</h4>}
+    </div>
   );
 };
 
