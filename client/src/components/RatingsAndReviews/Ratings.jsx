@@ -18,42 +18,47 @@ const Ratings = () => (
       </span>
       <span>
         5 stars
-        <meter id="fuel"
+        <meter
           min="0"
           max="5"
-          value="1" />
+          value="1"
+        />
         <br />
       </span>
       <span>
         4 stars
-        <meter id="fuel"
+        <meter
           min="0"
           max="5"
-          value="2" />
+          value="2"
+        />
         <br />
       </span>
       <span>
         3 stars
-        <meter id="fuel"
+        <meter
           min="0"
           max="5"
-          value="4" />
+          value="4"
+        />
         <br />
       </span>
       <span>
         2 stars
-        <meter id="fuel"
+        <meter
           min="0"
           max="5"
-          value="5" />
+          value="5"
+        />
         <br />
       </span>
       <span>
         1 stars
-        <meter id="fuel"
+        <meter
           min="0"
           max="5"
-          value="3" />
+          value="3"
+        />
         <br />
       </span>
     </div>
