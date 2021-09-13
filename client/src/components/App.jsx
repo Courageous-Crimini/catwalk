@@ -5,7 +5,7 @@ import Header from './Header/Header.jsx';
 import Overview from './Overview/Overview.jsx';
 import RelatedAndComparison from './RelatedAndComparison/RelatedAndComparison.jsx';
 import QA from './QA/QA.jsx';
-import Reviews from './Reviews/Reviews.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 
 const Container = styled.div`
 width: 100%;
@@ -31,7 +31,7 @@ const App = () => {
       <Overview products={products} />
       <RelatedAndComparison />
       <QA />
-      <Reviews />
+      <RatingsAndReviews products={products} />
     </Container>
   );
 };
