@@ -30,7 +30,7 @@ const App = () => {
       <Header />
       <Overview products={products} />
       <RelatedAndComparison />
-      <QA />
+      <QA products={products} />
       <Reviews />
     </Container>
   );

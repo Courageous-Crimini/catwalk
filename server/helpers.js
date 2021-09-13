@@ -188,6 +188,7 @@ module.exports = {
       });
   },
   getAnswers: (req, res) => {
+    // console.log(req.params)
     const id = req.params.question_id;
     const options = {
       headers: { Authorization: TOKEN },
