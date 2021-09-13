@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import Header from './Header/Header.jsx';
 import Overview from './Overview/Overview.jsx';
@@ -14,14 +15,25 @@ justify-content: flex-start;
 align-items: center;
 font-family: Valera Round, sans-serif;`;
 
-const App = () => (
-  <Container>
-    <Header />
-    <Overview />
-    <RelatedAndComparison />
-    <QA />
-    <Reviews />
-  </Container>
-);
+const App = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    axios.get('/api/products')
+      .then((response) => {
+        setProducts(response.data);
+      });
+  }, []);
+
+  return (
+    <Container>
+      <Header />
+      <Overview products={products} />
+      <RelatedAndComparison />
+      <QA />
+      <Reviews />
+    </Container>
+  );
+};
 
 export default App;
