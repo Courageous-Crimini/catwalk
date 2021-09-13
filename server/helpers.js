@@ -176,7 +176,7 @@ module.exports = {
       params: {
         page: 1,
         count: 5,
-        product_id: req.body.product_id,
+        product_id: req.query.product_id,
       },
     };
     axios.request(options)
