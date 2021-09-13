@@ -81,7 +81,7 @@ module.exports = {
                 page: 1,
                 count: 5,
                 sort: sortType,
-                product_id: req.body.product_id
+                product_id: req.query.product_id
               }
         };
         axios.request(options)
@@ -98,7 +98,7 @@ module.exports = {
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
             url: '/reviews/meta',
             method: 'get',
-            params: { product_id: req.body.product_id }
+            params: { product_id: req.query.product_id }
         };
         axios.request(options)
             .then((response) => {
@@ -110,13 +110,13 @@ module.exports = {
     },
     createReview: (req, res) => {
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
             url: '/reviews',
             method: 'post',
-            data: { 
+            data: {
                 product_id: req.body.product_id,
                 rating: req.body.rating,
                 summary: req.body.summary,
@@ -210,13 +210,13 @@ module.exports = {
     },
     createQuestion: (req, res) => {
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
             url: '/qa/questions',
             method: 'post',
-            data: { 
+            data: {
                 product_id: req.body.product_id,
                 name: req.body.name,
                 email: req.body.email,
@@ -234,13 +234,13 @@ module.exports = {
     createAnswer: (req, res) => {
         const id = req.params.question_id;
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
             url: `/qa/questions/${id}/answers`,
             method: 'post',
-            data: { 
+            data: {
                 name: req.body.name,
                 email: req.body.email,
                 body: req.body.body,
@@ -258,7 +258,7 @@ module.exports = {
     markQuestionAsHelpful: (req, res) => {
         const id = req.params.question_id;
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
@@ -276,7 +276,7 @@ module.exports = {
     reportQuestion: (req, res) => {
         const id = req.params.question_id;
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
@@ -294,7 +294,7 @@ module.exports = {
     markAnswerAsHelpful: (req, res) => {
         const id = req.params.answer_id;
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
@@ -312,7 +312,7 @@ module.exports = {
     reportAnswer: (req, res) => {
         const id = req.params.answer_id;
         const options = {
-            headers: { 
+            headers: {
                 Authorization: TOKEN,
             },
             baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
