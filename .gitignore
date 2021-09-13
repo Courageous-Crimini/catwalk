@@ -7,5 +7,5 @@
 # Config File
 /server/config.js
 
-#Webpack bundle.js
+# Webpack Bundle File
 /client/public/bundle.js

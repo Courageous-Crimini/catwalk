@@ -31,6 +31,18 @@ background: #BAEFD5;
 //     }
 //   }
 
+//   function reducer(state, action) {
+//     switch (action.type) {
+//       case ACTIONS.SELECT_ITEM:
+//         return {
+//           ...state,
+//           selectedItem: action.payload,
+//         };
+//       default:
+//         return state;
+//     }
+//   }
+
 const Overview = ({ products }) => (
   <Wrapper>
     <h2> Overview </h2>
