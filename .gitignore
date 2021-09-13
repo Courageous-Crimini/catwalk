@@ -6,3 +6,6 @@
 
 # Config File
 /server/config.js
+
+#Webpack bundle.js
+/client/public/bundle.js
