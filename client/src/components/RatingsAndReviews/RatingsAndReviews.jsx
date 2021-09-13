@@ -5,16 +5,19 @@ import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
 
 const Wrapper = styled.section`
-padding: 20em;
-outline: 5px dotted #9EEFF6;
+background: #9EEFF6;
+display: flex;
+justify-content: space-between;
 `;
 
 const RatingsAndReviews = () => (
-  <Wrapper>
-    <h2> Ratings & Reviews </h2>
-    <Ratings />
-    <Reviews />
-  </Wrapper>
+  <div>
+    <h2> Ratings & Reviews</h2>
+    <Wrapper>
+      <Ratings />
+      <Reviews />
+    </Wrapper>
+  </div>
 );
 
 export default RatingsAndReviews;

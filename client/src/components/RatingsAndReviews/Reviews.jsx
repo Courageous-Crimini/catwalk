@@ -2,6 +2,13 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+const Wrapper = styled.section`
+background: seagreen;
+flex: 0 0 50%;
+display: flex;
+justify-content: flex-end;
+`;
+
 const getAverageRating = (ratingsObj) => {
   let sum = 0;
   let numRatings = 0;
@@ -16,10 +23,17 @@ const getAverageRating = (ratingsObj) => {
   return sum / numRatings;
 };
 
+const getRecommendPercent = (recObj) => {
+  const recTrue = parseInt(recObj.true, 10);
+  const recFalse = parseInt(recObj.false, 10);
+  return 100 * (recTrue / (recTrue + recFalse));
+};
+
 axios.get('/api/reviews/meta?product_id=48433')
   .then((response) => {
     console.log(response.data);
     console.log(getAverageRating(response.data.ratings));
+    console.log(getRecommendPercent(response.data.recommended));
   })
   .catch((error) => {
     console.log(error);
@@ -130,14 +144,16 @@ const TomatoButton = styled(Button)`
 `;
 
 const Reviews = () => (
-  <div>
-    <SortByDropdown />
-    <ReviewsList />
-    <MoreReviews />
-    <AddAReview />
-    <Button>Normal Button</Button>
-    <TomatoButton>Tomato Button</TomatoButton>
-  </div>
+  <Wrapper>
+    <div>
+      <SortByDropdown />
+      <ReviewsList />
+      <MoreReviews />
+      <AddAReview />
+      <Button>Normal Button</Button>
+      <TomatoButton>Tomato Button</TomatoButton>
+    </div>
+  </Wrapper>
 );
 
 export default Reviews;

@@ -31,7 +31,7 @@ const App = () => {
       <Overview products={products} />
       <RelatedAndComparison />
       <QA />
-      <RatingsAndReviews products={products} />
+      <RatingsAndReviews />
     </Container>
   );
 };
