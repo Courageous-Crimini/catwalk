@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
+margin-top: 15em;
 padding: 20em;
 background: #DF9EF6;`;
 
