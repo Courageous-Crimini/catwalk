@@ -5,6 +5,8 @@ import styled from 'styled-components';
 const Wrapper = styled.section`
 height: 33%;
 background: #FFC1FD;
+grid-column-start: 1;
+grid-column-end: 3;
 `;
 
 const ProductOverview = () => (
