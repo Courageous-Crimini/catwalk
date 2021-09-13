@@ -27,7 +27,7 @@ const QA = () => {
     return (
         <Wrapper>
             <div> 
-                {console.log('a list of questions', questions)}
+                {/* {console.log('a list of questions', questions)} */}
                 
                 <h2> Questions & Answers </h2>
                 <div className="Questions"> 
