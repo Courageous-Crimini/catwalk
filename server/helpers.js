@@ -80,7 +80,7 @@ module.exports = {
         page: 1,
         count: 5,
         sort: sortType,
-        product_id: req.body.product_id,
+        product_id: req.query.product_id,
       },
     };
     axios.request(options)
@@ -97,7 +97,7 @@ module.exports = {
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
       url: '/reviews/meta',
       method: 'get',
-      params: { product_id: req.body.product_id },
+      params: { product_id: req.query.product_id },
     };
     axios.request(options)
       .then((response) => {
