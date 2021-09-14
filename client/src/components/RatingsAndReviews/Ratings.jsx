@@ -34,6 +34,12 @@ const getMaxRatings = (ratingsObj) => {
 };
 
 const getRecommendPercent = (recObj) => {
+  if (recObj.true === undefined) {
+    if (recObj.false === undefined) {
+      return 'None';
+    }
+    return 0;
+  }
   const recTrue = parseInt(recObj.true, 10);
   const recFalse = parseInt(recObj.false, 10);
   return 100 * (recTrue / (recTrue + recFalse));
@@ -43,12 +49,14 @@ const Ratings = ({ meta }) => (
   <Wrapper>
     <div>
       <div>
-        {Math.round(getAverageRating(meta.ratings) * 10) / 10}
-        &#9734; &#9734; &#9734; &#9734; &#9734;
+        { (getAverageRating(meta.ratings) === 'No ratings')
+          ? 'No ratings yet'
+          : `${Math.round(getAverageRating(meta.ratings) * 10) / 10} ☆☆☆☆☆`}
       </div>
       <div>
-        {Math.round(getRecommendPercent(meta.recommended))}
-        % of reviews recommend this product
+        { (getRecommendPercent(meta.recommended) === 'None')
+          ? 'No recommendations yet'
+          : `${Math.round(getRecommendPercent(meta.recommended))}% of reviews recommend this product`}
       </div>
       {Array.from(Array(5).keys()).map((num) => (
         <div key={5 - num}>
