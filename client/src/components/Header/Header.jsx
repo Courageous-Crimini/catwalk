@@ -10,7 +10,7 @@ const Wrapper = styled.section`
 
 const Header = () => (
   <Wrapper>
-    <h1> Header Template </h1>
+    <h1 id="header"> Header Template </h1>
   </Wrapper>
 );
 
