@@ -8,31 +8,32 @@ height: 100%;
 background: white;
 `;
 
-const AnswersList = ({questionId}) => {
-    const [question, setQuestion] = useState(questionId);
-    const [answers, setAnswers] = useState([]);
+// eslint-disable-next-line react/prop-types
+const AnswersList = ({ questionId }) => {
+  const [question, setQuestion] = useState(questionId);
+  const [answers, setAnswers] = useState([]);
 
-    useEffect(() => {
-        axios.get(`/api/qa/questions/${question}/answers`)
-        .then(({data}) => {
-            setAnswers(data.results)
-        })
-        .catch((err) => { 
-            console.error(err);
-        })
-    }, []);
-    
-    return (
-        <Wrapper>
-            <div> 
-                {
-                    answers.map(answer => (
-                        <AnswerItem answer={answer} key={answer.answer_id}/>
-                    ))
-                }
-            </div>
-        </Wrapper>
-    )
+  useEffect(() => {
+    axios.get(`/api/qa/questions/${question}/answers`)
+      .then(({ data }) => {
+        setAnswers(data.results);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, []);
+
+  return (
+    <Wrapper>
+      <div>
+        {
+        answers.map((answer) => (
+          <AnswerItem answer={answer} key={answer.answer_id} />
+        ))
+        }
+      </div>
+    </Wrapper>
+  );
 };
 
 export default AnswersList;

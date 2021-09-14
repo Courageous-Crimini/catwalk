@@ -14,8 +14,8 @@ background: papayawhip;
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "black" : "white"};
-  color: ${props => props.primary ? "white" : "black"};
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
 
   font-size: 1.2em;
   margin: 1.2em;
@@ -28,45 +28,44 @@ const Row = styled.div`
     display: flex
 `;
 
-const QA = ({products}) => {
-    
-    const [productId, setProductId] = useState(48432);
-    const [questions, setQuestions] = useState([]);
-    const [isOpen, setIsOpen] = useState(false);
+// eslint-disable-next-line no-empty-pattern
+const QA = ({}) => {
+  const [productId] = useState(48432);
+  const [questions, setQuestions] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
 
-    useEffect(() => {
-        axios.get(`/api/qa/questions?product_id=${productId}`)
-        .then(({data}) => {
-            setQuestions(data.results)
-        })
-        .catch((err) => { 
-            console.error(err);
-        })
-    }, []);
+  useEffect(() => {
+    axios.get(`/api/qa/questions?product_id=${productId}`)
+      .then(({ data }) => {
+        setQuestions(data.results);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
-    return (
+  return (
 
-        
-        <Wrapper>
-            <div> 
-                <h2> Questions and Answers </h2>
-                <div className="Search">
-                    <Search />
-                </div>
-                <div className="Questions-collapsible"> 
-                    { 
-                        isOpen && <QuestionsList questions={questions}/>
-                    } 
-                    <Row>
-                        <Button className="toggle" onClick={() => setIsOpen(!isOpen)}>
-                            More Answered Questions
-                        </Button>
-                        <AddQuestion/>
-                    </Row>  
-                </div>
-            </div>  
-        </Wrapper>
-    )
-}
+    <Wrapper>
+      <div>
+        <h2> Questions and Answers </h2>
+        <div className="Search">
+          <Search />
+        </div>
+        <div className="Questions-collapsible">
+          {
+            isOpen && <QuestionsList questions={questions} />
+          }
+          <Row>
+            <Button className="toggle" onClick={() => setIsOpen(!isOpen)}>
+              More Answered Questions
+            </Button>
+            <AddQuestion />
+          </Row>
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
 
 export default QA;

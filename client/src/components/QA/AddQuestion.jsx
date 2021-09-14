@@ -1,14 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.section`
-
-`;
-
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "black" : "white"};
-  color: ${props => props.primary ? "white" : "black"};
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
 
   font-size: 1.2em;
   margin: 1.2em;
@@ -17,14 +13,12 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const AddQuestion = () => {
-  return (
+const AddQuestion = () => (
 
-      <div> 
-        <Button> Add a question + </Button>
-      </div>
+  <div>
+    <Button> Add a question + </Button>
+  </div>
 
-  )
-};
+);
 
 export default AddQuestion;

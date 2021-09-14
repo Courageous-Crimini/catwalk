@@ -10,7 +10,7 @@ const Input = styled.input`
   padding: 1em;
   margin: 0.5rem;
   font-size: 22px;
-  color: ${props => props.inputColor || "palevioletred"};
+  color: 'palevioletred';
   background: white;
   border: 2px;
   border-color: black;
@@ -21,7 +21,7 @@ const Input = styled.input`
 const Search = () => (
   <Wrapper>
     <form>
-        <Input type="text" name="name" placeholder="Have a quesiton? Search for Answers..." />
+      <Input type="text" name="name" placeholder="Have a quesiton? Search for Answers..." />
     </form>
   </Wrapper>
 );
