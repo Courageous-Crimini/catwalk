@@ -48,15 +48,6 @@ const Review = () => (
   </li>
 );
 
-const ImageWindow = () => (
-  <div className="reviewslist">
-    <ul>
-      <li />
-    </ul>
-  </div>
-
-);
-
 const MoreReviews = () => (
   <button className="see-more-reviews" type="submit">More Reviews</button>
 );
@@ -69,38 +60,30 @@ class SortByDropdown extends React.Component {
     super(props);
     this.state = { value: 'coconut' };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
     this.setState({ value: event.target.value });
   }
 
-  handleSubmit(event) {
-    alert(`Your favorite flavor is: ${this.state.value}`);
-    event.preventDefault();
-  }
-
   render() {
+    const { value } = this.state;
     return (
       <form>
-        <label>
-          Sort on
-          <select value={this.state.value} onChange={this.handleChange}>
-            <option value="helpful">Helpful</option>
-            <option value="newest">Newest</option>
-            <option value="relevant">Relevant</option>
-          </select>
-        </label>
+        Sort on
+        <select value={value} onChange={this.handleChange}>
+          <option value="relevant">Relevant</option>
+          <option value="helpful">Helpful</option>
+          <option value="newest">Newest</option>
+        </select>
       </form>
     );
   }
 }
 
-const Reviews = (props) => (
+const Reviews = () => (
   <Wrapper>
     <div>
-      {console.log('data', props)}
       <SortByDropdown />
       <ReviewsList />
       <MoreReviews />
