@@ -25,7 +25,7 @@ const RatingsAndReviews = ({ id }) => {
       });
   }, []);
   useEffect(() => {
-    axios.get(`/api/reviews/meta?product_id=${id}`)
+    axios.get(`/api/reviews?product_id=${id}`)
       .then((response) => {
         setReviews(response.data);
       })
@@ -39,10 +39,10 @@ const RatingsAndReviews = ({ id }) => {
       <h2> Ratings & Reviews</h2>
       <Wrapper>
         {ratingsLoaded
-          ? <Ratings />
+          ? <Ratings meta={reviewsMeta} />
           : <h4>Loading...</h4>}
         {reviewsLoaded
-          ? <Reviews />
+          ? <Reviews reviews={reviews} />
           : <h4>Loading...</h4>}
       </Wrapper>
     </div>

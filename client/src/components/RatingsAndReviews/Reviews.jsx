@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -8,36 +7,6 @@ flex: 0 0 50%;
 display: flex;
 justify-content: flex-end;
 `;
-
-const getAverageRating = (ratingsObj) => {
-  let sum = 0;
-  let numRatings = 0;
-  const ratingsArr = Object.entries(ratingsObj);
-  for (let i = 0; i < ratingsArr.length; i += 1) {
-    sum += ratingsArr[i][0] * ratingsArr[i][1];
-    numRatings += parseInt(ratingsArr[i][1], 10);
-  }
-  if (numRatings === 0) {
-    return 'No ratings';
-  }
-  return sum / numRatings;
-};
-
-const getRecommendPercent = (recObj) => {
-  const recTrue = parseInt(recObj.true, 10);
-  const recFalse = parseInt(recObj.false, 10);
-  return 100 * (recTrue / (recTrue + recFalse));
-};
-
-axios.get('/api/reviews/meta?product_id=48433')
-  .then((response) => {
-    console.log(response.data);
-    console.log(getAverageRating(response.data.ratings));
-    console.log(getRecommendPercent(response.data.recommended));
-  })
-  .catch((error) => {
-    console.log(error);
-  });
 
 const ReviewsList = () => (
   <div className="reviewslist">
@@ -128,30 +97,14 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Button = styled.button`
-  color: palevioletred;
-  font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-`;
-
-// A new component based on Button, but with some override styles
-const TomatoButton = styled(Button)`
-  color: tomato;
-  border-color: tomato;
-`;
-
-const Reviews = () => (
+const Reviews = (props) => (
   <Wrapper>
     <div>
+      {console.log('data', props)}
       <SortByDropdown />
       <ReviewsList />
       <MoreReviews />
       <AddAReview />
-      <Button>Normal Button</Button>
-      <TomatoButton>Tomato Button</TomatoButton>
     </div>
   </Wrapper>
 );

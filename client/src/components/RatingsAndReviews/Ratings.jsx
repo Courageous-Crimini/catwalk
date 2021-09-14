@@ -9,58 +9,59 @@ display: flex;
 justify-content: flex-start;
 `;
 
-const Ratings = () => (
+const getAverageRating = (ratingsObj) => {
+  let sum = 0;
+  let numRatings = 0;
+  const ratingsArr = Object.entries(ratingsObj);
+  for (let i = 0; i < ratingsArr.length; i += 1) {
+    sum += ratingsArr[i][0] * ratingsArr[i][1];
+    numRatings += parseInt(ratingsArr[i][1], 10);
+  }
+  if (numRatings === 0) {
+    return 'No ratings';
+  }
+  return sum / numRatings;
+};
+
+const getMaxRatings = (ratingsObj) => {
+  const ratingsArr = Object.entries(ratingsObj);
+  let maxNum = 0;
+  for (let i = 0; i < ratingsArr.length; i += 1) {
+    if (ratingsArr[i][1] > maxNum) {
+      [, maxNum] = ratingsArr[i];
+    }
+  }
+  return maxNum;
+};
+
+const getRecommendPercent = (recObj) => {
+  const recTrue = parseInt(recObj.true, 10);
+  const recFalse = parseInt(recObj.false, 10);
+  return 100 * (recTrue / (recTrue + recFalse));
+};
+
+const Ratings = ({ meta }) => (
   <Wrapper>
     <div>
+      {console.log(meta)}
+      {console.log(getAverageRating(meta.ratings))}
+      {console.log(getMaxRatings(meta.ratings))}
       <span>
-        100% of reviews recommend this product
+        {Math.round(getRecommendPercent(meta.recommended))}
+        % of reviews recommend this product
         <br />
       </span>
-      <span>
-        5 stars
-        <meter
-          min="0"
-          max="5"
-          value="1"
-        />
-        <br />
-      </span>
-      <span>
-        4 stars
-        <meter
-          min="0"
-          max="5"
-          value="2"
-        />
-        <br />
-      </span>
-      <span>
-        3 stars
-        <meter
-          min="0"
-          max="5"
-          value="4"
-        />
-        <br />
-      </span>
-      <span>
-        2 stars
-        <meter
-          min="0"
-          max="5"
-          value="5"
-        />
-        <br />
-      </span>
-      <span>
-        1 stars
-        <meter
-          min="0"
-          max="5"
-          value="3"
-        />
-        <br />
-      </span>
+      {Array.from(Array(5).keys()).map((num) => (
+        <div key={5 - num}>
+          {5 - num}
+          {' stars '}
+          <meter
+            min="0"
+            max="5"
+            value="1"
+          />
+        </div>
+      ))}
     </div>
   </Wrapper>
 );
