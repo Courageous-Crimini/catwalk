@@ -10,7 +10,7 @@ background: white;
 
 // eslint-disable-next-line react/prop-types
 const AnswersList = ({ questionId }) => {
-  const [question, setQuestion] = useState(questionId);
+  const [question] = useState(questionId);
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
