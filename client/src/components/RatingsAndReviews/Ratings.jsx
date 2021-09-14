@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
@@ -43,7 +42,6 @@ const getRecommendPercent = (recObj) => {
 const Ratings = ({ meta }) => (
   <Wrapper>
     <div>
-      {console.log(meta)}
       <div>
         {Math.round(getAverageRating(meta.ratings) * 10) / 10}
         &#9734; &#9734; &#9734; &#9734; &#9734;
@@ -61,6 +59,13 @@ const Ratings = ({ meta }) => (
             max={getMaxRatings(meta.ratings)}
             value={meta.ratings[5 - num]}
           />
+        </div>
+      ))}
+      {Object.entries(meta.characteristics).map((characteristic) => (
+        <div key={characteristic[1].id}>
+          {characteristic[0]}
+          {': '}
+          {characteristic[1].value}
         </div>
       ))}
     </div>
