@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, {useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import AddToCart from './AddToCart.jsx';
@@ -13,7 +13,7 @@ const Wrapper = styled.section`
 display: grid;
 grid-template-columns: [first] 60% [second] 35%;
 grid-template-rows: [row1-start] 25% [row1-end] 25% [row3-start] 25% [row3-end] auto [last];
-grid-template-areas: 
+grid-template-areas:
     "ImageGallery ProductInfo"
     "ImageGallery StyleSelector"
     "ImageGallery AddToCart"
