@@ -5,7 +5,7 @@ import Header from './Header/Header.jsx';
 import Overview from './Overview/Overview.jsx';
 import RelatedAndComparison from './RelatedAndComparison/RelatedAndComparison.jsx';
 import QA from './QA/QA.jsx';
-import Reviews from './Reviews/Reviews.jsx';
+import RatingsAndReviews from './RatingsAndReviews/RatingsAndReviews.jsx';
 
 const Container = styled.div`
 width: 100%;
@@ -17,22 +17,32 @@ font-family: Valera Round, sans-serif;`;
 
 const App = () => {
   const [products, setProducts] = useState([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     axios.get('/api/products')
       .then((response) => {
         setProducts(response.data);
+      })
+      .then(() => {
+        setLoaded(true);
       });
   }, []);
 
   return (
-    <Container>
-      <Header />
-      <Overview products={products} />
-      <RelatedAndComparison />
-      <QA />
-      <Reviews />
-    </Container>
+    <div>
+      { loaded
+        ? (
+          <Container>
+            <Header />
+            <Overview products={products} />
+            <RelatedAndComparison />
+            <QA />
+            <RatingsAndReviews id={products[0].id} />
+          </Container>
+        )
+        : <h4>Loading...</h4>}
+    </div>
   );
 };
 
