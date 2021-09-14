@@ -6,14 +6,19 @@ height: 100%;
 background: white;
 `;
 
+const Row = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const AnswerItem = ({answer}) => {
     return (
         <Wrapper>
+            <Row> 
+                <h3>A: </h3> <p>{answer.body}</p>     
+            </Row>
             <div> 
-                <h3>A: </h3><p>{answer.body}</p>     
-            </div>
-            <div> 
-                <p>by: {answer.answerer_name}, {answer.date}</p>
+                <p>by: {answer.answerer_name}, {answer.date} | Helpful? Yes ({answer.helpfulness}) | Report</p>
             </div>
         </Wrapper>
     )
