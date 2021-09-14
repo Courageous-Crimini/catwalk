@@ -44,21 +44,22 @@ const Ratings = ({ meta }) => (
   <Wrapper>
     <div>
       {console.log(meta)}
-      {console.log(getAverageRating(meta.ratings))}
-      {console.log(getMaxRatings(meta.ratings))}
-      <span>
+      <div>
+        {Math.round(getAverageRating(meta.ratings) * 10) / 10}
+        &#9734; &#9734; &#9734; &#9734; &#9734;
+      </div>
+      <div>
         {Math.round(getRecommendPercent(meta.recommended))}
         % of reviews recommend this product
-        <br />
-      </span>
+      </div>
       {Array.from(Array(5).keys()).map((num) => (
         <div key={5 - num}>
           {5 - num}
           {' stars '}
           <meter
             min="0"
-            max="5"
-            value="1"
+            max={getMaxRatings(meta.ratings)}
+            value={meta.ratings[5 - num]}
           />
         </div>
       ))}
