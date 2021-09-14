@@ -10,12 +10,10 @@ const AnswerItem = ({answer}) => {
     return (
         <Wrapper>
             <div> 
-                {console.log(answer)}
-                <h3>A: {answer.body}</h3>
-                
+                <h3>A: </h3><p>{answer.body}</p>     
             </div>
             <div> 
-                <h5>by: {answer.answerer_name}, {answer.date}</h5>
+                <p>by: {answer.answerer_name}, {answer.date}</p>
             </div>
         </Wrapper>
     )
