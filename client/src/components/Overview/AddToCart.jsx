@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 const Wrapper = styled.section`
 background: #F9FFA4;
-gridColumnStart: 2;
-gridColumnEnd: 3;
+grid-column-start: 2;
+grid-column-end: 3;
 `;
 
 const AddToCart = ({ styleDetails }) => {
