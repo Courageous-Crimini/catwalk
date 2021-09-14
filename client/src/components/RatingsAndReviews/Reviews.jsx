@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,44 +9,51 @@ display: flex;
 justify-content: flex-end;
 `;
 
-const ReviewsList = () => (
+const ReviewsList = ({ reviews }) => (
   <div className="reviewslist">
     <ul>
-      <Review />
+      {reviews.map((review) => (
+        <li key={review.review_id}>
+          <Review review={review} />
+        </li>
+      ))}
     </ul>
   </div>
 );
 
-const Review = () => (
-  <li>
-    <div className="reviewslist">
-      <span>
-        Insert Star Rating left-aligned and Review Username, Date right-aligned
-        <br />
-      </span>
-      <span>
-        Review Summary
-        <br />
-      </span>
-      <span>
-        Review Body
-        <br />
-      </span>
-      <MoreReviews />
-      <span>
-        Images
-        <br />
-      </span>
-      <span>
-        Response to Review
-        <br />
-      </span>
-      <span>
-        Helpful? Yes # No # Report
-        <br />
-      </span>
-    </div>
-  </li>
+const Review = ({ review }) => (
+  <div className="review">
+    {console.log(review)}
+    <span>
+      {`${review.rating} ☆☆☆☆☆ ${review.reviewer_name} ${review.date}`}
+      <br />
+    </span>
+    <span>
+      {review.summary}
+      <br />
+    </span>
+    <span>
+      {review.body.slice(0, 250)}
+      <br />
+    </span>
+    <ShowMore />
+    <span>
+      Images
+      <br />
+    </span>
+    <span>
+      Response to Review
+      <br />
+    </span>
+    <span>
+      Helpful? Yes # No # Report
+      <br />
+    </span>
+  </div>
+);
+
+const ShowMore = () => (
+  <button className="show-more-review" type="submit">Show More</button>
 );
 
 const MoreReviews = () => (
@@ -81,11 +89,11 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Reviews = () => (
+const Reviews = ({ reviews }) => (
   <Wrapper>
     <div>
       <SortByDropdown />
-      <ReviewsList />
+      <ReviewsList reviews={reviews.results} />
       <MoreReviews />
       <AddAReview />
     </div>
