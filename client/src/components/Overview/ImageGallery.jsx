@@ -35,7 +35,6 @@ const reducer = (state, action) => {
         return { ...state, image: 0 };
       }
       return { ...state, image: state.image + 1 };
-
     case ACTIONS.PREVIOUS_ITEM:
       if (state.image - 1 < 0) {
         return { ...state, image: state.length - 1 };
