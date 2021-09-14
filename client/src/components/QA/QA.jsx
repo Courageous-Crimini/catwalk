@@ -29,6 +29,7 @@ const Row = styled.div`
 `;
 
 const QA = ({products}) => {
+    
     const [productId, setProductId] = useState(48432);
     const [questions, setQuestions] = useState([]);
     const [isOpen, setIsOpen] = useState(false);
@@ -53,8 +54,6 @@ const QA = ({products}) => {
                     <Search />
                 </div>
                 <div className="Questions-collapsible"> 
-                    {/* 1st render the frist two if button is clicked render the rest */}
-
                     { 
                         isOpen && <QuestionsList questions={questions}/>
                     } 
