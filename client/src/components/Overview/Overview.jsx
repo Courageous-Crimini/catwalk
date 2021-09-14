@@ -11,37 +11,28 @@ import ProductOverview from './ProductOverview.jsx';
 
 const Wrapper = styled.section`
 display: grid;
-grid-template-columns: [first] 60% [second] 35%;
+grid-template-columns: [first] 55% [second] 35%;
 grid-template-rows: [row1-start] 25% [row1-end] 25% [row3-start] 25% [row3-end] auto [last];
 grid-template-areas:
     "ImageGallery ProductInfo"
     "ImageGallery StyleSelector"
     "ImageGallery AddToCart"
     "ProductOverview ProductOverview";
-column-gap: 2%;
+column-gap: 1%;
+row-gap: 1%;
 grid-line{
   border: 10px solid black;
 }
 width: 100%;
 height: 50em;
 background: #BAEFD5;
+padding: 5%;
+justify-content: center;
 `;
 
 // export const ACTIONS = {
 //     SELECT_ITEM: 'select-item',
 //   };
-
-//   function reducer(state, action) {
-//     switch (action.type) {
-//       case ACTIONS.SELECT_ITEM:
-//         return {
-//           ...state,
-//           selectedItem: action.payload,
-//         };
-//       default:
-//         return state;
-//     }
-//   }
 
 //   function reducer(state, action) {
 //     switch (action.type) {
