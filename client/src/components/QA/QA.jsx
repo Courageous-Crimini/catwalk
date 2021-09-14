@@ -19,7 +19,7 @@ const Button = styled.button`
 
   font-size: 1.2em;
   margin: 1.2em;
-  padding: 0.25em 1em;
+  padding: 1em;
   border: 2px solid black;
   border-radius: 3px;
 `;
@@ -54,7 +54,7 @@ const QA = ({products}) => {
                 </div>
                 <div className="Questions-collapsible"> 
                     {/* 1st render the frist two if button is clicked render the rest */}
-                    {console.log(questions)}
+
                     { 
                         isOpen && <QuestionsList questions={questions}/>
                     } 
