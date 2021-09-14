@@ -12,7 +12,7 @@ const Input = styled.input`
   font-size: 22px;
   color: ${props => props.inputColor || "palevioletred"};
   background: white;
-  border: 1px;
+  border: 2px;
   border-color: black;
   border-style: solid;
   border-radius: 3px;

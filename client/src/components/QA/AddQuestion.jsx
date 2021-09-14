@@ -21,7 +21,7 @@ const AddQuestion = () => {
   return (
 
       <div> 
-        <Button> Add a question</Button>
+        <Button> Add a question + </Button>
       </div>
 
   )
