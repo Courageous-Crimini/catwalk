@@ -7,8 +7,9 @@ height: 100%;
 
 const Input = styled.input`
   width: 100%;
-  padding: 1em;
+  padding: 2em;
   margin: 1em;
+  font-size: 1em;
   color: ${props => props.inputColor || "palevioletred"};
   background: white;
   border: 1px;
