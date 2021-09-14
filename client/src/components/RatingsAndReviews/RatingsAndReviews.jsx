@@ -10,8 +10,9 @@ display: flex;
 justify-content: space-between;
 `;
 
-const RatingsAndReviews = () => (
+const RatingsAndReviews = ({ id }) => (
   <div>
+    {console.log(id)}
     <h2> Ratings & Reviews</h2>
     <Wrapper>
       <Ratings />

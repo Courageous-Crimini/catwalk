@@ -38,7 +38,7 @@ const App = () => {
             <Overview products={products} />
             <RelatedAndComparison />
             <QA />
-            <Reviews />
+            <RatingsAndReviews id={products[0].id} />
           </Container>
         )
         : <h4>Loading...</h4>}
