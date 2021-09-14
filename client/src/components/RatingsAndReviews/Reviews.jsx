@@ -23,7 +23,6 @@ const ReviewsList = ({ reviews }) => (
 
 const Review = ({ review }) => (
   <div className="review">
-    {console.log(review)}
     <span>
       {`${review.rating} ☆☆☆☆☆ ${review.reviewer_name} ${review.date}`}
       <br />
