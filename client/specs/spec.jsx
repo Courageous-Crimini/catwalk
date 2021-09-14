@@ -11,8 +11,36 @@ describe('Header', () => {
 });
 
 describe('Overview', () => {
-  // it('Should...', () => {});
-  // it('Should...', () => {});
+  it('Should render all subcomponents to the page to page', () => {
+    render(<App />);
+    const imageGalleryId = document.getElementById('ImageGallery');
+    expect(imageGalleryId).toBeTruthy();
+  });
+  it('Should render all subcomponents to the page to page', () => {
+    render(<App />);
+    const productInfoId = document.getElementById('ProductInfo');
+    expect(productInfoId).toBeTruthy();
+  });
+  it('Should render all subcomponents to the page to page', () => {
+    render(<App />);
+    const styleSelectorId = document.getElementById('StyleSelector');
+    expect(styleSelectorId).toBeTruthy();
+  });
+  it('Should render all subcomponents to the page to page', () => {
+    render(<App />);
+    const addToCartId = document.getElementById('AddToCart');
+    expect(addToCartId).toBeTruthy();
+  });
+  it('Should render all subcomponents to the page to page', () => {
+    render(<App />);
+    const productOverviewId = document.getElementById('ProductOverview');
+    expect(productOverviewId).toBeTruthy();
+  });
+  it('Should render 7 images to the Image Gallery component', () => {
+    render(<App />);
+    const images = document.images();
+    expect(images.length).toBe(7);
+  });
 });
 
 describe('Ratings and Reviews', () => {

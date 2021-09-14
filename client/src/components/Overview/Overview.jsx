@@ -64,11 +64,11 @@ const Overview = ({ products }) => {
     loaded
       ? (
         <Wrapper>
-          <ImageGallery styleDetails={selectedDetails} />
-          <ProductInfo productInfo={selected} />
-          <StyleSelector styleDetails={selectedDetails} />
-          <AddToCart styleDetails={selectedDetails} />
-          <ProductOverview productInfo={selected} />
+          <ImageGallery id="ImageGallery" styleDetails={selectedDetails} />
+          <ProductInfo id="ProductInfo" productInfo={selected} />
+          <StyleSelector id="StyleSelector" styleDetails={selectedDetails} />
+          <AddToCart id="AddToCart" styleDetails={selectedDetails} />
+          <ProductOverview id="ProductOverview" productInfo={selected} />
         </Wrapper>
       )
       : <h3>Loading...</h3>
