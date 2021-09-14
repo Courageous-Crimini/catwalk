@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search.jsx';
 import QuestionsList from './QuestionsList.jsx';
+import AddQuestion from './AddQuestion.jsx';
 
 const Wrapper = styled.section`
 margin: 0;
@@ -34,6 +35,9 @@ const QA = ({products}) => {
                 </div>
                 <div className="Questions"> 
                     <QuestionsList questions={questions}/>
+                </div>
+                <div>
+                    <AddQuestion/>
                 </div>
             </div>  
         </Wrapper>
