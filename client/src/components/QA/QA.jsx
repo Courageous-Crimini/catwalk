@@ -49,6 +49,11 @@ const QA = ({products}) => {
         
         <Wrapper>
             <div> 
+<<<<<<< HEAD
+=======
+                {/* {console.log('a list of questions', questions)} */}
+                
+>>>>>>> ceed6bad3d4df6c3c3f32238f17c4b9d3fad0214
                 <h2> Questions & Answers </h2>
                 <div className="Search">
                     <Search />
