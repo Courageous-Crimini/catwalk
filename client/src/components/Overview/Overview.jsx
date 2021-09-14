@@ -43,18 +43,6 @@ background: #BAEFD5;
 //     }
 //   }
 
-//   function reducer(state, action) {
-//     switch (action.type) {
-//       case ACTIONS.SELECT_ITEM:
-//         return {
-//           ...state,
-//           selectedItem: action.payload,
-//         };
-//       default:
-//         return state;
-//     }
-//   }
-
 const Overview = ({ products }) => {
   const [selected, setSelected] = useState(products[0]);
   const [selectedDetails, setSelectedDetails] = useState();
