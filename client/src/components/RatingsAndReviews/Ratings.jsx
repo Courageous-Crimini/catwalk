@@ -3,10 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-background: palevioletred;
-flex: 0 0 50%;
-display: flex;
-justify-content: flex-start;
+background: rgb(211, 212, 213);;
+height: auto;
+grid-column-start: 1;
+grid-column-end: 2;
+grid-row-start: 2
 `;
 
 const getAverageRating = (ratingsObj) => {

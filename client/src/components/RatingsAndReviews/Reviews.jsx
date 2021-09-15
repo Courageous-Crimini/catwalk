@@ -3,10 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-background: seagreen;
-flex: 0 0 50%;
-display: flex;
-justify-content: flex-end;
+background: rgb(201, 202, 203);
+height: auto;
+grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 2
 `;
 
 const ReviewsList = ({ reviews }) => (
