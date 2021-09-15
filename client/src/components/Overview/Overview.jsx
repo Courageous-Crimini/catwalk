@@ -35,8 +35,8 @@ const Overview = () => (
     {/* <ImageGallery /> */}
     <ProductInfo />
     <StyleSelector />
-    {/* <AddToCart />
-    <ProductOverview /> */}
+    {/* <AddToCart /> */}
+    <ProductOverview />
   </Wrapper>
 );
 
