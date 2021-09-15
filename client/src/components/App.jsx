@@ -24,9 +24,10 @@ export const ACTIONS = {
 
 const initialState = {
   loaded: false,
-  selectedProduct: null,
   products: [],
+  selectedProduct: null,
   styles: [],
+  selectedStyle: {},
 };
 
 const reducer = (state, action) => {
@@ -41,6 +42,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         styles: action.payload,
+        selectedStyle: action.payload[0],
         loaded: true,
       };
     // case ACTIONS.NEXT_ITEM:

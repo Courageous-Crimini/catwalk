@@ -1,14 +1,15 @@
-/* eslint-disable arrow-body-style */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 height: auto;
-background: #FFC1FD;
+background: #F3F3F3;
 grid-column-start: 2;
 grid-column-end: 3;
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 const ProductInfo = () => {

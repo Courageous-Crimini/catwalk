@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
@@ -33,7 +34,7 @@ const Overview = () => (
   <Wrapper>
     {/* <ImageGallery /> */}
     <ProductInfo />
-    {/* <StyleSelector /> */}
+    <StyleSelector />
     {/* <AddToCart />
     <ProductOverview /> */}
   </Wrapper>
