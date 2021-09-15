@@ -25,7 +25,7 @@ const AnswerItem = ({ answer }) => (
         by:
         {answer.answerer_name}
         ,
-        {moment(answer.date).startOf('day').fromNow()}
+        {moment(answer.date).format('LL')}
         {' '}
         | Helpful? Yes (
         {answer.helpfulness}
