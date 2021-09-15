@@ -1,23 +1,22 @@
 import React from 'react';
 
-const RelatedProducts = ({ styles, products }) => {
-  // console.log('Styles:', styles);
+const RelatedProducts = ({ styles }) => {
+  console.log('Styles:', styles);
 
   const cards = styles.map((item) => {
-    const id = item.product_id;
-    const image = item.results[0].photos.thumbnail_url;
-    // const category = ;
-    const name = item.results[0].name;
-    const price = item.results[0].sale_price || item.results[0].original_price;
-
-    console.log(image);
+    const id = item.id;
+    const image = item.results[0].images[0].thumbnail_url;
+    const category = item.category;
+    const name = item.name;
+    const price = item.results[0].salePrice || item.results[0].originalPrice;
 
     return (
       <div className="card" key={id}>
-        <img src={image} alt="A related produce" />
+        <img src={image} alt="A related product" />
         <button type="button" className="relatedBtn">&#9733;</button>
+        {/* <span className="relatedBtn">&#9733;</span> */}
         <br />
-        <span>Category</span>
+        <span>{category}</span>
         <br />
         <span>{name}</span>
         <br />

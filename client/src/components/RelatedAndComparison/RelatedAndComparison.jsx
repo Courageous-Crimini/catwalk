@@ -5,7 +5,9 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 
 const RelatedAndComparison = ({ products }) => {
   const [relatedIds, setRelatedIds] = useState([]);
-  const [styles, setStyle] = useState([]);
+  const [relatedStyles, setRelatedStyles] = useState([]);
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const [styles, setStyles] = useState([]);
 
   // const [yourOutfit, setYourOutfit] = useState([]);
 
@@ -15,21 +17,68 @@ const RelatedAndComparison = ({ products }) => {
         setRelatedIds(data);
       });
   }, []);
+
   useEffect(() => {
-    const stylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => data));
-    Promise.all(stylesData)
+    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
+      .then(({ data }) => {
+        const relatedStylesFormat = { id: data.product_id, results: [] };
+        const results = data.results;
+
+        for (let i = 0; i < results.length; i++) {
+          const resultsIdx = results[i];
+          const tempStyles = {
+            salePrice: resultsIdx.sale_price,
+            originalPrice: resultsIdx.original_price,
+            images: resultsIdx.photos,
+          };
+          relatedStylesFormat.results.push(tempStyles);
+        }
+        return relatedStylesFormat;
+      }));
+    Promise.all(relatedStylesData)
       .then((values) => {
-        setStyle(values);
+        setRelatedStyles(values);
       });
   }, [relatedIds]);
 
+  useEffect(() => {
+    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
+      .then(({ data }) => {
+        const productFormat = {
+          id: data.id,
+          name: data.name,
+          category: data.category,
+        };
+
+        return productFormat;
+      }));
+    Promise.all(relatedStylesData)
+      .then((values) => {
+        setRelatedProducts(values);
+      });
+  }, [relatedStyles]);
+
+  useEffect(() => {
+    const stylesData = [];
+    for (let i = 0; i < relatedIds.length; i++) {
+      const stylesDataFormat = {
+        id: relatedProducts[i].id,
+        category: relatedProducts[i].category,
+        name: relatedProducts[i].name,
+        results: relatedStyles[i].results,
+      };
+      stylesData.push(stylesDataFormat);
+    }
+
+    setStyles(stylesData);
+  }, [relatedProducts]);
+
   return (
     <div id="RelatedAndComparison">
-      {console.log(styles)}
+      {/* {console.log(styles)} */}
       <h2>Related Products</h2>
       <ul>
-        <RelatedProducts styles={styles} products={products} />
+        <RelatedProducts styles={styles} />
       </ul>
       <h2>Your Outfit</h2>
       {/* <YourOutfit /> */}
