@@ -1,3 +1,5 @@
+/* eslint-disable prefer-destructuring */
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 const RelatedProducts = ({ styles, handleAddClick }) => {

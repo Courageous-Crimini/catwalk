@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
