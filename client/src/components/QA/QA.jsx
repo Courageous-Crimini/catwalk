@@ -32,11 +32,13 @@ const Row = styled.div`
 const QA = () => {
   const [productId] = useState(48432);
   const [questions, setQuestions] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  // const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axios.get(`/api/qa/questions?product_id=${productId}`)
       .then(({ data }) => {
+        setFiltered(data.results);
         setQuestions(data.results);
       })
       .catch((err) => {
@@ -45,7 +47,7 @@ const QA = () => {
   }, []);
 
   const filterSearch = (q) => {
-    const filter = questions.filter((question) => {
+    const filter = filtered.filter((question) => {
       if (question.question_body.toLowerCase().includes(q)) {
         return question;
       }

@@ -47,7 +47,9 @@ const QuestionItem = ({ question }) => {
         <P>
           {' '}
           helpful? Yes
+          (
           {question.question_helpfulness}
+          )
           {' '}
           | Add Answer
         </P>
