@@ -37,7 +37,7 @@ const App = () => {
             <Header />
             <Overview products={products} />
             <RelatedAndComparison />
-            <QA />
+            <QA products={products} />
             <RatingsAndReviews id={products[0].id} />
           </Container>
         )
