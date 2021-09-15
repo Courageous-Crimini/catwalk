@@ -29,7 +29,7 @@ const Row = styled.div`
 `;
 
 // eslint-disable-next-line no-empty-pattern
-const QA = ({}) => {
+const QA = () => {
   const [productId] = useState(48432);
   const [questions, setQuestions] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -40,7 +40,7 @@ const QA = ({}) => {
         setQuestions(data.results);
       })
       .catch((err) => {
-        console.error(err);
+        throw err;
       });
   }, []);
 
