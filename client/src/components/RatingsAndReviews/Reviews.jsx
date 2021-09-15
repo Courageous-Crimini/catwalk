@@ -78,7 +78,7 @@ class SortByDropdown extends React.Component {
     const { value } = this.state;
     return (
       <form>
-        Sort on
+        {`Sort on `}
         <select value={value} onChange={this.handleChange}>
           <option value="relevant">Relevant</option>
           <option value="helpful">Helpful</option>
