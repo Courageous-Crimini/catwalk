@@ -23,12 +23,7 @@ const AlignRight = styled.div`
     padding-right: 100px;
 `;
 
-const H2 = styled.h2`
-  /* Adapt the colors based on primary prop */
 
-  font-size: 1.1em;
-  padding: 1em;
-`;
 
 const QuestionItem = ({ question }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,14 +51,7 @@ const QuestionItem = ({ question }) => {
       </Row>
       <div className="Answers-collapsible">
         <AlignRight>
-          {/* {
-                        isOpen && <AnswersList questionId={question.question_id} />
-                    } */}
-
           <AnswersList questionId={question.question_id} />
-          <H2 onClick={() => setIsOpen(!isOpen)}>
-            Load More Answers
-          </H2>
         </AlignRight>
       </div>
 
