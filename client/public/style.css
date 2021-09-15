@@ -8,12 +8,23 @@
   padding: 20em;
   background: #EEE;
 }
+
+/* -- outer carousel -- */
 .cards {
   display: flex;
 }
 .card {
   width: 200px;
-  background: gray;
+  background: #DCDCDC;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  border: 1px solid black;
+}
+
+/* -- Buttons -- */
+.actionBtn {
+
 }
 .relatedBtn {
   color: #ADD8E6;
