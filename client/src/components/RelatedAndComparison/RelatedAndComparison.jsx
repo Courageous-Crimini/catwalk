@@ -3,7 +3,7 @@ import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 // import YourOutfit from './assets/YourOutfit.jsx';
 
-const RelatedAndComparison = () => {
+const RelatedAndComparison = ({ products }) => {
   const [relatedIds, setRelatedIds] = useState([]);
   const [styles, setStyle] = useState([]);
 
@@ -15,26 +15,21 @@ const RelatedAndComparison = () => {
         setRelatedIds(data);
       });
   }, []);
-
   useEffect(() => {
     const stylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => {
-        // get images
-        console.log('Here is the data', data);
-        return data;
-      }));
+      .then(({ data }) => data));
     Promise.all(stylesData)
       .then((values) => {
-        console.log('Here are the values in RC', values);
         setStyle(values);
       });
   }, [relatedIds]);
 
   return (
     <div id="RelatedAndComparison">
+      {console.log(styles)}
       <h2>Related Products</h2>
       <ul>
-        <RelatedProducts styles={styles} />
+        <RelatedProducts styles={styles} products={products} />
       </ul>
       <h2>Your Outfit</h2>
       {/* <YourOutfit /> */}

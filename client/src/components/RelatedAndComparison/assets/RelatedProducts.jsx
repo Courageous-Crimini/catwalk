@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RelatedProducts = ({ styles }) => {
-  console.log('Styles:', styles);
+const RelatedProducts = ({ styles, products }) => {
+  // console.log('Styles:', styles);
 
   const cards = styles.map((item) => {
     const id = item.product_id;
@@ -22,12 +22,14 @@ const RelatedProducts = ({ styles }) => {
         <span>{name}</span>
         <br />
         <span>{price}</span>
+        <br />
+        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
       </div>
     );
   });
 
   return (
-    <div className="carousel">
+    <div className="cards">
       {cards}
     </div>
   );
