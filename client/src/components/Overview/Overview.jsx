@@ -32,7 +32,7 @@ justify-content: center;
 
 const Overview = () => (
   <Wrapper>
-    {/* <ImageGallery /> */}
+    <ImageGallery />
     <ProductInfo />
     <StyleSelector />
     <AddToCart />
