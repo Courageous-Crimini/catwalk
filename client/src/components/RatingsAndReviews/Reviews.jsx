@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import Review from './Review.jsx';
 
 const Wrapper = styled.section`
 background: rgb(201, 202, 203);
@@ -20,40 +21,6 @@ const ReviewsList = ({ reviews }) => (
       ))}
     </ul>
   </div>
-);
-
-const Review = ({ review }) => (
-  <div className="review">
-    <span>
-      {`${review.rating} ☆☆☆☆☆ ${review.reviewer_name} ${review.date}`}
-      <br />
-    </span>
-    <span>
-      {review.summary}
-      <br />
-    </span>
-    <span>
-      {review.body.slice(0, 250)}
-      <br />
-    </span>
-    <ShowMore />
-    <span>
-      Images
-      <br />
-    </span>
-    <span>
-      Response to Review
-      <br />
-    </span>
-    <span>
-      Helpful? Yes # No # Report
-      <br />
-    </span>
-  </div>
-);
-
-const ShowMore = () => (
-  <button className="show-more-review" type="submit">Show More</button>
 );
 
 const MoreReviews = () => (
@@ -78,7 +45,7 @@ class SortByDropdown extends React.Component {
     const { value } = this.state;
     return (
       <form>
-        {`Sort on `}
+        {'Sort on '}
         <select value={value} onChange={this.handleChange}>
           <option value="relevant">Relevant</option>
           <option value="helpful">Helpful</option>
