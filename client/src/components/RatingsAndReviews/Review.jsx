@@ -29,6 +29,7 @@ const ShowMore = () => (
 const Review = ({ review }) => (
   <Wrapper>
     <div className="review">
+      {console.log(review)}
       <Row>
         <AlignLeft>
           {`${review.rating} ☆☆☆☆☆`}
@@ -37,10 +38,9 @@ const Review = ({ review }) => (
           {`${review.reviewer_name} ${review.date}`}
         </AlignRight>
       </Row>
-      <span>
+      <AlignLeft style={{ fontWeight: 'bold' }}>
         {review.summary}
-        <br />
-      </span>
+      </AlignLeft>
       <span>
         {review.body.slice(0, 250)}
         <br />
@@ -55,7 +55,7 @@ const Review = ({ review }) => (
         <br />
       </span>
       <span>
-        Helpful? Yes # No # Report
+        Helpful? Yes {review.helpfulness} No # Report
         <br />
       </span>
     </div>

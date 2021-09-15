@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-background: rgb(211, 212, 213);;
+background: rgb(211, 212, 213);
 height: auto;
 grid-column-start: 1;
 grid-column-end: 2;
