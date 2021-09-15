@@ -8,7 +8,7 @@ height: 100%;
 
 const Input = styled.input`
   width: 100%;
-  padding: 1em;
+  padding: 30px;
   margin: 0.5rem;
   font-size: 22px;
   color: 'palevioletred';

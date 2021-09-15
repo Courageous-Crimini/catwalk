@@ -20,7 +20,7 @@ const P = styled.p`
 
 const AlignRight = styled.div`
     margin-right: auto;
-    padding-right: 3em;
+    padding-right: 100px;
 `;
 
 const H2 = styled.h2`
@@ -56,9 +56,11 @@ const QuestionItem = ({ question }) => {
       </Row>
       <div className="Answers-collapsible">
         <AlignRight>
-          {
+          {/* {
                         isOpen && <AnswersList questionId={question.question_id} />
-                    }
+                    } */}
+
+          <AnswersList questionId={question.question_id} />
           <H2 onClick={() => setIsOpen(!isOpen)}>
             Load More Answers
           </H2>

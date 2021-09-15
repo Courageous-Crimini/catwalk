@@ -8,7 +8,7 @@ import AddQuestion from './AddQuestion.jsx';
 const Wrapper = styled.section`
 margin: 0;
 height: 100%;
-padding: 20em;
+padding: 200px;
 background: papayawhip;
 `;
 
