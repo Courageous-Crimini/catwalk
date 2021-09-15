@@ -62,7 +62,8 @@ const QA = () => {
         </div>
         <div className="Questions-collapsible">
             {console.log('QA.jsx', questions)}
-          {
+          <QuestionsList questions={questions} />
+          {/* {
             isOpen && <QuestionsList questions={questions} />
           }
           <Row>
@@ -70,7 +71,7 @@ const QA = () => {
               More Answered Questions
             </Button>
             <AddQuestion />
-          </Row>
+          </Row> */}
         </div>
       </div>
     </Wrapper>

@@ -24,16 +24,12 @@ const Search = ({ filterSearch }) => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
     filterSearch(value);
   };
 
   return (
     <Wrapper>
-      <form onSubmit={handleSubmit}>
+      <form>
         <Input type="text" name="name" placeholder="Have a quesiton? Search for Answers..." value={value} onChange={handleChange} />
       </form>
     </Wrapper>
