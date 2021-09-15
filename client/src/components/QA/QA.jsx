@@ -44,15 +44,24 @@ const QA = () => {
       });
   }, []);
 
-  return (
+  const filterSearch = (q) => {
+    const filter = questions.filter((question) => {
+      if (question.question_body.toLowerCase().includes(q)) {
+        return question;
+      }
+    });
+    setQuestions(filter);
+  };
 
+  return (
     <Wrapper>
       <div>
         <h2> Questions and Answers </h2>
         <div className="Search">
-          <Search />
+          <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
+            {console.log('QA.jsx', questions)}
           {
             isOpen && <QuestionsList questions={questions} />
           }
