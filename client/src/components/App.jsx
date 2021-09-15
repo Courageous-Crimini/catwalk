@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable object-shorthand */
+/* eslint-disable no-unused-vars */
+import React, { useEffect, useReducer } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Header from './Header/Header.jsx';
@@ -15,31 +17,86 @@ justify-content: flex-start;
 align-items: center;
 font-family: Valera Round, sans-serif;`;
 
+export const ACTIONS = {
+  PRODUCTS_SUCCESS: 'products-success',
+  STYLES_SUCCESS: 'styles-success',
+};
+
+const initialState = {
+  loaded: false,
+  selectedProduct: null,
+  products: [],
+  styles: [],
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        products: action.payload,
+        selectedProduct: action.payload[0].id,
+      };
+    case ACTIONS.STYLES_SUCCESS:
+      return {
+        ...state,
+        styles: action.payload,
+        loaded: true,
+      };
+    // case ACTIONS.NEXT_ITEM:
+    //   if (state.image + 1 > state.length - 1) {
+    //     return { ...state, image: 0 };
+    //   }
+    //   return { ...state, image: state.image + 1 };
+    // case ACTIONS.PREVIOUS_ITEM:
+    //   if (state.image - 1 < 0) {
+    //     return { ...state, image: state.length - 1 };
+    //   }
+    //   return { ...state, image: state.image - 1 };
+    // case ACTIONS.SET_ITEM:
+    //   return { ...state, image: action.payload };
+    // case ACTIONS.VIEW_ITEM:
+    //   return { ...state, clicked: !state.clicked };
+    default:
+      return state;
+  }
+};
+
+export const DispatchContext = React.createContext();
+export const StateContext = React.createContext();
+
 const App = () => {
-  const [products, setProducts] = useState([]);
-  const [loaded, setLoaded] = useState(false);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     axios.get('/api/products')
       .then((response) => {
-        setProducts(response.data);
+        dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
+        return response.data[0].id;
       })
-      .then(() => {
-        setLoaded(true);
+      .then((id) => {
+        axios.get(`/api/products/${id}/styles`)
+          .then((response) => {
+            dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
+          });
       });
   }, []);
 
   return (
     <div>
-      { loaded
+      { state.loaded
         ? (
-          <Container>
-            <Header />
-            <Overview products={products} />
-            <RelatedAndComparison />
-            <QA />
-            <RatingsAndReviews id={products[0].id} />
-          </Container>
+          <DispatchContext.Provider value={dispatch}>
+            <StateContext.Provider value={state}>
+              <Container>
+                <Header />
+                <Overview />
+                <RelatedAndComparison />
+                <QA />
+                <RatingsAndReviews />
+              </Container>
+            </StateContext.Provider>
+          </DispatchContext.Provider>
         )
         : <h4>Loading...</h4>}
     </div>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
@@ -30,49 +31,14 @@ padding: 5%;
 justify-content: center;
 `;
 
-// export const ACTIONS = {
-//     SELECT_ITEM: 'select-item',
-//   };
-
-//   function reducer(state, action) {
-//     switch (action.type) {
-//       case ACTIONS.SELECT_ITEM:
-//         return {
-//           ...state,
-//           selectedItem: action.payload,
-//         };
-//       default:
-//         return state;
-//     }
-//   }
-
-const Overview = ({ products }) => {
-  const [selected, setSelected] = useState(products[0]);
-  const [selectedDetails, setSelectedDetails] = useState();
-  const [loaded, setLoaded] = useState(false);
-
-  useEffect(() => {
-    axios.get(`/api/products/${selected.id}/styles`)
-      .then((response) => {
-        setSelectedDetails(response.data);
-      }).then(() => {
-        setLoaded(true);
-      });
-  }, [selected]);
-
-  return (
-    loaded
-      ? (
-        <Wrapper>
-          <ImageGallery styleDetails={selectedDetails} />
-          <ProductInfo productInfo={selected} />
-          <StyleSelector styleDetails={selectedDetails} />
-          <AddToCart styleDetails={selectedDetails} />
-          <ProductOverview productInfo={selected} />
-        </Wrapper>
-      )
-      : <h3>Loading...</h3>
-  );
-};
+const Overview = () => (
+  <Wrapper>
+    <ImageGallery />
+    <ProductInfo />
+    <StyleSelector />
+    <AddToCart />
+    <ProductOverview />
+  </Wrapper>
+);
 
 export default Overview;

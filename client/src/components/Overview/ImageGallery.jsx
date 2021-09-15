@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useReducer } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -21,41 +21,7 @@ grid-row-end: 4;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
-export const ACTIONS = {
-  NEXT_ITEM: 'next-item',
-  PREVIOUS_ITEM: 'previous-item',
-  SET_ITEM: 'set-item',
-  VIEW_ITEM: 'view-item',
-};
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.NEXT_ITEM:
-      if (state.image + 1 > state.length - 1) {
-        return { ...state, image: 0 };
-      }
-      return { ...state, image: state.image + 1 };
-
-    case ACTIONS.PREVIOUS_ITEM:
-      if (state.image - 1 < 0) {
-        return { ...state, image: state.length - 1 };
-      }
-      return { ...state, image: state.image - 1 };
-    case ACTIONS.SET_ITEM:
-      return { ...state, image: action.payload };
-    case ACTIONS.VIEW_ITEM:
-      return { ...state, clicked: !state.clicked };
-    default:
-      return state;
-  }
-};
-
-const ImageGallery = ({ styleDetails }) => {
-  const [state, dispatch] = useReducer(reducer, {
-    image: 0,
-    length: styleDetails.results[0].photos.length,
-    clicked: false,
-  });
+const ImageGallery = () => {
 
   if (state.clicked === false) {
     return (
