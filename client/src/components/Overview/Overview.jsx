@@ -35,7 +35,7 @@ const Overview = () => (
     {/* <ImageGallery /> */}
     <ProductInfo />
     <StyleSelector />
-    {/* <AddToCart /> */}
+    <AddToCart />
     <ProductOverview />
   </Wrapper>
 );
