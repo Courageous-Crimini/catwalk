@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 /* eslint-disable object-shorthand */
 /* eslint-disable no-unused-vars */
 import React, { useEffect, useReducer } from 'react';

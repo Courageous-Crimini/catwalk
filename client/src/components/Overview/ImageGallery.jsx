@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
@@ -26,24 +27,39 @@ const IMAGE_ACTIONS = {
   NEXT_ITEM: 'next-item',
   PREVIOUS_ITEM: 'previous-item',
   VIEW_ITEM: 'view-item',
+  SHIFT_THUMBNAILS_UP: 'shift-thumbnails-up',
+  SHIFT_THUMBNAILS_DOWN: 'shift-thumbnails-down',
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case IMAGE_ACTIONS.NEXT_ITEM:
-      if (state.image + 1 > state.length - 1) {
-        return { ...state, image: 0 };
+      if (state.currentImageIndex + 1 > state.imageCollection.length - 1) {
+        return { ...state, currentImageIndex: 0 };
       }
-      return { ...state, image: state.image + 1 };
+      return { ...state, currentImageIndex: state.currentImageIndex + 1 };
     case IMAGE_ACTIONS.PREVIOUS_ITEM:
-      if (state.image - 1 < 0) {
-        return { ...state, image: state.length - 1 };
+      if (state.currentImageIndex - 1 < 0) {
+        return { ...state, currentImageIndex: state.currentImageIndex.length - 1 };
       }
-      return { ...state, image: state.image - 1 };
+      return { ...state, currentImageIndex: state.currentImageIndex - 1 };
     case IMAGE_ACTIONS.SET_ITEM:
-      return { ...state, image: action.payload };
+      return { ...state, currentImageIndex: action.payload };
     case IMAGE_ACTIONS.VIEW_ITEM:
       return { ...state, clicked: !state.clicked };
+    case IMAGE_ACTIONS.SHIFT_THUMBNAILS_UP:
+      return {
+        ...state,
+        imageCollection: state.imageCollection.concat(state.imageCollection).slice(1, 7),
+      };
+    case IMAGE_ACTIONS.SHIFT_THUMBNAILS_DOWN:
+      return {
+        ...state,
+        imageCollection:
+          state.imageCollection
+            .concat(state.imageCollection)
+            .slice(state.imageCollection.length - 1, (state.imageCollection.length * 2) - 1),
+      };
     default:
       return state;
   }
@@ -58,8 +74,11 @@ const ImageGallery = () => {
   ))[0].photos;
 
   const initialState = {
-    currentImage: styleImages[0].url,
+    currentImageIndex: 0,
+    imageCollection: styleImages,
     clicked: false,
+    startIndex: 0,
+    endIndex: 6,
   };
   const [imageState, imageDispatch] = useReducer(reducer, initialState);
 
@@ -83,36 +102,46 @@ const ImageGallery = () => {
             margin: '0',
             width: '15%',
             height: '85%',
+            border: '1px solid lightgrey',
+            backgroundColor: '#F6F6F6',
           }}
         >
           <IoIosArrowUp
+            onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.SHIFT_THUMBNAILS_UP }); }}
             style={{
               order: '1',
               cursor: 'pointer',
-              fontSize: '6em',
             }}
           />
           <IoIosArrowDown
+            onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.SHIFT_THUMBNAILS_DOWN }); }}
             style={{
               order: '8',
               cursor: 'pointer',
-              fontSize: '6em',
             }}
           />
-          {styleImages.map((photo, index) => {
-            if (photo.url === styleImages[0].url) {
+          {imageState.imageCollection.map((photo, index) => {
+            if (photo.url === imageState.imageCollection[imageState.currentImageIndex].url) {
               return (
                 <img
                   src={photo.thumbnail_url}
+                  key={index}
+                  onClick={() => {
+                    imageDispatch({
+                      type: IMAGE_ACTIONS.SET_ITEM,
+                      payload: index,
+                    });
+                  }}
                   style={{
-                    borderRadius: '3%',
+                    borderRadius: '25%',
                     order: `${index + 2}`,
-                    width: '40%',
-                    height: '80%',
+                    width: '50%',
+                    height: '12%',
                     margin: '5%',
                     padding: '3px',
-                    borderBottom: '3px solid black',
+                    border: '2px solid black',
                     cursor: 'pointer',
+                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
                   }}
                   alt="Thumbnail"
                 />
@@ -121,13 +150,21 @@ const ImageGallery = () => {
             return (
               <img
                 src={photo.thumbnail_url}
+                key={index}
+                onClick={() => {
+                  imageDispatch({
+                    type: IMAGE_ACTIONS.SET_ITEM,
+                    payload: index,
+                  });
+                }}
                 style={{
-                  borderRadius: '3%',
+                  borderRadius: '25%',
                   order: `${index + 2}`,
-                  width: '40%',
-                  height: '80%',
+                  width: '50%',
+                  height: '12%',
                   margin: '5%',
                   cursor: 'pointer',
+                  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                 }}
                 alt="Thumbnail"
               />
@@ -135,7 +172,7 @@ const ImageGallery = () => {
           })}
         </div>
         <IoIosArrowBack
-          onClick={() => { dispatch({ type: IMAGE_ACTIONS.PREVIOUS_ITEM }); }}
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.PREVIOUS_ITEM }); }}
           style={{
             order: '2',
             cursor: 'pointer',
@@ -143,7 +180,7 @@ const ImageGallery = () => {
           }}
         />
         <IoIosArrowForward
-          onClick={() => { dispatch({ type: IMAGE_ACTIONS.NEXT_ITEM }); }}
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.NEXT_ITEM }); }}
           style={{
             order: '4',
             cursor: 'pointer',
@@ -151,15 +188,16 @@ const ImageGallery = () => {
           }}
         />
         <img
-          src={styleImages[0].url}
-          onClick={() => { dispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+          src={imageState.imageCollection[imageState.currentImageIndex].url}
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
           style={{
             borderRadius: '3%',
             order: '3',
-            width: '45%',
+            width: '50%',
             height: '90%',
             margin: '0 5%',
             cursor: 'pointer',
+            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
           }}
           alt="Style"
         />
@@ -176,16 +214,16 @@ const ImageGallery = () => {
       }}
     >
       <img
-        src={styleImages[0].url}
+        src={imageState.imageCollection[imageState.currentImageIndex].url}
         style={{
           borderRadius: '3%',
-          border: '1px solid grey',
-          height: '100%',
+          height: '98%',
           margin: '2%',
           zIndex: '10',
           cursor: 'pointer',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
         }}
-        onClick={() => { dispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+        onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
         alt="Thumbnail"
       />
     </Wrapper>
