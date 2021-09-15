@@ -88,9 +88,18 @@ const RelatedAndComparison = () => {
   const handleAddClick = (id) => {
     addOutfit(id);
   };
-  const removeOutfit = () => { console.log('You clicked me'); }; // Remove Outfit
+  const removeOutfit = (id) => {
+    for (let i = 0; i < yourOutfit.length; i++) {
+      if (id === yourOutfit[i].id) {
+        setYourOutfit(yourOutfit.splice(i, 1));
+        break;
+      }
+    }
+  };
 
-  const handleRemoveClick = () => {}; // Handle Remove
+  const handleRemoveClick = (id) => {
+    removeOutfit(id);
+  };
 
   return (
     <div id="RelatedAndComparison">

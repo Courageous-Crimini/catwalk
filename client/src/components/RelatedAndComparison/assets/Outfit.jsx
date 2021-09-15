@@ -11,7 +11,7 @@ const Outfit = ({ yourOutfit, handleRemoveClick }) => {
     return (
       <div className="card" key={id}>
         <img src={image} alt="A related product" />
-        <button type="button" className="actionBtn outfitBtn" onClick={() => handleRemoveClick}>X</button>
+        <button type="button" className="actionBtn outfitBtn" onClick={() => handleRemoveClick(id)}>X</button>
         {/* <span className="relatedBtn">&#9733;</span> */}
         <br />
         <span>{category}</span>
