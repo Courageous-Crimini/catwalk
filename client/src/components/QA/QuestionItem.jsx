@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import AnswersList from './AnswersList.jsx';
 
@@ -29,29 +30,41 @@ const H2 = styled.h2`
   padding: 1em;
 `;
 
-const QuestionItem = ({question}) => {
+const QuestionItem = ({ question }) => {
+  const [isOpen, setIsOpen] = useState(false);
 
-    const [isOpen, setIsOpen] = useState(false);
+  return (
+    <Wrapper>
+      <Row>
+        <AlignRight>
+          {' '}
+          <h2>
+            Q:
+            {question.question_body}
+          </h2>
+          {' '}
+        </AlignRight>
+        <P>
+          {' '}
+          helpful? Yes
+          {question.question_helpfulness}
+          {' '}
+          | Add Answer
+        </P>
+      </Row>
+      <div className="Answers-collapsible">
+        <AlignRight>
+          {
+                        isOpen && <AnswersList questionId={question.question_id} />
+                    }
+          <H2 onClick={() => setIsOpen(!isOpen)}>
+            Load More Answers
+          </H2>
+        </AlignRight>
+      </div>
 
-    return (
-        <Wrapper>
-            <Row> 
-                <AlignRight> <h2>Q: {question.question_body}</h2> </AlignRight>
-                <P> helpful? Yes {question.question_helpfulness} | Add Answer</P>
-            </Row>
-            <div className="Answers-collapsible">
-                <AlignRight>
-                    { 
-                        isOpen && <AnswersList questionId={question.question_id}/>
-                    } 
-                    <H2 onClick={() => setIsOpen(!isOpen)}>
-                        Load More Answers
-                    </H2>
-                </AlignRight>
-            </div>
-
-        </Wrapper>
-    )
-}
+    </Wrapper>
+  );
+};
 
 export default QuestionItem;

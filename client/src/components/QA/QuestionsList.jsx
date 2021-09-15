@@ -14,10 +14,10 @@ const QuestionsList = ({ questions }) => (
     <div>
 
       {
-          questions.map((question) => (
-            <QuestionItem question={question} key={question.question_id} />
-          ))
-        }
+        questions.map((question) => (
+          <QuestionItem question={question} key={question.question_id} />
+        ))
+      }
     </div>
   </Wrapper>
 );
