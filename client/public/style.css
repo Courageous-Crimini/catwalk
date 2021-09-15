@@ -1,0 +1,20 @@
+/*
+================================================================================
+    Related And Comparison
+================================================================================
+*/
+#RelatedAndComparison {
+  margin-top: 15em;
+  padding: 20em;
+  background: #EEE;
+}
+.cards {
+  display: flex;
+}
+.card {
+  width: 200px;
+  background: gray;
+}
+.relatedBtn {
+  color: #ADD8E6;
+}
