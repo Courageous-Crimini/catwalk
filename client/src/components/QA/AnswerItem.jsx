@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -11,17 +12,26 @@ const Row = styled.div`
     align-items: center;
 `;
 
-const AnswerItem = ({answer}) => {
-    return (
-        <Wrapper>
-            <Row> 
-                <h3>A: </h3> <p>{answer.body}</p>     
-            </Row>
-            <div> 
-                <p>by: {answer.answerer_name}, {answer.date} | Helpful? Yes ({answer.helpfulness}) | Report</p>
-            </div>
-        </Wrapper>
-    )
-}
+const AnswerItem = ({ answer }) => (
+  <Wrapper>
+    <Row>
+      <h3>A: </h3>
+      {' '}
+      <p>{answer.body}</p>
+    </Row>
+    <div>
+      <p>
+        by:
+        {answer.answerer_name}
+        ,
+        {answer.date}
+        {' '}
+        | Helpful? Yes (
+        {answer.helpfulness}
+        ) | Report
+      </p>
+    </div>
+  </Wrapper>
+);
 
 export default AnswerItem;
