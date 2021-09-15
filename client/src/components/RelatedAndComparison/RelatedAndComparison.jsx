@@ -1,15 +1,15 @@
+/* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
-// import YourOutfit from './assets/YourOutfit.jsx';
+import YourOutfit from './assets/YourOutfit.jsx';
 
-const RelatedAndComparison = ({ products }) => {
+const RelatedAndComparison = () => {
   const [relatedIds, setRelatedIds] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [styles, setStyles] = useState([]);
-
-  // const [yourOutfit, setYourOutfit] = useState([]);
+  const [yourOutfit, setYourOutfit] = useState([]);
 
   useEffect(() => {
     axios.get('/api/products/48432/related')
@@ -73,15 +73,39 @@ const RelatedAndComparison = ({ products }) => {
     setStyles(stylesData);
   }, [relatedProducts]);
 
+  const addOutfit = (id) => {
+    let product;
+
+    for (let i = 0; i < styles.length; i++) {
+      if (id === styles[i].id) {
+        product = styles[i];
+        break;
+      }
+    }
+    setYourOutfit(yourOutfit.concat(product));
+  };
+
+  const handleAddClick = (id) => {
+    addOutfit(id);
+  };
+  const removeOutfit = () => { console.log('You clicked me'); }; // Remove Outfit
+
+  const handleRemoveClick = () => {}; // Handle Remove
+
   return (
     <div id="RelatedAndComparison">
-      {/* {console.log(styles)} */}
       <h2>Related Products</h2>
       <ul>
-        <RelatedProducts styles={styles} />
+        <RelatedProducts
+          styles={styles}
+          handleAddClick={handleAddClick}
+        />
       </ul>
       <h2>Your Outfit</h2>
-      {/* <YourOutfit /> */}
+      <YourOutfit
+        yourOutfit={yourOutfit}
+        handleRemoveClick={handleRemoveClick}
+      />
     </div>
   );
 };
