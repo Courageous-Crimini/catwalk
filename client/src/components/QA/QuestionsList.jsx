@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
 import QuestionItem from './QuestionItem.jsx';
@@ -8,19 +9,17 @@ background: white;
 padding: 100px;
 `;
 
-const QuestionsList = ({questions}) => {
-  return (
-    <Wrapper>
-      <div> 
+const QuestionsList = ({ questions }) => (
+  <Wrapper>
+    <div>
 
-        {
-          questions.map(question => (
-              <QuestionItem question={question} key={question.question_id}/>
+      {
+          questions.map((question) => (
+            <QuestionItem question={question} key={question.question_id} />
           ))
         }
-      </div>
-    </Wrapper>
-  )
-};
+    </div>
+  </Wrapper>
+);
 
 export default QuestionsList;
