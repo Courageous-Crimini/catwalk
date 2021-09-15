@@ -24,7 +24,7 @@ const AnswersList = ({ questionId }) => {
   useEffect(() => {
     axios.get(`/api/qa/questions/${question}/answers`, { params: { count: limit } })
       .then(({ data }) => {
-        console.log('results from answerslist.jsx', data.results);
+        // console.log('results from answerslist.jsx', data.results);
         setAnswers(data.results);
       })
       .catch((err) => {

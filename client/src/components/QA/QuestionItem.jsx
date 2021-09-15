@@ -23,40 +23,34 @@ const AlignRight = styled.div`
     padding-right: 100px;
 `;
 
+const QuestionItem = ({ question }) => (
+  <Wrapper>
+    <Row>
+      <AlignRight>
+        {' '}
+        <h2>
+          Q:
+          {question.question_body}
+        </h2>
+        {' '}
+      </AlignRight>
+      <P>
+        {' '}
+        helpful? Yes
+        (
+        {question.question_helpfulness}
+        )
+        {' '}
+        | Add Answer
+      </P>
+    </Row>
+    <div className="Answers-collapsible">
+      <AlignRight>
+        <AnswersList questionId={question.question_id} />
+      </AlignRight>
+    </div>
 
-
-const QuestionItem = ({ question }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Wrapper>
-      <Row>
-        <AlignRight>
-          {' '}
-          <h2>
-            Q:
-            {question.question_body}
-          </h2>
-          {' '}
-        </AlignRight>
-        <P>
-          {' '}
-          helpful? Yes
-          (
-          {question.question_helpfulness}
-          )
-          {' '}
-          | Add Answer
-        </P>
-      </Row>
-      <div className="Answers-collapsible">
-        <AlignRight>
-          <AnswersList questionId={question.question_id} />
-        </AlignRight>
-      </div>
-
-    </Wrapper>
-  );
-};
+  </Wrapper>
+);
 
 export default QuestionItem;

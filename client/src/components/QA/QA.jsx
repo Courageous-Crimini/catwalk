@@ -33,10 +33,10 @@ const QA = () => {
   const [productId] = useState(48432);
   const [questions, setQuestions] = useState([]);
   const [filtered, setFiltered] = useState([]);
-  // const [isOpen, setIsOpen] = useState(false);
+  const [limit, setLimit] = useState(2);
 
   useEffect(() => {
-    axios.get(`/api/qa/questions?product_id=${productId}`)
+    axios.get(`/api/qa/questions?product_id=${productId}`, { params: { count: limit } })
       .then(({ data }) => {
         setFiltered(data.results);
         setQuestions(data.results);
@@ -44,7 +44,7 @@ const QA = () => {
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [limit]);
 
   const filterSearch = (q) => {
     const filter = filtered.filter((question) => {
@@ -63,17 +63,14 @@ const QA = () => {
           <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
-            {console.log('QA.jsx', questions)}
+          {console.log('QA.jsx', questions)}
           <QuestionsList questions={questions} />
-          {/* {
-            isOpen && <QuestionsList questions={questions} />
-          }
           <Row>
-            <Button className="toggle" onClick={() => setIsOpen(!isOpen)}>
+            <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
               More Answered Questions
             </Button>
             <AddQuestion />
-          </Row> */}
+          </Row>
         </div>
       </div>
     </Wrapper>
