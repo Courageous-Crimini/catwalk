@@ -2,13 +2,13 @@
 import React from 'react';
 import Outfit from './Outfit.jsx';
 
-const YourOutfit = ({ yourOutfit, handleRemoveClick }) => {
+const YourOutfit = ({ yourOutfit, handleClick }) => {
   if (yourOutfit.length > 0) {
     return (
-      <Outfit yourOutfit={yourOutfit} handleRemoveClick={handleRemoveClick} />
+      <Outfit yourOutfit={yourOutfit} handleClick={handleClick} />
     );
   }
-  return (<>No outfits added</>);
+  return (<>No items added</>);
 };
 
 export default YourOutfit;

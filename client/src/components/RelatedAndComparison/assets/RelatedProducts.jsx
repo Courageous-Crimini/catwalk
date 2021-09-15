@@ -2,7 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 
-const RelatedProducts = ({ styles, handleAddClick }) => {
+const RelatedProducts = ({ styles, handleClick }) => {
   const cards = styles.map((item) => {
     const id = item.id;
     const image = item.results[0].images[0].thumbnail_url;
@@ -13,7 +13,7 @@ const RelatedProducts = ({ styles, handleAddClick }) => {
     return (
       <div className="card" key={id}>
         <img src={image} alt="A related product" />
-        <button type="button" className="actionBtn relatedBtn" onClick={() => { handleAddClick(id); }}>&#9733;</button>
+        <button type="button" className="actionBtn relatedBtn" onClick={() => { handleClick(id); }}>&#9733;</button>
         {/* <span className="relatedBtn">&#9733;</span> */}
         <br />
         <span>{category}</span>

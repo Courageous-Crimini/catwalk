@@ -2,18 +2,20 @@
 /* eslint-disable prefer-destructuring */
 import React from 'react';
 
-const Outfit = ({ yourOutfit, handleRemoveClick }) => {
+const Outfit = ({ yourOutfit, handleClick }) => {
   const cards = yourOutfit.map((item) => {
     const id = item.id;
     const image = item.results[0].images[0].thumbnail_url;
     const category = item.category;
     const name = item.name;
     const price = item.results[0].salePrice || item.results[0].originalPrice;
+    // const priceOriginal = item.results[0].originalPrice;
+    // const priceSale = item.results[0].salePrice;
 
     return (
       <div className="card" key={id}>
         <img src={image} alt="A related product" />
-        <button type="button" className="actionBtn outfitBtn" onClick={() => handleRemoveClick(id)}>X</button>
+        <button type="button" className="actionBtn outfitBtn" onClick={() => handleClick(id)}>X</button>
         {/* <span className="relatedBtn">&#9733;</span> */}
         <br />
         <span>{category}</span>

@@ -27,12 +27,12 @@ const RelatedAndComparison = () => {
 
         for (let i = 0; i < results.length; i++) {
           const resultsIdx = results[i];
-          const tempStyles = {
+          const thisIn = {
             salePrice: resultsIdx.sale_price,
             originalPrice: resultsIdx.original_price,
             images: resultsIdx.photos,
           };
-          relatedStylesFormat.results.push(tempStyles);
+          relatedStylesFormat.results.push(thisIn);
         }
         return relatedStylesFormat;
       }));
@@ -43,17 +43,17 @@ const RelatedAndComparison = () => {
   }, [relatedIds]);
 
   useEffect(() => {
-    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
+    const productData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
       .then(({ data }) => {
-        const productFormat = {
+        const productDataFormat = {
           id: data.id,
           name: data.name,
           category: data.category,
         };
 
-        return productFormat;
+        return productDataFormat;
       }));
-    Promise.all(relatedStylesData)
+    Promise.all(productData)
       .then((values) => {
         setRelatedProducts(values);
       });
@@ -61,60 +61,48 @@ const RelatedAndComparison = () => {
 
   useEffect(() => {
     const stylesData = [];
+
     for (let i = 0; i < relatedIds.length; i++) {
-      const stylesDataFormat = {
+      const thisIn = {
         id: relatedProducts[i].id,
         category: relatedProducts[i].category,
         name: relatedProducts[i].name,
         results: relatedStyles[i].results,
       };
-      stylesData.push(stylesDataFormat);
+      stylesData.push(thisIn);
     }
-
     setStyles(stylesData);
   }, [relatedProducts]);
 
   const addOutfit = (id) => {
-    let product;
-
     for (let i = 0; i < styles.length; i++) {
       if (id === styles[i].id) {
-        product = styles[i];
+        setYourOutfit(yourOutfit.concat(styles[i]));
         break;
       }
     }
-    setYourOutfit(yourOutfit.concat(product));
   };
 
-  const handleAddClick = (id) => {
-    addOutfit(id);
-  };
   const removeOutfit = (id) => {
     for (let i = 0; i < yourOutfit.length; i++) {
       if (id === yourOutfit[i].id) {
-        setYourOutfit(yourOutfit.splice(i, 1));
+        setYourOutfit(yourOutfit.splice(i, 0));
         break;
       }
     }
-  };
-
-  const handleRemoveClick = (id) => {
-    removeOutfit(id);
   };
 
   return (
     <div id="RelatedAndComparison">
       <h2>Related Products</h2>
-      <ul>
-        <RelatedProducts
-          styles={styles}
-          handleAddClick={handleAddClick}
-        />
-      </ul>
+      <RelatedProducts
+        styles={styles}
+        handleClick={addOutfit}
+      />
       <h2>Your Outfit</h2>
       <YourOutfit
         yourOutfit={yourOutfit}
-        handleRemoveClick={handleRemoveClick}
+        handleClick={removeOutfit}
       />
     </div>
   );
