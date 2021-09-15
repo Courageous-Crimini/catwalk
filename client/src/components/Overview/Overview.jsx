@@ -1,14 +1,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 import AddToCart from './AddToCart.jsx';
 import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ProductOverview from './ProductOverview.jsx';
-// import ACTIONS from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
@@ -33,11 +31,11 @@ justify-content: center;
 
 const Overview = () => (
   <Wrapper>
-    <ImageGallery />
+    {/* <ImageGallery /> */}
     <ProductInfo />
-    <StyleSelector />
-    <AddToCart />
-    <ProductOverview />
+    {/* <StyleSelector /> */}
+    {/* <AddToCart />
+    <ProductOverview /> */}
   </Wrapper>
 );
 
