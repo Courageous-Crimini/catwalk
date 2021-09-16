@@ -81,7 +81,7 @@ const App = () => {
                 <Header />
                 <Overview />
                 <RelatedAndComparison />
-                {/* <QA /> */}
+                <QA />
                 {/* <RatingsAndReviews /> */}
               </Container>
             </StateContext.Provider>
