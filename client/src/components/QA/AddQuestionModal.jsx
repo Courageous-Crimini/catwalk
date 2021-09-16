@@ -9,10 +9,13 @@ const Background = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    // position: fixed;
+    position: fixed;
     display: flex;
+    left: 0;
+    top: 0;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 `;
 
 const ModalWrapper = styled.div`
