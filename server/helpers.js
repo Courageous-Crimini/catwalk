@@ -9,8 +9,8 @@ module.exports = {
       url: '/products',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page || 1,
+        count: req.query.count || 5,
       },
     };
     axios.request(options)
@@ -77,8 +77,8 @@ module.exports = {
       url: '/reviews',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page || 1,
+        count: req.query.count || 5,
         sort: sortType,
         product_id: req.query.product_id,
       },

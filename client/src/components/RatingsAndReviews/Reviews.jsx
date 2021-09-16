@@ -1,51 +1,26 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
+import Review from './Review.jsx';
 
 const Wrapper = styled.section`
-background: seagreen;
-flex: 0 0 50%;
-display: flex;
-justify-content: flex-end;
+background: rgb(201, 202, 203);
+height: auto;
+grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 2
 `;
 
-const ReviewsList = () => (
+const ReviewsList = ({ reviews }) => (
   <div className="reviewslist">
     <ul>
-      <Review />
+      {reviews.map((review) => (
+        <li key={review.review_id}>
+          <Review review={review} />
+        </li>
+      ))}
     </ul>
   </div>
-);
-
-const Review = () => (
-  <li>
-    <div className="reviewslist">
-      <span>
-        Insert Star Rating left-aligned and Review Username, Date right-aligned
-        <br />
-      </span>
-      <span>
-        Review Summary
-        <br />
-      </span>
-      <span>
-        Review Body
-        <br />
-      </span>
-      <MoreReviews />
-      <span>
-        Images
-        <br />
-      </span>
-      <span>
-        Response to Review
-        <br />
-      </span>
-      <span>
-        Helpful? Yes # No # Report
-        <br />
-      </span>
-    </div>
-  </li>
 );
 
 const MoreReviews = () => (
@@ -70,7 +45,7 @@ class SortByDropdown extends React.Component {
     const { value } = this.state;
     return (
       <form>
-        Sort on
+        {'Sort on '}
         <select value={value} onChange={this.handleChange}>
           <option value="relevant">Relevant</option>
           <option value="helpful">Helpful</option>
@@ -81,11 +56,11 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Reviews = () => (
+const Reviews = ({ reviews }) => (
   <Wrapper>
     <div>
       <SortByDropdown />
-      <ReviewsList />
+      <ReviewsList reviews={reviews.results} />
       <MoreReviews />
       <AddAReview />
     </div>
