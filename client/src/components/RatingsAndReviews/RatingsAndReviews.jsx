@@ -3,7 +3,9 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Ratings from './Ratings.jsx';
+// eslint-disable-next-line import/no-cycle
 import Reviews from './Reviews.jsx';
+// eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`

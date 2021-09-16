@@ -80,8 +80,8 @@ const App = () => {
               <Container>
                 <Header />
                 <Overview />
-                {/* <RelatedAndComparison />
-                <QA /> */}
+                {/* <RelatedAndComparison /> */}
+                <QA />
                 <RatingsAndReviews />
               </Container>
             </StateContext.Provider>
