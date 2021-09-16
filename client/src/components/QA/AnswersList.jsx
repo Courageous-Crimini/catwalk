@@ -8,11 +8,10 @@ height: 100%;
 background: white;
 `;
 
-const H2 = styled.h2`
-  /* Adapt the colors based on primary prop */
-
-  font-size: 1.1em;
+const LoadBtn = styled.h3`
+  font-size: 1em;
   padding: 1em;
+  font-style: normal;
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -42,9 +41,9 @@ const AnswersList = ({ questionId }) => {
         }
       </div>
       <div>
-        <H2 onClick={() => { setLimit((prevState) => prevState + 2); }}>
+        <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
           Load More Answers
-        </H2>
+        </LoadBtn>
       </div>
 
     </Wrapper>

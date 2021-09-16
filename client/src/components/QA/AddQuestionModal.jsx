@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
@@ -9,10 +9,13 @@ const Background = styled.div`
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.8);
-    // position: fixed;
+    position: fixed;
     display: flex;
+    left: 0;
+    top: 0;
     justify-content: center;
     align-items: center;
+    z-index: 1000;
 `;
 
 const ModalWrapper = styled.div`
@@ -48,12 +51,19 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `;
 
-export const Modal = ({ showModal, setShowModal }) => (
-  <>
-    {showModal
-      ? (
+export const Modal = ({ showModal, setShowModal }) => {
+  const modalRef = useRef();
 
-        <Background>
+  const closeModal = (e) => {
+    if (modalRef.current === e.target) {
+      setShowModal(false);
+    }
+  };
+
+  return (
+    <>
+      {showModal ? (
+        <Background ref={modalRef} onClick={closeModal}>
           <ModalWrapper showModal={showModal}>
             <ModalContent>
               <h1>Add a question here</h1>
@@ -64,9 +74,7 @@ export const Modal = ({ showModal, setShowModal }) => (
             />
           </ModalWrapper>
         </Background>
-
-      )
-      : null}
-  </>
-
-);
+      ) : null}
+    </>
+  );
+};
