@@ -11,8 +11,8 @@ padding: 100px;
 
 const QuestionsList = ({ questions }) => (
   <Wrapper>
-    <div>
 
+    <div>
       {
         questions.map((question) => (
           <QuestionItem question={question} key={question.question_id} />

@@ -8,7 +8,7 @@ import AddQuestion from './AddQuestion.jsx';
 const Wrapper = styled.section`
 margin: 0;
 height: 100%;
-padding: 20em;
+padding: 200px;
 background: papayawhip;
 `;
 
@@ -32,32 +32,41 @@ const Row = styled.div`
 const QA = () => {
   const [productId] = useState(48432);
   const [questions, setQuestions] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
+  const [filtered, setFiltered] = useState([]);
+  const [limit, setLimit] = useState(2);
 
   useEffect(() => {
-    axios.get(`/api/qa/questions?product_id=${productId}`)
+    axios.get(`/api/qa/questions?product_id=${productId}`, { params: { count: limit } })
       .then(({ data }) => {
+        setFiltered(data.results);
         setQuestions(data.results);
       })
       .catch((err) => {
         throw err;
       });
-  }, []);
+  }, [limit]);
+
+  const filterSearch = (q) => {
+    const filter = filtered.filter((question) => {
+      if (question.question_body.toLowerCase().includes(q)) {
+        return question;
+      }
+    });
+    setQuestions(filter);
+  };
 
   return (
-
     <Wrapper>
       <div>
         <h2> Questions and Answers </h2>
         <div className="Search">
-          <Search />
+          <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
-          {
-            isOpen && <QuestionsList questions={questions} />
-          }
+          {/* {console.log('QA.jsx', questions)} */}
+          <QuestionsList questions={questions} />
           <Row>
-            <Button className="toggle" onClick={() => setIsOpen(!isOpen)}>
+            <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
               More Answered Questions
             </Button>
             <AddQuestion />

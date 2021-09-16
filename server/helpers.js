@@ -174,8 +174,8 @@ module.exports = {
       url: '/qa/questions',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page,
+        count: req.query.count,
         product_id: req.query.product_id,
       },
     };
@@ -196,8 +196,8 @@ module.exports = {
       url: `/qa/questions/${id}/answers`,
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page,
+        count: req.query.count,
       },
     };
     axios.request(options)
