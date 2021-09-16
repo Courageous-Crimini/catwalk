@@ -1,9 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext, useEffect, useReducer } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
+import { DispatchContext, StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
@@ -22,42 +24,64 @@ background: #e9ecef;
 padding: 5%;
 justify-content: center;
 `;
+export const ACTIONS = {
+  REVIEWS_SUCCESS: 'reviews-success',
+  REVIEWSMETA_SUCCESS: 'reviewsmeta-success',
+};
 
-const RatingsAndReviews = ({ id }) => {
-  const [reviewsMeta, setReviewsMeta] = useState([]);
-  const [reviews, setReviews] = useState([]);
-  const [ratingsLoaded, setRatingsLoaded] = useState(false);
-  const [reviewsLoaded, setReviewsLoaded] = useState(false);
+const initialState = {
+  loaded: false,
+  reviews: {},
+  reviewsMeta: {},
+};
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case ACTIONS.REVIEWS_SUCCESS:
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case ACTIONS.REVIEWSMETA_SUCCESS:
+      return {
+        ...state,
+        reviewsMeta: action.payload,
+        loaded: true,
+      };
+    default:
+      return state;
+  }
+};
+
+const RatingsAndReviews = () => {
+  const productState = useContext(StateContext);
+  const { selectedProduct } = productState;
+  const [state, dispatch] = useReducer(reducer, initialState);
+
   useEffect(() => {
-    axios.get(`/api/reviews/meta?product_id=${id}`)
+    axios.get(`/api/reviews?product_id=${selectedProduct}`)
       .then((response) => {
-        setReviewsMeta(response.data);
+        dispatch({ type: ACTIONS.REVIEWS_SUCCESS, payload: response.data });
+        return response.data.product;
       })
-      .then(() => {
-        setRatingsLoaded(true);
+      .then((id) => {
+        axios.get(`/api/reviews/meta?product_id=${id}`)
+          .then((response) => {
+            dispatch({ type: ACTIONS.REVIEWSMETA_SUCCESS, payload: response.data });
+          });
       });
   }, []);
-  useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}`)
-      .then((response) => {
-        setReviews(response.data);
-      })
-      .then(() => {
-        setReviewsLoaded(true);
-      });
-  }, []);
-
   return (
     <div>
-      <Wrapper>
-        <h2> Ratings & Reviews</h2>
-        {ratingsLoaded
-          ? <Ratings meta={reviewsMeta} />
-          : <h4>Loading...</h4>}
-        {reviewsLoaded
-          ? <Reviews reviews={reviews} />
-          : <h4>Loading...</h4>}
-      </Wrapper>
+      <DispatchContext.Provider value={dispatch}>
+        <StateContext.Provider value={state}>
+          <Wrapper>
+            <h2> Ratings & Reviews</h2>
+            <Ratings />
+            <Reviews />
+          </Wrapper>
+        </StateContext.Provider>
+      </DispatchContext.Provider>
     </div>
   );
 };
