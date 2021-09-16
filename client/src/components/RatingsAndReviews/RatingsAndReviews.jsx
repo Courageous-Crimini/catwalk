@@ -59,7 +59,7 @@ const RatingsAndReviews = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${selectedProduct}`)
+    axios.get(`/api/reviews?product_id=${selectedProduct}&count=1000`)
       .then((response) => {
         dispatch({ type: ACTIONS.REVIEWS_SUCCESS, payload: response.data });
         return response.data.product;
