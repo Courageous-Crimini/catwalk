@@ -80,7 +80,7 @@ const App = () => {
               <Container>
                 <Header />
                 <Overview />
-                {/* <RelatedAndComparison /> */}
+                <RelatedAndComparison />
                 <QA />
                 <RatingsAndReviews />
               </Container>

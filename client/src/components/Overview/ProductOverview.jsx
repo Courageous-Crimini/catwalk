@@ -33,7 +33,7 @@ const ProductOverview = () => {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-evenly',
-        width: '60%',
+        width: '69%',
       }}
       >
         <h2 style={{ margin: '0' }}>{productInfo[0].slogan}</h2>
