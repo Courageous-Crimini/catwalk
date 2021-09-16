@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
+import React, { useRef } from 'react';
+import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 
@@ -51,25 +52,40 @@ const CloseModalButton = styled(MdClose)`
     z-index: 10;
 `;
 
-export const Modal = ({ showModal, setShowModal }) => (
-  <>
-    {showModal
-      ? (
+export const Modal = ({ showModal, setShowModal }) => {
+  const modalRef = useRef();
 
-        <Background>
-          <ModalWrapper showModal={showModal}>
-            <ModalContent>
-              <h1>Add a question here</h1>
-            </ModalContent>
-            <CloseModalButton
-              area-label="Close modal"
-              onClick={() => setShowModal((prev) => !prev)}
-            />
-          </ModalWrapper>
+  const animation = useSpring({
+    config: {
+      duration: 250,
+    },
+    opactiy: showModal ? 1 : 0,
+    transform: showModal ? 'translateY(0%)' : 'translateY(-100%)',
+  });
+
+  const closeModal = (e) => {
+    if (modalRef.current === e.target) {
+      setShowModal(false);
+    }
+  };
+
+  return (
+    <>
+      {showModal ? (
+        <Background ref={modalRef} onClick={closeModal}>
+          <animated.div style={animation}>
+            <ModalWrapper showModal={showModal}>
+              <ModalContent>
+                <h1>Add a question here</h1>
+              </ModalContent>
+              <CloseModalButton
+                area-label="Close modal"
+                onClick={() => setShowModal((prev) => !prev)}
+              />
+            </ModalWrapper>
+          </animated.div>
         </Background>
-
-      )
-      : null}
-  </>
-
-);
+      ) : null}
+    </>
+  );
+};
