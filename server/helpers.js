@@ -78,7 +78,7 @@ module.exports = {
       params: {
         page: req.query.page || 1,
         count: req.query.count || 5,
-        sort: req.query.sortType || 'relevant',
+        sort: req.query.sort || 'relevant',
         product_id: req.query.product_id,
       },
     };
