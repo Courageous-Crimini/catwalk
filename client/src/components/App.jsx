@@ -82,7 +82,7 @@ const App = () => {
                 <Overview />
                 <RelatedAndComparison />
                 <QA />
-                {/* <RatingsAndReviews /> */}
+                <RatingsAndReviews />
               </Container>
             </StateContext.Provider>
           </DispatchContext.Provider>
