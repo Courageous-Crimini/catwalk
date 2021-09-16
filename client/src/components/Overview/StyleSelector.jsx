@@ -8,6 +8,7 @@ background: #F3F3F3;
 grid-column-start: 2;
 grid-column-end: 3;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+padding: 5% 5% 3% 5%;
 `;
 
 const StyleSelector = () => {
@@ -23,7 +24,8 @@ const StyleSelector = () => {
     }}
     >
       <h4 style={{
-        margin: '0 5%',
+        margin: '0',
+        marginBottom: '1%',
         fontSize: '1.25em',
         fontWeight: 'bolder',
         gridColumnStart: '1',
@@ -49,9 +51,9 @@ const StyleSelector = () => {
                 padding: '3px',
                 border: '2px solid black',
                 display: 'inline',
-                height: '60px',
-                width: '60px',
-                margin: '7px',
+                height: '40px',
+                width: '40px',
+                margin: '10px',
                 cursor: 'pointer',
                 boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
                 gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
@@ -71,9 +73,9 @@ const StyleSelector = () => {
             style={{
               borderRadius: '50%',
               display: 'inline',
-              height: '60px',
-              width: '60px',
-              margin: '7px',
+              height: '40px',
+              width: '40px',
+              margin: '10px',
               cursor: 'pointer',
               boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
               gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
