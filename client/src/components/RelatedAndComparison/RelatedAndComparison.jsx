@@ -21,23 +21,7 @@ const RelatedAndComparison = () => {
 
   useEffect(() => {
     const relatedStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => {
-        console.log('Here is the related styles data', data);
-        const relatedStylesFormat = { id: data.product_id, results: [] };
-        const results = data.results;
-
-        for (let i = 0; i < results.length; i++) {
-          const resultsIdx = results[i];
-          const thisIn = {
-            styleID: resultsIdx.style_id,
-            salePrice: resultsIdx.sale_price,
-            originalPrice: resultsIdx.original_price,
-            images: resultsIdx.photos,
-          };
-          relatedStylesFormat.results.push(thisIn);
-        }
-        return relatedStylesFormat;
-      }));
+      .then(({ data }) => data));
     Promise.all(relatedStylesData)
       .then((values) => {
         setRelatedStyles(values);
@@ -45,55 +29,38 @@ const RelatedAndComparison = () => {
   }, [relatedIDs]);
 
   useEffect(() => {
-    const productData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
-      .then(({ data }) => {
-        const productDataFormat = {
-          id: data.id,
-          name: data.name,
-          category: data.category,
-        };
-
-        return productDataFormat;
-      }));
-    Promise.all(productData)
+    const relatedProductData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
+      .then(({ data }) => data));
+    Promise.all(relatedProductData)
       .then((values) => {
         setRelatedProducts(values);
       });
-  }, [relatedStyles]);
+  }, [relatedIDs]);
 
-  /* UNDER CONSTRUCTION ----------------------------------------------------- */
-  useEffect(() => {
-    const stylesData = [];
-
-    for (let i = 0; i < relatedIDs.length; i++) {
-      const thisIn = {
-        id: relatedProducts[i].id,
-        category: relatedProducts[i].category,
-        name: relatedProducts[i].name,
-        results: relatedStyles[i].results,
-      };
-      stylesData.push(thisIn);
-    }
-    setStyles(stylesData);
-  }, [relatedProducts]);
-  /* END UNDER CONSTRUCTION ------------------------------------------------- */
-
-  /* REPLACEMENT CODE ------------------------------------------------------- */
   useEffect(() => {
     const cards = [];
+    let thisIn;
+    // console.log('relatedStyles', relatedStyles[0].results.photos);
 
-    for (let i = 0; i < relatedIDs.length; i++) {
-      const thisIn = { name: relatedIDs.name, category: relatedIDs.category, productID: relatedIDs.id };
-      for (let j = 0; j < relatedStyles.length; j++) {
-        thisIn.styleID = relatedStyles.styleID;
-        // thisIn.styleName = relatedStyles.;
-        // thisIn.originalPrice = relatedStyles.original_price
+    for (let i = 0; i < relatedProducts.length; i++) {
+      for (let j = 0; j < relatedStyles[i].results.length; j++) {
+        const relatedPIdx = relatedProducts[i];
+        const relatedSIdx = relatedStyles[i].results;
+        thisIn = {
+          productID: relatedPIdx.id,
+          name: relatedPIdx.name,
+          category: relatedPIdx.category,
+          styleID: relatedSIdx[j].style_id,
+          styleName: relatedSIdx[j].name,
+          styleImages: relatedSIdx[j].photos,
+          salePrice: relatedSIdx[j].sale_price,
+          originalPrice: relatedSIdx[j].original_price,
+        };
+        cards.push(thisIn);
       }
-      cards.push(thisIn);
     }
-    // setStyles(cards);
+    setStyles(cards);
   }, [relatedProducts]);
-  /* END REPLACEMENT CODE ---------------------------------------------------- */
 
   const addOutfit = (id) => {
     let isThere = false;
@@ -128,8 +95,6 @@ const RelatedAndComparison = () => {
   return (
     <div id="RelatedAndComparison">
       <h2>Related Products</h2>
-      {/* {console.log('Related Products', relatedProducts)}
-      {console.log('Related Styles', relatedStyles)} */}
       <RelatedProducts
         styles={styles}
         handleClick={addOutfit}
