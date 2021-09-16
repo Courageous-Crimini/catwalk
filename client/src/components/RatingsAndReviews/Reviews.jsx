@@ -27,6 +27,7 @@ const Button = styled.button`
 `;
 
 const ReviewsList = ({ reviews }) => {
+  const numReviews = reviews.length;
   const state = useContext(StateContext);
   const id = state.selectedProduct;
   const [currentReviews, setReviews] = useState([]);

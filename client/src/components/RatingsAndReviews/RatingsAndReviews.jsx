@@ -43,7 +43,7 @@ const RatingsAndReviews = () => {
       });
   }, []);
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}`)
+    axios.get(`/api/reviews?product_id=${id}&count=1000`)
       .then((response) => {
         setReviews(response.data);
       })
