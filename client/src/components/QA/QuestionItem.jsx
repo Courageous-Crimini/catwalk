@@ -37,7 +37,7 @@ const QuestionItem = ({ question }) => (
         (
         {question.question_helpfulness}
         )
-        &nbsp;&nbsp;
+        &nbsp;
         |&nbsp;&nbsp;Add Answer
       </P>
     </Row>
