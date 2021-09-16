@@ -23,52 +23,34 @@ const AlignRight = styled.div`
     padding-right: 100px;
 `;
 
-const H2 = styled.h2`
-  /* Adapt the colors based on primary prop */
+const QuestionItem = ({ question }) => (
+  <Wrapper>
+    <Row>
+      <AlignRight>
+        {' '}
+        <h2>
+          Q:
+          {question.question_body}
+        </h2>
+        {' '}
+      </AlignRight>
+      <P>
+        {' '}
+        helpful? Yes
+        (
+        {question.question_helpfulness}
+        )
+        {' '}
+        | Add Answer
+      </P>
+    </Row>
+    <div className="Answers-collapsible">
+      <AlignRight>
+        <AnswersList questionId={question.question_id} />
+      </AlignRight>
+    </div>
 
-  font-size: 1.1em;
-  padding: 1em;
-`;
-
-const QuestionItem = ({ question }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  return (
-    <Wrapper>
-      <Row>
-        <AlignRight>
-          {' '}
-          <h2>
-            Q:
-            {question.question_body}
-          </h2>
-          {' '}
-        </AlignRight>
-        <P>
-          {' '}
-          helpful? Yes
-          (
-          {question.question_helpfulness}
-          )
-          {' '}
-          | Add Answer
-        </P>
-      </Row>
-      <div className="Answers-collapsible">
-        <AlignRight>
-          {/* {
-                        isOpen && <AnswersList questionId={question.question_id} />
-                    } */}
-
-          <AnswersList questionId={question.question_id} />
-          <H2 onClick={() => setIsOpen(!isOpen)}>
-            Load More Answers
-          </H2>
-        </AlignRight>
-      </div>
-
-    </Wrapper>
-  );
-};
+  </Wrapper>
+);
 
 export default QuestionItem;
