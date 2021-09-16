@@ -6,7 +6,7 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 
 const RelatedAndComparison = () => {
-  const [relatedIds, setRelatedIds] = useState([]);
+  const [relatedIDs, setRelatedIDs] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [styles, setStyles] = useState([]);
@@ -15,19 +15,21 @@ const RelatedAndComparison = () => {
   useEffect(() => {
     axios.get('/api/products/48432/related')
       .then(({ data }) => {
-        setRelatedIds(data);
+        setRelatedIDs(data);
       });
   }, []);
 
   useEffect(() => {
-    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
+    const relatedStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
       .then(({ data }) => {
+        console.log('Here is the related styles data', data);
         const relatedStylesFormat = { id: data.product_id, results: [] };
         const results = data.results;
 
         for (let i = 0; i < results.length; i++) {
           const resultsIdx = results[i];
           const thisIn = {
+            styleID: resultsIdx.style_id,
             salePrice: resultsIdx.sale_price,
             originalPrice: resultsIdx.original_price,
             images: resultsIdx.photos,
@@ -40,10 +42,10 @@ const RelatedAndComparison = () => {
       .then((values) => {
         setRelatedStyles(values);
       });
-  }, [relatedIds]);
+  }, [relatedIDs]);
 
   useEffect(() => {
-    const productData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
+    const productData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
       .then(({ data }) => {
         const productDataFormat = {
           id: data.id,
@@ -59,10 +61,11 @@ const RelatedAndComparison = () => {
       });
   }, [relatedStyles]);
 
+  /* UNDER CONSTRUCTION ----------------------------------------------------- */
   useEffect(() => {
     const stylesData = [];
 
-    for (let i = 0; i < relatedIds.length; i++) {
+    for (let i = 0; i < relatedIDs.length; i++) {
       const thisIn = {
         id: relatedProducts[i].id,
         category: relatedProducts[i].category,
@@ -73,6 +76,24 @@ const RelatedAndComparison = () => {
     }
     setStyles(stylesData);
   }, [relatedProducts]);
+  /* END UNDER CONSTRUCTION ------------------------------------------------- */
+
+  /* REPLACEMENT CODE ------------------------------------------------------- */
+  useEffect(() => {
+    const cards = [];
+
+    for (let i = 0; i < relatedIDs.length; i++) {
+      const thisIn = { name: relatedIDs.name, category: relatedIDs.category, productID: relatedIDs.id };
+      for (let j = 0; j < relatedStyles.length; j++) {
+        thisIn.styleID = relatedStyles.styleID;
+        // thisIn.styleName = relatedStyles.;
+        // thisIn.originalPrice = relatedStyles.original_price
+      }
+      cards.push(thisIn);
+    }
+    // setStyles(cards);
+  }, [relatedProducts]);
+  /* END REPLACEMENT CODE ---------------------------------------------------- */
 
   const addOutfit = (id) => {
     let isThere = false;
@@ -107,6 +128,8 @@ const RelatedAndComparison = () => {
   return (
     <div id="RelatedAndComparison">
       <h2>Related Products</h2>
+      {/* {console.log('Related Products', relatedProducts)}
+      {console.log('Related Styles', relatedStyles)} */}
       <RelatedProducts
         styles={styles}
         handleClick={addOutfit}
