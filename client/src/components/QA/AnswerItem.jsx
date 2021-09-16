@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
-import moment from 'moment';
 
 const Wrapper = styled.section`
 height: 100%;
@@ -25,7 +24,7 @@ const AnswerItem = ({ answer }) => (
         by:
         {answer.answerer_name}
         ,
-        {moment(answer.date).format('LL')}
+        {answer.date}
         {' '}
         | Helpful? Yes (
         {answer.helpfulness}
