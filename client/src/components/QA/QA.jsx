@@ -1,45 +1,80 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Search from './Search.jsx';
+import QuestionsList from './QuestionsList.jsx';
+import AddQuestion from './AddQuestion.jsx';
 
 const Wrapper = styled.section`
 margin: 0;
-height: 200px;
-padding: 20em;
+height: 100%;
+padding: 200px;
 background: papayawhip;
-text-align: center;
 `;
 
+const Button = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
+
+  font-size: 1.2em;
+  margin: 1.2em;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 3px;
+`;
+
+const Row = styled.div`
+    display: flex
+`;
+
+// eslint-disable-next-line no-empty-pattern
 const QA = () => {
-    const [productId, setProductId] = useState(48432);
-    const [questions, setQuestions] = useState([]);
+  const [productId] = useState(48432);
+  const [questions, setQuestions] = useState([]);
+  const [filtered, setFiltered] = useState([]);
+  const [limit, setLimit] = useState(2);
 
-    useEffect(() => {
-        axios.get(`/api/qa/questions?product_id=${productId}`)
-        .then(({data}) => {
-            setQuestions(data.results)
-        })
-        .catch((err) => { 
-            console.error(err);
-        })
-    }, []);
+  useEffect(() => {
+    axios.get(`/api/qa/questions?product_id=${productId}`, { params: { count: limit } })
+      .then(({ data }) => {
+        setFiltered(data.results);
+        setQuestions(data.results);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, [limit]);
 
-    return (
-        <Wrapper>
-            <div> 
-                {/* {console.log('a list of questions', questions)} */}
-                
-                <h2> Questions & Answers </h2>
-                <div className="Questions"> 
-                    {
-                        questions.map(question => (
-                            <h4 key={question.question_id}>Q: {question.question_body}</h4>
-                        ))
-                    }
-                </div>
-            </div>  
-        </Wrapper>
-    )
-}
+  const filterSearch = (q) => {
+    const filter = filtered.filter((question) => {
+      if (question.question_body.toLowerCase().includes(q)) {
+        return question;
+      }
+    });
+    setQuestions(filter);
+  };
+
+  return (
+    <Wrapper>
+      <div>
+        <h2> Questions and Answers </h2>
+        <div className="Search">
+          <Search questions={questions} filterSearch={filterSearch} />
+        </div>
+        <div className="Questions-collapsible">
+          {/* {console.log('QA.jsx', questions)} */}
+          <QuestionsList questions={questions} />
+          <Row>
+            <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
+              More Answered Questions
+            </Button>
+            <AddQuestion />
+          </Row>
+        </div>
+      </div>
+    </Wrapper>
+  );
+};
 
 export default QA;
