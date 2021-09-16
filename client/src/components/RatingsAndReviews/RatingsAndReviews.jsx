@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Ratings from './Ratings.jsx';
 import Reviews from './Reviews.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
@@ -23,7 +24,9 @@ padding: 5%;
 justify-content: center;
 `;
 
-const RatingsAndReviews = ({ id }) => {
+const RatingsAndReviews = () => {
+  const state = useContext(StateContext);
+  const id = state.selectedProduct;
   const [reviewsMeta, setReviewsMeta] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
