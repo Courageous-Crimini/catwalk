@@ -1,4 +1,3 @@
-
 /* eslint-disable react/prop-types */
 import React from 'react';
 import styled from 'styled-components';
@@ -17,20 +16,22 @@ const Row = styled.div`
 const AnswerItem = ({ answer }) => (
   <Wrapper>
     <Row>
-      <h3>A: </h3>
-      {' '}
+      <h3>
+        A:&nbsp;
+      </h3>
+
       <p>{answer.body}</p>
     </Row>
     <div>
-      <p>
-        by:
+      <p style={{ margin: 0 }}>
+        by:&nbsp;
         {answer.answerer_name}
-        ,
+        ,&nbsp;
         {moment(answer.date).format('LL')}
-        {' '}
-        | Helpful? Yes (
+        &nbsp;&nbsp;
+        |&nbsp;&nbsp;Helpful? Yes (
         {answer.helpfulness}
-        ) | Report
+        )&nbsp;&nbsp;|&nbsp;&nbsp; Report
       </p>
     </div>
   </Wrapper>
