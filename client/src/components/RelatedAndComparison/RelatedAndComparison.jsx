@@ -75,10 +75,22 @@ const RelatedAndComparison = () => {
   }, [relatedProducts]);
 
   const addOutfit = (id) => {
-    for (let i = 0; i < styles.length; i++) {
-      if (id === styles[i].id) {
-        setYourOutfit(yourOutfit.concat(styles[i]));
-        break;
+    let isThere = false;
+
+    for (let i = 0; i < yourOutfit.length; i++) {
+      if (yourOutfit.length > 0) {
+        if (id === yourOutfit[i].id) {
+          isThere = true;
+          break;
+        }
+      }
+    }
+    if (!isThere) {
+      for (let i = 0; i < styles.length; i++) {
+        if (id === styles[i].id) {
+          setYourOutfit(yourOutfit.concat(styles[i]));
+          break;
+        }
       }
     }
   };
@@ -86,7 +98,7 @@ const RelatedAndComparison = () => {
   const removeOutfit = (id) => {
     for (let i = 0; i < yourOutfit.length; i++) {
       if (id === yourOutfit[i].id) {
-        setYourOutfit(yourOutfit.splice(i, 0));
+        setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));
         break;
       }
     }

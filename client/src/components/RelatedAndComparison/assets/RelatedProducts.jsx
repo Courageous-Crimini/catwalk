@@ -12,7 +12,7 @@ const RelatedProducts = ({ styles, handleClick }) => {
 
     return (
       <div className="card" key={id}>
-        <img src={image} alt="A related product" />
+        <img src={image} alt="A related product" className="cardsImg" />
         <button type="button" className="actionBtn relatedBtn" onClick={() => { handleClick(id); }}>&#9733;</button>
         {/* <span className="relatedBtn">&#9733;</span> */}
         <br />

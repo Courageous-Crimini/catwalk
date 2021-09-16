@@ -21,6 +21,11 @@
   flex-basis: 0;
   border: 1px solid black;
 }
+.cardsImg {
+  width:  100px;
+  height: 100px;
+  object-fit: cover;
+}
 
 /* -- Buttons -- */
 .actionBtn {
