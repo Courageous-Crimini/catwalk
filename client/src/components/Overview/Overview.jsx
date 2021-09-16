@@ -8,11 +8,12 @@ import ImageGallery from './ImageGallery.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import ProductOverview from './ProductOverview.jsx';
+import Banner from './Banner.jsx';
 
 const Wrapper = styled.section`
 display: grid;
-grid-template-columns: [first] 65% [second] 25%;
-grid-template-rows: [row1-start] 25% [row1-end] 25% [row3-start] 25% [row3-end] auto [last];
+grid-template-columns: [first] 60% [second] 25%;
+grid-template-rows: [row1-start] 5% [row1-end] 22% [row3-start] 25% [row3-end] 21% [row5-start] 23% [last];
 grid-template-areas:
     "ImageGallery ProductInfo"
     "ImageGallery StyleSelector"
@@ -24,14 +25,15 @@ grid-line{
   border: 10px solid black;
 }
 width: 100%;
-height: 50em;
-background: #BAEFD5;
-padding: 5%;
+height: 46em;
+background: #white;
+padding: 1% 5%;
 justify-content: center;
 `;
 
 const Overview = () => (
   <Wrapper>
+    <Banner />
     <ImageGallery />
     <ProductInfo />
     <StyleSelector />

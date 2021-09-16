@@ -29,7 +29,7 @@ const AddToCart = () => {
           height: '100%',
           justifyContent: 'space-evenly',
           alignItems: 'center',
-          padding: '0 12.5%',
+          padding: '0 5%',
         }}
       >
         <div style={{
@@ -44,7 +44,7 @@ const AddToCart = () => {
             order: '1',
             fontSize: '18px',
             fontWeight: 'lighter',
-            padding: '10px 15px',
+            padding: '10px 5px',
             textAlign: 'center',
             width: '45%',
           }}
@@ -58,7 +58,7 @@ const AddToCart = () => {
             order: '2',
             fontSize: '18px',
             fontWeight: 'lighter',
-            padding: '10px 15px',
+            padding: '10px 5px',
             textAlign: 'center',
           }}
           >

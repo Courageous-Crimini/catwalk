@@ -10,7 +10,7 @@ background: #F3F3F3;
 grid-column-start: 2;
 grid-column-end: 3;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-padding: 3%;
+padding: 3% 5%;
 `;
 
 const ProductInfo = () => {
@@ -25,7 +25,6 @@ const ProductInfo = () => {
       alignItems: 'left',
       alignContent: 'center',
       justifyContent: 'space-evenly',
-      gap: '1px',
     }}
     >
       <span style={{
@@ -34,7 +33,7 @@ const ProductInfo = () => {
         flexDirection: 'row',
         alignItems: 'center',
         alignContent: 'center',
-        margin: '0 5%',
+        // margin: '0 5%',
         justifyContent: 'space-between',
       }}
       >
@@ -46,7 +45,7 @@ const ProductInfo = () => {
       <p style={{
         order: '2',
         margin: '0',
-        marginLeft: '5%',
+        // marginLeft: '5%',
         fontWeight: 'lighter',
       }}
       >
@@ -55,7 +54,7 @@ const ProductInfo = () => {
       <h4 style={{
         order: '3',
         margin: '0',
-        marginLeft: '5%',
+        // marginLeft: '5%',
         fontSize: '1.75em',
         fontWeight: 'bolder',
       }}
@@ -65,7 +64,7 @@ const ProductInfo = () => {
       <p style={{
         order: '4',
         margin: '0',
-        marginLeft: '5%',
+        // marginLeft: '5%',
         fontSize: '1.25em',
       }}
       >
