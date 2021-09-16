@@ -14,8 +14,13 @@ const StyleSelector = () => {
   const state = useContext(StateContext);
 
   return (
-    <Wrapper>
-      <h3>
+    <Wrapper style={{
+      display: 'grid',
+      gridTemplateColumns: '[first] 25% [second] 25% [third] 25% [fourth] 25%',
+      gridTemplateRows: '[row1-start] 20% [row1-end] 40% [row3-start] 40% [row3-end]',
+    }}
+    >
+      <h3 style={{}}>
         Style
         {' > '}
         {state.selectedStyle.name}
