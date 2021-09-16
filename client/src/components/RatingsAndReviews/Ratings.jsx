@@ -1,8 +1,6 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable import/no-cycle */
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: rgb(211, 212, 213);
@@ -49,43 +47,39 @@ const getRecommendPercent = (recObj) => {
   return 100 * (recTrue / (recTrue + recFalse));
 };
 
-const Ratings = () => {
-  const state = useContext(StateContext);
-  const { reviewsMeta } = state;
-  return (
-    <Wrapper>
+const Ratings = ({ meta }) => (
+  <Wrapper>
+    <div>
       <div>
-        <div>
-          { (getAverageRating(reviewsMeta.ratings) === 'No ratings')
-            ? 'No ratings yet'
-            : `${Math.round(getAverageRating(reviewsMeta.ratings) * 10) / 10} ☆☆☆☆☆`}
-        </div>
-        <div>
-          { (getRecommendPercent(reviewsMeta.recommended) === 'None')
-            ? 'No recommendations yet'
-            : `${Math.round(getRecommendPercent(reviewsMeta.recommended))}% of reviews recommend this product`}
-        </div>
-        {Array.from(Array(5).keys()).map((num) => (
-          <div key={5 - num}>
-            {5 - num}
-            {' stars '}
-            <meter
-              min="0"
-              max={getMaxRatings(reviewsMeta.ratings)}
-              value={reviewsMeta.ratings[5 - num]}
-            />
-          </div>
-        ))}
-        {Object.entries(reviewsMeta.characteristics).map((characteristic) => (
-          <div key={characteristic[1].id}>
-            {characteristic[0]}
-            {': '}
-            {characteristic[1].value}
-          </div>
-        ))}
+        { (getAverageRating(meta.ratings) === 'No ratings')
+          ? 'No ratings yet'
+          : `${Math.round(getAverageRating(meta.ratings) * 10) / 10} ☆☆☆☆☆`}
       </div>
-    </Wrapper>
-  );
-};
+      <div>
+        { (getRecommendPercent(meta.recommended) === 'None')
+          ? 'No recommendations yet'
+          : `${Math.round(getRecommendPercent(meta.recommended))}% of reviews recommend this product`}
+      </div>
+      {Array.from(Array(5).keys()).map((num) => (
+        <div key={5 - num}>
+          {5 - num}
+          {' stars '}
+          <meter
+            min="0"
+            max={getMaxRatings(meta.ratings)}
+            value={meta.ratings[5 - num]}
+          />
+        </div>
+      ))}
+      {Object.entries(meta.characteristics).map((characteristic) => (
+        <div key={characteristic[1].id}>
+          {characteristic[0]}
+          {': '}
+          {characteristic[1].value}
+        </div>
+      ))}
+    </div>
+  </Wrapper>
+);
 
 export default Ratings;
