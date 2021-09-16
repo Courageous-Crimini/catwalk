@@ -11,7 +11,7 @@ import ProductOverview from './ProductOverview.jsx';
 
 const Wrapper = styled.section`
 display: grid;
-grid-template-columns: [first] 55% [second] 35%;
+grid-template-columns: [first] 65% [second] 25%;
 grid-template-rows: [row1-start] 25% [row1-end] 25% [row3-start] 25% [row3-end] auto [last];
 grid-template-areas:
     "ImageGallery ProductInfo"
