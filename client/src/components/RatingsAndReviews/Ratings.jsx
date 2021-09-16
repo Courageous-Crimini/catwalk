@@ -51,19 +51,19 @@ const getRecommendPercent = (recObj) => {
 
 const Ratings = () => {
   const state = useContext(StateContext);
+  const { reviewsMeta } = state;
   return (
     <Wrapper>
       <div>
-        {console.log(state)}
         <div>
-          { (getAverageRating(meta.ratings) === 'No ratings')
+          { (getAverageRating(reviewsMeta.ratings) === 'No ratings')
             ? 'No ratings yet'
-            : `${Math.round(getAverageRating(meta.ratings) * 10) / 10} ☆☆☆☆☆`}
+            : `${Math.round(getAverageRating(reviewsMeta.ratings) * 10) / 10} ☆☆☆☆☆`}
         </div>
         <div>
-          { (getRecommendPercent(meta.recommended) === 'None')
+          { (getRecommendPercent(reviewsMeta.recommended) === 'None')
             ? 'No recommendations yet'
-            : `${Math.round(getRecommendPercent(meta.recommended))}% of reviews recommend this product`}
+            : `${Math.round(getRecommendPercent(reviewsMeta.recommended))}% of reviews recommend this product`}
         </div>
         {Array.from(Array(5).keys()).map((num) => (
           <div key={5 - num}>
@@ -71,12 +71,12 @@ const Ratings = () => {
             {' stars '}
             <meter
               min="0"
-              max={getMaxRatings(meta.ratings)}
-              value={meta.ratings[5 - num]}
+              max={getMaxRatings(reviewsMeta.ratings)}
+              value={reviewsMeta.ratings[5 - num]}
             />
           </div>
         ))}
-        {Object.entries(meta.characteristics).map((characteristic) => (
+        {Object.entries(reviewsMeta.characteristics).map((characteristic) => (
           <div key={characteristic[1].id}>
             {characteristic[0]}
             {': '}

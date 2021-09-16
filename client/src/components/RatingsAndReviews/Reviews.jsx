@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 import Review from './Review.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: rgb(201, 202, 203);
@@ -11,17 +13,22 @@ grid-column-end: 3;
 grid-row-start: 2
 `;
 
-const ReviewsList = ({ reviews }) => (
-  <div className="reviewslist">
-    <ul>
-      {reviews.map((review) => (
-        <li key={review.review_id}>
-          <Review review={review} />
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const ReviewsList = () => {
+  const state = useContext(StateContext);
+  const { reviews } = state;
+
+  return (
+    <div className="reviewslist">
+      <ul>
+        {reviews.results.map((review) => (
+          <li key={review.review_id}>
+            <Review review={review} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 const MoreReviews = () => (
   <button className="see-more-reviews" type="submit">More Reviews</button>
@@ -56,11 +63,11 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Reviews = ({ reviews }) => (
+const Reviews = () => (
   <Wrapper>
     <div>
       <SortByDropdown />
-      <ReviewsList reviews={reviews.results} />
+      <ReviewsList />
       <MoreReviews />
       <AddAReview />
     </div>

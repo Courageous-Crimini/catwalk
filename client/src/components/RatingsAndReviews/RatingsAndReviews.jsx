@@ -73,15 +73,19 @@ const RatingsAndReviews = () => {
   }, []);
   return (
     <div>
-      <DispatchContext.Provider value={dispatch}>
-        <StateContext.Provider value={state}>
-          <Wrapper>
-            <h2> Ratings & Reviews</h2>
-            <Ratings />
-            <Reviews />
-          </Wrapper>
-        </StateContext.Provider>
-      </DispatchContext.Provider>
+      {state.loaded
+        ? (
+          <DispatchContext.Provider value={dispatch}>
+            <StateContext.Provider value={state}>
+              <Wrapper>
+                <h2> Ratings & Reviews</h2>
+                <Ratings />
+                <Reviews />
+              </Wrapper>
+            </StateContext.Provider>
+          </DispatchContext.Provider>
+        )
+        : <h4>Loading...</h4>}
     </div>
   );
 };
