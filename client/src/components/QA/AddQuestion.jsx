@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Modal } from './AddQuestionModal.jsx';
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -13,12 +14,19 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const AddQuestion = () => (
+const AddQuestion = () => {
+  const [showModal, setShowModal] = useState(false);
 
-  <div>
-    <Button> Add a question + </Button>
-  </div>
+  const openModal = () => {
+    setShowModal((prev) => !prev);
+  };
 
-);
+  return (
+    <div>
+      <Button onClick={openModal}> Add a question + </Button>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
+    </div>
+  );
+};
 
 export default AddQuestion;

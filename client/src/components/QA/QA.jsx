@@ -63,7 +63,7 @@ const QA = () => {
           <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
-          {console.log('QA.jsx', questions)}
+          {/* {console.log('QA.jsx', questions)} */}
           <QuestionsList questions={questions} />
           <Row>
             <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
