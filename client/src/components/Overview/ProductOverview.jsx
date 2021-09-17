@@ -19,29 +19,47 @@ const ProductOverview = () => {
   const productInfo = state.products.filter((product) => product.id === state.selectedProduct);
 
   return (
-    <Wrapper>
+    <Wrapper style={{
+      display: 'flex',
+      padding: '0 0 0 3%',
+      flexDirection: 'row',
+      alignItems: 'center',
+    }}
+    >
       <div style={{
         gridColumnStart: '1',
         gridColumnEnd: '2',
+        order: '1',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-evenly',
+        width: '69%',
       }}
       >
-        <h2>{productInfo[0].slogan}</h2>
-        <p>{productInfo[0].description}</p>
+        <h2 style={{ margin: '0' }}>{productInfo[0].slogan}</h2>
+        <p style={{ width: '90%' }}>{productInfo[0].description}</p>
       </div>
       <div style={{
         gridColumnStart: '2',
         gridColumnEnd: '3',
+        columnGap: '0',
+        justifySelf: 'start',
+        order: '2',
+        margin: '0',
       }}
       >
         <ul style={{
           borderLeft: '3px solid black',
           listStyleType: 'none',
+          margin: '0',
+          paddingLeft: '1%',
+          width: '100%',
         }}
         >
-          <li>&#10003; GMO and Pesticide Free</li>
-          <li>&#10003; Made with 100% Synthetic Materials</li>
-          <li>&#10003; #1 Item of Choice by MadeUpFoundation</li>
-          <li>&#10003; As seen in Style Magazine</li>
+          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; GMO and Pesticide Free</li>
+          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; Made with 100% Synthetic Materials</li>
+          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; #1 Item of Choice by MadeUpFoundation</li>
+          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; As seen in Style Magazine</li>
         </ul>
       </div>
     </Wrapper>

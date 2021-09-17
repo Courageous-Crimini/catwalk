@@ -1,56 +1,72 @@
-import React from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState /* , useEffect, useContext */ } from 'react';
 import styled from 'styled-components';
+// import axios from 'axios';
+import Review from './Review.jsx';
+// eslint-disable-next-line import/no-cycle
+// import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
-background: seagreen;
-flex: 0 0 50%;
-display: flex;
-justify-content: flex-end;
+background: rgb(201, 202, 203);
+height: auto;
+grid-column-start: 2;
+grid-column-end: 3;
+grid-row-start: 2
 `;
 
-const ReviewsList = () => (
-  <div className="reviewslist">
-    <ul>
-      <Review />
-    </ul>
-  </div>
-);
+const Button = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
 
-const Review = () => (
-  <li>
+  font-size: 1.2em;
+  margin: 1.2em;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 3px;
+`;
+
+const ReviewsList = ({ reviews }) => {
+  const numReviews = reviews.length;
+  // const state = useContext(StateContext);
+  // const id = state.selectedProduct;
+  const [currentReviews, setReviews] = useState(reviews.slice(0, 2));
+  const [limit, setLimit] = useState(2);
+
+  //  useEffect(() => {
+  //    axios.get(`/api/reviews?product_id=${id}&count=${limit}&sort=helpful`)
+  //      .then(({ data }) => {
+  //        setReviews(data.results);
+  //      })
+  //      .catch((err) => {
+  //        throw err;
+  //      });
+  //  }, [limit]);
+
+  return (
     <div className="reviewslist">
-      <span>
-        Insert Star Rating left-aligned and Review Username, Date right-aligned
-        <br />
-      </span>
-      <span>
-        Review Summary
-        <br />
-      </span>
-      <span>
-        Review Body
-        <br />
-      </span>
-      <MoreReviews />
-      <span>
-        Images
-        <br />
-      </span>
-      <span>
-        Response to Review
-        <br />
-      </span>
-      <span>
-        Helpful? Yes # No # Report
-        <br />
-      </span>
+      <ul>
+        {currentReviews.map((review) => (
+          <li key={review.review_id}>
+            <Review review={review} />
+          </li>
+        ))}
+      </ul>
+      {(numReviews > limit)
+      && (
+      <Button
+        className="toggle"
+        onClick={() => {
+          setReviews(reviews.slice(0, limit + 2));
+          setLimit((prevState) => prevState + 2);
+        }}
+      >
+        More Reviews
+      </Button>
+      )}
     </div>
-  </li>
-);
-
-const MoreReviews = () => (
-  <button className="see-more-reviews" type="submit">More Reviews</button>
-);
+  );
+};
 
 const AddAReview = () => (
   <button className="add-a-review" type="submit">Add a Review</button>
@@ -70,7 +86,7 @@ class SortByDropdown extends React.Component {
     const { value } = this.state;
     return (
       <form>
-        Sort on
+        {'Sort on '}
         <select value={value} onChange={this.handleChange}>
           <option value="relevant">Relevant</option>
           <option value="helpful">Helpful</option>
@@ -81,12 +97,11 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Reviews = () => (
+const Reviews = ({ reviews }) => (
   <Wrapper>
     <div>
       <SortByDropdown />
-      <ReviewsList />
-      <MoreReviews />
+      <ReviewsList reviews={reviews.results} />
       <AddAReview />
     </div>
   </Wrapper>

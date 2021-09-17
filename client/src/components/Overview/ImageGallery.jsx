@@ -19,8 +19,8 @@ width: auto;
 background: #F3F3F3;
 grid-column-start: 1;
 grid-column-end: 2;
-grid-row-start: 1;
-grid-row-end: 4;
+grid-row-start: 2;
+grid-row-end: 5;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 const IMAGE_ACTIONS = {
@@ -100,7 +100,7 @@ const ImageGallery = () => {
             alignContent: 'middle',
             justifyContent: 'space-evenly',
             margin: '0',
-            width: '15%',
+            width: '12%',
             height: '85%',
             border: '1px solid lightgrey',
             backgroundColor: '#F6F6F6',
@@ -136,7 +136,7 @@ const ImageGallery = () => {
                     borderRadius: '25%',
                     order: `${index + 2}`,
                     width: '50%',
-                    height: '12%',
+                    height: '11%',
                     margin: '5%',
                     padding: '3px',
                     border: '2px solid black',
@@ -161,7 +161,7 @@ const ImageGallery = () => {
                   borderRadius: '25%',
                   order: `${index + 2}`,
                   width: '50%',
-                  height: '12%',
+                  height: '11%',
                   margin: '5%',
                   cursor: 'pointer',
                   boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -193,8 +193,8 @@ const ImageGallery = () => {
           style={{
             borderRadius: '3%',
             order: '3',
-            width: '50%',
-            height: '90%',
+            width: '35%',
+            height: '82%',
             margin: '0 5%',
             cursor: 'pointer',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -217,7 +217,8 @@ const ImageGallery = () => {
         src={imageState.imageCollection[imageState.currentImageIndex].url}
         style={{
           borderRadius: '3%',
-          height: '98%',
+          height: '90%',
+          width: '40%',
           margin: '2%',
           zIndex: '10',
           cursor: 'pointer',

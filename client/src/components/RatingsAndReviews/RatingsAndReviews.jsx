@@ -1,16 +1,34 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Ratings from './Ratings.jsx';
+// eslint-disable-next-line import/no-cycle
 import Reviews from './Reviews.jsx';
+// eslint-disable-next-line import/no-cycle
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
-background: #9EEFF6;
-display: flex;
-justify-content: space-between;
+display: grid;
+grid-template-columns: [first] 40% [second] 60%;
+grid-template-rows: [row1-start] 5% [row1-end] auto [last];
+grid-template-areas:
+
+column-gap: 1%;
+row-gap: 1%;
+grid-line{
+  border: 10px solid black;
+}
+width: 100%;
+height: 50em;
+background: #e9ecef;
+padding: 5%;
+justify-content: center;
 `;
 
-const RatingsAndReviews = ({ id }) => {
+const RatingsAndReviews = () => {
+  const state = useContext(StateContext);
+  const id = state.selectedProduct;
   const [reviewsMeta, setReviewsMeta] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
@@ -25,7 +43,7 @@ const RatingsAndReviews = ({ id }) => {
       });
   }, []);
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}`)
+    axios.get(`/api/reviews?product_id=${id}&count=1000&sort=helpful`)
       .then((response) => {
         setReviews(response.data);
       })
@@ -36,8 +54,8 @@ const RatingsAndReviews = ({ id }) => {
 
   return (
     <div>
-      <h2> Ratings & Reviews</h2>
       <Wrapper>
+        <h2> Ratings & Reviews</h2>
         {ratingsLoaded
           ? <Ratings meta={reviewsMeta} />
           : <h4>Loading...</h4>}

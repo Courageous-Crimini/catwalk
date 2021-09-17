@@ -9,8 +9,8 @@ module.exports = {
       url: '/products',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page || 1,
+        count: req.query.count || 5,
       },
     };
     axios.request(options)
@@ -70,16 +70,15 @@ module.exports = {
       });
   },
   getReviews: (req, res) => {
-    const sortType = req.body.sortType || 'newest';
     const options = {
       headers: { Authorization: TOKEN },
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
       url: '/reviews',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
-        sort: sortType,
+        page: req.query.page || 1,
+        count: req.query.count || 5,
+        sort: req.query.sort || 'relevant',
         product_id: req.query.product_id,
       },
     };
@@ -174,8 +173,8 @@ module.exports = {
       url: '/qa/questions',
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page,
+        count: req.query.count,
         product_id: req.query.product_id,
       },
     };
@@ -188,6 +187,7 @@ module.exports = {
       });
   },
   getAnswers: (req, res) => {
+    // console.log(req.params)
     const id = req.params.question_id;
     const options = {
       headers: { Authorization: TOKEN },
@@ -195,8 +195,8 @@ module.exports = {
       url: `/qa/questions/${id}/answers`,
       method: 'get',
       params: {
-        page: 1,
-        count: 5,
+        page: req.query.page,
+        count: req.query.count,
       },
     };
     axios.request(options)
