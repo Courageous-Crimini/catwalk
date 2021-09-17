@@ -21,13 +21,16 @@ font-family: Valera Round, sans-serif;`;
 export const ACTIONS = {
   PRODUCTS_SUCCESS: 'products-success',
   STYLES_SUCCESS: 'styles-success',
+  FEATURES_SUCCESS: 'features-success',
   SET_STYLE: 'set-style',
+  SET_LOADED: 'set-loaded',
 };
 
 const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
   selectedProduct: null, // integer
+  selectedProductFeatures: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
 };
@@ -45,12 +48,21 @@ const reducer = (state, action) => {
         ...state,
         styles: action.payload,
         selectedStyle: action.payload[0].style_id,
-        loaded: true,
       };
     case ACTIONS.SET_STYLE:
       return {
         ...state,
         selectedStyle: action.payload,
+      };
+    case ACTIONS.FEATURES_SUCCESS:
+      return {
+        ...state,
+        selectedProductFeatures: action.payload,
+      };
+    case ACTIONS.SET_LOADED:
+      return {
+        ...state,
+        loaded: true,
       };
     default:
       return state;
@@ -74,6 +86,18 @@ const App = () => {
           .then((response) => {
             dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
           });
+        return id;
+      })
+      .then((id) => {
+        axios.get(`/api/products/${id}`)
+          .then((response) => {
+            dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
+          });
+      })
+      .then(() => {
+        setTimeout(() => {
+          dispatch({ type: ACTIONS.SET_LOADED });
+        }, 100);
       });
   }, []);
 
