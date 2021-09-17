@@ -5,15 +5,15 @@ import React, { useState } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
 import Images from './Images.jsx';
 
-const RelatedProducts = ({ styles, handleClick }) => {
+const RelatedProducts = ({ styles, handleClick, openModal }) => {
   const [currentCard, setCurrentCard] = useState(0);
-  const length = styles.length;
+  const length = styles.length - 5;
 
   const prevCard = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
   const nextCard = () => {
-    setCurrentCard(currentCard === (length - 1) ? 0 : currentCard + 1);
+    setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
 
   const cards = styles.map((item) => {
@@ -21,27 +21,30 @@ const RelatedProducts = ({ styles, handleClick }) => {
     const salePrice = item.salePrice;
 
     return (
-      <div key={item.styleID}>
-        <Images images={item.styleImages} />
+      <div key={item.styleID} className="card">
         <button type="button" className="relatedBtn" onClick={() => { handleClick(item.styleID); }}>&#9733;</button>
-        {/* <span className="relatedBtn">&#9733;</span> */}
-        <br />
-        <span className="item-category">{item.category}</span>
-        <br />
-        <span className="item-name">{item.name}</span>
-        <br />
-        <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
-        <br />
-        <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
-        <br className={salePrice ? 'break' : 'hide'} />
-        <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <div className="card-image">
+          <Images images={item.styleImages} openModal={openModal} />
+          {/* <span className="relatedBtn">&#9733;</span> */}
+        </div>
+        <div className="card-description">
+          <span className="item-category">{item.category}</span>
+          <br />
+          <span className="item-name">{item.name}</span>
+          <br />
+          <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
+          <br />
+          <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
+          <br className={salePrice ? 'break' : 'hide'} />
+          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
       </div>
     );
   });
 
   return (
     <section className="card-carousel">
-      <div className="container">
+      <div className="carousel-container">
         <div>
           <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
         </div>
