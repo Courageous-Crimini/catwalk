@@ -24,7 +24,7 @@ const Background = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-    width: 800px;
+    width: 1000px;
     height: 700px;
     box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
     background: #fff;
@@ -41,9 +41,13 @@ const ModalContent = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    line-height: 1.8;
+    line-height: 1;
     color: #141414;
-    padding: 50px;
+    padding: 10px;
+`;
+
+const Form = styled.form`
+text-align: center;
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -63,7 +67,8 @@ const Label = styled.label`
   justify-content: flex-end;
   text-align: left;
   line-height: 26px;
-  margin-bottom: 10px;
+  margin-bottom: 1px;
+  margin-left: 100px;
   margin-right: 100px;
 `;
 
@@ -77,19 +82,17 @@ const Input = styled.input`
   height: 20px;
   flex: 0 0 200px;
   margin-left: 10px;
-  margin-top: 20px;
 `;
 
 const Button = styled.button`
   background: black;
   color: white;
-  margin-left: 5px;
-  border-radius: 5px;
+  border-radius: 3px;
   font-size: 1.2em;
   margin: 1em;
-  padding: 1em;
-  border: 2px solid black;
-  border-radius: 3px;
+  padding: 0.5em;
+  border: 1px solid black;
+  border-radius: 1.5px;
 `;
 
 export const Modal = ({ showModal, setShowModal }) => {
@@ -135,7 +138,7 @@ export const Modal = ({ showModal, setShowModal }) => {
             <ModalContent>
               <h1>Write Your Review</h1>
               <h5 className="subtitle">{`About the ${productName}`}</h5>
-              <form onSubmit={handleSubmit}>
+              <Form onSubmit={handleSubmit}>
                 <Label>
                   Overall rating: *
                   <Input name="overall-rating" value={newReview.rating} onChange={handleChange} />
@@ -169,11 +172,9 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Email:
                   <Input name="email" placeholder="Why did you like the product or not?" maxLength="60" value={newReview.email} onChange={handleChange} />
                 </Label>
-                <Label>
                   <p> For authentication reasons, you will not be emailed</p>
-                </Label>
-                <Button> Submit </Button>
-              </form>
+              </Form>
+              <Button> Submit </Button>
             </ModalContent>
             <CloseModalButton
               area-label="Close modal"
