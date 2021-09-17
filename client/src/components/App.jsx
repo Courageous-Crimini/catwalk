@@ -85,25 +85,18 @@ const App = () => {
         axios.get(`/api/products/${id}/styles`)
           .then((response) => {
             dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
+          })
+          .then(() => {
+            axios.get(`/api/products/${id}`)
+              .then((response) => {
+                dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
+              });
+          })
+          .then(() => {
+            dispatch({ type: ACTIONS.SET_LOADED });
           });
-        return id;
-      })
-      .then((id) => {
-        axios.get(`/api/products/${id}`)
-          .then((response) => {
-            dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
-          });
-      })
-      .then(() => {
-        setTimeout(() => {
-          dispatch({ type: ACTIONS.SET_LOADED });
-        }, 100);
       });
   }, []);
-
-  // useEffect(() => {
-  //   axios.get('/api/products')
-  // }, [state.selectedStyle]);
 
   return (
     <div>

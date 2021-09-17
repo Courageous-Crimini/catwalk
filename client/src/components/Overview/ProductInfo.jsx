@@ -25,7 +25,7 @@ const ProductInfo = () => {
       flexDirection: 'column',
       alignItems: 'left',
       alignContent: 'center',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-between',
     }}
     >
       <span style={{
@@ -59,7 +59,7 @@ const ProductInfo = () => {
       >
         {productInfo.name}
       </h4>
-      <p style={{
+      <div style={{
         order: '4',
         margin: '0',
         fontSize: '1.25em',
@@ -68,16 +68,29 @@ const ProductInfo = () => {
         { styleInfo.sale_price
           ? (
             <span>
-              <p style={{ display: 'inline', textDecoration: 'line-through' }}>{`$${styleInfo.original_price}`}</p>
-              <p style={{ marginLeft: '10px', display: 'inline', color: 'green' }}>
+              <p style={{
+                margin: '0',
+                display: 'inline',
+                textDecoration: 'line-through',
+              }}
+              >
+                {`$${styleInfo.original_price}`}
+              </p>
+              <p style={{
+                margin: '0',
+                marginLeft: '10px',
+                display: 'inline',
+                color: 'green',
+              }}
+              >
                 {`SALE: $${styleInfo.sale_price}`}
               </p>
             </span>
           )
           : (
-            <p>{`$${styleInfo.original_price}`}</p>
+            <p style={{ margin: '0' }}>{`$${styleInfo.original_price}`}</p>
           )}
-      </p>
+      </div>
     </Wrapper>
   );
 };

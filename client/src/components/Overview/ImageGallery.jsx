@@ -66,6 +66,7 @@ const reducer = (state, action) => {
         ...state,
         imageCollection: action.payload,
         currentImageIndex: 0,
+        clicked: false,
       };
     default:
       return state;
