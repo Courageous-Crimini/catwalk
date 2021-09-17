@@ -39,14 +39,13 @@ const RelatedAndComparison = () => {
 
   useEffect(() => {
     const cards = [];
-    let thisIn;
-    // console.log('relatedStyles', relatedStyles[0].results.photos);
+    let cardFormat;
 
     for (let i = 0; i < relatedProducts.length; i++) {
       for (let j = 0; j < relatedStyles[i].results.length; j++) {
         const relatedPIdx = relatedProducts[i];
         const relatedSIdx = relatedStyles[i].results;
-        thisIn = {
+        cardFormat = {
           productID: relatedPIdx.id,
           name: relatedPIdx.name,
           category: relatedPIdx.category,
@@ -56,7 +55,7 @@ const RelatedAndComparison = () => {
           salePrice: relatedSIdx[j].sale_price,
           originalPrice: relatedSIdx[j].original_price,
         };
-        cards.push(thisIn);
+        cards.push(cardFormat);
       }
     }
     setStyles(cards);
@@ -67,7 +66,7 @@ const RelatedAndComparison = () => {
 
     for (let i = 0; i < yourOutfit.length; i++) {
       if (yourOutfit.length > 0) {
-        if (id === yourOutfit[i].id) {
+        if (id === yourOutfit[i].styleID) {
           isThere = true;
           break;
         }
@@ -75,7 +74,7 @@ const RelatedAndComparison = () => {
     }
     if (!isThere) {
       for (let i = 0; i < styles.length; i++) {
-        if (id === styles[i].id) {
+        if (id === styles[i].styleID) {
           setYourOutfit(yourOutfit.concat(styles[i]));
           break;
         }
@@ -85,7 +84,7 @@ const RelatedAndComparison = () => {
 
   const removeOutfit = (id) => {
     for (let i = 0; i < yourOutfit.length; i++) {
-      if (id === yourOutfit[i].id) {
+      if (id === yourOutfit[i].styleID) {
         setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));
         break;
       }
@@ -109,3 +108,10 @@ const RelatedAndComparison = () => {
 };
 
 export default RelatedAndComparison;
+
+/* Notes
+Tests:
+- check api and make sure the correct images are stores for each style
+- check api and make sure the correct price for each style renders to the page
+- make sure only 5 items can render to page at a time under all circumstances
+*/
