@@ -6,7 +6,7 @@ import AnswersList from './AnswersList.jsx';
 const Wrapper = styled.section`
 height: 100%;
 background: white;
-margin: 40px;
+margin: 20px;
 `;
 
 const Row = styled.div`
@@ -27,21 +27,18 @@ const QuestionItem = ({ question }) => (
   <Wrapper>
     <Row>
       <AlignRight>
-        {' '}
         <h2>
           Q:
           {question.question_body}
         </h2>
-        {' '}
       </AlignRight>
       <P>
-        {' '}
-        helpful? Yes
+        helpful?&nbsp;Yes
         (
         {question.question_helpfulness}
         )
-        {' '}
-        | Add Answer
+        &nbsp;
+        |&nbsp;&nbsp;Add Answer
       </P>
     </Row>
     <div className="Answers-collapsible">

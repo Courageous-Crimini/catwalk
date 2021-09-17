@@ -21,19 +21,19 @@ const getAverageRating = (ratingsObj) => {
   if (numRatings === 0) {
     return 'No ratings';
   }
-  return sum / numRatings;
+  return [sum / numRatings, numRatings];
 };
 
-const getMaxRatings = (ratingsObj) => {
-  const ratingsArr = Object.entries(ratingsObj);
-  let maxNum = 0;
-  for (let i = 0; i < ratingsArr.length; i += 1) {
-    if (ratingsArr[i][1] > maxNum) {
-      [, maxNum] = ratingsArr[i];
-    }
-  }
-  return maxNum;
-};
+// const getMaxRatings = (ratingsObj) => {
+//   const ratingsArr = Object.entries(ratingsObj);
+//   let maxNum = 0;
+//   for (let i = 0; i < ratingsArr.length; i += 1) {
+//     if (ratingsArr[i][1] > maxNum) {
+//       [, maxNum] = ratingsArr[i];
+//     }
+//   }
+//   return maxNum;
+// };
 
 const getRecommendPercent = (recObj) => {
   if (recObj.true === undefined) {
@@ -53,7 +53,7 @@ const Ratings = ({ meta }) => (
       <div>
         { (getAverageRating(meta.ratings) === 'No ratings')
           ? 'No ratings yet'
-          : `${Math.round(getAverageRating(meta.ratings) * 10) / 10} ☆☆☆☆☆`}
+          : `${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} ☆☆☆☆☆`}
       </div>
       <div>
         { (getRecommendPercent(meta.recommended) === 'None')
@@ -66,7 +66,7 @@ const Ratings = ({ meta }) => (
           {' stars '}
           <meter
             min="0"
-            max={getMaxRatings(meta.ratings)}
+            max={getAverageRating(meta.ratings)[1]}
             value={meta.ratings[5 - num]}
           />
         </div>
