@@ -10,6 +10,18 @@ background: white;
 margin: 40px;
 `;
 
+const ShowMoreButton = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
+
+  font-size: 1.2em;
+  margin: 1.2em;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 3px;
+`;
+
 const Button = styled.button`
 background: none!important;
 border: none;

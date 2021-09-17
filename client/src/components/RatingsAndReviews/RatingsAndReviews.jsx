@@ -53,7 +53,7 @@ const RatingsAndReviews = () => {
   }, []);
 
   return (
-    <div>
+    <div id="RatingsAndReviews">
       <Wrapper>
         <h2> Ratings & Reviews</h2>
         {ratingsLoaded

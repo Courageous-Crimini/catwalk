@@ -3,10 +3,12 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
+// eslint-disable-next-line import/no-cycle
+import { StateContext } from '../App.jsx';
 
 const Background = styled.div`
     width: 100%;
@@ -91,6 +93,9 @@ const Button = styled.button`
 `;
 
 export const Modal = ({ showModal, setShowModal }) => {
+  const state = useContext(StateContext);
+  const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const productName = selected.name;
   const [newReview, setNewQuestion] = useState(
     {
       product_id: 48432, name: '', email: '', body: '',
@@ -129,7 +134,7 @@ export const Modal = ({ showModal, setShowModal }) => {
           <ModalWrapper showModal={showModal}>
             <ModalContent>
               <h1>Write Your Review</h1>
-              <h5 className="subtitle">About the [Product Name Here]</h5>
+              <h5 className="subtitle">{`About the ${productName}`}</h5>
               <form onSubmit={handleSubmit}>
                 <Label>
                   Overall rating: *
