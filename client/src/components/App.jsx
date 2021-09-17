@@ -78,11 +78,11 @@ const App = () => {
           <DispatchContext.Provider value={dispatch}>
             <StateContext.Provider value={state}>
               <Container>
-                {/* <Header />
+                <Header />
                 <Overview />
-                <RelatedAndComparison /> */}
+                <RelatedAndComparison />
                 <QA />
-                {/* <RatingsAndReviews /> */}
+                <RatingsAndReviews />
               </Container>
             </StateContext.Provider>
           </DispatchContext.Provider>
