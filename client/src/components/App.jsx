@@ -121,7 +121,15 @@ const App = () => {
             </StateContext.Provider>
           </DispatchContext.Provider>
         )
-        : <h4>Loading...</h4>}
+        : (
+          <>
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+              alt="Loading gif"
+              style={{ backgroundPosition: 'center', width: '100%', height: '100%' }}
+            />
+          </>
+        )}
     </div>
   );
 };
