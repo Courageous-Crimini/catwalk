@@ -16,7 +16,8 @@ padding: 3% 5%;
 const ProductInfo = () => {
   const state = useContext(StateContext);
 
-  const productInfo = state.products.filter((product) => product.id === state.selectedProduct);
+  const productInfo = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const styleInfo = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
 
   return (
     <Wrapper style={{
@@ -24,7 +25,7 @@ const ProductInfo = () => {
       flexDirection: 'column',
       alignItems: 'left',
       alignContent: 'center',
-      justifyContent: 'space-evenly',
+      justifyContent: 'space-between',
     }}
     >
       <span style={{
@@ -33,7 +34,6 @@ const ProductInfo = () => {
         flexDirection: 'row',
         alignItems: 'center',
         alignContent: 'center',
-        // margin: '0 5%',
         justifyContent: 'space-between',
       }}
       >
@@ -45,32 +45,52 @@ const ProductInfo = () => {
       <p style={{
         order: '2',
         margin: '0',
-        // marginLeft: '5%',
         fontWeight: 'lighter',
       }}
       >
-        {productInfo[0].category}
+        {productInfo.category}
       </p>
       <h4 style={{
         order: '3',
         margin: '0',
-        // marginLeft: '5%',
         fontSize: '1.75em',
         fontWeight: 'bolder',
       }}
       >
-        {productInfo[0].name}
+        {productInfo.name}
       </h4>
-      <p style={{
+      <div style={{
         order: '4',
         margin: '0',
-        // marginLeft: '5%',
         fontSize: '1.25em',
       }}
       >
-        $
-        {productInfo[0].default_price}
-      </p>
+        { styleInfo.sale_price
+          ? (
+            <span>
+              <p style={{
+                margin: '0',
+                display: 'inline',
+                color: 'red',
+              }}
+              >
+                {`$${styleInfo.sale_price}`}
+              </p>
+              <p style={{
+                margin: '0',
+                display: 'inline',
+                marginLeft: '10px',
+                textDecoration: 'line-through',
+              }}
+              >
+                {`$${styleInfo.original_price}`}
+              </p>
+            </span>
+          )
+          : (
+            <p style={{ margin: '0' }}>{`$${styleInfo.original_price}`}</p>
+          )}
+      </div>
     </Wrapper>
   );
 };
