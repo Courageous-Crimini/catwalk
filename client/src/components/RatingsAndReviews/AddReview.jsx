@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-cycle
 import { Modal } from './AddReviewModal.jsx';
 
 const Button = styled.button`
@@ -23,7 +24,7 @@ const AddReview = () => {
 
   return (
     <div>
-      <Button onClick={openModal}> Add a question + </Button>
+      <Button onClick={openModal}> Write a Review </Button>
       <Modal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );

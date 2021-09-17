@@ -14,6 +14,11 @@ grid-column-end: 3;
 grid-row-start: 2
 `;
 
+const Row = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
   background: ${(props) => (props.primary ? 'black' : 'white')};
@@ -52,7 +57,8 @@ const ReviewsList = ({ reviews }) => {
           </li>
         ))}
       </ul>
-      {(numReviews > limit)
+      <Row>
+        {(numReviews > limit)
       && (
       <Button
         className="toggle"
@@ -64,6 +70,8 @@ const ReviewsList = ({ reviews }) => {
         More Reviews
       </Button>
       )}
+        <AddReview />
+      </Row>
     </div>
   );
 };
@@ -99,7 +107,6 @@ const Reviews = ({ reviews }) => (
     <div>
       <SortByDropdown />
       <ReviewsList reviews={reviews.results} />
-      <AddReview />
     </div>
   </Wrapper>
 );
