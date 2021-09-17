@@ -17,7 +17,7 @@ const Images = ({ images }) => {
 
   const displayImages = images.map((item, index) => (
     <div>
-      <img key={index} src={item.thumbnail_url} alt="IMAGE COMMING SOON" className="image" />
+      <img key={index} src={item.thumbnail_url} alt="IMAGES COMMING SOON" className="image" />
     </div>
   ));
 
