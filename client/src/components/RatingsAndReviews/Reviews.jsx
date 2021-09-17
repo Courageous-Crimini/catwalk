@@ -4,7 +4,6 @@ import styled from 'styled-components';
 // import axios from 'axios';
 import Review from './Review.jsx';
 // eslint-disable-next-line import/no-cycle
-// import { StateContext } from '../App.jsx';
 import AddReview from './AddReview.jsx';
 
 const Wrapper = styled.section`
