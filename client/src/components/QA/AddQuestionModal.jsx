@@ -133,7 +133,7 @@ export const Modal = ({ showModal, setShowModal }) => {
               <form onSubmit={handleSubmit}>
                 <Label>
                   Question:
-                  <Input name="body" maxLength="1000" value={newQuestion.body} onChange={handleChange} />
+                  <Input name="body" maxLength="1000" placeholder="Why did you like the product or not?" value={newQuestion.body} onChange={handleChange} />
                 </Label>
                 <Label>
                   Nickname:
@@ -141,7 +141,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                 </Label>
                 <Label>
                   Email:
-                  <Input name="email" placeholder="Why did you like the product or not?" maxLength="60" value={newQuestion.email} onChange={handleChange} />
+                  <Input name="email" maxLength="60" placeholder="example: Fikri@Fikri.com" value={newQuestion.email} onChange={handleChange} />
                 </Label>
                 <Label>
                   <p> For authentication reasons, you will not be emailed</p>
