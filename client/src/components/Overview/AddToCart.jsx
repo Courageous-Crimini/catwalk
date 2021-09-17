@@ -4,7 +4,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
-import { StateContext, DispatchContext } from '../App.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: #F3F3F3;
@@ -14,10 +14,9 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
 const AddToCart = () => {
-  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
 
-  const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle.style_id)[0];
+  const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
 
   return (
     <Wrapper>

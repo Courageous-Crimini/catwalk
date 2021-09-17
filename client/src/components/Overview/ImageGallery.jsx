@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -11,7 +11,7 @@ import {
   IoIosArrowUp,
 } from 'react-icons/io';
 // eslint-disable-next-line import/no-cycle
-import { StateContext, DispatchContext } from '../App.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 height: auto;
@@ -29,6 +29,7 @@ const IMAGE_ACTIONS = {
   VIEW_ITEM: 'view-item',
   SHIFT_THUMBNAILS_UP: 'shift-thumbnails-up',
   SHIFT_THUMBNAILS_DOWN: 'shift-thumbnails-down',
+  UPDATE_IMAGES: 'update-images',
 };
 
 const reducer = (state, action) => {
@@ -60,27 +61,43 @@ const reducer = (state, action) => {
             .concat(state.imageCollection)
             .slice(state.imageCollection.length - 1, (state.imageCollection.length * 2) - 1),
       };
+    case IMAGE_ACTIONS.UPDATE_IMAGES:
+      return {
+        ...state,
+        imageCollection: action.payload,
+        currentImageIndex: 0,
+      };
     default:
       return state;
   }
 };
 
+const initialState = {
+  currentImageIndex: 0,
+  imageCollection: [],
+  clicked: false,
+  startIndex: 0,
+  endIndex: 6,
+};
+
 const ImageGallery = () => {
-  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
 
   const styleImages = state.styles.filter((style) => (
-    style.style_id === state.selectedStyle.style_id
+    style.style_id === state.selectedStyle
   ))[0].photos;
 
-  const initialState = {
-    currentImageIndex: 0,
+  const [imageState, imageDispatch] = useReducer(reducer, {
+    ...initialState,
     imageCollection: styleImages,
-    clicked: false,
-    startIndex: 0,
-    endIndex: 6,
-  };
-  const [imageState, imageDispatch] = useReducer(reducer, initialState);
+  });
+
+  useEffect(() => {
+    imageDispatch({
+      type: IMAGE_ACTIONS.UPDATE_IMAGES,
+      payload: state.styles.filter((style) => style.style_id === state.selectedStyle)[0].photos,
+    });
+  }, [state.selectedStyle]);
 
   if (imageState.clicked === false) {
     return (
@@ -193,7 +210,7 @@ const ImageGallery = () => {
           style={{
             borderRadius: '3%',
             order: '3',
-            width: '35%',
+            width: '40%',
             height: '82%',
             margin: '0 5%',
             cursor: 'pointer',
@@ -218,7 +235,7 @@ const ImageGallery = () => {
         style={{
           borderRadius: '3%',
           height: '90%',
-          width: '40%',
+          width: '45%',
           margin: '2%',
           zIndex: '10',
           cursor: 'pointer',

@@ -21,14 +21,15 @@ font-family: Valera Round, sans-serif;`;
 export const ACTIONS = {
   PRODUCTS_SUCCESS: 'products-success',
   STYLES_SUCCESS: 'styles-success',
+  SET_STYLE: 'set-style',
 };
 
 const initialState = {
-  loaded: false,
-  products: [],
-  selectedProduct: null,
-  styles: [],
-  selectedStyle: {},
+  loaded: false, // boolean
+  products: [], // array of objects
+  selectedProduct: null, // integer
+  styles: [], // array of objects
+  selectedStyle: null, // now integer; was object
 };
 
 const reducer = (state, action) => {
@@ -43,8 +44,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         styles: action.payload,
-        selectedStyle: action.payload[0],
+        selectedStyle: action.payload[0].style_id,
         loaded: true,
+      };
+    case ACTIONS.SET_STYLE:
+      return {
+        ...state,
+        selectedStyle: action.payload,
       };
     default:
       return state;
@@ -71,6 +77,10 @@ const App = () => {
       });
   }, []);
 
+  // useEffect(() => {
+  //   axios.get('/api/products')
+  // }, [state.selectedStyle]);
+
   return (
     <div>
       { state.loaded
@@ -80,7 +90,7 @@ const App = () => {
               <Container>
                 <Header />
                 <Overview />
-                <RelatedAndComparison />
+                {/* <RelatedAndComparison /> */}
                 <QA />
                 <RatingsAndReviews />
               </Container>
