@@ -9,7 +9,7 @@ const Wrapper = styled.section`
 margin: 0;
 height: 100%;
 padding: 200px;
-background: papayawhip;
+background: white;
 `;
 
 const Button = styled.button`
