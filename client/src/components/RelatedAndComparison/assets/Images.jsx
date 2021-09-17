@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable react/prop-types */
 /* eslint-disable prefer-destructuring */
 import React, { useState } from 'react';
@@ -16,7 +17,7 @@ const Images = ({ images }) => {
 
   const displayImages = images.map((item, index) => (
     <div>
-      <img key={index} src={item.thumbnail_url} alt="A related product" className="image" />
+      <img key={index} src={item.thumbnail_url} alt="IMAGE COMMING SOON" className="image" />
     </div>
   ));
 
