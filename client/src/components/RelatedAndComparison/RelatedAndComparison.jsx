@@ -39,13 +39,13 @@ const RelatedAndComparison = () => {
 
   useEffect(() => {
     const cards = [];
-    let thisIn;
+    let cardFormat;
 
     for (let i = 0; i < relatedProducts.length; i++) {
       for (let j = 0; j < relatedStyles[i].results.length; j++) {
         const relatedPIdx = relatedProducts[i];
         const relatedSIdx = relatedStyles[i].results;
-        thisIn = {
+        cardFormat = {
           productID: relatedPIdx.id,
           name: relatedPIdx.name,
           category: relatedPIdx.category,
@@ -55,7 +55,7 @@ const RelatedAndComparison = () => {
           salePrice: relatedSIdx[j].sale_price,
           originalPrice: relatedSIdx[j].original_price,
         };
-        cards.push(thisIn);
+        cards.push(cardFormat);
       }
     }
     setStyles(cards);
