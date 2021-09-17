@@ -71,19 +71,19 @@ const ProductInfo = () => {
               <p style={{
                 margin: '0',
                 display: 'inline',
+                color: 'red',
+              }}
+              >
+                {`$${styleInfo.sale_price}`}
+              </p>
+              <p style={{
+                margin: '0',
+                display: 'inline',
+                marginLeft: '10px',
                 textDecoration: 'line-through',
               }}
               >
                 {`$${styleInfo.original_price}`}
-              </p>
-              <p style={{
-                margin: '0',
-                marginLeft: '10px',
-                display: 'inline',
-                color: 'green',
-              }}
-              >
-                {`SALE: $${styleInfo.sale_price}`}
               </p>
             </span>
           )
