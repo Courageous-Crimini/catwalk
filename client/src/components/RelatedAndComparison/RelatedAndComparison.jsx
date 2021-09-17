@@ -108,3 +108,10 @@ const RelatedAndComparison = () => {
 };
 
 export default RelatedAndComparison;
+
+/* Notes
+Tests:
+- check api and make sure the correct images are stores for each style
+- check api and make sure the correct price for each style renders to the page
+- make sure only 5 items can render to page at a time under all circumstances
+*/

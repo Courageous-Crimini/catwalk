@@ -22,7 +22,7 @@ const Images = ({ images }) => {
   ));
 
   return (
-    <section className="image-carousel">
+    <section className="image-slider">
       <div className="image-container">
         <FaArrowAltCircleLeft onClick={prevImg} />
         <FaArrowAltCircleRight onClick={nextImg} />
