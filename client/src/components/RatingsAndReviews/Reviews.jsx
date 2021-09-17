@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Review from './Review.jsx';
 // eslint-disable-next-line import/no-cycle
 // import { StateContext } from '../App.jsx';
+import AddReview from './AddReview.jsx';
 
 const Wrapper = styled.section`
 background: rgb(201, 202, 203);
@@ -68,9 +69,6 @@ const ReviewsList = ({ reviews }) => {
   );
 };
 
-const AddAReview = () => (
-  <button className="add-a-review" type="submit">Add a Review</button>
-);
 class SortByDropdown extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +100,7 @@ const Reviews = ({ reviews }) => (
     <div>
       <SortByDropdown />
       <ReviewsList reviews={reviews.results} />
-      <AddAReview />
+      <AddReview />
     </div>
   </Wrapper>
 );
