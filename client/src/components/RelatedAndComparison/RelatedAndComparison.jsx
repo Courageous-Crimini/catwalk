@@ -6,7 +6,7 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 
 const RelatedAndComparison = () => {
-  const [relatedIds, setRelatedIds] = useState([]);
+  const [relatedIDs, setRelatedIDs] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [styles, setStyles] = useState([]);
@@ -15,63 +15,51 @@ const RelatedAndComparison = () => {
   useEffect(() => {
     axios.get('/api/products/48432/related')
       .then(({ data }) => {
-        setRelatedIds(data);
+        setRelatedIDs(data);
       });
   }, []);
 
   useEffect(() => {
-    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => {
-        const relatedStylesFormat = { id: data.product_id, results: [] };
-        const results = data.results;
-
-        for (let i = 0; i < results.length; i++) {
-          const resultsIdx = results[i];
-          const thisIn = {
-            salePrice: resultsIdx.sale_price,
-            originalPrice: resultsIdx.original_price,
-            images: resultsIdx.photos,
-          };
-          relatedStylesFormat.results.push(thisIn);
-        }
-        return relatedStylesFormat;
-      }));
+    const relatedStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
+      .then(({ data }) => data));
     Promise.all(relatedStylesData)
       .then((values) => {
         setRelatedStyles(values);
       });
-  }, [relatedIds]);
+  }, [relatedIDs]);
 
   useEffect(() => {
-    const productData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
-      .then(({ data }) => {
-        const productDataFormat = {
-          id: data.id,
-          name: data.name,
-          category: data.category,
-        };
-
-        return productDataFormat;
-      }));
-    Promise.all(productData)
+    const relatedProductData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
+      .then(({ data }) => data));
+    Promise.all(relatedProductData)
       .then((values) => {
         setRelatedProducts(values);
       });
-  }, [relatedStyles]);
+  }, [relatedIDs]);
 
   useEffect(() => {
-    const stylesData = [];
+    const cards = [];
+    let thisIn;
+    // console.log('relatedStyles', relatedStyles[0].results.photos);
 
-    for (let i = 0; i < relatedIds.length; i++) {
-      const thisIn = {
-        id: relatedProducts[i].id,
-        category: relatedProducts[i].category,
-        name: relatedProducts[i].name,
-        results: relatedStyles[i].results,
-      };
-      stylesData.push(thisIn);
+    for (let i = 0; i < relatedProducts.length; i++) {
+      for (let j = 0; j < relatedStyles[i].results.length; j++) {
+        const relatedPIdx = relatedProducts[i];
+        const relatedSIdx = relatedStyles[i].results;
+        thisIn = {
+          productID: relatedPIdx.id,
+          name: relatedPIdx.name,
+          category: relatedPIdx.category,
+          styleID: relatedSIdx[j].style_id,
+          styleName: relatedSIdx[j].name,
+          styleImages: relatedSIdx[j].photos,
+          salePrice: relatedSIdx[j].sale_price,
+          originalPrice: relatedSIdx[j].original_price,
+        };
+        cards.push(thisIn);
+      }
     }
-    setStyles(stylesData);
+    setStyles(cards);
   }, [relatedProducts]);
 
   const addOutfit = (id) => {

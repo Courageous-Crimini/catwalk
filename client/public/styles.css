@@ -7,34 +7,26 @@
     Related And Comparison
 ================================================================================
 */
-#RelatedAndComparison {
+/* #RelatedAndComparison {
   margin-top: 15em;
   padding: 20em;
   background: #EEE;
+} */
+#RelatedAndComparison {
+  margin-top: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /* background: #EEE; */
 }
-
 /* -- outer carousel -- */
-.cards {
-  display: flex;
-}
-.card {
-  width: 200px;
-  background: #DCDCDC;
-  flex-grow: 1;
-  flex-shrink: 1;
-  flex-basis: 0;
-  border: 1px solid black;
-}
-.cardsImg {
-  width:  100px;
-  height: 100px;
-  object-fit: cover;
+.carousel .container {
+  display:  flex;
+  flex-direction: row;
+  width: 0px;
+  /* align-items: center; */
+  justify-content: center;
 }
 
-/* -- Buttons -- */
-.actionBtn {
-
-}
 .relatedBtn {
-  color: #ADD8E6;
+  color: #00CCCC;
 }
