@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -46,8 +46,33 @@ const ShowMore = () => (
 );
 
 const Review = ({ review }) => {
+  // const review_id = useState(review.review_id);
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
   const [upvoted, setUpvoted] = useState(false);
+  const [reported, setReported] = useState(false);
+  const handleUpvote = () => {
+    if (!upvoted) {
+      axios.put(`/api/reviews/${review.review_id}/helpful`)
+        .then(() => {
+          setUpvoted(true);
+          setHelpfulness((prevState) => prevState + 1);
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
+  const handleReport = () => {
+    if (!reported) {
+      axios.put(`/api/reviews/${review.review_id}/report`)
+        .then(() => {
+          setReported(true);
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
 
   return (
     <Wrapper>
@@ -73,20 +98,23 @@ const Review = ({ review }) => {
       && <ShowMore />}
         <div>
           {/* (review.photos.length !== 0)
-        && <img src={review.photos[0].url} alt="1" /> */}
+        && <img src={review.photos[0].url} alt="1/> */}
         </div>
         {(review.response !== null && review.response !== '')
         && <Response>{`Response: ${review.response}`}</Response>}
         <AlignLeft>
           {'Helpful? '}
-          <Button onClick={() => {
-            setUpvoted(true);
-            setHelpfulness((prevState) => prevState + 1);
-          }}
-          >
+          <Button onClick={handleUpvote}>
             Yes
           </Button>
-          {` (${helpfulness}) Report`}
+          {` (${helpfulness}) `}
+          {reported
+            ? 'Reported'
+            : (
+              <Button onClick={handleReport}>
+                Report
+              </Button>
+            )}
         </AlignLeft>
       </div>
     </Wrapper>
