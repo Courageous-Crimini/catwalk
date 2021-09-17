@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
-import { StateContext } from '../App.jsx';
+import { ACTIONS, StateContext, DispatchContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: #F3F3F3;
@@ -13,6 +15,7 @@ padding: 5% 5% 3% 5%;
 
 const StyleSelector = () => {
   const state = useContext(StateContext);
+  const dispatch = useContext(DispatchContext);
 
   return (
     <Wrapper style={{
@@ -23,11 +26,8 @@ const StyleSelector = () => {
       alignItems: 'center',
     }}
     >
-      <h4 style={{
-        margin: '0',
-        marginBottom: '1%',
-        fontSize: '1.25em',
-        fontWeight: 'bolder',
+      <div style={{
+        marginBottom: '2%',
         gridColumnStart: '1',
         gridColumnEnd: '5',
         gridRowStart: '1',
@@ -35,12 +35,30 @@ const StyleSelector = () => {
         justifySelf: 'start',
       }}
       >
-        Style
-        {' > '}
-        {state.selectedStyle.name}
-      </h4>
+        <h4 style={{
+          margin: '0',
+          fontSize: '1.25em',
+          fontWeight: 'bolder',
+          display: 'inline',
+        }}
+        >
+          Style
+          {' > '}
+        </h4>
+        <p style={{
+          fontWeight: 'lighter',
+          fontSize: '1em',
+          margin: '0',
+          marginLeft: '10px',
+          display: 'inline',
+          alignSelf: 'center',
+        }}
+        >
+          {state.styles.filter((style) => style.style_id === state.selectedStyle)[0].name}
+        </p>
+      </div>
       {state.styles.map((style, index) => {
-        if (style.style_id === state.selectedStyle.style_id) {
+        if (style.style_id === state.selectedStyle) {
           return (
             <img
               // eslint-disable-next-line react/no-array-index-key
@@ -67,6 +85,8 @@ const StyleSelector = () => {
         }
         return (
           <img
+            // eslint-disable-next-line max-len
+            onClick={() => { dispatch({ type: ACTIONS.SET_STYLE, payload: style.style_id }); }}
             // eslint-disable-next-line react/no-array-index-key
             key={index}
             src={style.photos[0].thumbnail_url}

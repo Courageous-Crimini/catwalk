@@ -1,10 +1,10 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
-import { StateContext, DispatchContext } from '../App.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: #F3F3F3;
@@ -13,11 +13,14 @@ grid-column-end: 3;
 box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `;
 
+const maxQtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
 const AddToCart = () => {
-  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
 
-  const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle.style_id)[0];
+  const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
+  const [size, setSize] = useState('Select Size');
+  const inStock = Object.values(filteredSizes.skus).filter((sku) => sku.size === size)[0];
 
   return (
     <Wrapper>
@@ -40,16 +43,19 @@ const AddToCart = () => {
           order: '1',
         }}
         >
-          <select style={{
-            order: '1',
-            fontSize: '18px',
-            fontWeight: 'lighter',
-            padding: '10px 5px',
-            textAlign: 'center',
-            width: '45%',
-          }}
+          <select
+            onChange={(e) => { setSize(e.target.value); }}
+            value={size}
+            style={{
+              order: '1',
+              fontSize: '18px',
+              fontWeight: 'lighter',
+              padding: '10px 5px',
+              textAlign: 'center',
+              width: '45%',
+            }}
           >
-            <option value="" key={0}>Select Size</option>
+            <option key={0}>Select Size</option>
             {Object.values(filteredSizes.skus).map((sku, index) => (
               <option key={index + 1}>{sku.size}</option>
             ))}
@@ -62,12 +68,14 @@ const AddToCart = () => {
             textAlign: 'center',
           }}
           >
-            <option value="" key="NoQty">Select Quantity</option>
-            <option key="Qty1">1</option>
-            <option key="Qty2">2</option>
-            <option key="Qty3">3</option>
-            <option key="Qty4">4</option>
-            <option key="Qty5">5</option>
+            <option value="" key="SelQty">Select Quantity</option>
+            { inStock === 0
+              ? (
+                <option key="NoQty">OUT OF STOCK</option>
+              )
+              : maxQtyArr.map((int) => (
+                (inStock && int <= inStock.quantity) ? (<option key={int}>{int}</option>) : null
+              ))}
           </select>
         </div>
         <input

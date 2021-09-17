@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
-import { StateContext } from '../App.jsx';
+import { StateContext, DispatchContext, ACTIONS } from '../App.jsx';
 
 const Wrapper = styled.section`
 background: #F3F3F3;
@@ -16,7 +18,8 @@ width: 100%;
 
 const Banner = () => {
   const state = useContext(StateContext);
-
+  const dispatch = useContext(DispatchContext);
+  const stylesOnSale = state.styles.filter((style) => style.sale_price !== null);
   return (
     <Wrapper style={{
       display: 'grid',
@@ -29,7 +32,7 @@ const Banner = () => {
         padding: '0',
       }}
       >
-        <em>SITE-WIDE ANNOUNCEMENT MESSAGE! </em>
+        <em>SITE-WIDE ANNOUNCEMENT! </em>
         {' '}
         -- SALE/DISCOUNT
         {' '}
@@ -37,7 +40,17 @@ const Banner = () => {
         {' '}
         --
         {' '}
-        <u>NEW PRODUCT HIGHLIGHT</u>
+        <u
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            dispatch({
+              type: ACTIONS.SET_STYLE,
+              payload: stylesOnSale[0].style_id,
+            });
+          }}
+        >
+          NEW PRODUCT HIGHLIGHT
+        </u>
       </p>
     </Wrapper>
   );
