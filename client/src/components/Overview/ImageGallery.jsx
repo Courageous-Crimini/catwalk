@@ -239,7 +239,7 @@ const ImageGallery = () => {
           width: '45%',
           margin: '2%',
           zIndex: '10',
-          cursor: 'pointer',
+          cursor: 'zoom-out',
           boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
         }}
         onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
