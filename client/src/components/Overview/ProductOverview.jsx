@@ -56,10 +56,20 @@ const ProductOverview = () => {
           width: '100%',
         }}
         >
+          {state.selectedProductFeatures.map((feature, index) => (
+            <li
+              key={`Feature${index + 1}`}
+              style={{ padding: '1.5% 0 1.5% 20px' }}
+            >
+              &#10003;
+              <strong>
+                {` ${feature.feature}: `}
+              </strong>
+              {`${feature.value}`}
+            </li>
+          ))}
           <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; GMO and Pesticide Free</li>
           <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; Made with 100% Synthetic Materials</li>
-          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; #1 Item of Choice by MadeUpFoundation</li>
-          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; As seen in Style Magazine</li>
         </ul>
       </div>
     </Wrapper>
