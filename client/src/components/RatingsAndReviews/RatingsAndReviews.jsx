@@ -29,8 +29,8 @@ justify-content: center;
 const RatingsAndReviews = () => {
   const state = useContext(StateContext);
   const id = state.selectedProduct;
-  const [reviewsMeta, setReviewsMeta] = useState([]);
-  const [reviews, setReviews] = useState([]);
+  const [reviewsMeta, setReviewsMeta] = useState({});
+  const [reviews, setReviews] = useState({});
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
   useEffect(() => {
@@ -43,7 +43,7 @@ const RatingsAndReviews = () => {
       });
   }, []);
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}&count=1000&sort=helpful`)
+    axios.get(`/api/reviews?product_id=${id}&count=100&sort=helpful`)
       .then((response) => {
         setReviews(response.data);
       })

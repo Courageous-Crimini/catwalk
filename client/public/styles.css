@@ -18,15 +18,72 @@
   box-sizing: border-box;
   /* background: #EEE; */
 }
-/* -- outer carousel -- */
-.carousel .container {
+/* #RelatedAndComparison > h2 {
+
+} */
+/* --                              carousel                                -- */
+.card-carousel .container {
   display:  flex;
   flex-direction: row;
   width: 0px;
   /* align-items: center; */
   justify-content: center;
 }
+.container {
 
+}
+.left-carousel-arrow, .right-carousel-arrow {
+
+}
+
+/* --                                cards                                 -- */
+/* related */
+.item-category {
+
+}
+.item-name {
+
+}
+.sale-price {
+
+}
+.original-price {
+
+}
+card-rating {
+
+}
+
+.cross-out-price {
+  text-decoration: line-through;
+}
+.hide {
+  display: none;
+}
+
+/* buttons */
 .relatedBtn {
   color: #00CCCC;
 }
+.outfitBtn {
+
+}
+
+/* --                                images                                -- */
+
+.image-slider .container {
+  display:  flex;
+  flex-direction: row;
+  width: 100px;
+  /* align-items: center; */
+  justify-content: center;
+}
+.image {
+  /* float: left; */
+  height: 200;
+  width:  100px;
+  background-size: cover;
+}
+
+
+
