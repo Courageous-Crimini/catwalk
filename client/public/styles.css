@@ -19,12 +19,25 @@
   /* background: #EEE; */
 }
 /* -- outer carousel -- */
-.carousel .container {
+.card-carousel .container {
   display:  flex;
   flex-direction: row;
   width: 0px;
   /* align-items: center; */
   justify-content: center;
+}
+.image-carousel .container {
+  display:  flex;
+  flex-direction: row;
+  width: 100px;
+  /* align-items: center; */
+  justify-content: center;
+}
+.image {
+  /* float: left; */
+  height: 200;
+  width:  100px;
+  background-size: cover;
 }
 
 .relatedBtn {

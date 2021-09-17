@@ -40,7 +40,6 @@ const RelatedAndComparison = () => {
   useEffect(() => {
     const cards = [];
     let thisIn;
-    // console.log('relatedStyles', relatedStyles[0].results.photos);
 
     for (let i = 0; i < relatedProducts.length; i++) {
       for (let j = 0; j < relatedStyles[i].results.length; j++) {
@@ -67,7 +66,7 @@ const RelatedAndComparison = () => {
 
     for (let i = 0; i < yourOutfit.length; i++) {
       if (yourOutfit.length > 0) {
-        if (id === yourOutfit[i].id) {
+        if (id === yourOutfit[i].styleID) {
           isThere = true;
           break;
         }
@@ -75,7 +74,7 @@ const RelatedAndComparison = () => {
     }
     if (!isThere) {
       for (let i = 0; i < styles.length; i++) {
-        if (id === styles[i].id) {
+        if (id === styles[i].styleID) {
           setYourOutfit(yourOutfit.concat(styles[i]));
           break;
         }
@@ -85,7 +84,7 @@ const RelatedAndComparison = () => {
 
   const removeOutfit = (id) => {
     for (let i = 0; i < yourOutfit.length; i++) {
-      if (id === yourOutfit[i].id) {
+      if (id === yourOutfit[i].styleID) {
         setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));
         break;
       }
