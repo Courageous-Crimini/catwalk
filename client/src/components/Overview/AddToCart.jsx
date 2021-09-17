@@ -19,7 +19,7 @@ const AddToCart = () => {
   const state = useContext(StateContext);
 
   const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
-  const [size, setSize] = useState('S');
+  const [size, setSize] = useState('Select Size');
   const inStock = Object.values(filteredSizes.skus).filter((sku) => sku.size === size)[0];
 
   return (
@@ -74,7 +74,7 @@ const AddToCart = () => {
                 <option key="NoQty">OUT OF STOCK</option>
               )
               : maxQtyArr.map((int) => (
-                int <= inStock.quantity ? (<option key={int}>{int}</option>) : null
+                (inStock && int <= inStock.quantity) ? (<option key={int}>{int}</option>) : null
               ))}
           </select>
         </div>
