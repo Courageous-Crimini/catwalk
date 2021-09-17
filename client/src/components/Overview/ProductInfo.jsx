@@ -19,63 +19,6 @@ const ProductInfo = () => {
   const productInfo = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const styleInfo = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
 
-  if (styleInfo.sale_price) {
-    return (
-      <Wrapper style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'left',
-        alignContent: 'center',
-        justifyContent: 'space-evenly',
-      }}
-      >
-        <span style={{
-          order: '1',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
-          alignContent: 'center',
-          justifyContent: 'space-between',
-        }}
-        >
-          <p style={{ fontSize: '1.25em', margin: '0', marginRight: '10%' }}>
-            &#9734; &#9734; &#9734; &#9734; &#9734;
-          </p>
-          <p style={{ margin: '0' }}><u>Read all reviews</u></p>
-        </span>
-        <p style={{
-          order: '2',
-          margin: '0',
-          fontWeight: 'lighter',
-        }}
-        >
-          {productInfo.category}
-        </p>
-        <h4 style={{
-          order: '3',
-          margin: '0',
-          fontSize: '1.75em',
-          fontWeight: 'bolder',
-        }}
-        >
-          {productInfo.name}
-        </h4>
-        <p style={{
-          order: '4',
-          margin: '0',
-          fontSize: '1.25em',
-        }}
-        >
-          <span>
-            <p style={{ display: 'inline', textDecoration: 'line-through' }}>{`$${styleInfo.original_price}`}</p>
-            <p style={{ marginLeft: '10px', display: 'inline', color: 'green' }}>
-              {styleInfo.sale_price ? `SALE: $${styleInfo.sale_price}` : ''}
-            </p>
-          </span>
-        </p>
-      </Wrapper>
-    );
-  }
   return (
     <Wrapper style={{
       display: 'flex',
@@ -122,7 +65,18 @@ const ProductInfo = () => {
         fontSize: '1.25em',
       }}
       >
-        {`$${styleInfo.original_price}`}
+        { styleInfo.sale_price
+          ? (
+            <span>
+              <p style={{ display: 'inline', textDecoration: 'line-through' }}>{`$${styleInfo.original_price}`}</p>
+              <p style={{ marginLeft: '10px', display: 'inline', color: 'green' }}>
+                {`SALE: $${styleInfo.sale_price}`}
+              </p>
+            </span>
+          )
+          : (
+            <p>{`$${styleInfo.original_price}`}</p>
+          )}
       </p>
     </Wrapper>
   );
