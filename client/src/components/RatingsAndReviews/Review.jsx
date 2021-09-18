@@ -52,7 +52,7 @@ const Review = ({ review }) => {
     if (!upvoted) {
       axios.put(`/api/reviews/${review.review_id}/helpful`)
         .then(() => {
-          setUpvoted(false);
+          setUpvoted(true);
           setHelpfulness((prevState) => prevState + 1);
         })
         .catch((err) => {

@@ -69,6 +69,7 @@ const Ratings = ({ meta }) => (
             max={getAverageRating(meta.ratings)[1]}
             value={meta.ratings[5 - num]}
           />
+          {` ${meta.ratings[5 - num]}`}
         </div>
       ))}
       {Object.entries(meta.characteristics).map((characteristic) => (
