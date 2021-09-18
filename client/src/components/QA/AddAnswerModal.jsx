@@ -143,6 +143,10 @@ export const Modal = ({ showModal, setShowModal, questionId }) => {
                   Email:
                   <Input name="email" maxLength="60" placeholder="example: Jacques@jacques.com" value={newAnswer.email} onChange={handleChange} />
                 </Label>
+                <Label>
+                  Photos:
+                  <Input type="file" />
+                </Label>
                 <Button> Submit </Button>
               </form>
             </ModalContent>
