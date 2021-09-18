@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React, { useContext, useReducer, useEffect } from 'react';
+import Zoom from 'react-img-zoom';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -212,7 +213,7 @@ const ImageGallery = () => {
             borderRadius: '3%',
             order: '3',
             width: '40%',
-            height: '82%',
+            height: '85%',
             margin: '0 5%',
             cursor: 'zoom-in',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -229,9 +230,11 @@ const ImageGallery = () => {
         alignItems: 'center',
         alignContent: 'middle',
         justifyContent: 'middle',
+        backgroundColor: 'rgba(73, 73, 73, 0.7)', // #494949',
       }}
+      onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
     >
-      <img
+      {/* <img
         src={imageState.imageCollection[imageState.currentImageIndex].url}
         style={{
           borderRadius: '3%',
@@ -244,7 +247,25 @@ const ImageGallery = () => {
         }}
         onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
         alt="Thumbnail"
-      />
+      /> */}
+      <div
+        style={{
+          borderRadius: '3%',
+          height: '90%',
+          width: '45%',
+          // margin: '2%',
+          zIndex: '10',
+          cursor: 'zoom-out',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+        }}
+      >
+        <Zoom
+          img={imageState.imageCollection[imageState.currentImageIndex].url}
+          zoomScale={2}
+          width={450}
+          height={500}
+        />
+      </div>
     </Wrapper>
   );
 };
