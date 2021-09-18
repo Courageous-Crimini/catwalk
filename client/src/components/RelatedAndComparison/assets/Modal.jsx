@@ -1,7 +1,11 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import Images from './Images.jsx';
+// import Features from './Features.jsx';
 
-const Modal = ({ closeModal, styles }) => {
+const Modal = ({ modalkey, closeModal, styles, products }) => {
+  console.log('MODAL KEY', modalkey);
+
   return (
     <div className="related-modal-background">
       <div className="related-modal-container">

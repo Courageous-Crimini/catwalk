@@ -2,15 +2,16 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import {
-  Cards, Card, ImageContainer, InfoContainer, Button, Image,
-} from './styles.jsx';
+import { Cards, Card, ImageContainer, InfoContainer, Button, Image, } from './styles.jsx';
+import { RelatedContext } from '../Context.jsx';
 
-const RelatedProducts = ({ styles, handleClick, openModal }) => {
+const RelatedProducts = ({ handleClick }) => {
+  const { styles, displayIdx, openModal, setModalKey, } = useContext(RelatedContext);
+
   const [currentCard, setCurrentCard] = useState(0);
-  const length = styles.length - 5;
+  const length = 4; // styles.length - 5;
 
   const prevCard = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
@@ -26,10 +27,12 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
 
     return (
       <Card key={id}>
+        {/* {console.log(displayIdx)} */}
 
         <ImageContainer>
-          <Button color="#00CCCC" type="button" className="related-btn" onClick={() => { handleClick(id); }}>&#9733;</Button>
-          <Button type="button" onClick={() => { openModal(true); }}>compare</Button>
+          <Button color="#00CCCC" type="button" onClick={() => { handleClick(id); }}>&#9733;</Button>
+          <Button>Style</Button>
+          <Button type="button" onClick={() => { setModalKey(id); openModal(true); }}>compare</Button>
           <a href={url}>
             <Image src={photo} alt="NO IMAGE AVAILABLE" />
           </a>

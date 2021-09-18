@@ -62,21 +62,6 @@ export default styled;
 /* --                                Modal                                 -- */
 
 /*                                  CSS FILE
-/--                                images
-
-.image-slider .container {
-  display:  flex;
-  flex-direction: row;
-  width: 100px;
-  justify-content: center;
-}
-.image {
-  height: 100px;
-  width:  100px;
-}
-.slider-arrow {
-
-};
 
 --                                Modal
 .related-modal-background {
@@ -100,4 +85,21 @@ export default styled;
 
   background-color: #CCCCCC;
   background: blue;
-  */
+}
+
+ /--                                images
+
+ .image-slider .container {
+   display:  flex;
+   flex-direction: row;
+   width: 100px;
+   justify-content: center;
+ }
+ .image {
+   height: 100px;
+   width:  100px;
+ }
+ .slider-arrow {
+
+ };
+ */
