@@ -21,7 +21,13 @@ const Outfit = ({ yourOutfit, handleClick, openModal }) => {
 
     return (
       <div key={item.styleID} className="card">
-        <button type="button" className="outfitBtn" onClick={() => { handleClick(item.styleID); }}>X</button>
+        <button
+          type="button"
+          className="outfitBtn"
+          onClick={() => { handleClick(item.styleID, prevCard()); }}
+        >
+          X
+        </button>
         <div className="card-image">
           <Images images={item.styleImages} openModal={openModal} />
           {/* <span className="outfit">&#9733;</span> */}
@@ -45,11 +51,11 @@ const Outfit = ({ yourOutfit, handleClick, openModal }) => {
     <section className="card-carousel">
       <div className="carousel-container">
         <div>
-          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
+          <FaArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
         </div>
         {cards.slice(currentCard, (currentCard + 5))}
         <div>
-          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
+          <FaArrowAltCircleRight className={currentCard === length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
         </div>
       </div>
     </section>

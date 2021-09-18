@@ -2,15 +2,17 @@
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import Modal from './assets/Modal.jsx';
 
 const RelatedAndComparison = () => {
   const [relatedIDs, setRelatedIDs] = useState([]);
-  const [relatedStyles, setRelatedStyles] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
-  const [styles, setStyles] = useState([]);
+  const [relatedProductStyles, setRelatedProductStyles] = useState([]);
+  const [displayProducts, setDisplayProducts] = useState([]);
+  const [displayStyles, setDisplayStyles] = useState([]);
   const [yourOutfit, setYourOutfit] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
@@ -22,15 +24,6 @@ const RelatedAndComparison = () => {
   }, []);
 
   useEffect(() => {
-    const relatedStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => data));
-    Promise.all(relatedStylesData)
-      .then((values) => {
-        setRelatedStyles(values);
-      });
-  }, [relatedIDs]);
-
-  useEffect(() => {
     const relatedProductData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
       .then(({ data }) => data));
     Promise.all(relatedProductData)
@@ -40,28 +33,63 @@ const RelatedAndComparison = () => {
   }, [relatedIDs]);
 
   useEffect(() => {
+    const relatedProductStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
+      .then(({ data }) => data));
+    Promise.all(relatedProductStylesData)
+      .then((values) => {
+        setRelatedProductStyles(values);
+      });
+  }, [relatedIDs]);
+
+  useEffect(() => {
+    const display = [];
+    let displayProductsFormat;
+
+    for (let i = 0; i < relatedProducts.length; i++) {
+      const productsIdx = relatedProducts[i];
+      const stylesIdx = relatedProductStyles[i].results[0];
+
+      displayProductsFormat = {
+        name: productsIdx.name,
+        category: productsIdx.category,
+        id: stylesIdx.style_id,
+        photo: stylesIdx.photos[0].thumbnail_url,
+        url: stylesIdx.photos[0].url,
+        originalPrice: stylesIdx.original_price,
+        salePrice: stylesIdx.sale_price,
+      };
+      display.push(displayProductsFormat);
+    }
+    setDisplayProducts(display);
+  }, [relatedProductStyles]);
+
+  useEffect(() => {
     const cards = [];
     let cardFormat;
 
     for (let i = 0; i < relatedProducts.length; i++) {
-      for (let j = 0; j < relatedStyles[i].results.length; j++) {
-        const relatedPIdx = relatedProducts[i];
-        const relatedSIdx = relatedStyles[i].results;
+      for (let j = 0; j < relatedProductStyles[i].results.length; j++) {
+        const productsIdx = relatedProducts[i];
+        const stylesIdx = relatedProductStyles[i].results;
+
         cardFormat = {
-          productID: relatedPIdx.id,
-          name: relatedPIdx.name,
-          category: relatedPIdx.category,
-          styleID: relatedSIdx[j].style_id,
-          styleName: relatedSIdx[j].name,
-          styleImages: relatedSIdx[j].photos,
-          salePrice: relatedSIdx[j].sale_price,
-          originalPrice: relatedSIdx[j].original_price,
+          name: productsIdx.name,
+          category: productsIdx.category,
+          description: productsIdx.description,
+          features: productsIdx.features,
+          slogan: productsIdx.slogan,
+          id: stylesIdx[j].style_id,
+          photos: stylesIdx[j].photos,
+          skus: stylesIdx[j].skus,
+          StyleName: stylesIdx[j].name,
+          originalPrice: stylesIdx[j].original_price,
+          salePrice: stylesIdx[j].sale_price,
         };
         cards.push(cardFormat);
       }
     }
-    setStyles(cards);
-  }, [relatedProducts]);
+    setDisplayStyles(cards);
+  }, [relatedProductStyles]);
 
   const addOutfit = (id) => {
     let isThere = false;
@@ -75,9 +103,9 @@ const RelatedAndComparison = () => {
       }
     }
     if (!isThere) {
-      for (let i = 0; i < styles.length; i++) {
-        if (id === styles[i].styleID) {
-          setYourOutfit(yourOutfit.concat(styles[i]));
+      for (let i = 0; i < displayStyles.length; i++) {
+        if (id === displayStyles[i].styleID) {
+          setYourOutfit(yourOutfit.concat(displayStyles[i]));
           break;
         }
       }
@@ -95,10 +123,11 @@ const RelatedAndComparison = () => {
 
   return (
     <section id="RelatedAndComparison">
-      <div className="container">
+      {openModal && <Modal styles={displayStyles} closeModal={setOpenModal} />}
+      <div className="related-container">
         <h2>Related Products</h2>
         <RelatedProducts
-          styles={styles}
+          styles={displayProducts}
           handleClick={addOutfit}
           openModal={setOpenModal}
         />
@@ -108,7 +137,6 @@ const RelatedAndComparison = () => {
           handleClick={removeOutfit}
           openModal={setOpenModal}
         />
-        {openModal && <Modal closeModal={setOpenModal} />}
       </div>
     </section>
   );

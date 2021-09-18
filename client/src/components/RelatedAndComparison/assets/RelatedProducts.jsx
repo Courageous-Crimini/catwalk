@@ -1,9 +1,9 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
-import Images from './Images.jsx';
 
 const RelatedProducts = ({ styles, handleClick, openModal }) => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -17,20 +17,27 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
   };
 
   const cards = styles.map((item) => {
-    const originalPrice = item.originalPrice;
-    const salePrice = item.salePrice;
+    const {
+      id, photo, url, category, name, salePrice, originalPrice,
+    } = item;
 
     return (
-      <div key={item.styleID} className="card">
-        <button type="button" className="relatedBtn" onClick={() => { handleClick(item.styleID); }}>&#9733;</button>
-        <div className="card-image">
-          <Images images={item.styleImages} openModal={openModal} />
-          {/* <span className="relatedBtn">&#9733;</span> */}
+      <div key={id} className="card">
+
+        <div className="image-container">
+          <button type="button" className="related-btn" onClick={() => { handleClick(id); }}>&#9733;</button>
+          <button type="button" className="open-modal-btn" onClick={() => { openModal(true); }}>compare</button>
+          <div className="card-photo">
+            <a href={url}>
+              <img src={photo} alt="NO IMAGE AVAILABLE" className="related-photo" />
+            </a>
+          </div>
         </div>
-        <div className="card-description">
-          <span className="item-category">{item.category}</span>
+
+        <div className="description-container">
+          <span className="item-category">{category}</span>
           <br />
-          <span className="item-name">{item.name}</span>
+          <span className="item-name">{name}</span>
           <br />
           <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
           <br />
@@ -46,11 +53,11 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
     <section className="card-carousel">
       <div className="carousel-container">
         <div>
-          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
+          <FaArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
         </div>
         {cards.slice(currentCard, (currentCard + 5))}
         <div>
-          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
+          <FaArrowAltCircleRight className={currentCard >= length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
         </div>
       </div>
     </section>

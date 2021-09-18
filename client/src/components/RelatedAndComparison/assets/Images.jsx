@@ -6,13 +6,8 @@
 /* eslint-disable prefer-destructuring */
 import React, { useState } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
-// import Modal from './Modal.jsx';
 
 const Images = ({ images, openModal }) => {
-  // /* -------- MODAL ---------- */
-  // const [openModal, setOpenModal] = useState(false);
-
-  // /* -------- MODAL ---------- */
   const [currentImage, setCurrentImage] = useState(0);
   const length = images.length;
 
@@ -38,8 +33,8 @@ const Images = ({ images, openModal }) => {
   return (
     <section className="image-slider">
       <div className="image-container">
-        <FaArrowAltCircleLeft onClick={prevImg} />
-        <FaArrowAltCircleRight onClick={nextImg} />
+        <FaArrowAltCircleLeft onClick={prevImg} className="slider-arrow" />
+        <FaArrowAltCircleRight onClick={nextImg} className="slider-Arrow" />
         {displayImages[currentImage]}
       </div>
     </section>
