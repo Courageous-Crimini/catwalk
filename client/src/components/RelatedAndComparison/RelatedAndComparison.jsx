@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
-import { Main, Container } from './assets/styles.jsx';
+import { Main, Container } from './styles.jsx';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import Modal from './assets/Modal.jsx';

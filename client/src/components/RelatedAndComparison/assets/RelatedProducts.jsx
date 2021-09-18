@@ -4,11 +4,11 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import { Cards, Card, ImageContainer, InfoContainer, Button, Image, } from './styles.jsx';
+import { Cards, Card, ImageContainer, InfoContainer, Button, Image, } from '../styles.jsx';
 import { RelatedContext } from '../Context.jsx';
 
 const RelatedProducts = ({ handleClick }) => {
-  const { styles, displayIdx, openModal, setModalKey, } = useContext(RelatedContext);
+  const { styles, displayIdx, openModal, setModalKey } = useContext(RelatedContext);
 
   const [currentCard, setCurrentCard] = useState(0);
   const length = 4; // styles.length - 5;

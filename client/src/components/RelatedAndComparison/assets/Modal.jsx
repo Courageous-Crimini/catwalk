@@ -1,10 +1,13 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
-import Images from './Images.jsx';
+import React, { useContext } from 'react';
+import { RelatedContext } from '../Context.jsx';
 // import Features from './Features.jsx';
 
-const Modal = ({ modalkey, closeModal, styles, products }) => {
+// styles, displayIdx, yourOutfit, setYourOutfit, modalkey, setModalKey, openModal, setOpenModal
+
+const Modal = () => {
   console.log('MODAL KEY', modalkey);
+  const { modalkey, closeModal } = useContext(RelatedContext);
 
   return (
     <div className="related-modal-background">

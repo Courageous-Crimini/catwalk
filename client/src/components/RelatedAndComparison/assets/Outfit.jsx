@@ -1,12 +1,16 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
-import { Buttton } from './styles.jsx';
+import { Buttton } from '../styles.jsx';
 import Images from './Images.jsx';
+import RelatedContext from '../Context.jsx';
 
-const Outfit = ({ yourOutfit, handleClick, openModal }) => {
+// styles, displayIdx, yourOutfit, setYourOutfit, modalkey, setModalKey, openModal, setOpenModal
+
+const Outfit = ({ handleClick }) => {
   const [currentCard, setCurrentCard] = useState(0);
+  const { yourOutfit, openModal } = useContext(RelatedContext);
   const length = yourOutfit.length - 5;
 
   const prevCard = () => {
