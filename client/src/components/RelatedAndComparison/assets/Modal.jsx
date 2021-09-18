@@ -2,7 +2,6 @@ import React from 'react';
 import Images from './Images.jsx';
 
 const Modal = ({ closeModal, styles }) => {
-  // const
   return (
     <div className="related-modal-background">
       <div className="related-modal-container">

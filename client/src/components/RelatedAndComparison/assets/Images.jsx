@@ -5,7 +5,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable prefer-destructuring */
 import React, { useState } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { FaLongArrowAltLeft, FaLongArrowAltRight } from 'react-icons/fa';
 
 const Images = ({ images, openModal }) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -33,8 +33,8 @@ const Images = ({ images, openModal }) => {
   return (
     <section className="image-slider">
       <div className="image-container">
-        <FaArrowAltCircleLeft onClick={prevImg} className="slider-arrow" />
-        <FaArrowAltCircleRight onClick={nextImg} className="slider-Arrow" />
+        <FaLongArrowAltLeft onClick={prevImg} className="slider-arrow" />
+        <FaLongArrowAltRight onClick={nextImg} className="slider-Arrow" />
         {displayImages[currentImage]}
       </div>
     </section>

@@ -2,7 +2,7 @@
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styled from 'styled-components';
+import { Main, Container } from './assets/styles.jsx';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import Modal from './assets/Modal.jsx';
@@ -122,9 +122,9 @@ const RelatedAndComparison = () => {
   };
 
   return (
-    <section id="RelatedAndComparison">
-      {openModal && <Modal styles={displayStyles} closeModal={setOpenModal} />}
-      <div className="related-container">
+    <Main id="2">
+      <Container>
+        {openModal && <Modal styles={displayStyles} closeModal={setOpenModal} />}
         <h2>Related Products</h2>
         <RelatedProducts
           styles={displayProducts}
@@ -137,8 +137,8 @@ const RelatedAndComparison = () => {
           handleClick={removeOutfit}
           openModal={setOpenModal}
         />
-      </div>
-    </section>
+      </Container>
+    </Main>
   );
 };
 

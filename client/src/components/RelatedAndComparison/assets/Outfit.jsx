@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { Buttton } from './styles.jsx';
 import Images from './Images.jsx';
 
 const Outfit = ({ yourOutfit, handleClick, openModal }) => {
@@ -21,13 +22,13 @@ const Outfit = ({ yourOutfit, handleClick, openModal }) => {
 
     return (
       <div key={item.styleID} className="card">
-        <button
+        <Button
           type="button"
-          className="outfitBtn"
+          color="#FF0000"
           onClick={() => { handleClick(item.styleID, prevCard()); }}
         >
           X
-        </button>
+        </Button>
         <div className="card-image">
           <Images images={item.styleImages} openModal={openModal} />
           {/* <span className="outfit">&#9733;</span> */}

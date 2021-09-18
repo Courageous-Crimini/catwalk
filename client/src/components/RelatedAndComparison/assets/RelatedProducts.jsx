@@ -3,7 +3,10 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import {
+  Cards, Card, ImageContainer, InfoContainer, Button, Image,
+} from './styles.jsx';
 
 const RelatedProducts = ({ styles, handleClick, openModal }) => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -22,19 +25,17 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
     } = item;
 
     return (
-      <div key={id} className="card">
+      <Card key={id}>
 
-        <div className="image-container">
-          <button type="button" className="related-btn" onClick={() => { handleClick(id); }}>&#9733;</button>
-          <button type="button" className="open-modal-btn" onClick={() => { openModal(true); }}>compare</button>
-          <div className="card-photo">
-            <a href={url}>
-              <img src={photo} alt="NO IMAGE AVAILABLE" className="related-photo" />
-            </a>
-          </div>
-        </div>
+        <ImageContainer>
+          <Button color="#00CCCC" type="button" className="related-btn" onClick={() => { handleClick(id); }}>&#9733;</Button>
+          <Button type="button" onClick={() => { openModal(true); }}>compare</Button>
+          <a href={url}>
+            <Image src={photo} alt="NO IMAGE AVAILABLE" />
+          </a>
+        </ImageContainer>
 
-        <div className="description-container">
+        <InfoContainer>
           <span className="item-category">{category}</span>
           <br />
           <span className="item-name">{name}</span>
@@ -44,23 +45,19 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
           <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
           <br className={salePrice ? 'break' : 'hide'} />
           <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        </div>
-      </div>
+        </InfoContainer>
+      </Card>
     );
   });
 
   return (
-    <section className="card-carousel">
-      <div className="carousel-container">
-        <div>
-          <FaArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
-        </div>
+    <div>
+      <FaRegArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
+      <FaRegArrowAltCircleRight className={currentCard >= length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
+      <Cards>
         {cards.slice(currentCard, (currentCard + 5))}
-        <div>
-          <FaArrowAltCircleRight className={currentCard >= length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
-        </div>
-      </div>
-    </section>
+      </Cards>
+    </div>
   );
 };
 
