@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -11,6 +12,10 @@ import {
   IoIosArrowDown,
   IoIosArrowUp,
 } from 'react-icons/io';
+import {
+  RiFullscreenExitFill,
+  RiFullscreenFill,
+} from 'react-icons/ri';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
 
@@ -220,6 +225,34 @@ const ImageGallery = () => {
           }}
           alt="Style"
         />
+        <div
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+          style={{
+            position: 'absolute',
+            margin: '0',
+            height: '40px',
+            width: '40px',
+            zIndex: '20',
+            top: '140px',
+            right: '500px',
+            borderRadius: '25%',
+            alignText: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            border: '1px solid lightgrey',
+            backgroundColor: '#F6F6F6',
+            cursor: 'pointer',
+          }}
+        >
+          <RiFullscreenFill style={{
+            color: 'black',
+            height: '27',
+            width: '27',
+            zIndex: '30',
+          }}
+          />
+        </div>
       </Wrapper>
     );
   }
@@ -230,6 +263,7 @@ const ImageGallery = () => {
         alignItems: 'center',
         alignContent: 'middle',
         justifyContent: 'middle',
+        zIndex: '0',
       }}
       onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
     >
@@ -247,6 +281,36 @@ const ImageGallery = () => {
         onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
         alt="Thumbnail"
       /> */}
+      <div
+        onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+        style={{
+          position: 'absolute',
+          margin: '0',
+          height: '40px',
+          width: '40px',
+          zIndex: '20',
+          top: '140px',
+          right: '500px',
+          borderRadius: '25%',
+          alignText: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          border: '1px solid lightgrey',
+          backgroundColor: '#F6F6F6',
+          cursor: 'pointer',
+        }}
+      >
+        <RiFullscreenExitFill
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+          style={{
+            color: 'black',
+            height: '27',
+            width: '27',
+            zIndex: '30',
+          }}
+        />
+      </div>
       <div
         style={{
           // borderRadius: '3%',
