@@ -48,6 +48,7 @@ const ModalContent = styled.div`
 
 const Form = styled.form`
 text-align: center;
+width: 100%
 `;
 
 const CloseModalButton = styled(MdClose)`
@@ -68,19 +69,19 @@ const Label = styled.label`
   text-align: left;
   line-height: 26px;
   margin-bottom: 1px;
-  margin-left: 100px;
+  margin-left: 10px;
   margin-right: 100px;
 `;
 
 const Input = styled.input`
-  padding: 1em;
+  padding: 0.1em;
   background: white;
   border: solid;
   border-color: black;
   border-width: 1px;
   width: 80%;
   height: 20px;
-  flex: 0 0 200px;
+  flex: 0 0 65%;
   margin-left: 10px;
 `;
 
@@ -99,27 +100,35 @@ export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const productName = selected.name;
-  const [newReview, setNewQuestion] = useState(
+  const [newReview, setNewReview] = useState(
     {
-      product_id: 48432, name: '', email: '', body: '',
+      product_id: state.selectedProduct,
+      rating: 1,
+      recommend: false,
+      characteristics: {},
+      summary: '',
+      photos: [],
+      name: '',
+      email: '',
+      body: '',
     },
   );
 
   const handleChange = (event) => {
-    setNewQuestion({
+    setNewReview({
       ...newReview, [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // axios.post('/api/qa/questions', newQuestion)
-    //   .then(({ data }) => {
-    //     console.log(data);
-    //   })
-    //   .catch((err) => {
-    //     throw err;
-    //   });
+    axios.post('/api/reviews', newReview)
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        throw err;
+      });
   };
 
   const modalRef = useRef();
@@ -141,7 +150,7 @@ export const Modal = ({ showModal, setShowModal }) => {
               <Form onSubmit={handleSubmit}>
                 <Label>
                   Overall rating: *
-                  <Input name="overall-rating" value={newReview.rating} onChange={handleChange} />
+                  <Input name="rating" value={newReview.rating} onChange={handleChange} />
                 </Label>
                 <Label>
                   Do you recommend this product? *
@@ -157,24 +166,24 @@ export const Modal = ({ showModal, setShowModal }) => {
                 </Label>
                 <Label>
                   Review Body: *
-                  <Input name="body" placeholder="Must be between 50-1000 characters" maxLength="1000" value={newReview.body} onChange={handleChange} />
+                  <Input name="body" placeholder="Why did you like the product or not?" maxLength="1000" value={newReview.body} onChange={handleChange} />
                 </Label>
                 <Label>
-                  Nickname:
+                  Photos
                   <Input name="photos" value={newReview.photos} onChange={handleChange} />
                 </Label>
                 <Label>
-                  Nickname:
+                  Nickname: *
                   <Input name="name" placeholder="Example: jackson11!" maxLength="60" value={newReview.name} onChange={handleChange} />
                 </Label>
                 <p> For privacy reasons, do not use your full name or email address </p>
                 <Label>
                   Email:
-                  <Input name="email" placeholder="Why did you like the product or not?" maxLength="60" value={newReview.email} onChange={handleChange} />
+                  <Input name="email" maxLength="60" value={newReview.email} onChange={handleChange} />
                 </Label>
-                  <p> For authentication reasons, you will not be emailed</p>
+                <p> For authentication reasons, you will not be emailed</p>
+                <Button> Submit </Button>
               </Form>
-              <Button> Submit </Button>
             </ModalContent>
             <CloseModalButton
               area-label="Close modal"
