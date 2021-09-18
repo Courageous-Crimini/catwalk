@@ -230,7 +230,6 @@ const ImageGallery = () => {
         alignItems: 'center',
         alignContent: 'middle',
         justifyContent: 'middle',
-        backgroundColor: 'rgba(73, 73, 73, 0.7)', // #494949',
       }}
       onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
     >
@@ -250,20 +249,25 @@ const ImageGallery = () => {
       /> */}
       <div
         style={{
-          borderRadius: '3%',
-          height: '90%',
-          width: '45%',
+          // borderRadius: '3%',
+          height: '100%',
+          width: '100%',
           // margin: '2%',
           zIndex: '10',
           cursor: 'zoom-out',
           boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          // backgroundColor: 'rgba(73, 73, 73, 0.4)', // #494949',
         }}
       >
         <Zoom
           img={imageState.imageCollection[imageState.currentImageIndex].url}
-          zoomScale={2}
-          width={450}
-          height={500}
+          zoomScale={1.5}
+          width={1000}
+          height={600}
         />
       </div>
     </Wrapper>
