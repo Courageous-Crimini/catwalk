@@ -59,6 +59,21 @@ const reducer = (state, action) => {
         ...state,
         selectedProductFeatures: action.payload,
       };
+    case ACTIONS.SET_RELATED_PRODUCTS:
+      return {
+        ...state,
+        relatedDisplay: action.payload,
+      };
+    case ACTIONS.SET_ALL_STYLES:
+      return {
+        ...state,
+        styles: action.payload,
+      };
+    case ACTIONS.SET_RELATED_IDX:
+      return {
+        ...state,
+        relatedIdx: action.payload,
+      };
     case ACTIONS.SET_LOADED:
       return {
         ...state,

@@ -1,17 +1,13 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable no-plusplus */
-/* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { Cards, Card, ImageContainer, InfoContainer, Button, Image, } from '../styles.jsx';
 import { RelatedContext } from '../Context.jsx';
 
-const RelatedProducts = ({ handleClick }) => {
-  const { styles, displayIdx, openModal, setModalKey } = useContext(RelatedContext);
-
+const RelatedProducts = ({ addOutfit }) => {
+  const { display, setModalKey, setOpenModal } = useContext(RelatedContext);
   const [currentCard, setCurrentCard] = useState(0);
-  const length = 4; // styles.length - 5;
+  const length = display.length - 1;
 
   const prevCard = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
@@ -20,19 +16,17 @@ const RelatedProducts = ({ handleClick }) => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
 
-  const cards = styles.map((item) => {
+  const cards = display.map((item) => {
+    // console.log('here is an item', item);
     const {
-      id, photo, url, category, name, salePrice, originalPrice,
+      styleID, id, category, name, salePrice, originalPrice, url, photo,
     } = item;
 
     return (
-      <Card key={id}>
-        {/* {console.log(displayIdx)} */}
-
+      <Card key={styleID}>
         <ImageContainer>
-          <Button color="#00CCCC" type="button" onClick={() => { handleClick(id); }}>&#9733;</Button>
-          <Button>Style</Button>
-          <Button type="button" onClick={() => { setModalKey(id); openModal(true); }}>compare</Button>
+          <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
+          <Button type="button" onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
           <a href={url}>
             <Image src={photo} alt="NO IMAGE AVAILABLE" />
           </a>
@@ -43,10 +37,16 @@ const RelatedProducts = ({ handleClick }) => {
           <br />
           <span className="item-name">{name}</span>
           <br />
-          <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
+          <span>
+            &#36;
+            {originalPrice}
+          </span>
           <br />
-          <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
-          <br className={salePrice ? 'break' : 'hide'} />
+          <span>
+            SALE &#36;
+            {salePrice}
+          </span>
+          <br />
           <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         </InfoContainer>
       </Card>
@@ -55,8 +55,8 @@ const RelatedProducts = ({ handleClick }) => {
 
   return (
     <div>
-      <FaRegArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
-      <FaRegArrowAltCircleRight className={currentCard >= length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
+      <FaRegArrowAltCircleLeft onClick={prevCard} />
+      <FaRegArrowAltCircleRight onClick={nextCard} />
       <Cards>
         {cards.slice(currentCard, (currentCard + 5))}
       </Cards>
