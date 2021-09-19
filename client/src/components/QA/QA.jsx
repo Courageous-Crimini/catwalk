@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 margin: 0;
@@ -30,13 +32,15 @@ const Row = styled.div`
 
 // eslint-disable-next-line no-empty-pattern
 const QA = () => {
-  const [productId] = useState(48432);
+  // const [productId] = useState(48432);
+  const state = useContext(StateContext);
+  const id = state.selectedProduct;
   const [questions, setQuestions] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [limit, setLimit] = useState(2);
 
   useEffect(() => {
-    axios.get(`/api/qa/questions?product_id=${productId}`, { params: { count: limit } })
+    axios.get(`/api/qa/questions?product_id=${id}`, { params: { count: limit } })
       .then(({ data }) => {
         setFiltered(data.results);
         setQuestions(data.results);
