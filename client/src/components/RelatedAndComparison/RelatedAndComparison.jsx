@@ -9,9 +9,11 @@ import { RelatedContext } from './Context.jsx';
 
 const RelatedAndComparison = () => {
   const [display, setDisplay] = useState([]);
+  const [features, setFeatures] = useState([]);
+  const [idx, setRelatedIdx] = useState([]);
   const [styles, setStyles] = useState([]);
   const [images, setImages] = useState([]);
-  const [idx, setRelatedIdx] = useState([]);
+  const [skus, setSkus] = useState([]);
 
   const [yourOutfit, setYourOutfit] = useState([]);
   const [modalKey, setModalKey] = useState('');
@@ -41,14 +43,18 @@ const RelatedAndComparison = () => {
                 const stylesData = [];
                 const idxData = [];
                 const imagesData = [];
+                const featuresData = [];
+                const skusData = [];
                 let displayFormat;
+                let featureFormat;
                 let styleFormat;
                 let imageFormat;
-                let displayTracker = 0;
+                let skusFormat;
+                let dataTracker = 0;
                 let start;
 
                 for (let i = 0; i < responseProducts.length; i += 1) {
-                  start = (!start) ? 0 : displayTracker;
+                  start = (!start) ? dataTracker : dataTracker;
                   displayFormat = {
                     id: responseProducts[i].id,
                     category: responseProducts[i].category,
@@ -56,45 +62,61 @@ const RelatedAndComparison = () => {
                     styleID: responseStyles[i].results[0].style_id,
                     originalPrice: responseStyles[i].results[0].original_price,
                     salePrice: responseStyles[i].results[0].sale_price,
-
                     photo: responseStyles[i].results[0].photos[0].thumbnail_url,
                     url: responseStyles[i].results[0].photos[0].url,
                   };
+                  featureFormat = {
+                    id: responseProducts[i].id,
+                    features: responseProducts[i].features,
+                  };
                   displayData.push(displayFormat);
+                  featuresData.push(featureFormat);
 
                   for (let j = 0; j < responseStyles[i].results.length; j += 1) {
                     const productsIdx = responseProducts[i];
                     const stylesIdx = responseStyles[i].results;
 
                     styleFormat = {
+                      index: dataTracker,
                       id: productsIdx.id,
                       category: productsIdx.category,
                       name: productsIdx.name,
                       description: productsIdx.description,
                       features: productsIdx.features,
                       slogan: productsIdx.slogan,
-
                       styleID: stylesIdx[j].style_id,
-                      StyleName: stylesIdx[j].name,
+                      styleName: stylesIdx[j].name,
                       originalPrice: stylesIdx[j].original_price,
                       salePrice: stylesIdx[j].sale_price,
-                      skus: stylesIdx[j].skus,
                     };
                     imageFormat = {
+                      index: dataTracker,
                       id: productsIdx.id,
                       styleID: stylesIdx[j].style_id,
                       photos: stylesIdx[j].photos,
                     };
+                    skusFormat = { // maybe delete
+                      index: dataTracker,
+                      id: productsIdx.id,
+                      styleID: stylesIdx[j].style_id,
+                      skus: stylesIdx[j].skus,
+                    };
+
                     stylesData.push(styleFormat);
                     imagesData.push(imageFormat);
-                    displayTracker += 1;
+                    skusData.push(skusFormat); // maybe delete
+                    dataTracker += 1;
                   }
-                  idxData.push({ id: responseProducts.id, begin: start, end: displayTracker - 1 });
+                  idxData.push({ id: responseProducts[i].id, begin: start, end: dataTracker - 1 });
                 }
                 setDisplay(displayData);
+                setFeatures(featuresData);
+                setRelatedIdx(idxData);
                 setStyles(stylesData);
                 setImages(imagesData);
-                setRelatedIdx(idxData);
+                setSkus(skusData); // maybe delete
+
+                // console.log(skusData);
                 // dispatch({ type: ACTIONS.SET_RELATED_PRODUCTS, payload: stylesData });
                 // dispatch({ type: ACTIONS.SET_RELATED_IDX, payload: relatedIdx });
               });
@@ -136,7 +158,16 @@ const RelatedAndComparison = () => {
     <RelatedContext.Provider
       id="2"
       value={{
-        display, styles, images, idx,
+        display,
+        features,
+        idx,
+        styles,
+        images,
+        skus,
+        setModalKey,
+        setOpenModal,
+        modalKey,
+        yourOutfit,
       }}
     >
       <Container>
