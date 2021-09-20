@@ -12,6 +12,7 @@ const LoadBtn = styled.h3`
   font-size: 1em;
   padding: 1em;
   font-style: normal;
+  cursor: pointer;
 `;
 
 // eslint-disable-next-line react/prop-types

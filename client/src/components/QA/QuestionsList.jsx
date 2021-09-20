@@ -9,13 +9,13 @@ background: white;
 padding: 100px;
 `;
 
-const QuestionsList = ({ questions }) => (
-  <Wrapper>
+const QuestionsList = ({ questions, productInfo }) => (
 
+  <Wrapper>
     <div>
       {
         questions.map((question) => (
-          <QuestionItem question={question} key={question.question_id} />
+          <QuestionItem question={question} key={question.question_id} productInfo={productInfo} />
         ))
       }
     </div>

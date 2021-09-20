@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
+/* eslint-disable import/no-cycle */
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import Search from './Search.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import AddQuestion from './AddQuestion.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 margin: 0;
@@ -30,16 +34,26 @@ const Row = styled.div`
 
 // eslint-disable-next-line no-empty-pattern
 const QA = () => {
-  const [productId] = useState(48432);
+  // const [productId] = useState(48432);
+  const state = useContext(StateContext);
+  const id = state.selectedProduct;
   const [questions, setQuestions] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [limit, setLimit] = useState(2);
+  const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
-    axios.get(`/api/qa/questions?product_id=${productId}`, { params: { count: limit } })
+    axios.get(`/api/qa/questions?product_id=${id}`, { params: { count: limit } })
       .then(({ data }) => {
         setFiltered(data.results);
         setQuestions(data.results);
+      })
+      .catch((err) => {
+        throw err;
+      });
+    axios.get(`/api/products/${id}`)
+      .then(({ data }) => {
+        setProductInfo(data);
       })
       .catch((err) => {
         throw err;
@@ -63,13 +77,13 @@ const QA = () => {
           <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
-          {/* {console.log('QA.jsx', questions)} */}
-          <QuestionsList questions={questions} />
+          {/* {console.log('QA.jsx', productInfo)} */}
+          <QuestionsList questions={questions} productInfo={productInfo} />
           <Row>
             <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
               More Answered Questions
             </Button>
-            <AddQuestion />
+            <AddQuestion productInfo={productInfo} />
           </Row>
         </div>
       </div>
