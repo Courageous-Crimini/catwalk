@@ -38,12 +38,20 @@ const QA = () => {
   const [questions, setQuestions] = useState([]);
   const [filtered, setFiltered] = useState([]);
   const [limit, setLimit] = useState(2);
+  const [productInfo, setProductInfo] = useState([]);
 
   useEffect(() => {
     axios.get(`/api/qa/questions?product_id=${id}`, { params: { count: limit } })
       .then(({ data }) => {
         setFiltered(data.results);
         setQuestions(data.results);
+      })
+      .catch((err) => {
+        throw err;
+      });
+    axios.get(`/api/products/${id}`)
+      .then(({ data }) => {
+        setProductInfo(data);
       })
       .catch((err) => {
         throw err;
@@ -67,13 +75,13 @@ const QA = () => {
           <Search questions={questions} filterSearch={filterSearch} />
         </div>
         <div className="Questions-collapsible">
-          {/* {console.log('QA.jsx', questions)} */}
-          <QuestionsList questions={questions} />
+          {/* {console.log('QA.jsx', productInfo)} */}
+          <QuestionsList questions={questions} productInfo={productInfo} />
           <Row>
             <Button className="toggle" onClick={() => { setLimit((prevState) => prevState + 2); }}>
               More Answered Questions
             </Button>
-            <AddQuestion />
+            <AddQuestion productInfo={productInfo} />
           </Row>
         </div>
       </div>

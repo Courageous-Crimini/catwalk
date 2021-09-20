@@ -90,7 +90,7 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-export const Modal = ({ showModal, setShowModal }) => {
+export const Modal = ({ showModal, setShowModal, productInfo }) => {
   const [newQuestion, setNewQuestion] = useState(
     {
       product_id: 48436, name: '', email: '', body: '',
@@ -129,7 +129,7 @@ export const Modal = ({ showModal, setShowModal }) => {
           <ModalWrapper showModal={showModal}>
             <ModalContent>
               <h1>Ask Your Question</h1>
-              <h5 className="subtitle">About the...</h5>
+              <h3 className="subtitle">{productInfo.name}</h3>
               <form onSubmit={handleSubmit}>
                 <Label>
                   Question:

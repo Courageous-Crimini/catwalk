@@ -37,7 +37,7 @@ font-family: Valera Round,sans-serif;
 font-size: 16px
 `;
 
-const QuestionItem = ({ question }) => {
+const QuestionItem = ({ question, productInfo }) => {
   const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
   const [upvoted, setUpvoted] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -77,7 +77,7 @@ const QuestionItem = ({ question }) => {
           {` (${helpfulness}) `}
           {' | '}
           <Button onClick={openModal}> Add Answer </Button>
-          <Modal showModal={showModal} setShowModal={setShowModal} questionId={question.question_id} />
+          <Modal showModal={showModal} setShowModal={setShowModal} questionId={question.question_id} productInfo={productInfo} />
         </H5>
       </Row>
       <div className="Answers-collapsible">
