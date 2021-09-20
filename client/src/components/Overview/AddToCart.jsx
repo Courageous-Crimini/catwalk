@@ -19,6 +19,9 @@ const cartReducer = (state, action) => {
     case CART_ACTIONS.SET_INVENTORY:
       return { ...state, inventory: action.payload };
     case CART_ACTIONS.SET_SKU:
+      if (state.size === 'Select Size') {
+        return { ...state, sku: 'sku' };
+      }
       return { ...state, sku: Object.entries(state.inventory).filter((currSku) => currSku[1].size === state.size)[0][0] };
     case CART_ACTIONS.SET_SIZE:
       return { ...state, size: action.payload };
@@ -60,6 +63,7 @@ const AddToCart = () => {
     };
     axios.request(options)
       .then((response) => {
+        // eslint-disable-next-line no-console
         console.log(response.data);
       });
   };
