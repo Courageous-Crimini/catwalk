@@ -43,7 +43,7 @@ const reducer = (state, action) => {
       return { ...state, currentImageIndex: state.currentImageIndex + 1 };
     case IMAGE_ACTIONS.PREVIOUS_ITEM:
       if (state.currentImageIndex - 1 < 0) {
-        return { ...state, currentImageIndex: state.currentImageIndex.length - 1 };
+        return { ...state, currentImageIndex: state.imageCollection.length - 1 };
       }
       return { ...state, currentImageIndex: state.currentImageIndex - 1 };
     case IMAGE_ACTIONS.SET_ITEM:
