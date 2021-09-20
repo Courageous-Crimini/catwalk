@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from './AddQuestionModal.jsx';
@@ -14,7 +15,7 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const AddQuestion = () => {
+const AddQuestion = ({ productInfo }) => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -24,7 +25,7 @@ const AddQuestion = () => {
   return (
     <div>
       <Button onClick={openModal}> Add a question + </Button>
-      <Modal showModal={showModal} setShowModal={setShowModal} />
+      <Modal showModal={showModal} setShowModal={setShowModal} productInfo={productInfo} />
     </div>
   );
 };
