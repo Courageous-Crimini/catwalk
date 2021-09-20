@@ -152,6 +152,13 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Overall rating: *
                   <Input name="rating" value={newReview.rating} onChange={handleChange} />
                 </Label>
+                <div className="rating">
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                  <span>☆</span>
+                </div>
                 <Label>
                   Do you recommend this product? *
                   <Input name="recommend" value={newReview.recommend} onChange={handleChange} />

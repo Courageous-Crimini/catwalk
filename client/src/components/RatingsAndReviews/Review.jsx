@@ -41,6 +41,18 @@ const AlignLeft = styled.div`
     padding-right: 3em;
 `;
 
+const genAllStars = (rating) => {
+  let stars = '';
+  for (let i = 1; i <= 5; i += 1) {
+    if (rating < i) {
+      stars += '☆';
+    } else {
+      stars += '★';
+    }
+  }
+  return stars;
+};
+
 const Review = ({ review }) => {
   // const review_id = useState(review.review_id);
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
@@ -52,7 +64,7 @@ const Review = ({ review }) => {
     if (!upvoted) {
       axios.put(`/api/reviews/${review.review_id}/helpful`)
         .then(() => {
-          setUpvoted(false);
+          setUpvoted(true);
           setHelpfulness((prevState) => prevState + 1);
         })
         .catch((err) => {
@@ -83,7 +95,8 @@ const Review = ({ review }) => {
       <div className="review">
         <Row>
           <AlignLeft>
-            {`${review.rating} ☆☆☆☆☆`}
+            {`${review.rating}`}
+            {genAllStars(review.rating)}
           </AlignLeft>
           <AlignRight>
             {(true)
