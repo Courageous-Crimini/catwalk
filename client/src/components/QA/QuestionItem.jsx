@@ -43,7 +43,6 @@ const QuestionItem = ({ question, productInfo }) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleUpvote = () => {
-    console.log(question);
     if (!upvoted) {
       axios.put(`/api/qa/questions/${question.question_id}/helpful`)
         .then(() => {

@@ -1,3 +1,5 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable consistent-return */
 /* eslint-disable import/no-cycle */
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
