@@ -33,7 +33,7 @@ const AnswerItem = ({ answer }) => {
 
   const handleUpvote = () => {
     if (!upvoted) {
-      axios.put(`api/qa/questions/${answer.answer_id}/helpful`)
+      axios.put(`api/qa/answers/${answer.answer_id}/helpful`)
         .then(() => {
           setUpvoted(true);
           setHelpful((prevState) => prevState + 1);
@@ -46,7 +46,7 @@ const AnswerItem = ({ answer }) => {
 
   const handleReport = () => {
     if (!reported) {
-      axios.put(`/api/qa/questions/${answer.answer_id}/report`)
+      axios.put(`/api/qa/answers/${answer.answer_id}/report`)
         .then(() => {
           setReported(true);
         })
@@ -70,7 +70,11 @@ const AnswerItem = ({ answer }) => {
           {answer.answerer_name}
           ,&nbsp;
           {moment(answer.date).format('LL')}
+<<<<<<< HEAD
           {'Helpful? '}
+=======
+          {' Helpful? '}
+>>>>>>> 898ed43e5144ef989d7644d19b4585223ab82523
           <Button onClick={handleUpvote}>
             Yes
           </Button>
