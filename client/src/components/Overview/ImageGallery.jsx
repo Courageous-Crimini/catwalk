@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React, { useContext, useReducer, useEffect } from 'react';
-// import Zoom from 'react-img-zoom';
+import Zoom from 'react-img-zoom';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -207,20 +207,33 @@ const ImageGallery = () => {
             zIndex: '10',
           }}
         />
-        <img
-          src={imageState.imageCollection[imageState.currentImageIndex].url}
+        <div
           onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
           style={{
-            borderRadius: '3%',
             order: '3',
-            width: '40%',
+            display: 'flex',
+            width: '60%',
             height: '85%',
-            margin: '0 5%',
             cursor: 'zoom-in',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          alt="Style"
-        />
+        >
+          <img
+            src={imageState.imageCollection[imageState.currentImageIndex].url}
+            // onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+            style={{
+              borderRadius: '3%',
+              // order: '3',
+              maxWidth: '100%',
+              height: '100%',
+              margin: '0 5%',
+              cursor: 'zoom-in',
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            }}
+            alt="Style"
+          />
+        </div>
       </Wrapper>
     );
   }
