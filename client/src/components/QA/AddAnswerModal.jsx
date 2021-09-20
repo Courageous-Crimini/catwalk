@@ -147,7 +147,9 @@ export const Modal = ({ showModal, setShowModal, questionId, productInfo }) => {
                   Photos:
                   <Input type="file" />
                 </Label>
-                <Button> Submit </Button>
+                <div style={{ textAlign: 'center' }}>
+                  <Button> Submit </Button>
+                </div>
               </form>
             </ModalContent>
             <CloseModalButton

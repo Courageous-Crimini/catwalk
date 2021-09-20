@@ -146,7 +146,10 @@ export const Modal = ({ showModal, setShowModal, productInfo }) => {
                 <Label>
                   <p> For authentication reasons, you will not be emailed</p>
                 </Label>
-                <Button> Submit </Button>
+                <div style={{ textAlign: 'center' }}>
+                  <Button> Submit </Button>
+                </div>
+
               </form>
             </ModalContent>
             <CloseModalButton
