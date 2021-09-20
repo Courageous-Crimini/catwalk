@@ -40,7 +40,7 @@ const ProductInfo = () => {
         <p style={{ fontSize: '1.25em', margin: '0', marginRight: '10%' }}>
           &#9734; &#9734; &#9734; &#9734; &#9734;
         </p>
-        <p style={{ margin: '0' }}><u>Read all reviews</u></p>
+        <p style={{ margin: '0' }}><a href="#RatingsAndReviews" style={{ color: 'black' }}><u>Read all reviews</u></a></p>
       </span>
       <p style={{
         order: '2',

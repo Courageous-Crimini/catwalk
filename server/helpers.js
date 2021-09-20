@@ -342,7 +342,6 @@ module.exports = {
       });
   },
   addToCart: (req, res) => {
-    console.log('In POST to CART!');
     const options = {
       headers: { Authorization: TOKEN },
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
