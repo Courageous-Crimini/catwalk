@@ -41,20 +41,18 @@ const AlignLeft = styled.div`
     padding-right: 3em;
 `;
 
-const ShowMore = () => (
-  <button className="show-more-review" type="submit">Show More</button>
-);
-
 const Review = ({ review }) => {
   // const review_id = useState(review.review_id);
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
+  const [body, setBody] = useState((review.body).slice(0, 250));
   const [upvoted, setUpvoted] = useState(false);
   const [reported, setReported] = useState(false);
+  const [showMore, setShowMore] = useState(review.body.length > 250);
   const handleUpvote = () => {
     if (!upvoted) {
       axios.put(`/api/reviews/${review.review_id}/helpful`)
         .then(() => {
-          setUpvoted(true);
+          setUpvoted(false);
           setHelpfulness((prevState) => prevState + 1);
         })
         .catch((err) => {
@@ -71,6 +69,12 @@ const Review = ({ review }) => {
         .catch((err) => {
           throw err;
         });
+    }
+  };
+  const handleShowMore = () => {
+    if (showMore) {
+      setBody(review.body);
+      setShowMore(false);
     }
   };
 
@@ -91,11 +95,18 @@ const Review = ({ review }) => {
           {review.summary}
         </AlignLeft>
         <span>
-          {review.body.slice(0, 250)}
+          {body}
           <br />
         </span>
-        {(review.body.length > 250)
-      && <ShowMore />}
+        {(showMore)
+      && (
+      <Button
+        className="toggle"
+        onClick={handleShowMore}
+      >
+        Show More
+      </Button>
+      )}
         <div>
           {/* (review.photos.length !== 0)
         && <img src={review.photos[0].url} alt="1/> */}
