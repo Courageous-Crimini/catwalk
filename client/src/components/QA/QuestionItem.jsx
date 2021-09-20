@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 import AnswersList from './AnswersList.jsx';
 import { Modal } from './AddAnswerModal.jsx';
@@ -26,16 +27,34 @@ const AlignRight = styled.div`
 `;
 
 const Button = styled.button`
-  background: white;
-  color: black;
-  font-weight: bold;
-  font-size: 1em;
-  border: none;
-
+background: none!important;
+border: none;
+padding: 0!important;
+font-weight: bold;
+text-decoration: underline;
+cursor: pointer;
+font-family: Valera Round,sans-serif;
+font-size: 16px
 `;
 
 const QuestionItem = ({ question }) => {
+  const [helpfulness, setHelpfulness] = useState(question.question_helpfulness);
+  const [upvoted, setUpvoted] = useState(false);
   const [showModal, setShowModal] = useState(false);
+
+  const handleUpvote = () => {
+    console.log(question);
+    if (!upvoted) {
+      axios.put(`/api/qa/questions/${question.question_id}/helpful`)
+        .then(() => {
+          setUpvoted(true);
+          setHelpfulness((prevState) => prevState + 1);
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  };
 
   const openModal = () => {
     setShowModal((prev) => !prev);
@@ -51,12 +70,12 @@ const QuestionItem = ({ question }) => {
           </h2>
         </AlignRight>
         <H5>
-          helpful?&nbsp;Yes
-          (
-          {question.question_helpfulness}
-          )
-          &nbsp;
-          |&nbsp;&nbsp;
+          {'Helpful? '}
+          <Button onClick={handleUpvote}>
+            Yes
+          </Button>
+          {` (${helpfulness}) `}
+          {' | '}
           <Button onClick={openModal}> Add Answer </Button>
           <Modal showModal={showModal} setShowModal={setShowModal} questionId={question.question_id} />
         </H5>

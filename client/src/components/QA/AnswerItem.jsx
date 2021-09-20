@@ -33,7 +33,7 @@ const AnswerItem = ({ answer }) => {
 
   const handleUpvote = () => {
     if (!upvoted) {
-      axios.put(`api/qa/questions/${answer.answer_id}/helpful`)
+      axios.put(`api/qa/answers/${answer.answer_id}/helpful`)
         .then(() => {
           setUpvoted(true);
           setHelpful((prevState) => prevState + 1);
@@ -46,7 +46,7 @@ const AnswerItem = ({ answer }) => {
 
   const handleReport = () => {
     if (!reported) {
-      axios.put(`/api/qa/questions/${answer.answer_id}/report`)
+      axios.put(`/api/qa/answers/${answer.answer_id}/report`)
         .then(() => {
           setReported(true);
         })
