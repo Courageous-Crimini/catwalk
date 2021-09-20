@@ -10,7 +10,7 @@ module.exports = {
       method: 'get',
       params: {
         page: req.query.page || 1,
-        count: req.query.count || 5,
+        count: req.query.count || 100,
       },
     };
     axios.request(options)
