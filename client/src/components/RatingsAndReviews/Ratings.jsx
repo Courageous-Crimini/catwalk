@@ -24,6 +24,57 @@ const getAverageRating = (ratingsObj) => {
   return [sum / numRatings, numRatings];
 };
 
+const generateStar = (rating) => {
+  let size = 1;
+  if (rating < 0.125) {
+    size = 0;
+  } else if (rating < 0.375) {
+    size = 0.35;
+  } else if (rating < 0.625) {
+    size = 0.5;
+  } else if (rating < 0.875) {
+    size = 0.65;
+  }
+  return (
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      width="34"
+      height="32"
+    >
+      <defs>
+        <linearGradient id={`grad-${size}`}>
+          <stop offset={size} stopColor="yellow" />
+          <stop offset={size} stopColor="grey" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M20.388,10.918L32,12.118l-8.735,7.749L25.914,
+           31.4l-9.893-6.088L6.127,31.4l2.695-11.533L0,
+           12.118l11.547-1.2L16.026,0.6L20.388,10.918z"
+        fill={`url(#grad-${size})`}
+        strokeWidth="1"
+        stroke="black"
+      />
+    </svg>
+  );
+};
+const generateStars = (rating) => {
+  const starsArray = [];
+  let num = rating;
+  for (let i = 0; i < 5; i += 1) {
+    if (num >= 1) {
+      starsArray.push(1);
+    } else if (num < 0) {
+      starsArray.push(0);
+    } else {
+      starsArray.push(rating % 1);
+    }
+    num -= 1;
+  }
+  return starsArray.map((size) => generateStar(size));
+};
+
 // const getMaxRatings = (ratingsObj) => {
 //   const ratingsArr = Object.entries(ratingsObj);
 //   let maxNum = 0;
@@ -53,7 +104,8 @@ const Ratings = ({ meta }) => (
       <div>
         { (getAverageRating(meta.ratings) === 'No ratings')
           ? 'No ratings yet'
-          : `${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} ☆☆☆☆☆`}
+          : `${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10}`}
+        {generateStars(getAverageRating(meta.ratings)[0])}
       </div>
       <div>
         { (getRecommendPercent(meta.recommended) === 'None')
