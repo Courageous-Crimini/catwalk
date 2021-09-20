@@ -4,7 +4,7 @@ import styled from 'styled-components';
 // import axios from 'axios';
 import Review from './Review.jsx';
 // eslint-disable-next-line import/no-cycle
-// import { StateContext } from '../App.jsx';
+import AddReview from './AddReview.jsx';
 
 const Wrapper = styled.section`
 background: rgb(201, 202, 203);
@@ -12,6 +12,11 @@ height: auto;
 grid-column-start: 2;
 grid-column-end: 3;
 grid-row-start: 2
+`;
+
+const Row = styled.div`
+    display: flex;
+    align-items: center;
 `;
 
 const Button = styled.button`
@@ -52,7 +57,8 @@ const ReviewsList = ({ reviews }) => {
           </li>
         ))}
       </ul>
-      {(numReviews > limit)
+      <Row>
+        {(numReviews > limit)
       && (
       <Button
         className="toggle"
@@ -64,13 +70,12 @@ const ReviewsList = ({ reviews }) => {
         More Reviews
       </Button>
       )}
+        <AddReview />
+      </Row>
     </div>
   );
 };
 
-const AddAReview = () => (
-  <button className="add-a-review" type="submit">Add a Review</button>
-);
 class SortByDropdown extends React.Component {
   constructor(props) {
     super(props);
@@ -102,7 +107,6 @@ const Reviews = ({ reviews }) => (
     <div>
       <SortByDropdown />
       <ReviewsList reviews={reviews.results} />
-      <AddAReview />
     </div>
   </Wrapper>
 );
