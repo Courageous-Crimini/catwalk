@@ -107,7 +107,7 @@ const App = () => {
               <Container>
                 <Header />
                 <Overview />
-                {/* <RelatedAndComparison /> */}
+                <RelatedAndComparison />
                 <QA />
                 <RatingsAndReviews />
               </Container>
@@ -117,9 +117,9 @@ const App = () => {
         : (
           <>
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"
+              src="https://mir-s3-cdn-cf.behance.net/project_modules/max_1200/6d391369321565.5b7d0d570e829.gif"
               alt="Loading gif"
-              style={{ backgroundPosition: 'center', width: '100%', height: '100%' }}
+              style={{ backgroundPosition: 'center', width: '100%', height: '50%' }}
             />
           </>
         )}

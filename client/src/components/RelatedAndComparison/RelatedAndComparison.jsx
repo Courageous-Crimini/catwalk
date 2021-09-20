@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
+import Modal from './assets/Modal.jsx';
 
 const RelatedAndComparison = () => {
   const [relatedIDs, setRelatedIDs] = useState([]);
@@ -11,6 +12,7 @@ const RelatedAndComparison = () => {
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [styles, setStyles] = useState([]);
   const [yourOutfit, setYourOutfit] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     axios.get('/api/products/48432/related')
@@ -92,18 +94,23 @@ const RelatedAndComparison = () => {
   };
 
   return (
-    <div id="RelatedAndComparison">
-      <h2>Related Products</h2>
-      <RelatedProducts
-        styles={styles}
-        handleClick={addOutfit}
-      />
-      <h2>Your Outfit</h2>
-      <YourOutfit
-        yourOutfit={yourOutfit}
-        handleClick={removeOutfit}
-      />
-    </div>
+    <section id="RelatedAndComparison">
+      <div className="container">
+        <h2>Related Products</h2>
+        <RelatedProducts
+          styles={styles}
+          handleClick={addOutfit}
+          openModal={setOpenModal}
+        />
+        <h2>Your Outfit</h2>
+        <YourOutfit
+          yourOutfit={yourOutfit}
+          handleClick={removeOutfit}
+          openModal={setOpenModal}
+        />
+        {openModal && <Modal closeModal={setOpenModal} />}
+      </div>
+    </section>
   );
 };
 
