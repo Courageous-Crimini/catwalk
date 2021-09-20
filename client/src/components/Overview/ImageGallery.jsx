@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
-import React, { useContext, useReducer } from 'react';
+import React, { useContext, useReducer, useEffect } from 'react';
+import Zoom from 'react-img-zoom';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -10,8 +12,12 @@ import {
   IoIosArrowDown,
   IoIosArrowUp,
 } from 'react-icons/io';
+import {
+  RiFullscreenExitFill,
+  RiFullscreenFill,
+} from 'react-icons/ri';
 // eslint-disable-next-line import/no-cycle
-import { StateContext, DispatchContext } from '../App.jsx';
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 height: auto;
@@ -29,6 +35,7 @@ const IMAGE_ACTIONS = {
   VIEW_ITEM: 'view-item',
   SHIFT_THUMBNAILS_UP: 'shift-thumbnails-up',
   SHIFT_THUMBNAILS_DOWN: 'shift-thumbnails-down',
+  UPDATE_IMAGES: 'update-images',
 };
 
 const reducer = (state, action) => {
@@ -60,27 +67,44 @@ const reducer = (state, action) => {
             .concat(state.imageCollection)
             .slice(state.imageCollection.length - 1, (state.imageCollection.length * 2) - 1),
       };
+    case IMAGE_ACTIONS.UPDATE_IMAGES:
+      return {
+        ...state,
+        imageCollection: action.payload,
+        currentImageIndex: 0,
+        clicked: false,
+      };
     default:
       return state;
   }
 };
 
+const initialState = {
+  currentImageIndex: 0,
+  imageCollection: [],
+  clicked: false,
+  startIndex: 0,
+  endIndex: 6,
+};
+
 const ImageGallery = () => {
-  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
 
   const styleImages = state.styles.filter((style) => (
-    style.style_id === state.selectedStyle.style_id
+    style.style_id === state.selectedStyle
   ))[0].photos;
 
-  const initialState = {
-    currentImageIndex: 0,
+  const [imageState, imageDispatch] = useReducer(reducer, {
+    ...initialState,
     imageCollection: styleImages,
-    clicked: false,
-    startIndex: 0,
-    endIndex: 6,
-  };
-  const [imageState, imageDispatch] = useReducer(reducer, initialState);
+  });
+
+  useEffect(() => {
+    imageDispatch({
+      type: IMAGE_ACTIONS.UPDATE_IMAGES,
+      payload: state.styles.filter((style) => style.style_id === state.selectedStyle)[0].photos,
+    });
+  }, [state.selectedStyle]);
 
   if (imageState.clicked === false) {
     return (
@@ -193,14 +217,42 @@ const ImageGallery = () => {
           style={{
             borderRadius: '3%',
             order: '3',
-            width: '35%',
-            height: '82%',
+            width: '40%',
+            height: '85%',
             margin: '0 5%',
-            cursor: 'pointer',
+            cursor: 'zoom-in',
             boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
           }}
           alt="Style"
         />
+        <div
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+          style={{
+            position: 'absolute',
+            margin: '0',
+            height: '40px',
+            width: '40px',
+            zIndex: '20',
+            top: '140px',
+            right: '500px',
+            borderRadius: '25%',
+            alignText: 'center',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            border: '1px solid lightgrey',
+            backgroundColor: '#F6F6F6',
+            cursor: 'pointer',
+          }}
+        >
+          <RiFullscreenFill style={{
+            color: 'black',
+            height: '27',
+            width: '27',
+            zIndex: '30',
+          }}
+          />
+        </div>
       </Wrapper>
     );
   }
@@ -211,22 +263,77 @@ const ImageGallery = () => {
         alignItems: 'center',
         alignContent: 'middle',
         justifyContent: 'middle',
+        zIndex: '0',
       }}
+      onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
     >
-      <img
+      {/* <img
         src={imageState.imageCollection[imageState.currentImageIndex].url}
         style={{
           borderRadius: '3%',
           height: '90%',
-          width: '40%',
+          width: '45%',
           margin: '2%',
           zIndex: '10',
-          cursor: 'pointer',
+          cursor: 'zoom-out',
           boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
         }}
         onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
         alt="Thumbnail"
-      />
+      /> */}
+      <div
+        onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+        style={{
+          position: 'absolute',
+          margin: '0',
+          height: '40px',
+          width: '40px',
+          zIndex: '20',
+          top: '140px',
+          right: '500px',
+          borderRadius: '25%',
+          alignText: 'center',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          border: '1px solid lightgrey',
+          backgroundColor: '#F6F6F6',
+          cursor: 'pointer',
+        }}
+      >
+        <RiFullscreenExitFill
+          onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+          style={{
+            color: 'black',
+            height: '27',
+            width: '27',
+            zIndex: '30',
+          }}
+        />
+      </div>
+      <div
+        style={{
+          // borderRadius: '3%',
+          height: '100%',
+          width: '100%',
+          // margin: '2%',
+          zIndex: '10',
+          cursor: 'zoom-out',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
+          // backgroundColor: 'rgba(73, 73, 73, 0.4)', // #494949',
+        }}
+      >
+        <Zoom
+          img={imageState.imageCollection[imageState.currentImageIndex].url}
+          zoomScale={1.5}
+          width={1000}
+          height={600}
+        />
+      </div>
     </Wrapper>
   );
 };

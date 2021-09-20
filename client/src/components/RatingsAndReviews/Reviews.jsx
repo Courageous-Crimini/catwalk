@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState /* , useEffect, useContext */ } from 'react';
 import styled from 'styled-components';
+// import axios from 'axios';
 import Review from './Review.jsx';
+// eslint-disable-next-line import/no-cycle
+import AddReview from './AddReview.jsx';
 
 const Wrapper = styled.section`
 background: rgb(201, 202, 203);
@@ -11,25 +14,68 @@ grid-column-end: 3;
 grid-row-start: 2
 `;
 
-const ReviewsList = ({ reviews }) => (
-  <div className="reviewslist">
-    <ul>
-      {reviews.map((review) => (
-        <li key={review.review_id}>
-          <Review review={review} />
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const Row = styled.div`
+    display: flex;
+    align-items: center;
+`;
 
-const MoreReviews = () => (
-  <button className="see-more-reviews" type="submit">More Reviews</button>
-);
+const Button = styled.button`
+  /* Adapt the colors based on primary prop */
+  background: ${(props) => (props.primary ? 'black' : 'white')};
+  color: ${(props) => (props.primary ? 'white' : 'black')};
 
-const AddAReview = () => (
-  <button className="add-a-review" type="submit">Add a Review</button>
-);
+  font-size: 1.2em;
+  margin: 1.2em;
+  padding: 1em;
+  border: 2px solid black;
+  border-radius: 3px;
+`;
+
+const ReviewsList = ({ reviews }) => {
+  const numReviews = reviews.length;
+  // const state = useContext(StateContext);
+  // const id = state.selectedProduct;
+  const [currentReviews, setReviews] = useState(reviews.slice(0, 2));
+  const [limit, setLimit] = useState(2);
+
+  //  useEffect(() => {
+  //    axios.get(`/api/reviews?product_id=${id}&count=${limit}&sort=helpful`)
+  //      .then(({ data }) => {
+  //        setReviews(data.results);
+  //      })
+  //      .catch((err) => {
+  //        throw err;
+  //      });
+  //  }, [limit]);
+
+  return (
+    <div className="reviewslist">
+      <ul>
+        {currentReviews.map((review) => (
+          <li key={review.review_id}>
+            <Review review={review} />
+          </li>
+        ))}
+      </ul>
+      <Row>
+        {(numReviews > limit)
+      && (
+      <Button
+        className="toggle"
+        onClick={() => {
+          setReviews(reviews.slice(0, limit + 2));
+          setLimit((prevState) => prevState + 2);
+        }}
+      >
+        More Reviews
+      </Button>
+      )}
+        <AddReview />
+      </Row>
+    </div>
+  );
+};
+
 class SortByDropdown extends React.Component {
   constructor(props) {
     super(props);
@@ -61,8 +107,6 @@ const Reviews = ({ reviews }) => (
     <div>
       <SortByDropdown />
       <ReviewsList reviews={reviews.results} />
-      <MoreReviews />
-      <AddAReview />
     </div>
   </Wrapper>
 );

@@ -4,74 +4,63 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
+import Modal from './assets/Modal.jsx';
 
 const RelatedAndComparison = () => {
-  const [relatedIds, setRelatedIds] = useState([]);
+  const [relatedIDs, setRelatedIDs] = useState([]);
   const [relatedStyles, setRelatedStyles] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [styles, setStyles] = useState([]);
   const [yourOutfit, setYourOutfit] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
     axios.get('/api/products/48432/related')
       .then(({ data }) => {
-        setRelatedIds(data);
+        setRelatedIDs(data);
       });
   }, []);
 
   useEffect(() => {
-    const relatedStylesData = relatedIds.map((item) => axios.get(`/api/products/${item}/styles`)
-      .then(({ data }) => {
-        const relatedStylesFormat = { id: data.product_id, results: [] };
-        const results = data.results;
-
-        for (let i = 0; i < results.length; i++) {
-          const resultsIdx = results[i];
-          const thisIn = {
-            salePrice: resultsIdx.sale_price,
-            originalPrice: resultsIdx.original_price,
-            images: resultsIdx.photos,
-          };
-          relatedStylesFormat.results.push(thisIn);
-        }
-        return relatedStylesFormat;
-      }));
+    const relatedStylesData = relatedIDs.map((item) => axios.get(`/api/products/${item}/styles`)
+      .then(({ data }) => data));
     Promise.all(relatedStylesData)
       .then((values) => {
         setRelatedStyles(values);
       });
-  }, [relatedIds]);
+  }, [relatedIDs]);
 
   useEffect(() => {
-    const productData = relatedIds.map((item) => axios.get(`/api/products/${item}`)
-      .then(({ data }) => {
-        const productDataFormat = {
-          id: data.id,
-          name: data.name,
-          category: data.category,
-        };
-
-        return productDataFormat;
-      }));
-    Promise.all(productData)
+    const relatedProductData = relatedIDs.map((item) => axios.get(`/api/products/${item}`)
+      .then(({ data }) => data));
+    Promise.all(relatedProductData)
       .then((values) => {
         setRelatedProducts(values);
       });
-  }, [relatedStyles]);
+  }, [relatedIDs]);
 
   useEffect(() => {
-    const stylesData = [];
+    const cards = [];
+    let cardFormat;
 
-    for (let i = 0; i < relatedIds.length; i++) {
-      const thisIn = {
-        id: relatedProducts[i].id,
-        category: relatedProducts[i].category,
-        name: relatedProducts[i].name,
-        results: relatedStyles[i].results,
-      };
-      stylesData.push(thisIn);
+    for (let i = 0; i < relatedProducts.length; i++) {
+      for (let j = 0; j < relatedStyles[i].results.length; j++) {
+        const relatedPIdx = relatedProducts[i];
+        const relatedSIdx = relatedStyles[i].results;
+        cardFormat = {
+          productID: relatedPIdx.id,
+          name: relatedPIdx.name,
+          category: relatedPIdx.category,
+          styleID: relatedSIdx[j].style_id,
+          styleName: relatedSIdx[j].name,
+          styleImages: relatedSIdx[j].photos,
+          salePrice: relatedSIdx[j].sale_price,
+          originalPrice: relatedSIdx[j].original_price,
+        };
+        cards.push(cardFormat);
+      }
     }
-    setStyles(stylesData);
+    setStyles(cards);
   }, [relatedProducts]);
 
   const addOutfit = (id) => {
@@ -79,7 +68,7 @@ const RelatedAndComparison = () => {
 
     for (let i = 0; i < yourOutfit.length; i++) {
       if (yourOutfit.length > 0) {
-        if (id === yourOutfit[i].id) {
+        if (id === yourOutfit[i].styleID) {
           isThere = true;
           break;
         }
@@ -87,7 +76,7 @@ const RelatedAndComparison = () => {
     }
     if (!isThere) {
       for (let i = 0; i < styles.length; i++) {
-        if (id === styles[i].id) {
+        if (id === styles[i].styleID) {
           setYourOutfit(yourOutfit.concat(styles[i]));
           break;
         }
@@ -97,7 +86,7 @@ const RelatedAndComparison = () => {
 
   const removeOutfit = (id) => {
     for (let i = 0; i < yourOutfit.length; i++) {
-      if (id === yourOutfit[i].id) {
+      if (id === yourOutfit[i].styleID) {
         setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));
         break;
       }
@@ -105,19 +94,31 @@ const RelatedAndComparison = () => {
   };
 
   return (
-    <div id="RelatedAndComparison">
-      <h2>Related Products</h2>
-      <RelatedProducts
-        styles={styles}
-        handleClick={addOutfit}
-      />
-      <h2>Your Outfit</h2>
-      <YourOutfit
-        yourOutfit={yourOutfit}
-        handleClick={removeOutfit}
-      />
-    </div>
+    <section id="RelatedAndComparison">
+      <div className="container">
+        <h2>Related Products</h2>
+        <RelatedProducts
+          styles={styles}
+          handleClick={addOutfit}
+          openModal={setOpenModal}
+        />
+        <h2>Your Outfit</h2>
+        <YourOutfit
+          yourOutfit={yourOutfit}
+          handleClick={removeOutfit}
+          openModal={setOpenModal}
+        />
+        {openModal && <Modal closeModal={setOpenModal} />}
+      </div>
+    </section>
   );
 };
 
 export default RelatedAndComparison;
+
+/* Notes
+Tests:
+- check api and make sure the correct images are stores for each style
+- check api and make sure the correct price for each style renders to the page
+- make sure only 5 items can render to page at a time under all circumstances
+*/

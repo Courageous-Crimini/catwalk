@@ -1,36 +1,59 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import Images from './Images.jsx';
 
-const RelatedProducts = ({ styles, handleClick }) => {
+const RelatedProducts = ({ styles, handleClick, openModal }) => {
+  const [currentCard, setCurrentCard] = useState(0);
+  const length = styles.length - 5;
+
+  const prevCard = () => {
+    setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
+  };
+  const nextCard = () => {
+    setCurrentCard(currentCard === length ? 0 : currentCard + 1);
+  };
+
   const cards = styles.map((item) => {
-    const id = item.id;
-    const image = item.results[0].images[0].thumbnail_url;
-    const category = item.category;
-    const name = item.name;
-    const price = item.results[0].salePrice || item.results[0].originalPrice;
+    const originalPrice = item.originalPrice;
+    const salePrice = item.salePrice;
 
     return (
-      <div className="card" key={id}>
-        <img src={image} alt="A related product" className="cardsImg" />
-        <button type="button" className="actionBtn relatedBtn" onClick={() => { handleClick(id); }}>&#9733;</button>
-        {/* <span className="relatedBtn">&#9733;</span> */}
-        <br />
-        <span>{category}</span>
-        <br />
-        <span>{name}</span>
-        <br />
-        <span>{price}</span>
-        <br />
-        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      <div key={item.styleID} className="card">
+        <button type="button" className="relatedBtn" onClick={() => { handleClick(item.styleID); }}>&#9733;</button>
+        <div className="card-image">
+          <Images images={item.styleImages} openModal={openModal} />
+          {/* <span className="relatedBtn">&#9733;</span> */}
+        </div>
+        <div className="card-description">
+          <span className="item-category">{item.category}</span>
+          <br />
+          <span className="item-name">{item.name}</span>
+          <br />
+          <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
+          <br />
+          <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
+          <br className={salePrice ? 'break' : 'hide'} />
+          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
       </div>
     );
   });
 
   return (
-    <div className="cards">
-      {cards}
-    </div>
+    <section className="card-carousel">
+      <div className="carousel-container">
+        <div>
+          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
+        </div>
+        {cards.slice(currentCard, (currentCard + 5))}
+        <div>
+          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
+        </div>
+      </div>
+    </section>
   );
 };
 

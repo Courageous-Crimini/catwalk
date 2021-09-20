@@ -70,7 +70,6 @@ module.exports = {
       });
   },
   getReviews: (req, res) => {
-    const sortType = req.body.sortType || 'newest';
     const options = {
       headers: { Authorization: TOKEN },
       baseURL: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo',
@@ -79,7 +78,7 @@ module.exports = {
       params: {
         page: req.query.page || 1,
         count: req.query.count || 5,
-        sort: sortType,
+        sort: req.query.sort || 'relevant',
         product_id: req.query.product_id,
       },
     };
