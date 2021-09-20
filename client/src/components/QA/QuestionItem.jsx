@@ -9,6 +9,17 @@ background: white;
 margin: 20px;
 `;
 
+const Button = styled.button`
+background: none!important;
+border: none;
+padding: 0!important;
+font-weight: bold;
+text-decoration: underline;
+cursor: pointer;
+font-family: Valera Round,sans-serif;
+font-size: 16px
+`;
+
 const Row = styled.div`
     display: flex;
     align-items: center;
