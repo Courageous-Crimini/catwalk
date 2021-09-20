@@ -10,6 +10,10 @@ grid-column-end: 2;
 grid-row-start: 2
 `;
 
+const RatingNumber = styled.span`
+font-size: 2.6em;
+`;
+
 const getAverageRating = (ratingsObj) => {
   let sum = 0;
   let numRatings = 0;
@@ -104,7 +108,11 @@ const Ratings = ({ meta }) => (
       <div>
         { (getAverageRating(meta.ratings) === 'No ratings')
           ? 'No ratings yet'
-          : `${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10}`}
+          : (
+            <RatingNumber>
+              {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
+            </RatingNumber>
+          )}
         {generateStars(getAverageRating(meta.ratings)[0])}
       </div>
       <div>
