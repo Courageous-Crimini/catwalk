@@ -70,11 +70,7 @@ const AnswerItem = ({ answer }) => {
           {answer.answerer_name}
           ,&nbsp;
           {moment(answer.date).format('LL')}
-<<<<<<< HEAD
-          {'Helpful? '}
-=======
           {' Helpful? '}
->>>>>>> 898ed43e5144ef989d7644d19b4585223ab82523
           <Button onClick={handleUpvote}>
             Yes
           </Button>
