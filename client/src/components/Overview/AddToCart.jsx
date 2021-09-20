@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
+import axios from 'axios';
 import React, { useContext, useReducer } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
@@ -45,17 +46,28 @@ const AddToCart = () => {
     quantity: 'Select Quantity',
     sku: 'sku',
   };
-  // const [inventory, setInventory] = useState(state.styles.filter((style) => style.style_id === state.selectedStyle)[0].skus);
-  // const [size, setSize] = useState('Select Size');
-  // const [quantity, setQuantity] = useState('Select Quantity');
-  // const [sku, setSku] = useState('sku');
+
   const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
-  // const [availableStock, setAvailableStock] = useState(null);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const options = {
+      url: '/api/cart',
+      method: 'post',
+      data: {
+        sku_id: Number(cartState.sku),
+      },
+    };
+    axios.request(options)
+      .then((response) => {
+        console.log(response.data);
+      });
+  };
 
   return (
     <Wrapper>
       <form
-        onSubmit={(e) => { e.preventDefault(); }}
+        onSubmit={(e) => { handleSubmit(e); }}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -106,7 +118,7 @@ const AddToCart = () => {
             }}
           >
             <option value="" key="SelQty">Select Quantity</option>
-            { cartState.sku === 'sku' || Object.entries(cartState.inventory).filter((currSku) => currSku[0] === cartState.sku)[0][1].quanity === 0
+            { cartState.sku === 'sku' || Object.entries(cartState.inventory).filter((currSku) => currSku[0] === cartState.sku)[0][1].quantity === 0
               ? (
                 <option key="NoQty">OUT OF STOCK</option>
               )
