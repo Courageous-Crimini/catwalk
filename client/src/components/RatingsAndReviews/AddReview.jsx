@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal } from './AddQuestionModal.jsx';
+// eslint-disable-next-line import/no-cycle
+import { Modal } from './AddReviewModal.jsx';
 
 const Button = styled.button`
   /* Adapt the colors based on primary prop */
@@ -15,7 +15,7 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const AddQuestion = ({ productInfo }) => {
+const AddReview = () => {
   const [showModal, setShowModal] = useState(false);
 
   const openModal = () => {
@@ -24,10 +24,10 @@ const AddQuestion = ({ productInfo }) => {
 
   return (
     <div>
-      <Button onClick={openModal}> Add a question + </Button>
-      <Modal showModal={showModal} setShowModal={setShowModal} productInfo={productInfo} />
+      <Button onClick={openModal}> Write a Review </Button>
+      <Modal showModal={showModal} setShowModal={setShowModal} />
     </div>
   );
 };
 
-export default AddQuestion;
+export default AddReview;

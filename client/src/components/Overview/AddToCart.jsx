@@ -1,10 +1,36 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
-import React, { useContext, useState } from 'react';
+import axios from 'axios';
+import React, { useContext, useReducer } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
+
+const CART_ACTIONS = {
+  SET_INVENTORY: 'set-inventory',
+  SET_SKU: 'set-sku',
+  SET_SIZE: 'set-size',
+  SET_QUANTITY: 'set-quanity',
+};
+
+const cartReducer = (state, action) => {
+  switch (action.type) {
+    case CART_ACTIONS.SET_INVENTORY:
+      return { ...state, inventory: action.payload };
+    case CART_ACTIONS.SET_SKU:
+      if (state.size === 'Select Size') {
+        return { ...state, sku: 'sku' };
+      }
+      return { ...state, sku: Object.entries(state.inventory).filter((currSku) => currSku[1].size === state.size)[0][0] };
+    case CART_ACTIONS.SET_SIZE:
+      return { ...state, size: action.payload };
+    case CART_ACTIONS.SET_QUANTITY:
+      return { ...state, quantity: action.payload };
+    default:
+      return { state };
+  }
+};
 
 const Wrapper = styled.section`
 background: #F3F3F3;
@@ -17,15 +43,35 @@ const maxQtyArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
 const AddToCart = () => {
   const state = useContext(StateContext);
+  const initialState = {
+    inventory: state.styles.filter((style) => style.style_id === state.selectedStyle)[0].skus,
+    size: 'Select Size',
+    quantity: 'Select Quantity',
+    sku: 'sku',
+  };
 
-  const filteredSizes = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
-  const [size, setSize] = useState('Select Size');
-  const inStock = Object.values(filteredSizes.skus).filter((sku) => sku.size === size)[0];
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const options = {
+      url: '/api/cart',
+      method: 'post',
+      data: {
+        sku_id: Number(cartState.sku),
+      },
+    };
+    axios.request(options)
+      .then((response) => {
+        // eslint-disable-next-line no-console
+        console.log(response.data);
+      });
+  };
 
   return (
     <Wrapper>
       <form
-        onSubmit={(e) => { e.preventDefault(); }}
+        onSubmit={(e) => { handleSubmit(e); }}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -44,8 +90,12 @@ const AddToCart = () => {
         }}
         >
           <select
-            onChange={(e) => { setSize(e.target.value); }}
-            value={size}
+            onChange={(e) => {
+              cartDispatch({ type: CART_ACTIONS.SET_SIZE, payload: e.target.value });
+              cartDispatch({ type: CART_ACTIONS.SET_SKU });
+              cartDispatch({ type: CART_ACTIONS.SET_QUANTITY, payload: 'Set Quantity' });
+            }}
+            value={cartState.size}
             style={{
               order: '1',
               fontSize: '18px',
@@ -56,41 +106,64 @@ const AddToCart = () => {
             }}
           >
             <option key={0}>Select Size</option>
-            {Object.values(filteredSizes.skus).map((sku, index) => (
-              <option key={index + 1}>{sku.size}</option>
+            {Object.values(cartState.inventory).map((currSku, index) => (
+              <option key={index + 1}>{currSku.size}</option>
             ))}
           </select>
-          <select style={{
-            order: '2',
-            fontSize: '18px',
-            fontWeight: 'lighter',
-            padding: '10px 5px',
-            textAlign: 'center',
-          }}
+          <select
+            onChange={(e) => { cartDispatch({ type: CART_ACTIONS.SET_QUANTITY, payload: e.target.value }); }}
+            value={cartState.quantity}
+            style={{
+              order: '2',
+              fontSize: '18px',
+              fontWeight: 'lighter',
+              padding: '10px 5px',
+              textAlign: 'center',
+            }}
           >
             <option value="" key="SelQty">Select Quantity</option>
-            { inStock === 0
+            { cartState.sku === 'sku' || Object.entries(cartState.inventory).filter((currSku) => currSku[0] === cartState.sku)[0][1].quantity === 0
               ? (
                 <option key="NoQty">OUT OF STOCK</option>
               )
               : maxQtyArr.map((int) => (
-                (inStock && int <= inStock.quantity) ? (<option key={int}>{int}</option>) : null
+                (int <= Object.entries(cartState.inventory).filter((currSku) => currSku[0] === cartState.sku)[0][1].quantity) ? (<option key={int}>{int}</option>) : null
               ))}
           </select>
         </div>
-        <input
-          type="submit"
-          value="Add to Cart"
-          style={{
-            order: '2',
-            fontSize: '18px',
-            padding: '10px 15px',
-            width: '100%',
-            backgroundColor: 'white',
-            border: '1px solid black',
-            fontWeight: 'bold',
-          }}
-        />
+        { cartState.quantity > 0
+          ? (
+            <input
+              type="submit"
+              value="Add to Cart"
+              style={{
+                order: '2',
+                fontSize: '18px',
+                padding: '10px 15px',
+                width: '100%',
+                backgroundColor: 'white',
+                border: '1px solid black',
+                fontWeight: 'bold',
+                cursor: 'pointer',
+              }}
+            />
+          )
+          : (
+            <input
+              type="submit"
+              value="Add to Cart"
+              style={{
+                order: '2',
+                fontSize: '18px',
+                padding: '10px 15px',
+                width: '100%',
+                backgroundColor: 'white',
+                border: '1px solid black',
+                fontWeight: 'bold',
+                opacity: '40%',
+              }}
+            />
+          )}
       </form>
     </Wrapper>
   );

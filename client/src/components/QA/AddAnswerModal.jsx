@@ -90,22 +90,22 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-export const Modal = ({ showModal, setShowModal, productInfo }) => {
-  const [newQuestion, setNewQuestion] = useState(
+export const Modal = ({ showModal, setShowModal, questionId, productInfo }) => {
+  const [newAnswer, setNewAnswer] = useState(
     {
-      product_id: 48436, name: '', email: '', body: '',
+      name: '', email: '', body: '', photos: [],
     },
   );
 
   const handleChange = (event) => {
-    setNewQuestion({
-      ...newQuestion, [event.target.name]: event.target.value,
+    setNewAnswer({
+      ...newAnswer, [event.target.name]: event.target.value,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/qa/questions', newQuestion)
+    axios.post(`/api/qa/questions/${questionId}/answers`, newAnswer)
       .then(({ data }) => {
         console.log(data);
       })
@@ -128,28 +128,28 @@ export const Modal = ({ showModal, setShowModal, productInfo }) => {
         <Background ref={modalRef} onClick={closeModal}>
           <ModalWrapper showModal={showModal}>
             <ModalContent>
-              <h1>Ask Your Question</h1>
+              <h1>Submit your Answer</h1>
               <h3 className="subtitle">{productInfo.name}</h3>
               <form onSubmit={handleSubmit}>
                 <Label>
-                  Question:
-                  <Input name="body" maxLength="1000" placeholder="Why did you like the product or not?" value={newQuestion.body} onChange={handleChange} />
+                  Answer:
+                  <Input name="body" maxLength="1000" placeholder="Why did you like the product or not?" value={newAnswer.body} onChange={handleChange} />
                 </Label>
                 <Label>
                   Nickname:
-                  <Input name="name" placeholder="Example: jackson11!" maxLength="60" value={newQuestion.name} onChange={handleChange} />
+                  <Input name="name" placeholder="Example: jackson543!" maxLength="60" value={newAnswer.name} onChange={handleChange} />
                 </Label>
                 <Label>
                   Email:
-                  <Input name="email" maxLength="60" placeholder="example: Fikri@Fikri.com" value={newQuestion.email} onChange={handleChange} />
+                  <Input name="email" maxLength="60" placeholder="Example: Jacques@jacques.com" value={newAnswer.email} onChange={handleChange} />
                 </Label>
                 <Label>
-                  <p> For authentication reasons, you will not be emailed</p>
+                  Photos:
+                  <Input type="file" />
                 </Label>
                 <div style={{ textAlign: 'center' }}>
                   <Button> Submit </Button>
                 </div>
-
               </form>
             </ModalContent>
             <CloseModalButton

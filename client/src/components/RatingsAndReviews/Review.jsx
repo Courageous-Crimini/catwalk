@@ -41,15 +41,25 @@ const AlignLeft = styled.div`
     padding-right: 3em;
 `;
 
-const ShowMore = () => (
-  <button className="show-more-review" type="submit">Show More</button>
-);
+const genAllStars = (rating) => {
+  let stars = '';
+  for (let i = 1; i <= 5; i += 1) {
+    if (rating < i) {
+      stars += '☆';
+    } else {
+      stars += '★';
+    }
+  }
+  return stars;
+};
 
 const Review = ({ review }) => {
   // const review_id = useState(review.review_id);
   const [helpfulness, setHelpfulness] = useState(review.helpfulness);
+  const [body, setBody] = useState((review.body).slice(0, 250));
   const [upvoted, setUpvoted] = useState(false);
   const [reported, setReported] = useState(false);
+  const [showMore, setShowMore] = useState(review.body.length > 250);
   const handleUpvote = () => {
     if (!upvoted) {
       axios.put(`/api/reviews/${review.review_id}/helpful`)
@@ -73,13 +83,20 @@ const Review = ({ review }) => {
         });
     }
   };
+  const handleShowMore = () => {
+    if (showMore) {
+      setBody(review.body);
+      setShowMore(false);
+    }
+  };
 
   return (
     <Wrapper>
       <div className="review">
         <Row>
           <AlignLeft>
-            {`${review.rating} ☆☆☆☆☆`}
+            {`${review.rating} `}
+            {genAllStars(review.rating)}
           </AlignLeft>
           <AlignRight>
             {(true)
@@ -91,11 +108,18 @@ const Review = ({ review }) => {
           {review.summary}
         </AlignLeft>
         <span>
-          {review.body.slice(0, 250)}
+          {body}
           <br />
         </span>
-        {(review.body.length > 250)
-      && <ShowMore />}
+        {(showMore)
+      && (
+      <Button
+        className="toggle"
+        onClick={handleShowMore}
+      >
+        Show More
+      </Button>
+      )}
         <div>
           {/* (review.photos.length !== 0)
         && <img src={review.photos[0].url} alt="1/> */}

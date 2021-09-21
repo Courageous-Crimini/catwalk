@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ const LoadBtn = styled.h3`
   font-size: 1em;
   padding: 1em;
   font-style: normal;
+  cursor: pointer;
 `;
 
 // eslint-disable-next-line react/prop-types
@@ -23,13 +25,28 @@ const AnswersList = ({ questionId }) => {
   useEffect(() => {
     axios.get(`/api/qa/questions/${question}/answers`, { params: { count: limit } })
       .then(({ data }) => {
-        // console.log('results from answerslist.jsx', data.results);
         setAnswers(data.results);
       })
       .catch((err) => {
         throw err;
       });
   }, [limit]);
+
+  const showMore = (ans) => {
+    if (ans.length === 0) {
+      return (<p> There are no answers. Add a new answer</p>);
+    }
+    if (limit !== ans.length) {
+      return '';
+    }
+    if (ans.length > 0) {
+      return (
+        <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
+          Load More Answers
+        </LoadBtn>
+      );
+    }
+  };
 
   return (
     <Wrapper>
@@ -41,9 +58,16 @@ const AnswersList = ({ questionId }) => {
         }
       </div>
       <div>
-        <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
-          Load More Answers
-        </LoadBtn>
+        {showMore(answers)}
+        {/* {
+          (limit === answers.length && answers.length > 0)
+            ? (
+              <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
+                Load More Answers
+              </LoadBtn>
+            )
+            : null
+        } */}
       </div>
 
     </Wrapper>

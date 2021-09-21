@@ -9,6 +9,7 @@ import { Wrapper, Container } from './styles.jsx';
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
   const { relatedStyles } = state;
+
   const [yourOutfit, setYourOutfit] = useState([]);
   const [modalKey, setModalKey] = useState('');
   const [openModal, setOpenModal] = useState(false);
