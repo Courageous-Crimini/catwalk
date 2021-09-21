@@ -50,7 +50,7 @@ export const Card = styled.section`
   margin-right: .5em;
   position: relative;
   box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
-  border: .1em solid black;
+  border: .1em solid #A9A9A9;
 
   /* &:hover {
     width: 30%
@@ -82,19 +82,25 @@ export const CompareBtn = styled.span`
   color: ${(props) => props.color};
   padding: .25em;
   position: absolute;
-  bottom: 0em;
+  bottom: 1em;
   right: 0em;
   cursor: pointer;
-  /* background-color:#FFF; */
   z-index: 10;
+
+   &:hover {
+    background-color:#FFF;
+  }
 `;
 export const Price = styled.div`
   padding: .25em;
   position: absolute;
   left: 0em;
-  bottom: 0em;
+  bottom: 1em;
   text-decoration: ${(props) => props.cross};
   background-color:#FFF;
+  &:hover {
+    background-color: transparent;
+  }
 `;
 export const Description = styled.div`
   display: flex;
