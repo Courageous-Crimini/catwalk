@@ -43,7 +43,6 @@ const Modal = ({ crossPrice, onSale }) => {
 
     return (
       <CompareCard key={styleID}>
-        <span>Style</span>
         <Button onClick={nextComp}>styles</Button>
         <Images photos={photos} />
         {crossPrice(originalPrice, salePrice)}
@@ -63,7 +62,6 @@ const Modal = ({ crossPrice, onSale }) => {
 
     return (
       <CompareCard key={styleID}>
-        <span>Style</span>
         <Button onClick={nextProd}>styles</Button>
         <Images photos={photos} />
         {crossPrice(originalPrice, salePrice)}

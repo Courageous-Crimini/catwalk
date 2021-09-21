@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import Outfit from './Outfit.jsx';
-import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
+import Outfit from './Outfit.jsx';
 
-const YourOutfit = ({ handleClick }) => {
-  const state = useContext(StateContext);
-  const { relatedDisplay, relatedFeatures, relatedIdx, relatedStyles, relatedImages } = state;
-
+const YourOutfit = ({ removeOutfit, crossPrice, onSale, setOpenModal }) => {
   const { yourOutfit } = useContext(RelatedContext);
 
   if (yourOutfit.length > 0) {
     return (
-      <Outfit yourOutfit={yourOutfit} handleClick={handleClick} />
+      <Outfit
+        yourOutfit={yourOutfit}
+        removeOutfit={removeOutfit}
+        crossPrice={crossPrice}
+        onSale={onSale}
+      />
     );
   }
   return (<>No items added</>);

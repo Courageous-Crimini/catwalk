@@ -29,7 +29,7 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     return (
       <Card key={styleID}>
         <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
-        <Button type="button" onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
+        <Button onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
         <ImageContainer>
           <a href={url}>
             <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />

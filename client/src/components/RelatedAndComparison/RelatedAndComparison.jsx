@@ -60,7 +60,7 @@ const RelatedAndComparison = () => {
           <h2>Related Products</h2>
           <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
           <h2>Your Outfit</h2>
-          <YourOutfit handleClick={removeOutfit} crossPrice={crossPrice} onSale={onSale} />
+          <YourOutfit removeOutfit={removeOutfit} crossPrice={crossPrice} onSale={onSale} />
         </Container>
       </RelatedContext.Provider>
     </Wrapper>
