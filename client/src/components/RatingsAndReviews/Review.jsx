@@ -95,7 +95,7 @@ const Review = ({ review }) => {
       <div className="review">
         <Row>
           <AlignLeft>
-            {`${review.rating}`}
+            {`${review.rating} `}
             {genAllStars(review.rating)}
           </AlignLeft>
           <AlignRight>
