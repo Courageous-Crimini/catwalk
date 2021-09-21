@@ -1,8 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React, { useContext, useReducer, useEffect } from 'react';
+import Zoom from 'react-img-zoom';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
@@ -41,7 +43,7 @@ const reducer = (state, action) => {
       return { ...state, currentImageIndex: state.currentImageIndex + 1 };
     case IMAGE_ACTIONS.PREVIOUS_ITEM:
       if (state.currentImageIndex - 1 < 0) {
-        return { ...state, currentImageIndex: state.currentImageIndex.length - 1 };
+        return { ...state, currentImageIndex: state.imageCollection.length - 1 };
       }
       return { ...state, currentImageIndex: state.currentImageIndex - 1 };
     case IMAGE_ACTIONS.SET_ITEM:
@@ -205,20 +207,33 @@ const ImageGallery = () => {
             zIndex: '10',
           }}
         />
-        <img
-          src={imageState.imageCollection[imageState.currentImageIndex].url}
+        <div
           onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
           style={{
-            borderRadius: '3%',
             order: '3',
-            width: '40%',
-            height: '82%',
-            margin: '0 5%',
+            display: 'flex',
+            width: '60%',
+            height: '85%',
             cursor: 'zoom-in',
-            boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
-          alt="Style"
-        />
+        >
+          <img
+            src={imageState.imageCollection[imageState.currentImageIndex].url}
+            // onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+            style={{
+              borderRadius: '3%',
+              // order: '3',
+              maxWidth: '100%',
+              height: '100%',
+              margin: '0 5%',
+              cursor: 'zoom-in',
+              boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+            }}
+            alt="Style"
+          />
+        </div>
       </Wrapper>
     );
   }
@@ -229,22 +244,30 @@ const ImageGallery = () => {
         alignItems: 'center',
         alignContent: 'middle',
         justifyContent: 'middle',
+        zIndex: '0',
       }}
+      onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
     >
-      <img
-        src={imageState.imageCollection[imageState.currentImageIndex].url}
+      <div
         style={{
-          borderRadius: '3%',
-          height: '90%',
-          width: '45%',
-          margin: '2%',
+          height: '100%',
+          width: '100%',
           zIndex: '10',
-          cursor: 'pointer',
+          cursor: 'zoom-out',
           boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflow: 'hidden',
         }}
-        onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
-        alt="Thumbnail"
-      />
+      >
+        <Zoom
+          img={imageState.imageCollection[imageState.currentImageIndex].url}
+          zoomScale={1.5}
+          width={1000}
+          height={600}
+        />
+      </div>
     </Wrapper>
   );
 };
