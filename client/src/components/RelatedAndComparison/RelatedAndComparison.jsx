@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Wrapper, Container } from './styles.jsx';
-import RelatedProducts from './assets/RelatedProducts.jsx';
-import YourOutfit from './assets/YourOutfit.jsx';
-import Modal from './assets/Modal.jsx';
+import React, { useState, useContext } from 'react';
 import { StateContext } from '../App.jsx';
 import { RelatedContext } from './Context.jsx';
+import Modal from './assets/Modal.jsx';
+import RelatedProducts from './assets/RelatedProducts.jsx';
+import YourOutfit from './assets/YourOutfit.jsx';
+import { Wrapper, Container } from './styles.jsx';
 
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);

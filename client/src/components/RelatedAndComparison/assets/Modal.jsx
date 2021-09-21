@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import { Button, Background, ModalContainer, Compare, CompareCard, ImageContainer } from '../styles.jsx';
-import { RelatedContext } from '../Context.jsx';
 import { StateContext } from '../../App.jsx';
+import { RelatedContext } from '../Context.jsx';
 import ImageStyles from './ImageStyles.jsx';
+import { Button, Background, ModalContainer, Compare, CompareCard, ImageContainer } from '../styles.jsx';
 
 // import Features from './Features.jsx';
 
@@ -21,22 +21,24 @@ const Modal = () => {
       finish = currentRelatedIdx.end + 1;
     }
   }
+  const onSale = (price) => {
+    if (price) {
+      return true;
+    }
+    return false;
+  };
 
   const cards = relatedStyles.slice(start, finish).map((item) => {
+    // console.log('item in modal', item); // comment
     const {index, id, category, name, description } = item;
     const { slogan, styleID, styleName, originalPrice, salePrice } = item;
-    const onSale = (price) => {
-      if (price) {
-        return true;
-      }
-      return false;
-    };
 
     return (
       <CompareCard key={styleID}>
         <ImageStyles />
         <span>&#36;{originalPrice}</span>
-        {onSale(salePrice) && <span>&#36;{salePrice}</span>}
+        {/* {onSale(salePrice) && <span>&#36;{salePrice}</span>} */}
+        <span>&#36;{salePrice}</span>
         <span>{slogan}</span>
         <span>{name}</span>
         <span>{styleName}</span>

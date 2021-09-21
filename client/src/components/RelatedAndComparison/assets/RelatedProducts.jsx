@@ -1,17 +1,13 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
-import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-
-import {
-  CardsContainer, Card, Button, Image, ImageContainer,
-} from '../styles.jsx';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import { CardsContainer, Card, Button, Image, ImageContainer } from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit }) => {
   const state = useContext(StateContext);
   const { relatedDisplay } = state;
-
   const { setModalKey, setOpenModal } = useContext(RelatedContext);
   /* CHANGE BELOW AFTER REFACTOR ---------------------------------------------*/
   const [currentCard, setCurrentCard] = useState(0);
@@ -24,6 +20,8 @@ const RelatedProducts = ({ addOutfit }) => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
   /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
+  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
+  const crossPrice = (origPrice, newPrice) => newPrice ? <span style={{ textdDecoration: 'line-through' }}>&#36;{origPrice}</span> : <span>&#36;{origPrice}</span>
 
   const cards = relatedDisplay.map((item) => {
     const {
@@ -41,14 +39,8 @@ const RelatedProducts = ({ addOutfit }) => {
         </ImageContainer>
         <span>{category}</span>
         <span>{name}</span>
-        <span>
-          &#36;
-          {originalPrice}
-        </span>
-        <span>
-          SALE &#36;
-          {salePrice}
-        </span>
+        {crossPrice(originalPrice, salePrice)}
+        {onSale(salePrice)}
         <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
       </Card>
     );
