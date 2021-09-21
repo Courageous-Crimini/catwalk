@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
@@ -10,7 +11,6 @@ const Wrapper = styled.section`
 height: 100%;
 background: white;
 margin: 20px;
-columns: 300px 2;
 `;
 
 const Button = styled.button`

@@ -1,4 +1,4 @@
-/* eslint-disable consistent-return */
+/* eslint-disable no-mixed-operators */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -25,7 +25,6 @@ const AnswersList = ({ questionId }) => {
   useEffect(() => {
     axios.get(`/api/qa/questions/${question}/answers`, { params: { count: limit } })
       .then(({ data }) => {
-        // console.log('results from answerslist.jsx', data.results);
         setAnswers(data.results);
       })
       .catch((err) => {
@@ -60,6 +59,15 @@ const AnswersList = ({ questionId }) => {
       </div>
       <div>
         {showMore(answers)}
+        {/* {
+          (limit === answers.length && answers.length > 0)
+            ? (
+              <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
+                Load More Answers
+              </LoadBtn>
+            )
+            : null
+        } */}
       </div>
 
     </Wrapper>
