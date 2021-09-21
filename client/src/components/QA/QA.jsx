@@ -12,7 +12,7 @@ import { StateContext } from '../App.jsx';
 const Wrapper = styled.section`
 margin: 70px;
 height: 100%;
-padding: 50px;
+padding: 50px 150px;
 background: white;
 `;
 

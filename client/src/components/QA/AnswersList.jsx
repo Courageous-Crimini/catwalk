@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -32,6 +33,22 @@ const AnswersList = ({ questionId }) => {
       });
   }, [limit]);
 
+  const showMore = (ans) => {
+    if (ans.length === 0) {
+      return (<p> There are no answers. Add a new answer</p>);
+    }
+    if (limit !== ans.length) {
+      return '';
+    }
+    if (ans.length > 0) {
+      return (
+        <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
+          Load More Answers
+        </LoadBtn>
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <div>
@@ -42,9 +59,7 @@ const AnswersList = ({ questionId }) => {
         }
       </div>
       <div>
-        <LoadBtn onClick={() => { setLimit((prevState) => prevState + 2); }}>
-          Load More Answers
-        </LoadBtn>
+        {showMore(answers)}
       </div>
 
     </Wrapper>

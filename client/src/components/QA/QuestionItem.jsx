@@ -10,6 +10,7 @@ const Wrapper = styled.section`
 height: 100%;
 background: white;
 margin: 20px;
+columns: 300px 2;
 `;
 
 const Button = styled.button`
