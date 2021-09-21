@@ -1,8 +1,11 @@
+/* eslint-disable no-unused-vars */
+import axios from 'axios';
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
+// import { getAverageRating, generateStars } from '../RatingsAndReviews/Ratings.jsx';
 
 const Wrapper = styled.section`
 height: auto;
@@ -15,11 +18,28 @@ padding: 3% 5%;
 
 const ProductInfo = () => {
   const state = useContext(StateContext);
-
   const productInfo = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const styleInfo = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
 
+  // Lines commented out below are for including star ratings instead of the placeholder stars
+  // Stars don't look good enough to include right now; can't resize them
+
+  // const [reviewsMeta, setReviewsMeta] = useState({});
+  // const [loaded, setLoaded] = useState(false);
+
+  // useEffect(() => {
+  //   axios.get(`/api/reviews/meta?product_id=${state.selectedProduct}`)
+  //     .then((response) => {
+  //       setReviewsMeta(response.data);
+  //     })
+  //     .then(() => {
+  //       setLoaded(true);
+  //     });
+  // }, []);
+
   return (
+  // loaded === true
+  //   ? (
     <Wrapper style={{
       display: 'flex',
       flexDirection: 'column',
@@ -40,6 +60,14 @@ const ProductInfo = () => {
         <p style={{ fontSize: '1.25em', margin: '0', marginRight: '10%' }}>
           &#9734; &#9734; &#9734; &#9734; &#9734;
         </p>
+        {/* <p style={{
+              fontSize: '1.25em',
+              margin: '0',
+              marginRight: '10%',
+            }}
+            >
+              {generateStars(getAverageRating(reviewsMeta.ratings)[0])}
+            </p> */}
         <p style={{ margin: '0' }}><a href="#RatingsAndReviews" style={{ color: 'black' }}><u>Read all reviews</u></a></p>
       </span>
       <p style={{
@@ -93,6 +121,8 @@ const ProductInfo = () => {
       </div>
     </Wrapper>
   );
+  //     : null
+  // );
 };
 
 export default ProductInfo;

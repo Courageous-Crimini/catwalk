@@ -14,7 +14,7 @@ const RatingNumber = styled.span`
 font-size: 2.6em;
 `;
 
-const getAverageRating = (ratingsObj) => {
+export const getAverageRating = (ratingsObj) => {
   let sum = 0;
   let numRatings = 0;
   const ratingsArr = Object.entries(ratingsObj);
@@ -28,7 +28,7 @@ const getAverageRating = (ratingsObj) => {
   return [sum / numRatings, numRatings];
 };
 
-const generateStar = (rating) => {
+export const generateStar = (rating) => {
   let size = 1;
   if (rating < 0.125) {
     size = 0;
@@ -63,7 +63,7 @@ const generateStar = (rating) => {
     </svg>
   );
 };
-const generateStars = (rating) => {
+export const generateStars = (rating) => {
   const starsArray = [];
   let num = rating;
   for (let i = 0; i < 5; i += 1) {
