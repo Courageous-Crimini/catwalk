@@ -6,6 +6,8 @@ import {
 import axios from 'axios';
 import App from '../src/components/App.jsx';
 import RatingsAndReviews from '../src/components/RatingsAndReviews/RatingsAndReviews.jsx';
+import { getAverageRating, generateStars } from '../src/components/RatingsAndReviews/Ratings.jsx';
+import Reviews from '../src/components/RatingsAndReviews/Reviews.jsx';
 
 const mockProductsData = [
   {
@@ -98,7 +100,7 @@ beforeAll(() => {
     switch (url) {
       case '/api/products/':
         return Promise.resolve(mockProductsData);
-      case '/api/reviews/?product_id=1337':
+      case '/api/reviews?product_id=1337':
         return Promise.resolve(mockReviewData);
       case '/api/reviews/meta?product_id=1337':
         return Promise.resolve(mockReviewMetaData);
@@ -122,28 +124,60 @@ it('should load the products',
     .then((products) => expect(products).toEqual(mockProductsData)));
 
 it('should load the reviews',
-  () => axios.get('/api/reviews/?product_id=1337')
+  () => axios.get('/api/reviews?product_id=1337')
     .then((reviews) => expect(reviews).toEqual(mockReviewData)));
 
 it('should load the reviews meta',
   () => axios.get('/api/reviews/meta?product_id=1337')
     .then((reviewsMeta) => expect(reviewsMeta).toEqual(mockReviewMetaData)));
 
-it('should load and display the selected product data', async () => {
-  render(
-    <App />,
-  );
+// it('should load and display the ratings and reviews', async () => {
+//   render(
+//     <RatingsAndReviews />,
+//   );
+//
+//   //axios.get('/products/reviews?product_id=1337')
+//   //  .then(async () => {
+//   //  const componentDiv = await waitFor(() => screen.getByTestId('ratings-and-reviews'));
+//   //  const ratingsDiv = await waitFor(() => screen.getByTestId('ratings'));
+//   //  const reviewsDiv = await waitFor(() => screen.getByTestId('reviews'));
+//   //  expect(componentDiv).toHaveTextContent('Ratings And Reviews');
+//   //  expect(ratingsDiv).toHaveTextContent('');
+//   //  expect(reviewsDiv).toHaveTextContent('');
+//   //  });
+// });
+//
 
-  axios.get('/products/reviews/?product_id=337')
-    .then(async () => {
-      const componentDiv = await waitFor(() => screen.getByTestId('ratings-and-reviews'));
-      // const category = await waitFor(() => screen.getByTestId('show-category'));
-      // const name = await waitFor(() => screen.getByTestId('show-name'));
-      // const description = await waitFor(() => screen.getByTestId('show-description'));
-      // expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
-      // expect(category).toHaveTextContent('Pants');
-      // expect(name).toHaveTextContent('Morning Joggers');
-      // expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
-      expect(componentDiv).toHaveTextContent('Ratings And Reviews');
-    });
+// it('should get average rating', () => {
+//  expect(getAverageRating(mockReviewMetaData)).toEqual(3);
+// });
+
+it('should get average rating', () => {
+  expect((mockReviewMetaData.product_id)).toEqual('48438');
+  expect(getAverageRating(mockReviewMetaData.ratings)).toEqual([3, 2]);
+});
+
+expect.extend({
+  toBeWithinRange(received, floor, ceiling) {
+    const pass = received >= floor && received <= ceiling;
+    if (pass) {
+      return {
+        message: () => `expected ${received} not to be within range ${floor} - ${ceiling}`,
+        pass: true,
+      };
+    }
+    return {
+      message: () => `expected ${received} to be within range ${floor} - ${ceiling}`,
+      pass: false,
+    };
+  },
+});
+
+test('numeric ranges', () => {
+  expect(100).toBeWithinRange(90, 110);
+  expect(101).not.toBeWithinRange(0, 100);
+  expect({ apples: 6, bananas: 3 }).toEqual({
+    apples: expect.toBeWithinRange(1, 10),
+    bananas: expect.not.toBeWithinRange(11, 20),
+  });
 });

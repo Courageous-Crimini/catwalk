@@ -64,10 +64,10 @@ const RatingsAndReviews = () => {
       <Wrapper>
         <h2> Ratings & Reviews</h2>
         {ratingsLoaded
-          ? <Ratings meta={reviewsMeta} />
+          ? <Ratings meta={reviewsMeta} data-testid="ratings" />
           : <h4>Loading...</h4>}
         {reviewsLoaded
-          ? <Reviews reviews={reviews} />
+          ? <Reviews reviews={reviews} data-testid="reviews" />
           : <h4>Loading...</h4>}
       </Wrapper>
     </div>
