@@ -5,7 +5,7 @@ import { RelatedContext } from '../Context.jsx';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { CardsContainer, Card, Button, Image, ImageContainer } from '../styles.jsx';
 
-const RelatedProducts = ({ addOutfit }) => {
+const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const state = useContext(StateContext);
   const { relatedDisplay } = state;
   const { setModalKey, setOpenModal } = useContext(RelatedContext);
@@ -20,8 +20,6 @@ const RelatedProducts = ({ addOutfit }) => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
   /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
-  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
-  const crossPrice = (origPrice, newPrice) => newPrice ? <span style={{ textdDecoration: 'line-through' }}>&#36;{origPrice}</span> : <span>&#36;{origPrice}</span>
 
   const cards = relatedDisplay.map((item) => {
     const {
@@ -49,10 +47,10 @@ const RelatedProducts = ({ addOutfit }) => {
   return (
     <>
       <FaRegArrowAltCircleLeft onClick={prevCard} />
+      <FaRegArrowAltCircleRight onClick={nextCard} />
       <CardsContainer>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
-      <FaRegArrowAltCircleRight onClick={nextCard} />
     </>
   );
 };

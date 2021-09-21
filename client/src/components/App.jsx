@@ -200,6 +200,7 @@ const App = () => {
                         styleName: stylesIdx[j].name,
                         originalPrice: stylesIdx[j].original_price,
                         salePrice: stylesIdx[j].sale_price,
+                        photos: stylesIdx[j].photos,
                       };
                       imageFormat = {
                         index: dataTracker,

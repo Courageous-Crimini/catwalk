@@ -42,6 +42,8 @@ const RelatedAndComparison = () => {
       }
     }
   };
+  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
+  const crossPrice = (origPrice, newPrice) => newPrice ? <span style={{ textdDecoration: 'line-through' }}>&#36;{origPrice}</span> : <span>&#36;{origPrice}</span>
 
   return (
     <Wrapper id="2">
@@ -53,12 +55,12 @@ const RelatedAndComparison = () => {
           yourOutfit,
         }}
       >
-        {openModal && <Modal />}
+        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} />}
         <Container>
           <h2>Related Products</h2>
-          <RelatedProducts addOutfit={addOutfit} />
+          <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
           <h2>Your Outfit</h2>
-          <YourOutfit handleClick={removeOutfit} />
+          <YourOutfit handleClick={removeOutfit} crossPrice={crossPrice} onSale={onSale} />
         </Container>
       </RelatedContext.Provider>
     </Wrapper>
