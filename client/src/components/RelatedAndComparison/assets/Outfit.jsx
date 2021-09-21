@@ -1,11 +1,16 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { Buttton } from '../styles.jsx';
 import Images from './Images.jsx';
+import RelatedContext from '../Context.jsx';
 
-const Outfit = ({ yourOutfit, handleClick, openModal }) => {
+// styles, displayIdx, yourOutfit, setYourOutfit, modalkey, setModalKey, openModal, setOpenModal
+
+const Outfit = ({ handleClick }) => {
   const [currentCard, setCurrentCard] = useState(0);
+  const { yourOutfit, openModal } = useContext(RelatedContext);
   const length = yourOutfit.length - 5;
 
   const prevCard = () => {
@@ -21,7 +26,13 @@ const Outfit = ({ yourOutfit, handleClick, openModal }) => {
 
     return (
       <div key={item.styleID} className="card">
-        <button type="button" className="outfitBtn" onClick={() => { handleClick(item.styleID); }}>X</button>
+        <Button
+          type="button"
+          color="#FF0000"
+          onClick={() => { handleClick(item.styleID, prevCard()); }}
+        >
+          X
+        </Button>
         <div className="card-image">
           <Images images={item.styleImages} openModal={openModal} />
           {/* <span className="outfit">&#9733;</span> */}
@@ -45,11 +56,11 @@ const Outfit = ({ yourOutfit, handleClick, openModal }) => {
     <section className="card-carousel">
       <div className="carousel-container">
         <div>
-          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
+          <FaArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} />
         </div>
         {cards.slice(currentCard, (currentCard + 5))}
         <div>
-          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
+          <FaArrowAltCircleRight className={currentCard === length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} />
         </div>
       </div>
     </section>

@@ -1,48 +1,33 @@
-/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/img-redundant-alt */
-/* eslint-disable react/prop-types */
-/* eslint-disable prefer-destructuring */
+/* eslint-disable arrow-body-style */
 import React, { useState } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
-// import Modal from './Modal.jsx';
+import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
+import { Image } from '../styles.jsx';
 
-const Images = ({ images, openModal }) => {
-  // /* -------- MODAL ---------- */
-  // const [openModal, setOpenModal] = useState(false);
+const Images = ({ photos }) => {
+  const [counter, setCounter] = useState(0);
+  const length = photos.length;
 
-  // /* -------- MODAL ---------- */
-  const [currentImage, setCurrentImage] = useState(0);
-  const length = images.length;
-
-  const prevImg = () => {
-    setCurrentImage(currentImage === 0 ? 0 : currentImage - 1);
+  const prev = () => {
+    setCounter(counter === 0 ? 0 : counter - 1);
   };
-  const nextImg = () => {
-    setCurrentImage(currentImage === (length - 1) ? 0 : currentImage + 1);
+  const next = () => {
+    setCounter(counter === length ? 0 : counter + 1);
   };
 
-  const displayImages = images.map((item, index) => (
-    <div>
-      <img
-        key={index}
-        src={item.thumbnail_url}
-        alt="IMAGES COMMING SOON"
-        className="image"
-        onClick={() => { openModal(true); }}
-      />
-    </div>
-  ));
+  const images = photos.map((item, index) => {
+    const photo = item.thumbnail_url;
+    return (
+      <Image key={index} src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+    );
+  });
 
   return (
-    <section className="image-slider">
-      <div className="image-container">
-        <FaArrowAltCircleLeft onClick={prevImg} />
-        <FaArrowAltCircleRight onClick={nextImg} />
-        {displayImages[currentImage]}
-      </div>
-    </section>
+    <>
+      <FaCaretLeft onClick={prev} />
+      <FaCaretRight onClick={next} />
+      {images[counter]}
+    </>
   );
 };
+
 export default Images;
