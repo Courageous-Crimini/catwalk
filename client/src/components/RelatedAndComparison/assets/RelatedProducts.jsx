@@ -1,13 +1,21 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import { Cards, Card, ImageContainer, InfoContainer, Button, Image, } from '../styles.jsx';
+import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
 
+import {
+  CardsContainer, Card, Button, Image, ImageContainer,
+} from '../styles.jsx';
+
 const RelatedProducts = ({ addOutfit }) => {
-  const { display, setModalKey, setOpenModal } = useContext(RelatedContext);
+  const state = useContext(StateContext);
+  const { relatedDisplay } = state;
+
+  const { setModalKey, setOpenModal } = useContext(RelatedContext);
+  /* CHANGE BELOW AFTER REFACTOR ---------------------------------------------*/
   const [currentCard, setCurrentCard] = useState(0);
-  const length = display.length - 1;
+  const length = relatedDisplay.length - 1;
 
   const prevCard = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
@@ -15,52 +23,45 @@ const RelatedProducts = ({ addOutfit }) => {
   const nextCard = () => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
+  /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
 
-  const cards = display.map((item) => {
-    // console.log('here is an item', item);
+  const cards = relatedDisplay.map((item) => {
     const {
       styleID, id, category, name, salePrice, originalPrice, url, photo,
     } = item;
 
     return (
       <Card key={styleID}>
+        <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
+        <Button type="button" onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
         <ImageContainer>
-          <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
-          <Button type="button" onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
           <a href={url}>
-            <Image src={photo} alt="NO IMAGE AVAILABLE" />
+            <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
           </a>
         </ImageContainer>
-
-        <InfoContainer>
-          <span className="item-category">{category}</span>
-          <br />
-          <span className="item-name">{name}</span>
-          <br />
-          <span>
-            &#36;
-            {originalPrice}
-          </span>
-          <br />
-          <span>
-            SALE &#36;
-            {salePrice}
-          </span>
-          <br />
-          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        </InfoContainer>
+        <span>{category}</span>
+        <span>{name}</span>
+        <span>
+          &#36;
+          {originalPrice}
+        </span>
+        <span>
+          SALE &#36;
+          {salePrice}
+        </span>
+        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
       </Card>
     );
   });
 
   return (
-    <div>
+    <>
       <FaRegArrowAltCircleLeft onClick={prevCard} />
-      <FaRegArrowAltCircleRight onClick={nextCard} />
-      <Cards>
+      <CardsContainer>
         {cards.slice(currentCard, (currentCard + 5))}
-      </Cards>
-    </div>
+      </CardsContainer>
+      <FaRegArrowAltCircleRight onClick={nextCard} />
+    </>
   );
 };
 

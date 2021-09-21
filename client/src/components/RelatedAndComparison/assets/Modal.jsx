@@ -1,49 +1,63 @@
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
-import { Button } from '../styles.jsx';
+import { Button, Background, ModalContainer, Compare, CompareCard, ImageContainer } from '../styles.jsx';
 import { RelatedContext } from '../Context.jsx';
-import Images from './Images.jsx';
+import { StateContext } from '../../App.jsx';
+import ImageStyles from './ImageStyles.jsx';
+
 // import Features from './Features.jsx';
 
 const Modal = () => {
-  const { styles, modalKey, setOpenModal, idx } = useContext(RelatedContext);
+  const state = useContext(StateContext);
+  const { relatedIdx, relatedStyles } = state;
+
+  const { modalKey, setOpenModal } = useContext(RelatedContext);
   let start;
   let finish;
-
-  for (let i = 0; i < idx.length; i += 1) {
-    const currentidx = idx[i];
-    if (modalKey === currentidx.id) {
-      start = currentidx.begin;
-      finish = currentidx.end + 1;
+  for (let i = 0; i < relatedIdx.length; i += 1) {
+    const currentRelatedIdx = relatedIdx[i];
+    if (modalKey === currentRelatedIdx.id) {
+      start = currentRelatedIdx.begin;
+      finish = currentRelatedIdx.end + 1;
     }
   }
-  const cards = styles.slice(start, finish).map((item) => {
-    console.log(item.id);
-    const { index, id, category, name, description } = styles;
-    const { slogan, styleID, styleName, originalPrice, salePrice } = styles;
+
+  const cards = relatedStyles.slice(start, finish).map((item) => {
+    const {index, id, category, name, description } = item;
+    const { slogan, styleID, styleName, originalPrice, salePrice } = item;
+    const onSale = (price) => {
+      if (price) {
+        return true;
+      }
+      return false;
+    };
 
     return (
-      <section key={styleIDs}>
-        {/* <Images /> */}
-        <span>{originalPrice}</span>
-        <span>{salePrice}</span>
+      <CompareCard key={styleID}>
+        <ImageStyles />
+        <span>&#36;{originalPrice}</span>
+        {onSale(salePrice) && <span>&#36;{salePrice}</span>}
         <span>{slogan}</span>
         <span>{name}</span>
         <span>{styleName}</span>
         <span>{category}</span>
         <span>{description}</span>
         {/* <Features /> */}
-
-      </section>
-    )
+      </CompareCard>
+    );
   });
 
   return (
-    <section>
-      <Button onClick={() => { setOpenModal(false); }}>X</Button>
-      <h2>Comparing</h2>
-      {cards}
-    </section>
+    <Background>
+      <ModalContainer>
+        <Button onClick={() => { setOpenModal(false); }}>X</Button>
+        <h2>Comparing</h2>
+        <Compare>
+          {cards[0]}
+          {cards[1]}
+        </Compare>
+      </ModalContainer>
+    </Background>
   );
 };
 
