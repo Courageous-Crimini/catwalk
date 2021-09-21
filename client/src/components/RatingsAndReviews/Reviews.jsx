@@ -7,11 +7,17 @@ import Review from './Review.jsx';
 import AddReview from './AddReview.jsx';
 
 const Wrapper = styled.section`
-background: rgb(201, 202, 203);
 height: auto;
 grid-column-start: 2;
 grid-column-end: 3;
 grid-row-start: 2
+height: 100%;
+background: white;
+padding: 20px;
+`;
+
+const ListItem = styled.li`
+list-style-type: none;
 `;
 
 const Row = styled.div`
@@ -52,9 +58,9 @@ const ReviewsList = ({ reviews }) => {
     <div className="reviewslist">
       <ul>
         {currentReviews.map((review) => (
-          <li key={review.review_id}>
+          <ListItem key={review.review_id}>
             <Review review={review} />
-          </li>
+          </ListItem>
         ))}
       </ul>
       <Row>
