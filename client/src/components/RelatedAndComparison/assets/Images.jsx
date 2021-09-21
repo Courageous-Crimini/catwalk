@@ -3,8 +3,7 @@ import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
 import { Image, ImageContainer, Button } from '../styles.jsx';
 
-const Images = ({ photos, crossPrice, removeOutfit }) => {
-  const { originalPrice, salePrice, styleID } = useContext(RelatedContext);
+const Images = ({ photos, crossPrice, removeOutfit, id, orig, sale }) => {
   const [counter, setCounter] = useState(0);
   const length = photos.length - 1;
 
@@ -26,9 +25,9 @@ const Images = ({ photos, crossPrice, removeOutfit }) => {
     <ImageContainer>
       <FaCaretLeft onClick={prev} />
       <FaCaretRight onClick={next} />
-      <Button color="#FF0000" onClick={() => { removeOutfit(styleID); }}>X</Button>
+      <Button color="#FF0000" onClick={() => { removeOutfit(id); }}>X</Button>
       {images.slice(counter, counter + 1)}
-      {crossPrice(originalPrice, salePrice)}
+      {crossPrice(orig, sale)}
     </ImageContainer>
   );
 };

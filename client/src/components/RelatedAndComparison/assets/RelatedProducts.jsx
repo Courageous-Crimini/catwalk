@@ -29,10 +29,10 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     return (
       <Card key={styleID}>
         <ImageContainer>
-        <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
+        <Button color="#00CCCC" onClick={() => { addOutfit  (styleID); }}>&#9733;</Button>
           <CompareBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CompareBtn>
           <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
-        {crossPrice(originalPrice, salePrice)}
+          {crossPrice(originalPrice, salePrice)}
         </ImageContainer>
 
         <Description>

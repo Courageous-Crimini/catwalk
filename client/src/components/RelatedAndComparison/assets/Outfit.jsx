@@ -10,7 +10,6 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   const { yourOutfit } = useContext(RelatedContext);
   const length = yourOutfit.length - 1;
 
-
   const prev = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
@@ -19,11 +18,11 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   };
 
   const cards = yourOutfit.map((item) => {
-    const { salePrice, category, name, photos, styleName } = item;
+    const { salePrice, category, name, photos, styleName, styleID, originalPrice} = item;
 
     return (
       <Card key={item.styleID}>
-        <Images photos={photos} crossPrice={crossPrice} removeOutfit={removeOutfit} />
+        <Images photos={photos} crossPrice={crossPrice} removeOutfit={removeOutfit} sale={salePrice} orig={originalPrice} id={styleID} />
         <Description>
           <span>{category}</span>
           <span>{name}</span>
