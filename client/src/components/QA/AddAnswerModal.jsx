@@ -141,7 +141,7 @@ export const Modal = ({ showModal, setShowModal, questionId, productInfo }) => {
                 </Label>
                 <Label>
                   Email:
-                  <Input name="email" maxLength="60" placeholder="Example: Jacques@jacques.com" value={newAnswer.email} onChange={handleChange} />
+                  <Input name="email" maxLength="60" placeholder="Example: Jacques@tim.com" value={newAnswer.email} onChange={handleChange} />
                 </Label>
                 <Label>
                   Photos:

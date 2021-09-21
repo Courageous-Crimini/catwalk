@@ -10,9 +10,9 @@ import AddQuestion from './AddQuestion.jsx';
 import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
-margin: 0;
+margin: 70px;
 height: 100%;
-padding: 200px;
+padding: 50px;
 background: white;
 `;
 
