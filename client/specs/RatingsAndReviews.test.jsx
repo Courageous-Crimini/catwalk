@@ -6,7 +6,9 @@ import {
 import axios from 'axios';
 import App from '../src/components/App.jsx';
 import RatingsAndReviews from '../src/components/RatingsAndReviews/RatingsAndReviews.jsx';
-import { getAverageRating, generateStars } from '../src/components/RatingsAndReviews/Ratings.jsx';
+import {
+  getAverageRating, generateStar, generateStars, getRecommendPercent,
+} from '../src/components/RatingsAndReviews/Ratings.jsx';
 import Reviews from '../src/components/RatingsAndReviews/Reviews.jsx';
 
 const mockProductsData = [
@@ -157,27 +159,101 @@ it('should get average rating', () => {
   expect(getAverageRating(mockReviewMetaData.ratings)).toEqual([3, 2]);
 });
 
-expect.extend({
-  toBeWithinRange(received, floor, ceiling) {
-    const pass = received >= floor && received <= ceiling;
-    if (pass) {
-      return {
-        message: () => `expected ${received} not to be within range ${floor} - ${ceiling}`,
-        pass: true,
-      };
-    }
-    return {
-      message: () => `expected ${received} to be within range ${floor} - ${ceiling}`,
-      pass: false,
-    };
-  },
+it('should get no ratings if no ratings', () => {
+  expect((getAverageRating({}))).toEqual('No ratings');
 });
 
-test('numeric ranges', () => {
-  expect(100).toBeWithinRange(90, 110);
-  expect(101).not.toBeWithinRange(0, 100);
-  expect({ apples: 6, bananas: 3 }).toEqual({
-    apples: expect.toBeWithinRange(1, 10),
-    bananas: expect.not.toBeWithinRange(11, 20),
-  });
+it('should check a single star is generated properly', () => {
+  expect(generateStar(0.6, 34, 32, 2)).toEqual(
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 34 32"
+      width={34}
+      height={32}
+      preserveAspectRatio="xMidYMin slice"
+      key="2"
+    >
+      <defs>
+        <linearGradient id="grad-0.5">
+          <stop offset={0.5} stopColor="gold" />
+          <stop offset={0.5} stopColor="grey" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M20.388,10.918L32,12.118l-8.735,7.749L25.914,
+         31.4l-9.893-6.088L6.127,31.4l2.695-11.533L0,
+         12.118l11.547-1.2L16.026,0.6L20.388,10.918z"
+        fill="url(#grad-0.5)"
+        strokeWidth="1"
+        stroke="black"
+      />
+    </svg>,
+  );
+  expect(generateStar(0.2, 34, 32, 4)).toEqual(
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 34 32"
+      width={34}
+      height={32}
+      preserveAspectRatio="xMidYMin slice"
+      key="4"
+    >
+      <defs>
+        <linearGradient id="grad-0.35">
+          <stop offset={0.35} stopColor="gold" />
+          <stop offset={0.35} stopColor="grey" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M20.388,10.918L32,12.118l-8.735,7.749L25.914,
+         31.4l-9.893-6.088L6.127,31.4l2.695-11.533L0,
+         12.118l11.547-1.2L16.026,0.6L20.388,10.918z"
+        fill="url(#grad-0.35)"
+        strokeWidth="1"
+        stroke="black"
+      />
+    </svg>,
+  );
+  expect(generateStar(0.1, 34, 32, 3)).toEqual(
+    <svg
+      version="1.1"
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 34 32"
+      width={34}
+      height={32}
+      preserveAspectRatio="xMidYMin slice"
+      key="3"
+    >
+      <defs>
+        <linearGradient id="grad-0">
+          <stop offset={0} stopColor="gold" />
+          <stop offset={0} stopColor="grey" stopOpacity="1" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M20.388,10.918L32,12.118l-8.735,7.749L25.914,
+         31.4l-9.893-6.088L6.127,31.4l2.695-11.533L0,
+         12.118l11.547-1.2L16.026,0.6L20.388,10.918z"
+        fill="url(#grad-0)"
+        strokeWidth="1"
+        stroke="black"
+      />
+    </svg>,
+  );
+});
+
+it('should check stars are generated properly', () => {
+  expect(generateStars(3.8, 34, 32)).toEqual(
+    [1, 1, 1, 0.8, 0].map((size, index) => generateStar(size, 34, 32, index)),
+  );
+});
+
+it('should check percentages are calculated properly', () => {
+  expect(getRecommendPercent(mockReviewMetaData.recommended)).toEqual(50);
+  expect(getRecommendPercent({ true: 21, false: 29 })).toEqual(42);
+  expect(getRecommendPercent({ true: 3 })).toEqual(100);
+  expect(getRecommendPercent({ false: 4 })).toEqual(0);
+  expect(getRecommendPercent({})).toEqual('None');
 });
