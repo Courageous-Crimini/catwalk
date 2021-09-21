@@ -70,9 +70,7 @@ test('Should render appropriate announcement message', () => {
 
   userEvent.click(screen.getByText('NEW PRODUCT HIGHLIGHT'));
 
-  // screen.debug();
   setTimeout(() => {
     expect(global.window.location.pathname).toEqual('/?');
-    // expect(screen.getByRole('button', { name: 'Add to Cart' })).toHaveAttribute('onClick');
   }, 2000);
 });

@@ -68,7 +68,7 @@ const ProductInfo = () => {
             >
               {generateStars(getAverageRating(reviewsMeta.ratings)[0], 17, 16)}
             </p>
-            <p style={{ margin: '0' }}><a href="#RatingsAndReviews" style={{ color: 'black' }}><u>Read all reviews</u></a></p>
+            <p style={{ margin: '0' }}><a href="#RatingsAndReviews" style={{ color: 'black' }}>Read all reviews</a></p>
           </span>
           <p style={{
             order: '2',
