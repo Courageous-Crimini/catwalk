@@ -13,10 +13,10 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const length = relatedDisplay.length - 1;
 
-  const prevCard = () => {
+  const prev = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
-  const nextCard = () => {
+  const next = () => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
   /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
@@ -46,8 +46,8 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
 
   return (
     <>
-      <FaRegArrowAltCircleLeft onClick={prevCard} />
-      <FaRegArrowAltCircleRight onClick={nextCard} />
+      <FaRegArrowAltCircleLeft onClick={prev} />
+      <FaRegArrowAltCircleRight onClick={next} />
       <CardsContainer>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
