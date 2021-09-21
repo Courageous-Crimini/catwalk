@@ -15,7 +15,7 @@ const RatingNumber = styled.span`
 font-size: 2.6em;
 `;
 
-const getAverageRating = (ratingsObj) => {
+export const getAverageRating = (ratingsObj) => {
   let sum = 0;
   let numRatings = 0;
   const ratingsArr = Object.entries(ratingsObj);
@@ -29,7 +29,7 @@ const getAverageRating = (ratingsObj) => {
   return [sum / numRatings, numRatings];
 };
 
-const generateStar = (rating, width = 34, height = 32, index) => {
+export const generateStar = (rating, width, height, index) => {
   let size = 1;
   if (rating < 0.125) {
     size = 0;
@@ -52,7 +52,7 @@ const generateStar = (rating, width = 34, height = 32, index) => {
     >
       <defs>
         <linearGradient id={`grad-${size}`}>
-          <stop offset={size} stopColor="yellow" />
+          <stop offset={size} stopColor="gold" />
           <stop offset={size} stopColor="grey" stopOpacity="1" />
         </linearGradient>
       </defs>
@@ -67,7 +67,7 @@ const generateStar = (rating, width = 34, height = 32, index) => {
     </svg>
   );
 };
-const generateStars = (rating, width, height) => {
+export const generateStars = (rating, width, height) => {
   const starsArray = [];
   let num = rating;
   for (let i = 0; i < 5; i += 1) {
@@ -117,7 +117,7 @@ const Ratings = ({ meta }) => (
               {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
             </RatingNumber>
           )}
-        {generateStars(getAverageRating(meta.ratings)[0])}
+        {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
       </div>
       <div>
         { (getRecommendPercent(meta.recommended) === 'None')
