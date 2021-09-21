@@ -17,7 +17,7 @@ const Images = ({ photos }) => {
   const images = photos.map((item, index) => {
     const photo = item.thumbnail_url;
     return (
-      <Image key={index} src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+      <Image key={index} src={photo} alt="NO IMAGE AVAILABLE" />
     );
   });
 

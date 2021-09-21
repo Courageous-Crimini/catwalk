@@ -3,78 +3,104 @@ import styled from 'styled-components';
 export const Wrapper = styled.section`
 display: flex;
   margin: 0;
-  padding-left: 4.5em;
-  padding-right: 4.5em;
+  padding-left: 4em;
+  padding-right: 4em;
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
+  /* box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px; */
   padding-left: 1em;
   padding-right: 1em;
   `;
-export const Arrow = styled.div`
-  display: flex;
-  flex-direction: row;
+export const LeftArrow = styled.div`
   position: absolute;
-  width: 2%;
-  height: 2%;
-
-  /*
-  width: 81.5%;
-  height: 79%;
-  background-color: rgba(204, 204, 204, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /*/
+  padding-top: 15%;
+  left: 3em;
+  color: #000;
+  font-size: 2em;
+  opacity: .3;
+  z-index: 10;
+    &:hover {
+    opacity: 1;
+  }
 `;
+export const RightArrow = styled.div`
+  position: absolute;
+  padding-top: 15%;
+  right: 3em;
+  color: #000;
+  font-size: 2em;
+  opacity: .3;
+  z-index: 10;
+    &:hover {
+    opacity: 1;
+  }
 
+`;
 /* --                              carousel                                -- */
 export const CardsContainer = styled.section`
   display: flex;
   flex-direction: row;
-  /* justify-content: space-between; */
-
-
-
-  padding: 1em;
-  border: 1px solid black;
-
-
 `;
-
 export const Card = styled.section`
   display: flex;
   flex-direction: column;
   width: 20%;
-  margin-right: .2em;
-  /* &:hover {
-    flex: 2;
-  } */
+  margin-right: .5em;
+  position: relative;
+  box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
+  border: .1em solid black;
 
-  border: 1px solid red;
+  /* &:hover {
+    width: 30%
+  } */
 `;
 /* --                                cards                                 -- */
 
 export const ImageContainer = styled.div`
+  /* display: flex;
+  justify-content: center; */
+  position: relative;
   width: 100%;
   height: 70%;
-
-  /* border: 1px solid black; */
 `;
 export const Image = styled.img`
   width: 100%;
   height: 100%;
 `;
-/* --                                images                                -- */
 
-export const Button = styled.button`
+export const Button = styled.span`
   color: ${(props) => props.color};
+  position: absolute;
+  right: 0em;
+  cursor: pointer;
+  z-index: 10;
+
 `;
-
-export default styled;
-
+export const CompareBtn = styled.span`
+  color: ${(props) => props.color};
+  padding: .25em;
+  position: absolute;
+  bottom: 0em;
+  right: 0em;
+  cursor: pointer;
+  /* background-color:#FFF; */
+  z-index: 10;
+`;
+export const Price = styled.div`
+  padding: .25em;
+  position: absolute;
+  left: 0em;
+  bottom: 0em;
+  text-decoration: ${(props) => props.cross};
+  background-color:#FFF;
+`;
+export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+`;
 /* --                                Modal                                 -- */
 
 export const Background = styled.section`
@@ -85,7 +111,7 @@ export const Background = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+  `;
 
 export const ModalContainer = styled.div`
   width: 90%;
@@ -94,9 +120,10 @@ export const ModalContainer = styled.div`
   box-shadow: rbga(0, 0, 0, 0.35) 0px 5px 15px;
   position: relative;
   background-color: #CCC;
+  z-index: 11;
 
   /* border: 1px solid black; */
-`;
+  `;
 export const Compare = styled.div`
   display: flex;
   flex-direction: row;
@@ -106,11 +133,13 @@ export const Compare = styled.div`
 
   /* border: 1px solid red; */
 
-`;
+  `;
 export const CompareCard = styled.div`
   display: flex;
   flex-direction: column;
   width: 45%;
 
   /* border: 1px solid green; */
-`;
+  `;
+
+export default styled;

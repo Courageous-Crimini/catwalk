@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-import { CardsContainer, Card, Button, Image, ImageContainer, Arrow } from '../styles.jsx';
+import { CardsContainer, Card, Button, CompareBtn, Image, ImageContainer, LeftArrow, RightArrow, Description } from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const state = useContext(StateContext);
@@ -29,26 +29,30 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     return (
       <Card key={styleID}>
         <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
-        <Button onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
         <ImageContainer>
+        <CompareBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CompareBtn>
           <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
-        </ImageContainer>
-        <span>{category}</span>
-        <span>{name}</span>
         {crossPrice(originalPrice, salePrice)}
-        {onSale(salePrice)}
-        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </ImageContainer>
+        <Description>
+          <span>{category}</span>
+          <span>{name}</span>
+          {onSale(salePrice)}
+          <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </Description>
       </Card>
     );
   });
 
   return (
     <>
-      <Arrow>
-        <FaRegArrowAltCircleLeft onClick={prev} />
-        <FaRegArrowAltCircleRight onClick={next} />
-      </Arrow>
       <CardsContainer>
+        <LeftArrow>
+          <FaRegArrowAltCircleLeft onClick={prev} />
+        </LeftArrow>
+        <RightArrow>
+          <FaRegArrowAltCircleRight onClick={next} />
+        </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
     </>

@@ -4,7 +4,7 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
-import { CardsContainer, Card, Button, ImageContainer } from '../styles.jsx';
+import { CardsContainer, Card, Button, ImageContainer, LeftArrow, RightArrow } from '../styles.jsx';
 
 const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -40,9 +40,13 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
 
   return (
     <>
-      <FaRegArrowAltCircleLeft onClick={prev} />
-      <FaRegArrowAltCircleRight onClick={next} />
       <CardsContainer>
+      <LeftArrow>
+          <FaRegArrowAltCircleLeft onClick={prev} />
+        </LeftArrow>
+        <RightArrow>
+          <FaRegArrowAltCircleRight onClick={next} />
+        </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
     </>
