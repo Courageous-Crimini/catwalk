@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* eslint-disable no-plusplus */
 /* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
@@ -55,6 +56,13 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
       </div>
     </section>
   );
+=======
+import React from 'react';
+import RelatedCard from './Card.jsx';
+
+const RelatedProducts = () => {
+  <RelatedCard />;
+>>>>>>> tests
 };
 
 export default RelatedProducts;

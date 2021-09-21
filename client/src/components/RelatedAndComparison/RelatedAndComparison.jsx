@@ -2,6 +2,7 @@
 /* eslint-disable no-plusplus */
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+<<<<<<< HEAD
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import Modal from './assets/Modal.jsx';
@@ -113,6 +114,24 @@ const RelatedAndComparison = () => {
     </section>
   );
 };
+=======
+import styled from 'styled-components';
+import RelatedProducts from './assets/RelatedProducts.jsx';
+
+const Wrapper = styled.section`
+padding: 20em;
+background: #DF9EF6;
+`;
+
+const RelatedAndComparison = () => (
+  <Wrapper>
+    <h2> Related Products </h2>
+    {/* <RelatedProducts /> */}
+    <h2>Your Outfits</h2>
+  </Wrapper>
+
+);
+>>>>>>> tests
 
 export default RelatedAndComparison;
 

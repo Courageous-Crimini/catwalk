@@ -16,6 +16,7 @@ justify-items: start;
 
 const Header = () => (
   <Wrapper>
+<<<<<<< HEAD
     <img
       src="./logo.png"
       alt="logo"
@@ -51,6 +52,9 @@ const Header = () => (
         }}
       />
     </div>
+=======
+    <h1 id="header"> Header Template </h1>
+>>>>>>> tests
   </Wrapper>
 );
 
