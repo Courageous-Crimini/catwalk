@@ -17,7 +17,11 @@ padding: 20px;
 `;
 
 const ListItem = styled.li`
+`;
+
+const List = styled.ul`
 list-style-type: none;
+padding: 0px
 `;
 
 const Row = styled.div`
@@ -56,13 +60,13 @@ const ReviewsList = ({ reviews }) => {
 
   return (
     <div className="reviewslist">
-      <ul>
+      <List>
         {currentReviews.map((review) => (
           <ListItem key={review.review_id}>
             <Review review={review} />
           </ListItem>
         ))}
-      </ul>
+      </List>
       <Row>
         {(numReviews > limit)
       && (
