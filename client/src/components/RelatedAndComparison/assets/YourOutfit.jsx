@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { RelatedContext } from '../Context.jsx';
 import Outfit from './Outfit.jsx';
 
-const YourOutfit = ({ removeOutfit, crossPrice, onSale, setOpenModal }) => {
+const YourOutfit = ({ removeOutfit, crossPrice, onSale }) => {
   const { yourOutfit } = useContext(RelatedContext);
 
   if (yourOutfit.length > 0) {

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { CardsContainer, Card, Button, Image, ImageContainer } from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
@@ -13,17 +13,17 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const length = relatedDisplay.length - 1;
 
-  const prevCard = () => {
+  const prev = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
-  const nextCard = () => {
+  const next = () => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
   /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
 
   const cards = relatedDisplay.map((item) => {
     const {
-      styleID, id, category, name, salePrice, originalPrice, url, photo,
+      styleID, id, category, name, salePrice, originalPrice, photo,
     } = item;
 
     return (
@@ -31,9 +31,7 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
         <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
         <Button onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
         <ImageContainer>
-          <a href={url}>
-            <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
-          </a>
+          <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
         </ImageContainer>
         <span>{category}</span>
         <span>{name}</span>
@@ -46,8 +44,8 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
 
   return (
     <>
-      <FaRegArrowAltCircleLeft onClick={prevCard} />
-      <FaRegArrowAltCircleRight onClick={nextCard} />
+      <FaRegArrowAltCircleLeft onClick={prev} />
+      <FaRegArrowAltCircleRight onClick={next} />
       <CardsContainer>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
