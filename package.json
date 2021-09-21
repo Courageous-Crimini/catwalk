@@ -4,9 +4,10 @@
   "description": "The frontend capstone project for Hack Reactor cohort SFO137 Group 2: Courageous Crimini",
   "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./client/src/components/Overview/__tests__/AddToCart.test.jsx",
     "start": "nodemon server/index.js",
-    "react-dev": "webpack --config ./webpack.config.js"
+    "react-dev": "webpack --config ./webpack.config.js",
+    "overview-test": "./client/src/components/Overview/__tests__/AddToCart.test.jsx"
   },
   "repository": {
     "type": "git",
@@ -37,6 +38,8 @@
   "devDependencies": {
     "@babel/cli": "^7.15.4",
     "@babel/core": "^7.15.5",
+    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/react": "^12.1.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.24.2",
