@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-import { CardsContainer, Card, Button, Image, ImageContainer } from '../styles.jsx';
+import { CardsContainer, Card, Button, Image, ImageContainer, Arrow } from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const state = useContext(StateContext);
@@ -44,8 +44,10 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
 
   return (
     <>
-      <FaRegArrowAltCircleLeft onClick={prev} />
-      <FaRegArrowAltCircleRight onClick={next} />
+      <Arrow>
+        <FaRegArrowAltCircleLeft onClick={prev} />
+        <FaRegArrowAltCircleRight onClick={next} />
+      </Arrow>
       <CardsContainer>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>

@@ -3,30 +3,43 @@ import styled from 'styled-components';
 export const Wrapper = styled.section`
 display: flex;
   margin: 0;
-  padding-left: 6em;
-  padding-right: 6em;
-
-  /* border: 1px solid black; */
+  padding-left: 4.5em;
+  padding-right: 4.5em;
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
-  /* box-shadow: rgba(0, 0, 0, .2) -2px 1px 6px 1px; */
-  /* padding-left: 1em; */
-  /* padding-right: 1em; */
-
-  /* border: 1px solid red; */
+  box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
+  padding-left: 1em;
+  padding-right: 1em;
   `;
+export const Arrow = styled.div`
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  width: 2%;
+  height: 2%;
+
+  /*
+  width: 81.5%;
+  height: 79%;
+  background-color: rgba(204, 204, 204, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*/
+`;
 
 /* --                              carousel                                -- */
 export const CardsContainer = styled.section`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+
 
 
   padding: 1em;
-  /* border: 1px solid red; */
+  border: 1px solid black;
 
 
 `;
@@ -35,11 +48,12 @@ export const Card = styled.section`
   display: flex;
   flex-direction: column;
   width: 20%;
+  margin-right: .2em;
   /* &:hover {
     flex: 2;
   } */
 
-  border: 1px solid green;
+  border: 1px solid red;
 `;
 /* --                                cards                                 -- */
 
@@ -81,16 +95,16 @@ export const ModalContainer = styled.div`
   position: relative;
   background-color: #CCC;
 
-  border: 1px solid black;
+  /* border: 1px solid black; */
 `;
 export const Compare = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 25px;
-  border: 1px solid red;
   height: 75%;
 
+  /* border: 1px solid red; */
 
 `;
 export const CompareCard = styled.div`
@@ -98,21 +112,5 @@ export const CompareCard = styled.div`
   flex-direction: column;
   width: 45%;
 
-  border: 1px solid green;
+  /* border: 1px solid green; */
 `;
-
-/*                                  CSS FILE
- .image-slider .container {
-   display:  flex;
-   flex-direction: row;
-   width: 100px;
-   justify-content: center;
- }
- .image {
-   height: 100px;
-   width:  100px;
- }
- .slider-arrow {
-
- };
- */
