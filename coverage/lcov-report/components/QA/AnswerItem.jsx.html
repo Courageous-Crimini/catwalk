@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/RelatedAndComparison/RelatedAndComparison.jsx</title>
+    <title>Code coverage report for components/QA/AnswerItem.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/RelatedAndComparison</a> RelatedAndComparison.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/QA</a> AnswerItem.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">34.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>31/91</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">34.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>31/91</span>
             </div>
         
             
@@ -127,7 +127,28 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -136,6 +157,27 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -197,76 +239,97 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useContext } from 'react';
-import { StateContext } from '../App.jsx';
-import { RelatedContext } from './Context.jsx';
-import Modal from './assets/Modal.jsx';
-import RelatedProducts from './assets/RelatedProducts.jsx';
-import YourOutfit from './assets/YourOutfit.jsx';
-import { Wrapper, Container } from './styles.jsx';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import moment from 'moment';
 &nbsp;
-const RelatedAndComparison = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const state = useContext(StateContext);</span>
-<span class="cstat-no" title="statement not covered" >  const { relatedStyles } = state;</span>
-<span class="cstat-no" title="statement not covered" >  const [yourOutfit, setYourOutfit] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [modalKey, setModalKey] = useState('');</span>
-<span class="cstat-no" title="statement not covered" >  const [openModal, setOpenModal] = useState(false);</span>
+const Wrapper = styled.section`
+height: 100%;
+background: white;
+`;
+&nbsp;
+const Row = styled.div`
+display: flex;
+align-items: center;
+`;
+&nbsp;
+const Button = styled.button`
+background: none!important;
+border: none;
+padding: 0!important;
+font-weight: bold;
+text-decoration: underline;
+cursor: pointer;
+font-family: Valera Round,sans-serif;
+font-size: 16px
+`;
+&nbsp;
+const AnswerItem = <span class="fstat-no" title="function not covered" >({ answer }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [helpful, setHelpful] = useState(answer.helpfulness);</span>
+<span class="cstat-no" title="statement not covered" >  const [upvoted, setUpvoted] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  const [reported, setReported] = useState(false);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const addOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let isThere = false;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (yourOutfit.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          isThere = true;</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (!isThere) {</span>
-<span class="cstat-no" title="statement not covered" >      for (let i = 0; i &lt; relatedStyles.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === relatedStyles[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          setYourOutfit(yourOutfit.concat(relatedStyles[i]));</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >  const handleUpvote = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!upvoted) {</span>
+<span class="cstat-no" title="statement not covered" >      axios.put(`api/qa/answers/${answer.answer_id}/helpful`)</span>
+<span class="cstat-no" title="statement not covered" >        .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          setUpvoted(true);</span>
+<span class="cstat-no" title="statement not covered" >          setHelpful((prevState) =&gt; prevState + 1);</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          throw err;</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const removeOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >        setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));</span>
-<span class="cstat-no" title="statement not covered" >        break;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
+<span class="cstat-no" title="statement not covered" >  const handleReport = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!reported) {</span>
+<span class="cstat-no" title="statement not covered" >      axios.put(`/api/qa/answers/${answer.answer_id}/report`)</span>
+<span class="cstat-no" title="statement not covered" >        .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          setReported(true);</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          throw err;</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" >  const onSale = (price) =&gt; price ? &lt;span style={{ color: 'red' }}&gt;SALE &amp;#36;{price}&lt;/span&gt; : null;</span>
-<span class="cstat-no" title="statement not covered" >  const crossPrice = (origPrice, newPrice) =&gt; newPrice ? &lt;span style={{ textdDecoration: 'line-through' }}&gt;&amp;#36;{origPrice}&lt;/span&gt; : &lt;span&gt;&amp;#36;{origPrice}&lt;/span&gt;</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;Wrapper id="2"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;RelatedContext.Provider</span>
-<span class="cstat-no" title="statement not covered" >        value={{</span>
-<span class="cstat-no" title="statement not covered" >          setModalKey,</span>
-<span class="cstat-no" title="statement not covered" >          setOpenModal,</span>
-<span class="cstat-no" title="statement not covered" >          modalKey,</span>
-<span class="cstat-no" title="statement not covered" >          yourOutfit,</span>
-<span class="cstat-no" title="statement not covered" >        }}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        {openModal &amp;&amp; &lt;Modal crossPrice={crossPrice} onSale={onSale} /&gt;}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Related Products&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Your Outfit&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;YourOutfit handleClick={removeOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/RelatedContext.Provider&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;Row&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;h3&gt;</span>
+<span class="cstat-no" title="statement not covered" >          A:&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/h3&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;{answer.body}&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/Row&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p style={{ margin: 0 }}&gt;</span>
+<span class="cstat-no" title="statement not covered" >          by:&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >          {answer.answerer_name}</span>
+<span class="cstat-no" title="statement not covered" >          ,&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >          {moment(answer.date).format('LL')}</span>
+<span class="cstat-no" title="statement not covered" >          {' Helpful? '}</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Button onClick={handleUpvote}&gt;</span>
+<span class="cstat-no" title="statement not covered" >            Yes</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >          {` (${helpful}) `}</span>
+<span class="cstat-no" title="statement not covered" >          {reported</span>
+<span class="cstat-no" title="statement not covered" >            ? 'Reported'</span>
+<span class="cstat-no" title="statement not covered" >            : (</span>
+<span class="cstat-no" title="statement not covered" >              &lt;Button onClick={handleReport}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                Report</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >            )}</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/Wrapper&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export default RelatedAndComparison;
+export default AnswerItem;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

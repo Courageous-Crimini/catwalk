@@ -3,15 +3,15 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/RelatedAndComparison/RelatedAndComparison.jsx</title>
+    <title>Code coverage report for components/RelatedAndComparison/assets/Outfit.jsx</title>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="../../prettify.css" />
-    <link rel="stylesheet" href="../../base.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <link rel="stylesheet" href="../../../prettify.css" />
+    <link rel="stylesheet" href="../../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style type='text/css'>
         .coverage-summary .sorter {
-            background-image: url(../../sort-arrow-sprite.png);
+            background-image: url(../../../sort-arrow-sprite.png);
         }
     </style>
 </head>
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/RelatedAndComparison</a> RelatedAndComparison.jsx</h1>
+        <h1><a href="../../../index.html">All files</a> / <a href="index.html">components/RelatedAndComparison/assets</a> Outfit.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">18.57% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>13/70</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">18.57% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>13/70</span>
             </div>
         
             
@@ -136,8 +136,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -197,76 +197,76 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useContext } from 'react';
-import { StateContext } from '../App.jsx';
-import { RelatedContext } from './Context.jsx';
-import Modal from './assets/Modal.jsx';
-import RelatedProducts from './assets/RelatedProducts.jsx';
-import YourOutfit from './assets/YourOutfit.jsx';
-import { Wrapper, Container } from './styles.jsx';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable prefer-destructuring */
+/* eslint-disable react/prop-types */
+import React, { useState, useContext } from 'react';
+import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import { Buttton } from '../styles.jsx';
+import Images from './Images.jsx';
+import RelatedContext from '../Context.jsx';
 &nbsp;
-const RelatedAndComparison = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  const state = useContext(StateContext);</span>
-<span class="cstat-no" title="statement not covered" >  const { relatedStyles } = state;</span>
-<span class="cstat-no" title="statement not covered" >  const [yourOutfit, setYourOutfit] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [modalKey, setModalKey] = useState('');</span>
-<span class="cstat-no" title="statement not covered" >  const [openModal, setOpenModal] = useState(false);</span>
+// styles, displayIdx, yourOutfit, setYourOutfit, modalkey, setModalKey, openModal, setOpenModal
+&nbsp;
+const Outfit = <span class="fstat-no" title="function not covered" >({ handleClick }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [currentCard, setCurrentCard] = useState(0);</span>
+<span class="cstat-no" title="statement not covered" >  const { yourOutfit, openModal } = useContext(RelatedContext);</span>
+<span class="cstat-no" title="statement not covered" >  const length = yourOutfit.length - 5;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const addOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let isThere = false;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (yourOutfit.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          isThere = true;</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (!isThere) {</span>
-<span class="cstat-no" title="statement not covered" >      for (let i = 0; i &lt; relatedStyles.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === relatedStyles[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          setYourOutfit(yourOutfit.concat(relatedStyles[i]));</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  const prevCard = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
+<span class="cstat-no" title="statement not covered" >  const nextCard = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    setCurrentCard(currentCard === length ? 0 : currentCard + 1);</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const removeOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >        setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));</span>
-<span class="cstat-no" title="statement not covered" >        break;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" >  const onSale = (price) =&gt; price ? &lt;span style={{ color: 'red' }}&gt;SALE &amp;#36;{price}&lt;/span&gt; : null;</span>
-<span class="cstat-no" title="statement not covered" >  const crossPrice = (origPrice, newPrice) =&gt; newPrice ? &lt;span style={{ textdDecoration: 'line-through' }}&gt;&amp;#36;{origPrice}&lt;/span&gt; : &lt;span&gt;&amp;#36;{origPrice}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >  const cards = yourOutfit.map((item) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    const originalPrice = item.originalPrice;</span>
+<span class="cstat-no" title="statement not covered" >    const salePrice = item.salePrice;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >    return (</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div key={item.styleID} className="card"&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;Button</span>
+<span class="cstat-no" title="statement not covered" >          type="button"</span>
+<span class="cstat-no" title="statement not covered" >          color="#FF0000"</span>
+<span class="cstat-no" title="statement not covered" >          onClick={() =&gt; { handleClick(item.styleID, prevCard()); }}</span>
+<span class="cstat-no" title="statement not covered" >        &gt;</span>
+<span class="cstat-no" title="statement not covered" >          X</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div className="card-image"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Images images={item.styleImages} openModal={openModal} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          {/* &lt;span className="outfit"&gt;&amp;#9733;&lt;/span&gt; */}</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div className="card-description"&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;span className="item-category"&gt;{item.category}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;br /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;span className="item-name"&gt;{item.name}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;br /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;span className={salePrice ? 'cross-out-price' : 'original-price'}&gt;&amp;#36;{originalPrice}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;br /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;span className={salePrice ? 'sale-price' : 'hide'}&gt;SALE &amp;#36;{salePrice}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;br className={salePrice ? 'break' : 'hide'} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;span className="card-rating"&gt;&amp;#9733;&amp;#9733;&amp;#9733;&amp;#9733;&amp;#9733;&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    );</span>
+<span class="cstat-no" title="statement not covered" >  });</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;Wrapper id="2"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;RelatedContext.Provider</span>
-<span class="cstat-no" title="statement not covered" >        value={{</span>
-<span class="cstat-no" title="statement not covered" >          setModalKey,</span>
-<span class="cstat-no" title="statement not covered" >          setOpenModal,</span>
-<span class="cstat-no" title="statement not covered" >          modalKey,</span>
-<span class="cstat-no" title="statement not covered" >          yourOutfit,</span>
-<span class="cstat-no" title="statement not covered" >        }}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        {openModal &amp;&amp; &lt;Modal crossPrice={crossPrice} onSale={onSale} /&gt;}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Related Products&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Your Outfit&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;YourOutfit handleClick={removeOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/RelatedContext.Provider&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;section className="card-carousel"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;div className="carousel-container"&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;FaArrowAltCircleLeft className={currentCard ? 'related-carousel-arrow' : 'hide'} onClick={prevCard} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        {cards.slice(currentCard, (currentCard + 5))}</span>
+<span class="cstat-no" title="statement not covered" >        &lt;div&gt;</span>
+<span class="cstat-no" title="statement not covered" >          &lt;FaArrowAltCircleRight className={currentCard === length ? 'hide' : 'related-carousel-arrow'} onClick={nextCard} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/section&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export default RelatedAndComparison;
+export default Outfit;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -277,14 +277,14 @@ export default RelatedAndComparison;
                 at Tue Sep 21 2021 14:21:41 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
-        <script src="../../prettify.js"></script>
+        <script src="../../../prettify.js"></script>
         <script>
             window.onload = function () {
                 prettyPrint();
             };
         </script>
-        <script src="../../sorter.js"></script>
-        <script src="../../block-navigation.js"></script>
+        <script src="../../../sorter.js"></script>
+        <script src="../../../block-navigation.js"></script>
     </body>
 </html>
     

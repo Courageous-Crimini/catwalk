@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/RelatedAndComparison/RelatedAndComparison.jsx</title>
+    <title>Code coverage report for components/RatingsAndReviews/RatingsAndReviews.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/RelatedAndComparison</a> RelatedAndComparison.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/RatingsAndReviews</a> RatingsAndReviews.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">41.56% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>32/77</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.71% </span>
+                <span class="strong">41.56% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/70</span>
+                <span class='fraction'>32/77</span>
             </div>
         
             
@@ -127,7 +127,14 @@
 <a name='L68'></a><a href='#L68'>68</a>
 <a name='L69'></a><a href='#L69'>69</a>
 <a name='L70'></a><a href='#L70'>70</a>
-<a name='L71'></a><a href='#L71'>71</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -136,20 +143,27 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -197,76 +211,83 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import React, { useState, useContext } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable react/prop-types */
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
+import styled from 'styled-components';
+import Ratings from './Ratings.jsx';
+// eslint-disable-next-line import/no-cycle
+import Reviews from './Reviews.jsx';
+// eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
-import { RelatedContext } from './Context.jsx';
-import Modal from './assets/Modal.jsx';
-import RelatedProducts from './assets/RelatedProducts.jsx';
-import YourOutfit from './assets/YourOutfit.jsx';
-import { Wrapper, Container } from './styles.jsx';
 &nbsp;
-const RelatedAndComparison = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
+const Wrapper = styled.section`
+display: grid;
+grid-template-columns: [first] 285px [second] auto;
+grid-template-rows: [row1-start] 10% [row1-end] auto [last];
+grid-template-areas:
+&nbsp;
+column-gap: 1%;
+row-gap: 1%;
+grid-line{
+  border: 10px solid black;
+}
+justify-content: center;
+&nbsp;
+margin: 0;
+height: 100%;
+padding: 0 50px 50px 100px;
+background: white;
+`;
+&nbsp;
+const RatingsAndReviews = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const state = useContext(StateContext);</span>
-<span class="cstat-no" title="statement not covered" >  const { relatedStyles } = state;</span>
-<span class="cstat-no" title="statement not covered" >  const [yourOutfit, setYourOutfit] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [modalKey, setModalKey] = useState('');</span>
-<span class="cstat-no" title="statement not covered" >  const [openModal, setOpenModal] = useState(false);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const addOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    let isThere = false;</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (yourOutfit.length &gt; 0) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          isThere = true;</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >    if (!isThere) {</span>
-<span class="cstat-no" title="statement not covered" >      for (let i = 0; i &lt; relatedStyles.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >        if (id === relatedStyles[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >          setYourOutfit(yourOutfit.concat(relatedStyles[i]));</span>
-<span class="cstat-no" title="statement not covered" >          break;</span>
-<span class="cstat-no" title="statement not covered" >        }</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const removeOutfit = (id) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    for (let i = 0; i &lt; yourOutfit.length; i += 1) {</span>
-<span class="cstat-no" title="statement not covered" >      if (id === yourOutfit[i].styleID) {</span>
-<span class="cstat-no" title="statement not covered" >        setYourOutfit(yourOutfit.slice(0, i).concat(yourOutfit.slice(i + 1)));</span>
-<span class="cstat-no" title="statement not covered" >        break;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    }</span>
-<span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" >  const onSale = (price) =&gt; price ? &lt;span style={{ color: 'red' }}&gt;SALE &amp;#36;{price}&lt;/span&gt; : null;</span>
-<span class="cstat-no" title="statement not covered" >  const crossPrice = (origPrice, newPrice) =&gt; newPrice ? &lt;span style={{ textdDecoration: 'line-through' }}&gt;&amp;#36;{origPrice}&lt;/span&gt; : &lt;span&gt;&amp;#36;{origPrice}&lt;/span&gt;</span>
+<span class="cstat-no" title="statement not covered" >  const id = state.selectedProduct;</span>
+<span class="cstat-no" title="statement not covered" >  const [reviewsMeta, setReviewsMeta] = useState({});</span>
+<span class="cstat-no" title="statement not covered" >  const [reviews, setReviews] = useState({});</span>
+<span class="cstat-no" title="statement not covered" >  const [ratingsLoaded, setRatingsLoaded] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  const [reviewsLoaded, setReviewsLoaded] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    axios.get(`/api/reviews/meta?product_id=${id}`)</span>
+<span class="cstat-no" title="statement not covered" >      .then((response) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        setReviewsMeta(response.data);</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        setRatingsLoaded(true);</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        throw err;</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >  }, []);</span>
+<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    axios.get(`/api/reviews?product_id=${id}&amp;count=100&amp;sort=helpful`)</span>
+<span class="cstat-no" title="statement not covered" >      .then((response) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        setReviews(response.data);</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        setReviewsLoaded(true);</span>
+<span class="cstat-no" title="statement not covered" >      })</span>
+<span class="cstat-no" title="statement not covered" >      .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >        throw err;</span>
+<span class="cstat-no" title="statement not covered" >      });</span>
+<span class="cstat-no" title="statement not covered" >  }, []);</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
-<span class="cstat-no" title="statement not covered" >    &lt;Wrapper id="2"&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;RelatedContext.Provider</span>
-<span class="cstat-no" title="statement not covered" >        value={{</span>
-<span class="cstat-no" title="statement not covered" >          setModalKey,</span>
-<span class="cstat-no" title="statement not covered" >          setOpenModal,</span>
-<span class="cstat-no" title="statement not covered" >          modalKey,</span>
-<span class="cstat-no" title="statement not covered" >          yourOutfit,</span>
-<span class="cstat-no" title="statement not covered" >        }}</span>
-<span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        {openModal &amp;&amp; &lt;Modal crossPrice={crossPrice} onSale={onSale} /&gt;}</span>
-<span class="cstat-no" title="statement not covered" >        &lt;Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Related Products&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Your Outfit&lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;YourOutfit handleClick={removeOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/Container&gt;</span>
-<span class="cstat-no" title="statement not covered" >      &lt;/RelatedContext.Provider&gt;</span>
-<span class="cstat-no" title="statement not covered" >    &lt;/Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;div id="RatingsAndReviews" data-testid="ratings-and-reviews"&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;h2&gt; Ratings &amp; Reviews&lt;/h2&gt;</span>
+<span class="cstat-no" title="statement not covered" >        {ratingsLoaded</span>
+<span class="cstat-no" title="statement not covered" >          ? &lt;Ratings meta={reviewsMeta} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          : &lt;h4&gt;Loading...&lt;/h4&gt;}</span>
+<span class="cstat-no" title="statement not covered" >        {reviewsLoaded</span>
+<span class="cstat-no" title="statement not covered" >          ? &lt;Reviews reviews={reviews} /&gt;</span>
+<span class="cstat-no" title="statement not covered" >          : &lt;h4&gt;Loading...&lt;/h4&gt;}</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >    &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export default RelatedAndComparison;
+export default RatingsAndReviews;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -274,7 +295,7 @@ export default RelatedAndComparison;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Sep 21 2021 14:21:41 GMT-0400 (Eastern Daylight Time)
+                at Tue Sep 21 2021 14:45:27 GMT-0400 (Eastern Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>

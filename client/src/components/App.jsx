@@ -123,6 +123,9 @@ const App = () => {
           .then(() => {
             dispatch({ type: ACTIONS.SET_LOADED });
           });
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
   /* RELATED COMPARISON START ----------------------------------------------- */
@@ -193,6 +196,9 @@ const App = () => {
                   dispatch({ type: ACTIONS.SET_RELATED_STYLES, payload: stylesData });
                 });
             });
+        })
+        .catch((err) => {
+          throw err;
         });
     }
   }, [state.selectedProduct]);
@@ -207,7 +213,7 @@ const App = () => {
               <Container>
                 <Header />
                 <Overview />
-                {/*<RelatedAndComparison />*/}
+                {/* <RelatedAndComparison /> */}
                 <QA />
                 <RatingsAndReviews />
               </Container>

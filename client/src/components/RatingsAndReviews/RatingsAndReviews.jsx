@@ -41,6 +41,9 @@ const RatingsAndReviews = () => {
       })
       .then(() => {
         setRatingsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
   useEffect(() => {
@@ -50,11 +53,14 @@ const RatingsAndReviews = () => {
       })
       .then(() => {
         setReviewsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
 
   return (
-    <div id="RatingsAndReviews">
+    <div id="RatingsAndReviews" data-testid="ratings-and-reviews">
       <Wrapper>
         <h2> Ratings & Reviews</h2>
         {ratingsLoaded
