@@ -52,7 +52,7 @@ export const generateStar = (rating, width, height, index) => {
     >
       <defs>
         <linearGradient id={`grad-${size}`}>
-          <stop offset={size} stopColor="yellow" />
+          <stop offset={size} stopColor="gold" />
           <stop offset={size} stopColor="grey" stopOpacity="1" />
         </linearGradient>
       </defs>
@@ -117,7 +117,7 @@ const Ratings = ({ meta }) => (
               {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
             </RatingNumber>
           )}
-        {generateStars(getAverageRating(meta.ratings)[0])}
+        {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
       </div>
       <div>
         { (getRecommendPercent(meta.recommended) === 'None')
