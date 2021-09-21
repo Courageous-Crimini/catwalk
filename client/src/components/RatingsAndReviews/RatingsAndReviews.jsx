@@ -10,7 +10,7 @@ import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
-grid-template-columns: [first] 30% [second] 70%;
+grid-template-columns: [first] 285px [second] auto;
 grid-template-rows: [row1-start] 10% [row1-end] auto [last];
 grid-template-areas:
 
@@ -23,7 +23,7 @@ justify-content: center;
 
 margin: 0;
 height: 100%;
-padding: 100px;
+padding: 0 50px 50px 100px;
 background: white;
 `;
 

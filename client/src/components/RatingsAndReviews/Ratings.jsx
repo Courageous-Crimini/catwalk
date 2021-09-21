@@ -3,13 +3,14 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Wrapper = styled.section`
-background: rgb(211, 212, 213);
 height: auto;
 grid-column-start: 1;
 grid-column-end: 2;
 grid-row-start: 2
+height: 100%;
+background: white;
+padding: 20px;
 `;
-
 const RatingNumber = styled.span`
 font-size: 2.6em;
 `;
@@ -28,7 +29,7 @@ export const getAverageRating = (ratingsObj) => {
   return [sum / numRatings, numRatings];
 };
 
-export const generateStar = (rating) => {
+export const generateStar = (rating, width, height, index) => {
   let size = 1;
   if (rating < 0.125) {
     size = 0;
@@ -43,8 +44,11 @@ export const generateStar = (rating) => {
     <svg
       version="1.1"
       xmlns="http://www.w3.org/2000/svg"
-      width="34"
-      height="32"
+      viewBox="0 0 34 32"
+      width={width}
+      height={height}
+      preserveAspectRatio="xMidYMin slice"
+      key={index}
     >
       <defs>
         <linearGradient id={`grad-${size}`}>
@@ -63,7 +67,7 @@ export const generateStar = (rating) => {
     </svg>
   );
 };
-export const generateStars = (rating) => {
+export const generateStars = (rating, width, height) => {
   const starsArray = [];
   let num = rating;
   for (let i = 0; i < 5; i += 1) {
@@ -76,7 +80,7 @@ export const generateStars = (rating) => {
     }
     num -= 1;
   }
-  return starsArray.map((size) => generateStar(size));
+  return starsArray.map((size, index) => generateStar(size, width, height, index));
 };
 
 // const getMaxRatings = (ratingsObj) => {
