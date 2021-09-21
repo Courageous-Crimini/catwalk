@@ -25,10 +25,8 @@ export const ACTIONS = {
   SET_STYLE: 'set-style',
   /* RELATED COMPARISON START ----------------------------------------------- */
   SET_DISPLAY: 'set-display',
-  SET_FEATURES: 'set-features',
   SET_RELATED_IDX: 'set-related-idx',
   SET_RELATED_STYLES: 'set-related-styles',
-  SET_IMAGES: 'set-images',
   /* RELATED COMPARISON END ------------------------------------------------- */
   SET_LOADED: 'set-loaded',
 };
@@ -42,10 +40,8 @@ const initialState = {
   selectedStyle: null, // now integer; was object
   /* RELATED COMPARISON START ----------------------------------------------- */
   relatedDisplay: [],
-  relatedFeatures: [],
   relatedIdx: [],
   relatedStyles: [],
-  relatedImages: [],
   /* RELATED COMPARISON END ------------------------------------------------- */
 
 };
@@ -80,11 +76,6 @@ const reducer = (state, action) => {
         ...state,
         relatedDisplay: action.payload,
       };
-    case ACTIONS.SET_FEATURES:
-      return {
-        ...state,
-        relatedFeatures: action.payload,
-      };
     case ACTIONS.SET_RELATED_IDX:
       return {
         ...state,
@@ -94,11 +85,6 @@ const reducer = (state, action) => {
       return {
         ...state,
         relatedStyles: action.payload,
-      };
-    case ACTIONS.SET_IMAGES:
-      return {
-        ...state,
-        relatedImages: action.payload,
       };
       /* RELATED COMPARISON END --------------------------------------------- */
     case ACTIONS.SET_LOADED:
@@ -156,12 +142,8 @@ const App = () => {
                   const displayData = [];
                   const stylesData = [];
                   const idxData = [];
-                  const imagesData = [];
-                  const featuresData = [];
                   let displayFormat;
-                  let featureFormat;
                   let styleFormat;
-                  let imageFormat;
                   let dataTracker = 0;
                   let start;
 
@@ -177,12 +159,7 @@ const App = () => {
                       photo: responseStyles[i].results[0].photos[0].thumbnail_url,
                       url: responseStyles[i].results[0].photos[0].url,
                     };
-                    featureFormat = {
-                      id: responseProducts[i].id,
-                      features: responseProducts[i].features,
-                    };
                     displayData.push(displayFormat);
-                    featuresData.push(featureFormat);
 
                     for (let j = 0; j < responseStyles[i].results.length; j += 1) {
                       const productsIdx = responseProducts[i];
@@ -202,14 +179,7 @@ const App = () => {
                         salePrice: stylesIdx[j].sale_price,
                         photos: stylesIdx[j].photos,
                       };
-                      imageFormat = {
-                        index: dataTracker,
-                        id: productsIdx.id,
-                        styleID: stylesIdx[j].style_id,
-                        photos: stylesIdx[j].photos,
-                      };
                       stylesData.push(styleFormat);
-                      imagesData.push(imageFormat);
                       dataTracker += 1;
                     }
                     idxData.push({
@@ -219,10 +189,8 @@ const App = () => {
                     });
                   }
                   dispatch({ type: ACTIONS.SET_DISPLAY, payload: displayData });
-                  dispatch({ type: ACTIONS.SET_FEATURES, payload: featuresData });
                   dispatch({ type: ACTIONS.SET_RELATED_IDX, payload: idxData });
                   dispatch({ type: ACTIONS.SET_RELATED_STYLES, payload: stylesData });
-                  dispatch({ type: ACTIONS.SET_IMAGES, payload: imagesData });
                 });
             });
         });

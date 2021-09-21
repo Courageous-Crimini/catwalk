@@ -4,7 +4,7 @@ import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
 import { Button, Background, ModalContainer, Compare, CompareCard, ImageContainer } from '../styles.jsx';
-// import Features from './Features.jsx';
+import Features from './Features.jsx';
 
 const Modal = ({ crossPrice, onSale }) => {
   const state = useContext(StateContext);
@@ -53,7 +53,7 @@ const Modal = ({ crossPrice, onSale }) => {
         <span>{styleName}</span>
         <span>{category}</span>
         <span>{description}</span>
-        {/* <Features features={features} /> */}
+        <Features features={features} />
       </CompareCard>
     );
   });
@@ -73,7 +73,7 @@ const Modal = ({ crossPrice, onSale }) => {
         <span>{styleName}</span>
         <span>{category}</span>
         <span>{description}</span>
-        {/* <Features features={features} /> */}
+        <Features features={features} />
       </CompareCard>
     );
   });
