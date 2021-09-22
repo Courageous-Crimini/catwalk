@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import { CardsContainer, Card, Button, Image, ImageContainer } from '../styles.jsx';
+import { CardsContainer, Card, Button, CornerBtn, Image, ImageContainer, LeftArrow, RightArrow, Description } from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const state = useContext(StateContext);
@@ -23,32 +23,42 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
 
   const cards = relatedDisplay.map((item) => {
     const {
-      styleID, id, category, name, salePrice, originalPrice, url, photo,
+      styleID, id, category, name, salePrice, originalPrice, photo,
     } = item;
 
     return (
       <Card key={styleID}>
-        <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
-        <Button onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
         <ImageContainer>
-          <a href={url}>
-            <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
-          </a>
+        <Button color="#00CCCC" onClick={() => { addOutfit  (styleID); }}>&#9733;</Button>
+          <CornerBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CornerBtn>
+          <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+          {crossPrice(originalPrice, salePrice)}
         </ImageContainer>
-        <span>{category}</span>
-        <span>{name}</span>
-        {crossPrice(originalPrice, salePrice)}
-        {onSale(salePrice)}
-        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+
+        <Description>
+          <span>{category}</span>
+          <span>{name}</span>
+          {onSale(salePrice)}
+          <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </Description>
       </Card>
     );
   });
 
   return (
     <>
+<<<<<<< HEAD
       <FaRegArrowAltCircleLeft onClick={prev} />
       <FaRegArrowAltCircleRight onClick={next} />
+=======
+>>>>>>> 0d5dcbe4f4d1db65230283aa5693f100a6de99f3
       <CardsContainer>
+        <LeftArrow>
+          <FaRegArrowAltCircleLeft onClick={prev} />
+        </LeftArrow>
+        <RightArrow>
+          <FaRegArrowAltCircleRight onClick={next} />
+        </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
     </>

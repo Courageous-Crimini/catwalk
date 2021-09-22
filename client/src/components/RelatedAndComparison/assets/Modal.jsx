@@ -3,10 +3,10 @@ import React, { useContext, useState } from 'react';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
-import { Button, Background, ModalContainer, Compare, CompareCard, ImageContainer } from '../styles.jsx';
+import { Button, Background, ModalContainer, Compare, CompareCard, Description} from '../styles.jsx';
 import Features from './Features.jsx';
 
-const Modal = ({ crossPrice, onSale }) => {
+const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const state = useContext(StateContext);
   const { selectedProduct, relatedIdx, relatedStyles } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
@@ -43,16 +43,22 @@ const Modal = ({ crossPrice, onSale }) => {
 
     return (
       <CompareCard key={styleID}>
-        <Button onClick={nextComp}>styles</Button>
-        <Images photos={photos} />
-        {crossPrice(originalPrice, salePrice)}
-        {onSale(salePrice)}
-        <span>{slogan}</span>
-        <span>{name}</span>
-        <span>{styleName}</span>
-        <span>{category}</span>
-        <span>{description}</span>
-        <Features features={features} />
+        <Images
+          photos={photos}
+          crossPrice={crossPrice}
+          orig={originalPrice}
+          sale={salePrice}
+          nextStyle={nextComp}
+        />
+        <Description>
+          {onSale(salePrice)}
+          <span>{slogan}</span>
+          <span>{name}</span>
+          <span>{styleName}</span>
+          <span>{category}</span>
+          <span>{description}</span>
+          <Features features={features} />
+        </Description>
       </CompareCard>
     );
   });
@@ -62,16 +68,23 @@ const Modal = ({ crossPrice, onSale }) => {
 
     return (
       <CompareCard key={styleID}>
-        <Button onClick={nextProd}>styles</Button>
-        <Images photos={photos} />
-        {crossPrice(originalPrice, salePrice)}
-        {onSale(salePrice)}
-        <span>{slogan}</span>
-        <span>{name}</span>
-        <span>{styleName}</span>
-        <span>{category}</span>
-        <span>{description}</span>
-        <Features features={features} />
+        <Images
+          photos={photos}
+          crossPrice={crossPrice}
+          orig={originalPrice}
+          sale={salePrice}
+          addOutfit={addOutfit}
+          nextStyle={nextProd}
+        />
+        <Description>
+          {onSale(salePrice)}
+          <span>{slogan}</span>
+          <span>{name}</span>
+          <span>{styleName}</span>
+          <span>{category}</span>
+          <span>{description}</span>
+          <Features features={features} />
+        </Description>
       </CompareCard>
     );
   });
