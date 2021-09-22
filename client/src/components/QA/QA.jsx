@@ -71,8 +71,8 @@ const QA = () => {
   };
 
   return (
-    <Wrapper>
-      <div>
+    <Wrapper data-testid="QA-1">
+      <div id="header">
         <h2> Questions and Answers </h2>
         <div className="Search">
           <Search questions={questions} filterSearch={filterSearch} />
