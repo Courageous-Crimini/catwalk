@@ -132,6 +132,7 @@ const ImageGallery = () => {
               order: '1',
               cursor: 'pointer',
             }}
+            data-testid="arrowU"
           />
           <IoIosArrowDown
             onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.SHIFT_THUMBNAILS_DOWN }); }}
@@ -139,6 +140,7 @@ const ImageGallery = () => {
               order: '8',
               cursor: 'pointer',
             }}
+            data-testid="arrowD"
           />
           {imageState.imageCollection.map((photo, index) => {
             if (photo.url === imageState.imageCollection[imageState.currentImageIndex].url) {
@@ -198,6 +200,7 @@ const ImageGallery = () => {
             cursor: 'pointer',
             zIndex: '10',
           }}
+          data-testid="arrowF"
         />
         <IoIosArrowForward
           onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.NEXT_ITEM }); }}
@@ -206,6 +209,7 @@ const ImageGallery = () => {
             cursor: 'pointer',
             zIndex: '10',
           }}
+          data-testid="arrowB"
         />
         <div
           onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
@@ -231,7 +235,7 @@ const ImageGallery = () => {
               cursor: 'zoom-in',
               boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
             }}
-            alt="Style"
+            alt="Main"
           />
         </div>
       </Wrapper>
@@ -247,6 +251,7 @@ const ImageGallery = () => {
         zIndex: '0',
       }}
       onClick={() => { imageDispatch({ type: IMAGE_ACTIONS.VIEW_ITEM }); }}
+      data-testid="ZoomContainer"
     >
       <div
         style={{

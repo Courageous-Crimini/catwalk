@@ -60,6 +60,7 @@ const ProductOverview = () => {
             <li
               key={`Feature${index + 1}`}
               style={{ padding: '1.5% 0 1.5% 20px' }}
+              data-testid="Feature"
             >
               &#10003;
               <strong>
