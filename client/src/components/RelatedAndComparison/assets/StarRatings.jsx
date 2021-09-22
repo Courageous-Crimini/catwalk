@@ -7,7 +7,7 @@ const StarRatings = ({ ratings }) => {
   const avgPerStar = ratingsArr.map((item) => (item / totalRatings));
   const total = avgPerStar.reduce(reducer) / 5;
 
-  console.log(total * 100);
+  // console.log(total * 100);
 
   return (
     <>
