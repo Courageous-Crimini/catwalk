@@ -3,7 +3,17 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
-import { CardsContainer, Card, Button, CornerBtn, Image, ImageContainer, LeftArrow, RightArrow, Description } from '../styles.jsx';
+import {
+  CardsContainer,
+  ImageContainer,
+  Description,
+  RightArrow,
+  LeftArrow,
+  CornerBtn,
+  Button,
+  Image,
+  Card,
+} from '../styles.jsx';
 
 const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
   const state = useContext(StateContext);
@@ -29,7 +39,7 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     return (
       <Card key={styleID}>
         <ImageContainer>
-        <Button color="#00CCCC" onClick={() => { addOutfit  (styleID); }}>&#9733;</Button>
+          <Button color="#00CCCC" onClick={() => { addOutfit  (styleID); }}>&#9733;</Button>
           <CornerBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CornerBtn>
           <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
           {crossPrice(originalPrice, salePrice)}

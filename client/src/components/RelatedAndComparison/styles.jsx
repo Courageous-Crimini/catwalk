@@ -54,7 +54,7 @@ export const Card = styled.section`
     width: 30%
   }
 `;
-/* --                                IMAGES                                 -- */
+/* --                               IMAGES                                 -- */
 
 export const ImageContainer = styled.div`
   /* display: flex;

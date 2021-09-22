@@ -1,9 +1,12 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
-import { RelatedContext } from '../Context.jsx';
-import { Image, ImageContainer, Button, CornerBtn, LeftImageArrow, RightImageArrow } from '../styles.jsx';
+import {
+  Image, ImageContainer, Button, CornerBtn, LeftImageArrow, RightImageArrow,
+} from '../styles.jsx';
 
-const Images = ({ photos, crossPrice, removeOutfit, id, orig, sale, addOutfit, nextStyle }) => {
+const Images = ({
+  photos, crossPrice, removeOutfit, id, orig, sale, addOutfit, nextStyle,
+}) => {
   const [counter, setCounter] = useState(0);
   const length = photos.length - 1;
 
@@ -25,10 +28,10 @@ const Images = ({ photos, crossPrice, removeOutfit, id, orig, sale, addOutfit, n
     return (
       <ImageContainer>
         <LeftImageArrow>
-          <FaCaretRight onClick={next} />
+          <FaCaretLeft onClick={prev} />
         </LeftImageArrow>
         <RightImageArrow>
-          <FaCaretLeft onClick={prev} />
+          <FaCaretRight onClick={next} />
         </RightImageArrow>
         <Button color="#FF0000" onClick={() => { removeOutfit(id); }}>X</Button>
         {images.slice(counter, counter + 1)}
@@ -44,7 +47,7 @@ const Images = ({ photos, crossPrice, removeOutfit, id, orig, sale, addOutfit, n
       <RightImageArrow>
         <FaCaretRight onClick={next} />
       </RightImageArrow>
-      <Button color="#00CCCC" onClick={() => { addOutfit  (styleID); }}>&#9733;</Button>
+      <Button color="#00CCCC" onClick={() => { addOutfit(id); }}>&#9733;</Button>
       <CornerBtn onClick={nextStyle}>styles</CornerBtn>
       {images.slice(counter, counter + 1)}
       {crossPrice(orig, sale)}

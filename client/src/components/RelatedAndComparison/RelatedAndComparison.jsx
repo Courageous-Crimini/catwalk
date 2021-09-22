@@ -42,9 +42,13 @@ const RelatedAndComparison = () => {
       }
     }
   };
-  const crossPrice = (origPrice, newPrice) => newPrice ? <Price cross="line-through">&#36;{origPrice}</Price> : <Price>&#36;{origPrice}</Price>
+  const crossPrice = (origPrice, newPrice) => newPrice ?
+    <Price cross="line-through">&#36;{origPrice}</Price> :
+    <Price>&#36;{origPrice}</Price>
 
-  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
+  const onSale = (price) => price ?
+    <span style={{ color: 'red' }}>SALE &#36;{price}</span> :
+    null;
 
   return (
     <Wrapper id="2">
@@ -56,7 +60,11 @@ const RelatedAndComparison = () => {
           yourOutfit,
         }}
       >
-        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} addOutfit={addOutfit} />}
+        {openModal && <Modal
+          crossPrice={crossPrice}
+          onSale={onSale}
+          addOutfit={addOutfit}
+        />}
         <Container>
           <h2>Related Products</h2>
           <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />

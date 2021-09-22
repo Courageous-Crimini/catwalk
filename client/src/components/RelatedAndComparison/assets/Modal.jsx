@@ -3,8 +3,10 @@ import React, { useContext, useState } from 'react';
 import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
-import { Button, Background, ModalContainer, Compare, CompareCard, Description} from '../styles.jsx';
 import Features from './Features.jsx';
+import {
+  Button, Background, ModalContainer, Compare, CompareCard, Description,
+} from '../styles.jsx';
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const state = useContext(StateContext);
@@ -38,17 +40,23 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
     setProdCounter(prodCounter === prodLength ? 0 : prodCounter + 1);
   };
   const compCards = relatedStyles.slice(compStart, compFinish).map((item) => {
-    const { category, name, description, photos, features } = item;
-    const { slogan, styleID, styleName, originalPrice, salePrice } = item;
+    const {
+      category, name, description, photos, features,
+    } = item;
+    const {
+      slogan, styleID, styleName, originalPrice, salePrice,
+    } = item;
 
     return (
       <CompareCard key={styleID}>
         <Images
-          photos={photos}
           crossPrice={crossPrice}
+          addOutfit={addOutfit}
           orig={originalPrice}
-          sale={salePrice}
           nextStyle={nextComp}
+          sale={salePrice}
+          photos={photos}
+          id={styleID}
         />
         <Description>
           {onSale(salePrice)}
@@ -63,18 +71,23 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
     );
   });
   const prodCards = relatedStyles.slice(prodStart, prodFinish).map((item) => {
-    const { category, name, description, photos, features } = item;
-    const { slogan, styleID, styleName, originalPrice, salePrice } = item;
+    const {
+      category, name, description, photos, features,
+    } = item;
+    const {
+      slogan, styleID, styleName, originalPrice, salePrice,
+    } = item;
 
     return (
       <CompareCard key={styleID}>
         <Images
-          photos={photos}
           crossPrice={crossPrice}
-          orig={originalPrice}
-          sale={salePrice}
           addOutfit={addOutfit}
+          orig={originalPrice}
           nextStyle={nextProd}
+          sale={salePrice}
+          photos={photos}
+          id={styleID}
         />
         <Description>
           {onSale(salePrice)}
