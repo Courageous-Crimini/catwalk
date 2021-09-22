@@ -94,7 +94,7 @@ export const generateStars = (rating, width, height) => {
 //   return maxNum;
 // };
 
-const getRecommendPercent = (recObj) => {
+export const getRecommendPercent = (recObj) => {
   if (recObj.true === undefined) {
     if (recObj.false === undefined) {
       return 'None';
@@ -102,7 +102,7 @@ const getRecommendPercent = (recObj) => {
     return 0;
   }
   const recTrue = parseInt(recObj.true, 10);
-  const recFalse = parseInt(recObj.false, 10);
+  const recFalse = parseInt(recObj.false, 10) || 0;
   return 100 * (recTrue / (recTrue + recFalse));
 };
 
