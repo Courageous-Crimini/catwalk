@@ -11,8 +11,35 @@ height: 100%;
 background: white;
 padding: 20px;
 `;
+
+const CharacteristicBar = styled.div`
+background-color: rgb(233, 236, 239);
+width: 100%
+`;
+
+const Indicator = styled.div`
+margin-left: ${(props) => props.distance};
+`;
+
 const RatingNumber = styled.span`
 font-size: 2.6em;
+`;
+
+const AlignRight = styled.div`
+float: right;
+text-align: right;
+width: 33%;
+`;
+
+const AlignMiddle = styled.div`
+float: left;
+text-align: center;
+width: 33%;
+`;
+
+const AlignLeft = styled.div`
+float: left;
+width: 33%;
 `;
 
 export const getAverageRating = (ratingsObj) => {
@@ -138,9 +165,29 @@ const Ratings = ({ meta }) => (
       ))}
       {Object.entries(meta.characteristics).map((characteristic) => (
         <div key={characteristic[1].id}>
-          {characteristic[0]}
-          {': '}
-          {characteristic[1].value}
+          <div>
+            {characteristic[0]}
+            {': '}
+            <CharacteristicBar>
+              <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
+                ▼
+              </Indicator>
+              {/*
+              <Indicator distance={'94%'}>
+                ▼
+              </Indicator>
+              */}
+            </CharacteristicBar>
+            <AlignLeft>
+              Left
+            </AlignLeft>
+            <AlignMiddle>
+              Middle
+            </AlignMiddle>
+            <AlignRight>
+              Right
+            </AlignRight>
+          </div>
         </div>
       ))}
     </div>
