@@ -39,8 +39,14 @@ const RatingsAndReviews = () => {
       .then((response) => {
         setReviewsMeta(response.data);
       })
+      .catch((err) => {
+        throw err;
+      })
       .then(() => {
         setRatingsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
   useEffect(() => {
@@ -48,8 +54,14 @@ const RatingsAndReviews = () => {
       .then((response) => {
         setReviews(response.data);
       })
+      .catch((err) => {
+        throw err;
+      })
       .then(() => {
         setReviewsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
 
