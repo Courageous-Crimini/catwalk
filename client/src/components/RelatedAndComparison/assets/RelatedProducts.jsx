@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { StateContext } from '../../App.jsx';
@@ -27,20 +29,30 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     } = item;
 
     return (
-      <Card key={styleID}>
-        <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
-        <Button onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</Button>
-        <ImageContainer>
-          <a href={url}>
-            <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
-          </a>
-        </ImageContainer>
-        <span>{category}</span>
-        <span>{name}</span>
-        {crossPrice(originalPrice, salePrice)}
-        {onSale(salePrice)}
-        <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-      </Card>
+      <div key={item.styleID} className="card">
+        <button type="button" className="relatedBtn" onClick={() => { handleClick(item.styleID); }}>&#9733;</button>
+        <div className="card-image">
+          <Images images={item.styleImages} openModal={openModal} />
+          {/* <span className="relatedBtn">&#9733;</span> */}
+        </div>
+        <div className="card-description">
+          <span className="item-category">{item.category}</span>
+          <br />
+          <span className="item-name">{item.name}</span>
+          <br />
+          <span className={salePrice ? 'cross-out-price' : 'original-price'}>
+            &#36;
+            {originalPrice}
+          </span>
+          <br />
+          <span className={salePrice ? 'sale-price' : 'hide'}>
+            SALE &#36;
+            {salePrice}
+          </span>
+          <br className={salePrice ? 'break' : 'hide'} />
+          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </div>
+      </div>
     );
   });
 

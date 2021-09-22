@@ -2,6 +2,9 @@ import React, { useState, useContext } from 'react';
 import { StateContext } from '../App.jsx';
 import { RelatedContext } from './Context.jsx';
 import Modal from './assets/Modal.jsx';
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
+import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container } from './styles.jsx';
@@ -69,3 +72,10 @@ const RelatedAndComparison = () => {
 };
 
 export default RelatedAndComparison;
+
+/* Notes
+Tests:
+- check api and make sure the correct images are stores for each style
+- check api and make sure the correct price for each style renders to the page
+- make sure only 5 items can render to page at a time under all circumstances
+*/

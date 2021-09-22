@@ -22,6 +22,7 @@ export const ACTIONS = {
   PRODUCTS_SUCCESS: 'products-success',
   STYLES_SUCCESS: 'styles-success',
   FEATURES_SUCCESS: 'features-success',
+  REVIEWS_META_SUCCESS: 'reviews-meta-success',
   SET_STYLE: 'set-style',
   /* RELATED COMPARISON START ----------------------------------------------- */
   SET_DISPLAY: 'set-display',
@@ -38,12 +39,7 @@ const initialState = {
   selectedProductFeatures: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
-  /* RELATED COMPARISON START ----------------------------------------------- */
-  relatedDisplay: [],
-  relatedIdx: [],
-  relatedStyles: [],
-  /* RELATED COMPARISON END ------------------------------------------------- */
-
+  reviewsMeta: {}, // obj
 };
 
 const reducer = (state, action) => {
@@ -70,23 +66,11 @@ const reducer = (state, action) => {
         ...state,
         selectedProductFeatures: action.payload,
       };
-      /* RELATED COMPARISON START ------------------------------------------- */
-    case ACTIONS.SET_DISPLAY:
+    case ACTIONS.REVIEWS_META_SUCCESS:
       return {
         ...state,
-        relatedDisplay: action.payload,
+        reviewsMeta: action.payload,
       };
-    case ACTIONS.SET_RELATED_IDX:
-      return {
-        ...state,
-        relatedIdx: action.payload,
-      };
-    case ACTIONS.SET_RELATED_STYLES:
-      return {
-        ...state,
-        relatedStyles: action.payload,
-      };
-      /* RELATED COMPARISON END --------------------------------------------- */
     case ACTIONS.SET_LOADED:
       return {
         ...state,
@@ -118,10 +102,16 @@ const App = () => {
             axios.get(`/api/products/${id}`)
               .then((response) => {
                 dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
+              })
+              .then(() => {
+                axios.get(`/api/reviews/meta?product_id=${id}`)
+                  .then((response) => {
+                    dispatch({ type: ACTIONS.REVIEWS_META_SUCCESS, payload: response.data });
+                  })
+                  .then(() => {
+                    dispatch({ type: ACTIONS.SET_LOADED });
+                  });
               });
-          })
-          .then(() => {
-            dispatch({ type: ACTIONS.SET_LOADED });
           });
       });
   }, []);
