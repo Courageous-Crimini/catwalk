@@ -3,7 +3,9 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
-import { CardsContainer, Card, LeftArrow, RightArrow, Description } from '../styles.jsx';
+import {
+  CardsContainer, Card, LeftArrow, RightArrow, Description,
+} from '../styles.jsx';
 
 const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   const [currentCard, setCurrentCard] = useState(0);
@@ -18,7 +20,9 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   };
 
   const cards = yourOutfit.map((item) => {
-    const { salePrice, category, name, photos, styleName, styleID, originalPrice} = item;
+    const {
+      salePrice, category, name, photos, styleName, styleID, originalPrice,
+    } = item;
 
     return (
       <Card key={item.styleID}>

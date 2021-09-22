@@ -1,4 +1,4 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { StateContext } from '../App.jsx';
 import { RelatedContext } from './Context.jsx';
 import Modal from './assets/Modal.jsx';
@@ -6,12 +6,11 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
 
-// export const RelatedContext = createContext({});
+// Refactor to use the filter function instead of having an idx tracker later
 
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
   const { relatedStyles } = state;
-
   const [yourOutfit, setYourOutfit] = useState([]);
   const [modalKey, setModalKey] = useState('');
   const [openModal, setOpenModal] = useState(false);
@@ -45,9 +44,13 @@ const RelatedAndComparison = () => {
       }
     }
   };
-  const crossPrice = (origPrice, newPrice) => newPrice ? <Price cross="line-through">&#36;{origPrice}</Price> : <Price>&#36;{origPrice}</Price>
+  const crossPrice = (origPrice, newPrice) => newPrice ?
+    <Price cross="line-through">&#36;{origPrice}</Price> :
+    <Price>&#36;{origPrice}</Price>
 
-  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
+  const onSale = (price) => price ?
+    <span style={{ color: 'red' }}>SALE &#36;{price}</span> :
+    null;
 
   return (
     <Wrapper id="2">
@@ -59,7 +62,11 @@ const RelatedAndComparison = () => {
           yourOutfit,
         }}
       >
-        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} addOutfit={addOutfit} />}
+        {openModal && <Modal
+          crossPrice={crossPrice}
+          onSale={onSale}
+          addOutfit={addOutfit}
+        />}
         <Container>
           <h2>Related Products</h2>
           <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
