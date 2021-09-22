@@ -22,7 +22,13 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
 
     return (
       <Card key={item.styleID}>
-        <Images photos={photos} crossPrice={crossPrice} removeOutfit={removeOutfit} sale={salePrice} orig={originalPrice} id={styleID} />
+        <Images
+          photos={photos}
+          crossPrice={crossPrice}
+          removeOutfit={removeOutfit}
+          sale={salePrice}
+          orig={originalPrice}
+          id={styleID} />
         <Description>
           <span>{category}</span>
           <span>{name}</span>

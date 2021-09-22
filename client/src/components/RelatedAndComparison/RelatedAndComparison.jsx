@@ -56,7 +56,7 @@ const RelatedAndComparison = () => {
           yourOutfit,
         }}
       >
-        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} />}
+        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} addOutfit={addOutfit} />}
         <Container>
           <h2>Related Products</h2>
           <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
