@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for components/QA/QA.jsx</title>
+    <title>Code coverage report for components/QA/AnswerItem.jsx</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../../prettify.css" />
     <link rel="stylesheet" href="../../base.css" />
@@ -19,13 +19,13 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/QA</a> QA.jsx</h1>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">components/QA</a> AnswerItem.jsx</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.43% </span>
+                <span class="strong">34.07% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>38/94</span>
+                <span class='fraction'>31/91</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">40.43% </span>
+                <span class="strong">34.07% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>38/94</span>
+                <span class='fraction'>31/91</span>
             </div>
         
             
@@ -148,10 +148,7 @@
 <a name='L89'></a><a href='#L89'>89</a>
 <a name='L90'></a><a href='#L90'>90</a>
 <a name='L91'></a><a href='#L91'>91</a>
-<a name='L92'></a><a href='#L92'>92</a>
-<a name='L93'></a><a href='#L93'>93</a>
-<a name='L94'></a><a href='#L94'>94</a>
-<a name='L95'></a><a href='#L95'>95</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L92'></a><a href='#L92'>92</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -180,13 +177,10 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -245,100 +239,97 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable array-callback-return */
-/* eslint-disable consistent-return */
-/* eslint-disable import/no-cycle */
-import React, { useState, useEffect, useContext } from 'react';
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import Search from './Search.jsx';
-import QuestionsList from './QuestionsList.jsx';
-import AddQuestion from './AddQuestion.jsx';
-import { StateContext } from '../App.jsx';
+import moment from 'moment';
 &nbsp;
 const Wrapper = styled.section`
-margin: 70px;
 height: 100%;
-padding: 50px;
 background: white;
 `;
 &nbsp;
-const Button = styled.button`
-  /* Adapt the colors based on primary prop */
-  background: ${(props) =&gt; (props.primary ? 'black' : 'white')};
-  color: ${(props) =&gt; (props.primary ? 'white' : 'black')};
-&nbsp;
-  font-size: 1.2em;
-  margin: 1.2em;
-  padding: 1em;
-  border: 2px solid black;
-  border-radius: 3px;
-`;
-&nbsp;
 const Row = styled.div`
-    display: flex
+display: flex;
+align-items: center;
 `;
 &nbsp;
-// eslint-disable-next-line no-empty-pattern
-const QA = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >  // const [productId] = useState(48432);</span>
-<span class="cstat-no" title="statement not covered" >  const state = useContext(StateContext);</span>
-<span class="cstat-no" title="statement not covered" >  const id = state.selectedProduct;</span>
-<span class="cstat-no" title="statement not covered" >  const [questions, setQuestions] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [filtered, setFiltered] = useState([]);</span>
-<span class="cstat-no" title="statement not covered" >  const [limit, setLimit] = useState(2);</span>
-<span class="cstat-no" title="statement not covered" >  const [productInfo, setProductInfo] = useState([]);</span>
+const Button = styled.button`
+background: none!important;
+border: none;
+padding: 0!important;
+font-weight: bold;
+text-decoration: underline;
+cursor: pointer;
+font-family: Valera Round,sans-serif;
+font-size: 16px
+`;
+&nbsp;
+const AnswerItem = <span class="fstat-no" title="function not covered" >({ answer }) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >  const [helpful, setHelpful] = useState(answer.helpfulness);</span>
+<span class="cstat-no" title="statement not covered" >  const [upvoted, setUpvoted] = useState(false);</span>
+<span class="cstat-no" title="statement not covered" >  const [reported, setReported] = useState(false);</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  useEffect(() =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    axios.get(`/api/qa/questions?product_id=${id}`, { params: { count: limit } })</span>
-<span class="cstat-no" title="statement not covered" >      .then(({ data }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        setFiltered(data.results);</span>
-<span class="cstat-no" title="statement not covered" >        setQuestions(data.results);</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" >      .catch((err) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        throw err;</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >    axios.get(`/api/products/${id}`)</span>
-<span class="cstat-no" title="statement not covered" >      .then(({ data }) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        setProductInfo(data);</span>
-<span class="cstat-no" title="statement not covered" >      })</span>
-<span class="cstat-no" title="statement not covered" >      .catch((err) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >        throw err;</span>
-<span class="cstat-no" title="statement not covered" >      });</span>
-<span class="cstat-no" title="statement not covered" >  }, [limit]);</span>
-<span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const filterSearch = (q) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >    const filter = filtered.filter((question) =&gt; {</span>
-<span class="cstat-no" title="statement not covered" >      if (question.question_body.toLowerCase().includes(q)) {</span>
-<span class="cstat-no" title="statement not covered" >        return question;</span>
-<span class="cstat-no" title="statement not covered" >      }</span>
-<span class="cstat-no" title="statement not covered" >    });</span>
-<span class="cstat-no" title="statement not covered" >    setQuestions(filter);</span>
+<span class="cstat-no" title="statement not covered" >  const handleUpvote = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!upvoted) {</span>
+<span class="cstat-no" title="statement not covered" >      axios.put(`api/qa/answers/${answer.answer_id}/helpful`)</span>
+<span class="cstat-no" title="statement not covered" >        .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          setUpvoted(true);</span>
+<span class="cstat-no" title="statement not covered" >          setHelpful((prevState) =&gt; prevState + 1);</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          throw err;</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >  const handleReport = () =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >    if (!reported) {</span>
+<span class="cstat-no" title="statement not covered" >      axios.put(`/api/qa/answers/${answer.answer_id}/report`)</span>
+<span class="cstat-no" title="statement not covered" >        .then(() =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          setReported(true);</span>
+<span class="cstat-no" title="statement not covered" >        })</span>
+<span class="cstat-no" title="statement not covered" >        .catch((err) =&gt; {</span>
+<span class="cstat-no" title="statement not covered" >          throw err;</span>
+<span class="cstat-no" title="statement not covered" >        });</span>
+<span class="cstat-no" title="statement not covered" >    }</span>
+<span class="cstat-no" title="statement not covered" >  };</span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;Wrapper&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;Row&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;h3&gt;</span>
+<span class="cstat-no" title="statement not covered" >          A:&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/h3&gt;</span>
+<span class="cstat-no" title="statement not covered" ></span>
+<span class="cstat-no" title="statement not covered" >        &lt;p&gt;{answer.body}&lt;/p&gt;</span>
+<span class="cstat-no" title="statement not covered" >      &lt;/Row&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;h2&gt; Questions and Answers &lt;/h2&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="Search"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;Search questions={questions} filterSearch={filterSearch} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;div className="Questions-collapsible"&gt;</span>
-<span class="cstat-no" title="statement not covered" >          {/* {console.log('QA.jsx', productInfo)} */}</span>
-<span class="cstat-no" title="statement not covered" >          &lt;QuestionsList questions={questions} productInfo={productInfo} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;Row&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;Button className="toggle" onClick={() =&gt; { setLimit((prevState) =&gt; prevState + 2); }}&gt;</span>
-<span class="cstat-no" title="statement not covered" >              More Answered Questions</span>
-<span class="cstat-no" title="statement not covered" >            &lt;/Button&gt;</span>
-<span class="cstat-no" title="statement not covered" >            &lt;AddQuestion productInfo={productInfo} /&gt;</span>
-<span class="cstat-no" title="statement not covered" >          &lt;/Row&gt;</span>
-<span class="cstat-no" title="statement not covered" >        &lt;/div&gt;</span>
+<span class="cstat-no" title="statement not covered" >        &lt;p style={{ margin: 0 }}&gt;</span>
+<span class="cstat-no" title="statement not covered" >          by:&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >          {answer.answerer_name}</span>
+<span class="cstat-no" title="statement not covered" >          ,&amp;nbsp;</span>
+<span class="cstat-no" title="statement not covered" >          {moment(answer.date).format('LL')}</span>
+<span class="cstat-no" title="statement not covered" >          {' Helpful? '}</span>
+<span class="cstat-no" title="statement not covered" >          &lt;Button onClick={handleUpvote}&gt;</span>
+<span class="cstat-no" title="statement not covered" >            Yes</span>
+<span class="cstat-no" title="statement not covered" >          &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >          {` (${helpful}) `}</span>
+<span class="cstat-no" title="statement not covered" >          {reported</span>
+<span class="cstat-no" title="statement not covered" >            ? 'Reported'</span>
+<span class="cstat-no" title="statement not covered" >            : (</span>
+<span class="cstat-no" title="statement not covered" >              &lt;Button onClick={handleReport}&gt;</span>
+<span class="cstat-no" title="statement not covered" >                Report</span>
+<span class="cstat-no" title="statement not covered" >              &lt;/Button&gt;</span>
+<span class="cstat-no" title="statement not covered" >            )}</span>
+<span class="cstat-no" title="statement not covered" >        &lt;/p&gt;</span>
 <span class="cstat-no" title="statement not covered" >      &lt;/div&gt;</span>
 <span class="cstat-no" title="statement not covered" >    &lt;/Wrapper&gt;</span>
 <span class="cstat-no" title="statement not covered" >  );</span>
 <span class="cstat-no" title="statement not covered" >};</span>
 &nbsp;
-export default QA;
+export default AnswerItem;
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

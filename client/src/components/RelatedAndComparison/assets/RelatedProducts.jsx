@@ -47,11 +47,6 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <FaRegArrowAltCircleLeft onClick={prev} />
-      <FaRegArrowAltCircleRight onClick={next} />
-=======
->>>>>>> 0d5dcbe4f4d1db65230283aa5693f100a6de99f3
       <CardsContainer>
         <LeftArrow>
           <FaRegArrowAltCircleLeft onClick={prev} />
