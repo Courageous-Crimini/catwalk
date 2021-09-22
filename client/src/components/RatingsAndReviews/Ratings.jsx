@@ -12,6 +12,10 @@ background: white;
 padding: 20px;
 `;
 
+const CharTitle = styled.span`
+font-weight: bold;
+`;
+
 const CharacteristicBar = styled.div`
 background-color: rgb(233, 236, 239);
 width: 100%
@@ -110,6 +114,15 @@ export const generateStars = (rating, width, height) => {
   return starsArray.map((size, index) => generateStar(size, width, height, index));
 };
 
+const CharMarkers = {
+  Size: ['Too Small', 'Perfect', 'Too Wide'],
+  Width: ['Too Narrow', 'Perfect', 'Too Wide'],
+  Comfort: ['Uncomfortable', 'Ok', 'Perfect'],
+  Quality: ['Poor', 'Expected', 'Perfect'],
+  Length: ['Runs Short', 'Perfect', 'Runs Long'],
+  Fit: ['Runs tight', 'Perfect', 'Runs Long'],
+};
+
 // const getMaxRatings = (ratingsObj) => {
 //   const ratingsArr = Object.entries(ratingsObj);
 //   let maxNum = 0;
@@ -166,8 +179,7 @@ const Ratings = ({ meta }) => (
       {Object.entries(meta.characteristics).map((characteristic) => (
         <div key={characteristic[1].id}>
           <div>
-            {characteristic[0]}
-            {': '}
+            <CharTitle>{`${characteristic[0]}: `}</CharTitle>
             <CharacteristicBar>
               <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
                 ▼
@@ -179,13 +191,13 @@ const Ratings = ({ meta }) => (
               */}
             </CharacteristicBar>
             <AlignLeft>
-              Left
+              {CharMarkers[characteristic[0]][0]}
             </AlignLeft>
             <AlignMiddle>
-              Middle
+              {CharMarkers[characteristic[0]][1]}
             </AlignMiddle>
             <AlignRight>
-              Right
+              {CharMarkers[characteristic[0]][2]}
             </AlignRight>
           </div>
         </div>
