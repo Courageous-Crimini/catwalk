@@ -12,4 +12,5 @@
 /client/public/bundle.js
 
 # Jest Coverage Files
-/coverage
+/coverage.data
+/coverage/
