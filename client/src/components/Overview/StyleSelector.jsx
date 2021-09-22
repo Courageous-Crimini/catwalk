@@ -45,14 +45,16 @@ const StyleSelector = () => {
           Style
           {' > '}
         </h4>
-        <p style={{
-          fontWeight: 'lighter',
-          fontSize: '1em',
-          margin: '0',
-          marginLeft: '10px',
-          display: 'inline',
-          alignSelf: 'center',
-        }}
+        <p
+          style={{
+            fontWeight: 'lighter',
+            fontSize: '1em',
+            margin: '0',
+            marginLeft: '10px',
+            display: 'inline',
+            alignSelf: 'center',
+          }}
+          data-testid="StyleTitle"
         >
           {state.styles.filter((style) => style.style_id === state.selectedStyle)[0].name}
         </p>

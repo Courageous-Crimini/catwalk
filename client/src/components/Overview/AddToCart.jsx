@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
@@ -52,6 +53,8 @@ const AddToCart = () => {
 
   const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
 
+  // cartDispatch({ type: CART_ACTIONS.SET_INVENTORY, payload: state.styles.filter((style) => style.style_id === state.selectedStyle)[0].skus });
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const options = {
@@ -71,7 +74,7 @@ const AddToCart = () => {
   return (
     <Wrapper>
       <form
-        onSubmit={(e) => { handleSubmit(e); }}
+        onSubmit={(e) => { e.preventDefault(); }}
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -134,6 +137,7 @@ const AddToCart = () => {
         { cartState.quantity > 0
           ? (
             <input
+              onClick={(e) => { handleSubmit(e); }}
               type="submit"
               value="Add to Cart"
               style={{
@@ -146,12 +150,13 @@ const AddToCart = () => {
                 fontWeight: 'bold',
                 cursor: 'pointer',
               }}
+              data-testid="Active"
             />
           )
           : (
             <input
-              type="submit"
               value="Add to Cart"
+              type="submit"
               style={{
                 order: '2',
                 fontSize: '18px',
@@ -162,6 +167,7 @@ const AddToCart = () => {
                 fontWeight: 'bold',
                 opacity: '40%',
               }}
+              data-testid="Inactive"
             />
           )}
       </form>

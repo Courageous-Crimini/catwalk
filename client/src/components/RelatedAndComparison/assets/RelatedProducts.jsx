@@ -32,9 +32,15 @@ const RelatedProducts = ({ styles, handleClick, openModal }) => {
           <br />
           <span className="item-name">{item.name}</span>
           <br />
-          <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
+          <span className={salePrice ? 'cross-out-price' : 'original-price'}>
+            &#36;
+            {originalPrice}
+          </span>
           <br />
-          <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
+          <span className={salePrice ? 'sale-price' : 'hide'}>
+            SALE &#36;
+            {salePrice}
+          </span>
           <br className={salePrice ? 'break' : 'hide'} />
           <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
         </div>
