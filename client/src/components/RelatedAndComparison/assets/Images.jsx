@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { FaCaretLeft, FaCaretRight } from 'react-icons/fa';
 import {
-  Image, ImageContainer, Button, CornerBtn, LeftImageArrow, RightImageArrow,
+  Image, ImageContainer, Button, CornerBtn,
 } from '../styles.jsx';
 
 const Images = ({
@@ -9,10 +8,6 @@ const Images = ({
 }) => {
   const [counter, setCounter] = useState(0);
   const length = photos.length - 1;
-
-  const prev = () => {
-    setCounter(counter === 0 ? 0 : counter - 1);
-  };
   const next = () => {
     setCounter(counter === length ? 0 : counter + 1);
   };
@@ -20,19 +15,13 @@ const Images = ({
   const images = photos.map((item, index) => {
     const photo = item.thumbnail_url;
     return (
-      <Image key={index} src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+      <Image key={index} onClick={next} src={photo} alt="SORRY NO IMAGE AVAILABLE" />
     );
   });
 
   if (removeOutfit) {
     return (
       <ImageContainer>
-        <LeftImageArrow>
-          <FaCaretLeft onClick={prev} />
-        </LeftImageArrow>
-        <RightImageArrow>
-          <FaCaretRight onClick={next} />
-        </RightImageArrow>
         <Button color="#FF0000" onClick={() => { removeOutfit(id); }}>X</Button>
         {images.slice(counter, counter + 1)}
         {crossPrice(orig, sale)}
@@ -41,12 +30,6 @@ const Images = ({
   }
   return (
     <ImageContainer>
-      <LeftImageArrow>
-        <FaCaretLeft onClick={prev} />
-      </LeftImageArrow>
-      <RightImageArrow>
-        <FaCaretRight onClick={next} />
-      </RightImageArrow>
       <Button color="#00CCCC" onClick={() => { addOutfit(id); }}>&#9733;</Button>
       <CornerBtn onClick={nextStyle}>styles</CornerBtn>
       {images.slice(counter, counter + 1)}

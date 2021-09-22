@@ -6,6 +6,8 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
 
+// Refactor to use the filter function instead of having an idx tracker later
+
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
   const { relatedStyles } = state;
