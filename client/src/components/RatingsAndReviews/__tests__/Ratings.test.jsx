@@ -1,15 +1,9 @@
 import React from 'react';
-import 'regenerator-runtime/runtime';
-import {
-  render, cleanup, waitFor, fireEvent, screen,
-} from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import axios from 'axios';
-import App from '../../App.jsx';
-import RatingsAndReviews from '../RatingsAndReviews.jsx';
 import {
   getAverageRating, generateStar, generateStars, getRecommendPercent,
 } from '../Ratings.jsx';
-import Reviews from '../Reviews.jsx';
 
 const mockProductsData = [
   {

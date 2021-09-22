@@ -120,7 +120,7 @@ const CharMarkers = {
   Comfort: ['Uncomfortable', 'Ok', 'Perfect'],
   Quality: ['Poor', 'Expected', 'Perfect'],
   Length: ['Runs Short', 'Perfect', 'Runs Long'],
-  Fit: ['Runs tight', 'Perfect', 'Runs Long'],
+  Fit: ['Runs Tight', 'Perfect', 'Runs Long'],
 };
 
 // const getMaxRatings = (ratingsObj) => {
