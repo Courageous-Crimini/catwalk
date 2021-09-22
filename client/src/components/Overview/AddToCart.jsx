@@ -150,6 +150,7 @@ const AddToCart = () => {
                 fontWeight: 'bold',
                 cursor: 'pointer',
               }}
+              data-testid="Active"
             />
           )
           : (
@@ -166,6 +167,7 @@ const AddToCart = () => {
                 fontWeight: 'bold',
                 opacity: '40%',
               }}
+              data-testid="Inactive"
             />
           )}
       </form>

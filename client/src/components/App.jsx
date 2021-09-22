@@ -22,6 +22,7 @@ export const ACTIONS = {
   PRODUCTS_SUCCESS: 'products-success',
   STYLES_SUCCESS: 'styles-success',
   FEATURES_SUCCESS: 'features-success',
+  REVIEWS_META_SUCCESS: 'reviews-meta-success',
   SET_STYLE: 'set-style',
   SET_LOADED: 'set-loaded',
 };
@@ -33,6 +34,7 @@ const initialState = {
   selectedProductFeatures: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
+  reviewsMeta: {}, // obj
 };
 
 const reducer = (state, action) => {
@@ -58,6 +60,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         selectedProductFeatures: action.payload,
+      };
+    case ACTIONS.REVIEWS_META_SUCCESS:
+      return {
+        ...state,
+        reviewsMeta: action.payload,
       };
     case ACTIONS.SET_LOADED:
       return {
@@ -90,10 +97,16 @@ const App = () => {
             axios.get(`/api/products/${id}`)
               .then((response) => {
                 dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
+              })
+              .then(() => {
+                axios.get(`/api/reviews/meta?product_id=${id}`)
+                  .then((response) => {
+                    dispatch({ type: ACTIONS.REVIEWS_META_SUCCESS, payload: response.data });
+                  })
+                  .then(() => {
+                    dispatch({ type: ACTIONS.SET_LOADED });
+                  });
               });
-          })
-          .then(() => {
-            dispatch({ type: ACTIONS.SET_LOADED });
           });
       });
   }, []);
