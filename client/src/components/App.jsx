@@ -54,13 +54,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         products: action.payload,
-        selectedProduct: action.payload[5].id,
+        selectedProduct: action.payload[14].id,
       };
     case ACTIONS.STYLES_SUCCESS:
       return {
         ...state,
         styles: action.payload,
-        selectedStyle: action.payload[5].style_id,
+        selectedStyle: action.payload[0].style_id,
       };
     case ACTIONS.SET_STYLE:
       return {

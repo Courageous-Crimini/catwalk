@@ -121,8 +121,8 @@ const Review = ({ review }) => {
       </Button>
       )}
         <div>
-          {/* (review.photos.length !== 0)
-        && <img src={review.photos[0].url} alt="1/> */}
+          {(review.photos.length !== 0)
+        && (review.photos.map((photo) => (<img src={photo.url} key={photo.url} alt="" height="50" />))) }
         </div>
         {(review.response !== null && review.response !== '')
         && <Response>{`Response: ${review.response}`}</Response>}
