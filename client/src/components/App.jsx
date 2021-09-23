@@ -32,7 +32,7 @@ export const ACTIONS = {
   SET_LOADED: 'set-loaded',
 };
 
-const initialState = {
+export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
   selectedProduct: null, // integer
