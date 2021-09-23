@@ -85,6 +85,19 @@ const Input = styled.input`
   margin-left: 10px;
 `;
 
+const TextArea = styled.textarea`
+padding: 0.1em;
+background: white;
+border: solid;
+border-color: black;
+border-width: 1px;
+width: 80%;
+height: auto;
+flex: 0 0 65%;
+margin-left: 10px;
+resize:none;
+`;
+
 const RadioDiv = styled.div`
 padding: 0.1em;
 background: white;
@@ -198,7 +211,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                 </Label>
                 <Label>
                   Review Body: *
-                  <Input name="body" placeholder="Why did you like the product or not?" maxLength="1000" value={newReview.body} onChange={handleChange} />
+                  <TextArea name="body" placeholder="Why did you like the product or not?" rows="6" maxLength="1000" value={newReview.body} onChange={handleChange} />
                 </Label>
                 <Label>
                   Photos
