@@ -6,6 +6,8 @@ display: flex;
   padding-left: 4em;
   padding-right: 4em;
   width: 80%;
+
+
 `;
 export const Container = styled.div`
   display: flex;
@@ -152,7 +154,7 @@ export const Description = styled.div`
 /* --                                MODAL                                 -- */
 
 export const Background = styled.section`
-  width: 60%;
+  width: 80%;
   height: 50em;
   background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
