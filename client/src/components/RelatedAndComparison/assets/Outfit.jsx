@@ -3,10 +3,7 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
-<<<<<<< HEAD
-=======
 import StarRatings from './StarRatings.jsx';
->>>>>>> 14ccd786a6c7529952725f9ddc65a35a44561c66
 import {
   CardsContainer, Card, LeftArrow, RightArrow, Description,
 } from '../styles.jsx';
