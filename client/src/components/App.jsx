@@ -39,7 +39,13 @@ const initialState = {
   selectedProductFeatures: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
+
   reviewsMeta: {}, // obj
+  /* RELATED COMPARISON START ----------------------------------------------- */
+  relatedDisplay: [],
+  relatedIdx: [],
+  relatedStyles: [],
+  /* RELATED COMPARISON END ------------------------------------------------- */
 };
 
 const reducer = (state, action) => {
@@ -71,6 +77,23 @@ const reducer = (state, action) => {
         ...state,
         reviewsMeta: action.payload,
       };
+      /* RELATED COMPARISON START ------------------------------------------- */
+    case ACTIONS.SET_DISPLAY:
+      return {
+        ...state,
+        relatedDisplay: action.payload,
+      };
+    case ACTIONS.SET_RELATED_IDX:
+      return {
+        ...state,
+        relatedIdx: action.payload,
+      };
+    case ACTIONS.SET_RELATED_STYLES:
+      return {
+        ...state,
+        relatedStyles: action.payload,
+      };
+      /* RELATED COMPARISON END --------------------------------------------- */
     case ACTIONS.SET_LOADED:
       return {
         ...state,
@@ -129,58 +152,68 @@ const App = () => {
                 .then(({ data }) => data));
               Promise.all(relatedStylesData)
                 .then((responseStyles) => {
-                  const displayData = [];
-                  const stylesData = [];
-                  const idxData = [];
-                  let displayFormat;
-                  let styleFormat;
-                  let dataTracker = 0;
-                  let start;
+                  const relatedRatingsData = idResponse.map((item) => axios.get(`api/reviews/meta?product_id=${state.selectedProduct}`)
+                    .then(({ data }) => data));
+                  Promise.all(relatedRatingsData)
+                    .then((responseRatings) => {
+                      const displayData = [];
+                      const stylesData = [];
+                      const idxData = [];
+                      let displayFormat;
+                      let styleFormat;
+                      let dataTracker = 0;
+                      let start;
 
-                  for (let i = 0; i < responseProducts.length; i += 1) {
-                    start = (!start) ? dataTracker : dataTracker;
-                    displayFormat = {
-                      id: responseProducts[i].id,
-                      category: responseProducts[i].category,
-                      name: responseProducts[i].name,
-                      styleID: responseStyles[i].results[0].style_id,
-                      originalPrice: responseStyles[i].results[0].original_price,
-                      salePrice: responseStyles[i].results[0].sale_price,
-                      photo: responseStyles[i].results[0].photos[0].thumbnail_url,
-                      url: responseStyles[i].results[0].photos[0].url,
-                    };
-                    displayData.push(displayFormat);
+                      for (let i = 0; i < responseProducts.length; i += 1) {
+                        start = (!start) ? dataTracker : dataTracker;
+                        displayFormat = {
+                          id: responseProducts[i].id,
+                          category: responseProducts[i].category,
+                          name: responseProducts[i].name,
+                          styleID: responseStyles[i].results[0].style_id,
+                          originalPrice: responseStyles[i].results[0].original_price,
+                          salePrice: responseStyles[i].results[0].sale_price,
+                          photo: responseStyles[i].results[0].photos[0].thumbnail_url,
+                          url: responseStyles[i].results[0].photos[0].url,
+                          ratings: responseRatings[i].ratings,
+                        };
 
-                    for (let j = 0; j < responseStyles[i].results.length; j += 1) {
-                      const productsIdx = responseProducts[i];
-                      const stylesIdx = responseStyles[i].results;
+                        displayData.push(displayFormat);
+                        // console.log('App', displayFormat.ratings); // COMMENT
 
-                      styleFormat = {
-                        index: dataTracker,
-                        id: productsIdx.id,
-                        category: productsIdx.category,
-                        name: productsIdx.name,
-                        description: productsIdx.description,
-                        features: productsIdx.features,
-                        slogan: productsIdx.slogan,
-                        styleID: stylesIdx[j].style_id,
-                        styleName: stylesIdx[j].name,
-                        originalPrice: stylesIdx[j].original_price,
-                        salePrice: stylesIdx[j].sale_price,
-                        photos: stylesIdx[j].photos,
-                      };
-                      stylesData.push(styleFormat);
-                      dataTracker += 1;
-                    }
-                    idxData.push({
-                      id: responseProducts[i].id,
-                      begin: start,
-                      end: dataTracker - 1,
+
+                        for (let j = 0; j < responseStyles[i].results.length; j += 1) {
+                          const productsIdx = responseProducts[i];
+                          const stylesIdx = responseStyles[i].results;
+
+                          styleFormat = {
+                            index: dataTracker,
+                            id: productsIdx.id,
+                            category: productsIdx.category,
+                            name: productsIdx.name,
+                            description: productsIdx.description,
+                            features: productsIdx.features,
+                            ratings: responseRatings[i].ratings,
+                            slogan: productsIdx.slogan,
+                            styleID: stylesIdx[j].style_id,
+                            styleName: stylesIdx[j].name,
+                            originalPrice: stylesIdx[j].original_price,
+                            salePrice: stylesIdx[j].sale_price,
+                            photos: stylesIdx[j].photos,
+                          };
+                          stylesData.push(styleFormat);
+                          dataTracker += 1;
+                        }
+                        idxData.push({
+                          id: responseProducts[i].id,
+                          begin: start,
+                          end: dataTracker - 1,
+                        });
+                      }
+                      dispatch({ type: ACTIONS.SET_DISPLAY, payload: displayData });
+                      dispatch({ type: ACTIONS.SET_RELATED_IDX, payload: idxData });
+                      dispatch({ type: ACTIONS.SET_RELATED_STYLES, payload: stylesData });
                     });
-                  }
-                  dispatch({ type: ACTIONS.SET_DISPLAY, payload: displayData });
-                  dispatch({ type: ACTIONS.SET_RELATED_IDX, payload: idxData });
-                  dispatch({ type: ACTIONS.SET_RELATED_STYLES, payload: stylesData });
                 });
             });
         });

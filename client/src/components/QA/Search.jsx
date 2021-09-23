@@ -30,7 +30,7 @@ const Search = ({ filterSearch }) => {
   return (
     <Wrapper>
       <form>
-        <Input type="text" name="name" placeholder="Have a quesiton? Search for Answers..." value={value} onChange={handleChange} />
+        <Input data-testid="search" type="text" name="name" placeholder="Have a quesiton? Search for Answers..." value={value} onChange={handleChange} />
       </form>
     </Wrapper>
   );

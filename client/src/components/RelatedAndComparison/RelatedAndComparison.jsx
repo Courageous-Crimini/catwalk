@@ -7,7 +7,9 @@ import Modal from './assets/Modal.jsx';
 import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
-import { Wrapper, Container } from './styles.jsx';
+import { Wrapper, Container, Price } from './styles.jsx';
+
+// Refactor to use the filter function instead of having an idx tracker later
 
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
@@ -46,8 +48,13 @@ const RelatedAndComparison = () => {
       }
     }
   };
-  const onSale = (price) => price ? <span style={{ color: 'red' }}>SALE &#36;{price}</span> : null;
-  const crossPrice = (origPrice, newPrice) => newPrice ? <span style={{ textdDecoration: 'line-through' }}>&#36;{origPrice}</span> : <span>&#36;{origPrice}</span>
+  const crossPrice = (origPrice, newPrice) => newPrice ?
+    <Price cross="line-through">&#36;{origPrice}</Price> :
+    <Price>&#36;{origPrice}</Price>
+
+  const onSale = (price) => price ?
+    <span style={{ color: 'red' }}>SALE &#36;{price}</span> :
+    null;
 
   return (
     <Wrapper id="2">
@@ -59,7 +66,11 @@ const RelatedAndComparison = () => {
           yourOutfit,
         }}
       >
-        {openModal && <Modal crossPrice={crossPrice} onSale={onSale} />}
+        {openModal && <Modal
+          crossPrice={crossPrice}
+          onSale={onSale}
+          addOutfit={addOutfit}
+        />}
         <Container>
           <h2>Related Products</h2>
           <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
