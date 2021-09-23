@@ -3,6 +3,10 @@ import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
+<<<<<<< HEAD
+=======
+import StarRatings from './StarRatings.jsx';
+>>>>>>> 14ccd786a6c7529952725f9ddc65a35a44561c66
 import {
   CardsContainer, Card, LeftArrow, RightArrow, Description,
 } from '../styles.jsx';
@@ -21,7 +25,7 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
 
   const cards = yourOutfit.map((item) => {
     const {
-      salePrice, category, name, photos, styleName, styleID, originalPrice,
+      salePrice, category, name, photos, styleName, styleID, originalPrice, ratings,
     } = item;
 
     return (
@@ -32,13 +36,14 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
           removeOutfit={removeOutfit}
           sale={salePrice}
           orig={originalPrice}
-          id={styleID} />
+          id={styleID}
+        />
         <Description>
           <span>{category}</span>
           <span>{name}</span>
           <span>{styleName}</span>
           {onSale(salePrice)}
-          <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+          <StarRatings ratings={ratings} />
         </Description>
       </Card>
     );
