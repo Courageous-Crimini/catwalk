@@ -10,7 +10,7 @@ import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
-grid-template-columns: [first] 285px [second] auto;
+grid-template-columns: [first] 325px [second] auto;
 grid-template-rows: [row1-start] 10% [row1-end] auto [last];
 grid-template-areas:
 
@@ -39,8 +39,14 @@ const RatingsAndReviews = () => {
       .then((response) => {
         setReviewsMeta(response.data);
       })
+      .catch((err) => {
+        throw err;
+      })
       .then(() => {
         setRatingsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
   useEffect(() => {
@@ -48,8 +54,14 @@ const RatingsAndReviews = () => {
       .then((response) => {
         setReviews(response.data);
       })
+      .catch((err) => {
+        throw err;
+      })
       .then(() => {
         setReviewsLoaded(true);
+      })
+      .catch((err) => {
+        throw err;
       });
   }, []);
 
