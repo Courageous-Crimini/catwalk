@@ -11,8 +11,17 @@ import {
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const state = useContext(StateContext);
-  const { selectedProduct, relatedIdx, relatedStyles } = state;
+  /* here */
+  const { selectedProduct, relatedIdx, relatedStyles, selectedProductFeatures, styles } = state;
+  /* here end */
+
   const { modalKey, setOpenModal } = useContext(RelatedContext);
+
+  /* here */
+  console.log('Features', selectedProductFeatures);
+  console.log('Styles', styles);
+  /* here end */
+
   const [compCounter, setCompCounter] = useState(0);
   const [prodCounter, setProdCounter] = useState(0);
   let compLength;
@@ -26,14 +35,18 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
     if (modalKey === currentRelatedIdx.id) {
       compStart = currentRelatedIdx.begin;
       compFinish = currentRelatedIdx.end + 1;
-      compLength = compFinish - compStart;
+      compLength = compFinish - compStart - 1;
     }
     if (selectedProduct === currentRelatedIdx.id) {
       prodStart = currentRelatedIdx.begin;
       prodFinish = currentRelatedIdx.end + 1;
-      prodLength = compFinish - compStart;
+      prodLength = prodFinish - prodStart - 1;
     }
   }
+
+  /* here delete prod stuff after */
+
+  /* here end */
   const nextComp = () => {
     setCompCounter(compCounter === compLength ? 0 : compCounter + 1);
   };
@@ -59,9 +72,9 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
         />
         <Description size="65%">
           {onSale(salePrice)}
-          <span>{slogan}</span>
+          <span>Style {compCounter + 1} of {compLength + 1}: {styleName}</span>
           <span>{name}</span>
-          <span>{styleName}</span>
+          <span>{slogan}</span>
           <span>{category}</span>
           <span>{description}</span>
           <Features features={features} />
@@ -89,9 +102,9 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
         />
         <Description size="65%">
           {onSale(salePrice)}
-          <span>{slogan}</span>
+          <span>Style {prodCounter + 1} of {prodLength + 1}: {styleName}</span>
           <span>{name}</span>
-          <span>{styleName}</span>
+          <span>{slogan}</span>
           <span>{category}</span>
           <span>{description}</span>
           <Features features={features} />
