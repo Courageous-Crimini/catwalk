@@ -85,6 +85,16 @@ const Input = styled.input`
   margin-left: 10px;
 `;
 
+const RadioDiv = styled.div`
+padding: 0.1em;
+background: white;
+border-width: 1px;
+width: 80%;
+height: 20px;
+flex: 0 0 65%;
+margin-left: 10px;
+`;
+
 const Button = styled.button`
   background: black;
   color: white;
@@ -152,16 +162,18 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Overall rating: *
                   <Input name="rating" value={newReview.rating} onChange={handleChange} />
                 </Label>
-                <div className="rating">
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                </div>
                 <Label>
                   Do you recommend this product? *
-                  <Input name="recommend" value={newReview.recommend} onChange={handleChange} />
+                  <RadioDiv>
+                    <label>
+                      <input type="radio" id="yes" name="recommend" value="true" onChange={handleChange} />
+                      Yes
+                    </label>
+                    <label>
+                      <input type="radio" id="no" name="recommend" value="false" onChange={handleChange} defaultChecked />
+                      No
+                    </label>
+                  </RadioDiv>
                 </Label>
                 <Label>
                   Characteristics: *
