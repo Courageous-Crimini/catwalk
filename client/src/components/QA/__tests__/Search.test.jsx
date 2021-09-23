@@ -1,7 +1,8 @@
 import React from 'react';
 import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import QA from '../QA.jsx';
+import Search from '../Search.jsx';
+import state from '../mockState.js';
 
 test('should render QA component', () => {
   render (<QA/>);
