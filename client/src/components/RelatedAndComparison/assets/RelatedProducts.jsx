@@ -1,3 +1,5 @@
+/* eslint-disable no-plusplus */
+/* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
@@ -51,8 +53,7 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
           <span>{category}</span>
           <span>{name}</span>
           {onSale(salePrice)}
-          <StarRatings ratings={ratings}/>
-          {/* <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span> */}
+          <StarRatings ratings={ratings} />
         </Description>
       </Card>
     );

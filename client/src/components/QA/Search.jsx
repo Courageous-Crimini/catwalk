@@ -7,7 +7,7 @@ height: 100%;
 `;
 
 const Input = styled.input`
-  width: 92%;
+  width: 100%;
   padding: 30px;
   margin: 0.5rem;
   font-size: 22px;
@@ -30,7 +30,7 @@ const Search = ({ filterSearch }) => {
   return (
     <Wrapper>
       <form>
-        <Input type="text" name="name" placeholder="Have a quesiton? Search for Answers..." value={value} onChange={handleChange} />
+        <Input data-testid="search" type="text" name="name" placeholder="Have a quesiton? Search for Answers..." value={value} onChange={handleChange} />
       </form>
     </Wrapper>
   );

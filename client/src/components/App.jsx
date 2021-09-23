@@ -32,7 +32,7 @@ export const ACTIONS = {
   SET_LOADED: 'set-loaded',
 };
 
-const initialState = {
+export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
   selectedProduct: null, // integer
@@ -179,8 +179,11 @@ const App = () => {
                         };
 
                         displayData.push(displayFormat);
+<<<<<<< HEAD
                         // console.log('App', displayFormat.ratings); // COMMENT
 
+=======
+>>>>>>> 67b4a0ddf81676ff7cd612ed0d447feaedcfea27
                         for (let j = 0; j < responseStyles[i].results.length; j += 1) {
                           const productsIdx = responseProducts[i];
                           const stylesIdx = responseStyles[i].results;
