@@ -11,7 +11,7 @@ import { StateContext } from '../App.jsx';
 const Wrapper = styled.section`
 display: grid;
 grid-template-columns: [first] 325px [second] auto;
-grid-template-rows: [row1-start] 10% [row1-end] auto [last];
+grid-template-rows: [row1-start] 70px [row1-end] auto [last];
 grid-template-areas:
 
 column-gap: 1%;

@@ -155,9 +155,9 @@ const Ratings = ({ meta }) => (
           : (
             <RatingNumber>
               {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
+              {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
             </RatingNumber>
           )}
-        {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
       </div>
       <div>
         { (getRecommendPercent(meta.recommended) === 'None')
@@ -173,35 +173,40 @@ const Ratings = ({ meta }) => (
             max={getAverageRating(meta.ratings)[1]}
             value={meta.ratings[5 - num]}
           />
-          {` ${meta.ratings[5 - num]}`}
+          {` ${meta.ratings[5 - num] || 0}`}
         </div>
       ))}
-      {Object.entries(meta.characteristics).map((characteristic) => (
-        <div key={characteristic[1].id}>
-          <div>
-            <CharTitle>{`${characteristic[0]}: `}</CharTitle>
-            <CharacteristicBar>
-              <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
-                ▼
-              </Indicator>
-              {/*
+      {Object.entries(meta.characteristics).map((characteristic) => {
+        if (characteristic[1].value !== null) {
+          return (
+            <div key={characteristic[1].id}>
+              <div>
+                <CharTitle>{`${characteristic[0]}: `}</CharTitle>
+                <CharacteristicBar>
+                  <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
+                    ▼
+                  </Indicator>
+                  {/*
               <Indicator distance={'94%'}>
                 ▼
               </Indicator>
               */}
-            </CharacteristicBar>
-            <AlignLeft>
-              {CharMarkers[characteristic[0]][0]}
-            </AlignLeft>
-            <AlignMiddle>
-              {CharMarkers[characteristic[0]][1]}
-            </AlignMiddle>
-            <AlignRight>
-              {CharMarkers[characteristic[0]][2]}
-            </AlignRight>
-          </div>
-        </div>
-      ))}
+                </CharacteristicBar>
+                <AlignLeft>
+                  {CharMarkers[characteristic[0]][0]}
+                </AlignLeft>
+                <AlignMiddle>
+                  {CharMarkers[characteristic[0]][1]}
+                </AlignMiddle>
+                <AlignRight>
+                  {CharMarkers[characteristic[0]][2]}
+                </AlignRight>
+              </div>
+            </div>
+          );
+        }
+        return null;
+      })}
     </div>
   </Wrapper>
 );
