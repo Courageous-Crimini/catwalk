@@ -179,11 +179,6 @@ const App = () => {
                         };
 
                         displayData.push(displayFormat);
-<<<<<<< HEAD
-                        // console.log('App', displayFormat.ratings); // COMMENT
-
-=======
->>>>>>> 67b4a0ddf81676ff7cd612ed0d447feaedcfea27
                         for (let j = 0; j < responseStyles[i].results.length; j += 1) {
                           const productsIdx = responseProducts[i];
                           const stylesIdx = responseStyles[i].results;
