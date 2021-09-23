@@ -11,8 +11,39 @@ height: 100%;
 background: white;
 padding: 20px;
 `;
+
+const CharTitle = styled.span`
+font-weight: bold;
+`;
+
+const CharacteristicBar = styled.div`
+background-color: rgb(233, 236, 239);
+width: 100%
+`;
+
+const Indicator = styled.div`
+margin-left: ${(props) => props.distance};
+`;
+
 const RatingNumber = styled.span`
 font-size: 2.6em;
+`;
+
+const AlignRight = styled.div`
+float: right;
+text-align: right;
+width: 33%;
+`;
+
+const AlignMiddle = styled.div`
+float: left;
+text-align: center;
+width: 33%;
+`;
+
+const AlignLeft = styled.div`
+float: left;
+width: 33%;
 `;
 
 export const getAverageRating = (ratingsObj) => {
@@ -83,6 +114,15 @@ export const generateStars = (rating, width, height) => {
   return starsArray.map((size, index) => generateStar(size, width, height, index));
 };
 
+const CharMarkers = {
+  Size: ['Too Small', 'Perfect', 'Too Wide'],
+  Width: ['Too Narrow', 'Perfect', 'Too Wide'],
+  Comfort: ['Uncomfortable', 'Ok', 'Perfect'],
+  Quality: ['Poor', 'Expected', 'Perfect'],
+  Length: ['Runs Short', 'Perfect', 'Runs Long'],
+  Fit: ['Runs Tight', 'Perfect', 'Runs Long'],
+};
+
 // const getMaxRatings = (ratingsObj) => {
 //   const ratingsArr = Object.entries(ratingsObj);
 //   let maxNum = 0;
@@ -94,7 +134,7 @@ export const generateStars = (rating, width, height) => {
 //   return maxNum;
 // };
 
-const getRecommendPercent = (recObj) => {
+export const getRecommendPercent = (recObj) => {
   if (recObj.true === undefined) {
     if (recObj.false === undefined) {
       return 'None';
@@ -102,7 +142,7 @@ const getRecommendPercent = (recObj) => {
     return 0;
   }
   const recTrue = parseInt(recObj.true, 10);
-  const recFalse = parseInt(recObj.false, 10);
+  const recFalse = parseInt(recObj.false, 10) || 0;
   return 100 * (recTrue / (recTrue + recFalse));
 };
 
@@ -138,9 +178,28 @@ const Ratings = ({ meta }) => (
       ))}
       {Object.entries(meta.characteristics).map((characteristic) => (
         <div key={characteristic[1].id}>
-          {characteristic[0]}
-          {': '}
-          {characteristic[1].value}
+          <div>
+            <CharTitle>{`${characteristic[0]}: `}</CharTitle>
+            <CharacteristicBar>
+              <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
+                ▼
+              </Indicator>
+              {/*
+              <Indicator distance={'94%'}>
+                ▼
+              </Indicator>
+              */}
+            </CharacteristicBar>
+            <AlignLeft>
+              {CharMarkers[characteristic[0]][0]}
+            </AlignLeft>
+            <AlignMiddle>
+              {CharMarkers[characteristic[0]][1]}
+            </AlignMiddle>
+            <AlignRight>
+              {CharMarkers[characteristic[0]][2]}
+            </AlignRight>
+          </div>
         </div>
       ))}
     </div>
