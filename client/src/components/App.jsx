@@ -54,7 +54,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         products: action.payload,
-        selectedProduct: action.payload[14].id,
+        selectedProduct: action.payload[0].id,
       };
     case ACTIONS.STYLES_SUCCESS:
       return {
@@ -114,7 +114,7 @@ const App = () => {
     axios.get('/api/products')
       .then((response) => {
         dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
-        return response.data[0].id;
+        return response.data[6].id;
       })
       .then((id) => {
         axios.get(`/api/products/${id}/styles`)

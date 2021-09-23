@@ -126,6 +126,7 @@ margin: 5px;
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
   const [newReview, setNewReview] = useState(
     {
@@ -205,10 +206,12 @@ export const Modal = ({ showModal, setShowModal }) => {
                     </label>
                   </RadioDiv>
                 </Label>
-                <Label>
-                  Characteristics: *
-                  <Input name="characteristics" value={newReview.characteristics} onChange={handleChange} />
-                </Label>
+                {selectedChars.map((characteristic) => (
+                  <Label key={characteristic[1].id}>
+                    {`${characteristic[0]}: *`}
+                    <Input />
+                  </Label>
+                ))}
                 <Label>
                   Review Summary:
                   <Input name="summary" placeholder="Example: Best purchase ever!" value={newReview.summary} onChange={handleChange} />
