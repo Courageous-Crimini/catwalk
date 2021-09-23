@@ -44,16 +44,16 @@ const RelatedAndComparison = () => {
       }
     }
   };
-  const crossPrice = (origPrice, newPrice) => newPrice ?
-    <Price cross="line-through">&#36;{origPrice}</Price> :
-    <Price>&#36;{origPrice}</Price>
+  const crossPrice = (origPrice, newPrice) =>
+    (newPrice ? <Price cross="line-through">&#36;{origPrice}</Price> : <Price>&#36;{origPrice}</Price>);
 
-  const onSale = (price) => price ?
-    <span style={{ color: 'red' }}>SALE &#36;{price}</span> :
-    null;
+  const onSale = (price) => (price ? <span style={{ color: 'red' }}>SALE&#36;{price}</span> : null);
+
+  const showRightArrow = (cardLength) => (cardLength > 4 ? true : false);
+  const showLeftArrow = (currentSpot) => (currentSpot != 0 ? true : false);
 
   return (
-    <Wrapper id="2">
+    <Wrapper>
       <RelatedContext.Provider
         value={{
           setModalKey,
@@ -69,9 +69,21 @@ const RelatedAndComparison = () => {
         />}
         <Container>
           <h2>Related Products</h2>
-          <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
+          <RelatedProducts
+            addOutfit={addOutfit}
+            crossPrice={crossPrice}
+            onSale={onSale}
+            showLeftArrow={showLeftArrow}
+            showRightArrow={showRightArrow}
+          />
           <h2>Your Outfit</h2>
-          <YourOutfit removeOutfit={removeOutfit} crossPrice={crossPrice} onSale={onSale} />
+          <YourOutfit
+            removeOutfit={removeOutfit}
+            crossPrice={crossPrice}
+            onSale={onSale}
+            showLeftArrow={showLeftArrow}
+            showRightArrow={showRightArrow}
+          />
         </Container>
       </RelatedContext.Provider>
     </Wrapper>

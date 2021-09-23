@@ -8,7 +8,7 @@ import {
   CardsContainer, Card, LeftArrow, RightArrow, Description,
 } from '../styles.jsx';
 
-const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
+const Outfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArrow }) => {
   const [currentCard, setCurrentCard] = useState(0);
   const { yourOutfit } = useContext(RelatedContext);
   const length = yourOutfit.length - 1;
@@ -50,10 +50,10 @@ const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
     <>
       <CardsContainer>
         <LeftArrow>
-          <FaRegArrowAltCircleLeft onClick={prev} />
+          {showLeftArrow(currentCard) && <FaRegArrowAltCircleLeft onClick={prev} />}
         </LeftArrow>
         <RightArrow>
-          <FaRegArrowAltCircleRight onClick={next} />
+          {showRightArrow(length) && <FaRegArrowAltCircleRight onClick={next} />}
         </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>

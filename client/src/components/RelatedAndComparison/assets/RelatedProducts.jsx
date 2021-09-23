@@ -16,7 +16,7 @@ import {
   Card,
 } from '../styles.jsx';
 
-const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
+const RelatedProducts = ({ addOutfit, crossPrice, onSale, showLeftArrow, showRightArrow }) => {
   const state = useContext(StateContext);
   const { relatedDisplay } = state;
   const { setModalKey, setOpenModal } = useContext(RelatedContext);
@@ -61,10 +61,10 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
     <>
       <CardsContainer>
         <LeftArrow>
-          <FaRegArrowAltCircleLeft onClick={prev} />
+          {showLeftArrow(currentCard) && <FaRegArrowAltCircleLeft onClick={prev} />}
         </LeftArrow>
         <RightArrow>
-          <FaRegArrowAltCircleRight onClick={next} />
+          {showRightArrow(length) && <FaRegArrowAltCircleRight onClick={next} />}
         </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
