@@ -119,6 +119,10 @@ const Button = styled.button`
   border-radius: 1.5px;
 `;
 
+const P = styled.p`
+margin: 5px;
+`;
+
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
@@ -213,6 +217,11 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Review Body: *
                   <TextArea name="body" placeholder="Why did you like the product or not?" rows="6" maxLength="1000" value={newReview.body} onChange={handleChange} />
                 </Label>
+                <P>
+                  {(newReview.body.length >= 50)
+                    ? 'Minimum reached'
+                    : `Minimum required characters left: [${50 - newReview.body.length}]`}
+                </P>
                 <Label>
                   Photos
                   <Input name="photos" value={newReview.photos} onChange={handleChange} />
@@ -221,12 +230,12 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Nickname: *
                   <Input name="name" placeholder="Example: jackson11!" maxLength="60" value={newReview.name} onChange={handleChange} />
                 </Label>
-                <p> For privacy reasons, do not use your full name or email address </p>
+                <P> For privacy reasons, do not use your full name or email address </P>
                 <Label>
                   Email:
                   <Input name="email" maxLength="60" value={newReview.email} onChange={handleChange} />
                 </Label>
-                <p> For authentication reasons, you will not be emailed</p>
+                <P> For authentication reasons, you will not be emailed</P>
                 <Button> Submit </Button>
               </Form>
             </ModalContent>
