@@ -11,6 +11,8 @@
 # Webpack Bundle File
 /client/public/bundle.js
 
-# Coverage 
+# Jest Coverage Files
+/coverage.data
+/coverage/
 /coverage
 
