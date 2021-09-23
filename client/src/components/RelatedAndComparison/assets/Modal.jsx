@@ -1,9 +1,10 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
-import { StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
+import { StateContext } from '../../App.jsx';
 import Images from './Images.jsx';
 import Features from './Features.jsx';
+import StarRatings from './StarRatings.jsx';
 import {
   Button, Background, ModalContainer, Compare, CompareCard, Description,
 } from '../styles.jsx';
@@ -41,9 +42,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   };
   const compCards = relatedStyles.slice(compStart, compFinish).map((item) => {
     const {
-      category, name, description, photos, features,
-    } = item;
-    const {
+      category, name, description, photos, features, ratings,
       slogan, styleID, styleName, originalPrice, salePrice,
     } = item;
 
@@ -58,7 +57,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           photos={photos}
           id={styleID}
         />
-        <Description>
+        <Description size="65%">
           {onSale(salePrice)}
           <span>{slogan}</span>
           <span>{name}</span>
@@ -66,15 +65,14 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           <span>{category}</span>
           <span>{description}</span>
           <Features features={features} />
+          <StarRatings ratings={ratings} />
         </Description>
       </CompareCard>
     );
   });
   const prodCards = relatedStyles.slice(prodStart, prodFinish).map((item) => {
     const {
-      category, name, description, photos, features,
-    } = item;
-    const {
+      category, name, description, photos, features, ratings,
       slogan, styleID, styleName, originalPrice, salePrice,
     } = item;
 
@@ -89,7 +87,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           photos={photos}
           id={styleID}
         />
-        <Description>
+        <Description size="65%">
           {onSale(salePrice)}
           <span>{slogan}</span>
           <span>{name}</span>
@@ -97,6 +95,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           <span>{category}</span>
           <span>{description}</span>
           <Features features={features} />
+          <StarRatings ratings={ratings} />
         </Description>
       </CompareCard>
     );

@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.28% </span>
+                <span class="strong">16.05% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>11/72</span>
+                <span class='fraction'>13/81</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">15.28% </span>
+                <span class="strong">16.05% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>11/72</span>
+                <span class='fraction'>13/81</span>
             </div>
         
             
@@ -129,7 +129,16 @@
 <a name='L70'></a><a href='#L70'>70</a>
 <a name='L71'></a><a href='#L71'>71</a>
 <a name='L72'></a><a href='#L72'>72</a>
-<a name='L73'></a><a href='#L73'>73</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -138,6 +147,15 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -209,10 +227,11 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
 &nbsp;
+// Refactor to use the filter function instead of having an idx tracker later
+&nbsp;
 const RelatedAndComparison = <span class="fstat-no" title="function not covered" >() =&gt; {</span>
 <span class="cstat-no" title="statement not covered" >  const state = useContext(StateContext);</span>
 <span class="cstat-no" title="statement not covered" >  const { relatedStyles } = state;</span>
-<span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  const [yourOutfit, setYourOutfit] = useState([]);</span>
 <span class="cstat-no" title="statement not covered" >  const [modalKey, setModalKey] = useState('');</span>
 <span class="cstat-no" title="statement not covered" >  const [openModal, setOpenModal] = useState(false);</span>
@@ -246,9 +265,13 @@ const RelatedAndComparison = <span class="fstat-no" title="function not covered"
 <span class="cstat-no" title="statement not covered" >      }</span>
 <span class="cstat-no" title="statement not covered" >    }</span>
 <span class="cstat-no" title="statement not covered" >  };</span>
-<span class="cstat-no" title="statement not covered" >  const crossPrice = (origPrice, newPrice) =&gt; newPrice ? &lt;Price cross="line-through"&gt;&amp;#36;{origPrice}&lt;/Price&gt; : &lt;Price&gt;&amp;#36;{origPrice}&lt;/Price&gt;</span>
+<span class="cstat-no" title="statement not covered" >  const crossPrice = (origPrice, newPrice) =&gt; newPrice ?</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Price cross="line-through"&gt;&amp;#36;{origPrice}&lt;/Price&gt; :</span>
+<span class="cstat-no" title="statement not covered" >    &lt;Price&gt;&amp;#36;{origPrice}&lt;/Price&gt;</span>
 <span class="cstat-no" title="statement not covered" ></span>
-<span class="cstat-no" title="statement not covered" >  const onSale = (price) =&gt; price ? &lt;span style={{ color: 'red' }}&gt;SALE &amp;#36;{price}&lt;/span&gt; : null;</span>
+<span class="cstat-no" title="statement not covered" >  const onSale = (price) =&gt; price ?</span>
+<span class="cstat-no" title="statement not covered" >    &lt;span style={{ color: 'red' }}&gt;SALE &amp;#36;{price}&lt;/span&gt; :</span>
+<span class="cstat-no" title="statement not covered" >    null;</span>
 <span class="cstat-no" title="statement not covered" ></span>
 <span class="cstat-no" title="statement not covered" >  return (</span>
 <span class="cstat-no" title="statement not covered" >    &lt;Wrapper id="2"&gt;</span>
@@ -260,7 +283,11 @@ const RelatedAndComparison = <span class="fstat-no" title="function not covered"
 <span class="cstat-no" title="statement not covered" >          yourOutfit,</span>
 <span class="cstat-no" title="statement not covered" >        }}</span>
 <span class="cstat-no" title="statement not covered" >      &gt;</span>
-<span class="cstat-no" title="statement not covered" >        {openModal &amp;&amp; &lt;Modal crossPrice={crossPrice} onSale={onSale} addOutfit={addOutfit} /&gt;}</span>
+<span class="cstat-no" title="statement not covered" >        {openModal &amp;&amp; &lt;Modal</span>
+<span class="cstat-no" title="statement not covered" >          crossPrice={crossPrice}</span>
+<span class="cstat-no" title="statement not covered" >          onSale={onSale}</span>
+<span class="cstat-no" title="statement not covered" >          addOutfit={addOutfit}</span>
+<span class="cstat-no" title="statement not covered" >        /&gt;}</span>
 <span class="cstat-no" title="statement not covered" >        &lt;Container&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;h2&gt;Related Products&lt;/h2&gt;</span>
 <span class="cstat-no" title="statement not covered" >          &lt;RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} /&gt;</span>
@@ -280,7 +307,7 @@ export default RelatedAndComparison;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Sep 21 2021 18:55:44 GMT-0700 (Pacific Daylight Time)
+                at Wed Sep 22 2021 12:45:18 GMT-0700 (Pacific Daylight Time)
             </div>
         </div>
         <script src="../../prettify.js"></script>
