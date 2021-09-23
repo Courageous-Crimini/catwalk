@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable react/prop-types */
 import React, { useContext, useReducer, useEffect } from 'react';
-// import Zoom from 'react-img-zoom';
+import Zoom from 'react-img-zoom';
 import styled from 'styled-components';
 import {
   IoIosArrowForward,
