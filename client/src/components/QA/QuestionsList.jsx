@@ -6,7 +6,7 @@ import QuestionItem from './QuestionItem.jsx';
 const Wrapper = styled.section`
 height: 100%;
 background: white;
-padding: 100px;
+padding: 0px;
 `;
 
 const QuestionsList = ({ questions, productInfo }) => (

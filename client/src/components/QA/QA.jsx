@@ -12,7 +12,8 @@ import { StateContext } from '../App.jsx';
 const Wrapper = styled.section`
 margin: 70px;
 height: 100%;
-padding: 50px;
+min-width: 80%;
+padding: 50px 150px;
 background: white;
 `;
 
@@ -70,8 +71,8 @@ const QA = () => {
   };
 
   return (
-    <Wrapper>
-      <div>
+    <Wrapper data-testid="QA-1">
+      <div id="header">
         <h2> Questions and Answers </h2>
         <div className="Search">
           <Search questions={questions} filterSearch={filterSearch} />
