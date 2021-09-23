@@ -1,65 +1,75 @@
-/* eslint-disable no-plusplus */
-/* eslint-disable prefer-destructuring */
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
-import Images from './Images.jsx';
+import React, { useState, useContext } from 'react';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import StarRatings from './StarRatings.jsx';
+import { StateContext } from '../../App.jsx';
+import { RelatedContext } from '../Context.jsx';
+import {
+  CardsContainer,
+  ImageContainer,
+  Description,
+  RightArrow,
+  LeftArrow,
+  CornerBtn,
+  Button,
+  Image,
+  Card,
+} from '../styles.jsx';
 
-const RelatedProducts = ({ styles, handleClick, openModal }) => {
+const RelatedProducts = ({ addOutfit, crossPrice, onSale }) => {
+  const state = useContext(StateContext);
+  const { relatedDisplay } = state;
+  const { setModalKey, setOpenModal } = useContext(RelatedContext);
+
+  // console.log('RelatedProducts', relatedDisplay.ratings);
+  /* CHANGE BELOW AFTER REFACTOR ---------------------------------------------*/
   const [currentCard, setCurrentCard] = useState(0);
-  const length = styles.length - 5;
+  const length = relatedDisplay.length - 1;
 
-  const prevCard = () => {
+  const prev = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
-  const nextCard = () => {
+  const next = () => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
+  /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
 
-  const cards = styles.map((item) => {
-    const originalPrice = item.originalPrice;
-    const salePrice = item.salePrice;
-
+  const cards = relatedDisplay.map((item) => {
+    const {
+      styleID, id, category, name, salePrice, originalPrice, photo, ratings,
+    } = item;
+    /* --------------------- START HERE AND ADD RATINGS --------------------- */
     return (
-      <div key={item.styleID} className="card">
-        <button type="button" className="relatedBtn" onClick={() => { handleClick(item.styleID); }}>&#9733;</button>
-        <div className="card-image">
-          <Images images={item.styleImages} openModal={openModal} />
-          {/* <span className="relatedBtn">&#9733;</span> */}
-        </div>
-        <div className="card-description">
-          <span className="item-category">{item.category}</span>
-          <br />
-          <span className="item-name">{item.name}</span>
-          <br />
-          <span className={salePrice ? 'cross-out-price' : 'original-price'}>
-            &#36;
-            {originalPrice}
-          </span>
-          <br />
-          <span className={salePrice ? 'sale-price' : 'hide'}>
-            SALE &#36;
-            {salePrice}
-          </span>
-          <br className={salePrice ? 'break' : 'hide'} />
-          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        </div>
-      </div>
+      <Card key={styleID}>
+        <ImageContainer>
+          <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
+          <CornerBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CornerBtn>
+          <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+          {crossPrice(originalPrice, salePrice)}
+        </ImageContainer>
+        <Description>
+          <span>{category}</span>
+          <span>{name}</span>
+          {onSale(salePrice)}
+          <StarRatings ratings={ratings}/>
+          {/* <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span> */}
+        </Description>
+      </Card>
     );
   });
 
   return (
-    <section className="card-carousel">
-      <div className="carousel-container">
-        <div>
-          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
-        </div>
+    <>
+      <CardsContainer>
+        <LeftArrow>
+          <FaRegArrowAltCircleLeft onClick={prev} />
+        </LeftArrow>
+        <RightArrow>
+          <FaRegArrowAltCircleRight onClick={next} />
+        </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
-        <div>
-          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
-        </div>
-      </div>
-    </section>
+      </CardsContainer>
+    </>
   );
 };
 

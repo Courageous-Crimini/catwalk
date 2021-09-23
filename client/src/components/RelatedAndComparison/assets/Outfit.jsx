@@ -1,58 +1,61 @@
 /* eslint-disable prefer-destructuring */
-/* eslint-disable react/prop-types */
-import React, { useState } from 'react';
-import { FaArrowAltCircleLeft, FaArrowAltCircleRight } from 'react-icons/fa';
+import React, { useState, useContext } from 'react';
+import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
+import { RelatedContext } from '../Context.jsx';
 import Images from './Images.jsx';
+import {
+  CardsContainer, Card, LeftArrow, RightArrow, Description,
+} from '../styles.jsx';
 
-const Outfit = ({ yourOutfit, handleClick, openModal }) => {
+const Outfit = ({ removeOutfit, crossPrice, onSale }) => {
   const [currentCard, setCurrentCard] = useState(0);
-  const length = yourOutfit.length - 5;
+  const { yourOutfit } = useContext(RelatedContext);
+  const length = yourOutfit.length - 1;
 
-  const prevCard = () => {
+  const prev = () => {
     setCurrentCard(currentCard === 0 ? 0 : currentCard - 1);
   };
-  const nextCard = () => {
+  const next = () => {
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
 
   const cards = yourOutfit.map((item) => {
-    const originalPrice = item.originalPrice;
-    const salePrice = item.salePrice;
+    const {
+      salePrice, category, name, photos, styleName, styleID, originalPrice,
+    } = item;
 
     return (
-      <div key={item.styleID} className="card">
-        <button type="button" className="outfitBtn" onClick={() => { handleClick(item.styleID); }}>X</button>
-        <div className="card-image">
-          <Images images={item.styleImages} openModal={openModal} />
-          {/* <span className="outfit">&#9733;</span> */}
-        </div>
-        <div className="card-description">
-          <span className="item-category">{item.category}</span>
-          <br />
-          <span className="item-name">{item.name}</span>
-          <br />
-          <span className={salePrice ? 'cross-out-price' : 'original-price'}>&#36;{originalPrice}</span>
-          <br />
-          <span className={salePrice ? 'sale-price' : 'hide'}>SALE &#36;{salePrice}</span>
-          <br className={salePrice ? 'break' : 'hide'} />
-          <span className="card-rating">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-        </div>
-      </div>
+      <Card key={item.styleID}>
+        <Images
+          photos={photos}
+          crossPrice={crossPrice}
+          removeOutfit={removeOutfit}
+          sale={salePrice}
+          orig={originalPrice}
+          id={styleID} />
+        <Description>
+          <span>{category}</span>
+          <span>{name}</span>
+          <span>{styleName}</span>
+          {onSale(salePrice)}
+          <span>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        </Description>
+      </Card>
     );
   });
 
   return (
-    <section className="card-carousel">
-      <div className="carousel-container">
-        <div>
-          <FaArrowAltCircleLeft className="left-carousel-arrow" onClick={prevCard} />
-        </div>
+    <>
+      <CardsContainer>
+        <LeftArrow>
+          <FaRegArrowAltCircleLeft onClick={prev} />
+        </LeftArrow>
+        <RightArrow>
+          <FaRegArrowAltCircleRight onClick={next} />
+        </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
-        <div>
-          <FaArrowAltCircleRight className="right-carousel-arrow" onClick={nextCard} />
-        </div>
-      </div>
-    </section>
+      </CardsContainer>
+    </>
   );
 };
 
