@@ -163,6 +163,19 @@ export const Modal = ({ showModal, setShowModal }) => {
                   <Input name="rating" value={newReview.rating} onChange={handleChange} />
                 </Label>
                 <Label>
+                  Overall rating: *
+                  <RadioDiv>
+                    <span className="star-cb-group">
+                      <input type="radio" id="rating-0" name="rating" value="0" className="star-cb-clear" defaultChecked />
+                      <input type="radio" id="rating-1" name="rating" value="1" />
+                      <input type="radio" id="rating-2" name="rating" value="2" />
+                      <input type="radio" id="rating-3" name="rating" value="3" />
+                      <input type="radio" id="rating-4" name="rating" value="4" />
+                      <input type="radio" id="rating-5" name="rating" value="5" />
+                    </span>
+                  </RadioDiv>
+                </Label>
+                <Label>
                   Do you recommend this product? *
                   <RadioDiv>
                     <label>
