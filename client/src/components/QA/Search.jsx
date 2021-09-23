@@ -7,7 +7,7 @@ height: 100%;
 `;
 
 const Input = styled.input`
-  width: 92%;
+  width: 100%;
   padding: 30px;
   margin: 0.5rem;
   font-size: 22px;
