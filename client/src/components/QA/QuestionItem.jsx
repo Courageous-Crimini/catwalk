@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
@@ -12,6 +13,17 @@ background: white;
 margin: 20px;
 `;
 
+const Button = styled.button`
+background: none!important;
+border: none;
+padding: 0!important;
+font-weight: bold;
+text-decoration: underline;
+cursor: pointer;
+font-family: Valera Round,sans-serif;
+font-size: 16px
+`;
+
 const Row = styled.div`
     display: flex;
     align-items: center;
@@ -24,17 +36,6 @@ const H5 = styled.h5`
 const AlignRight = styled.div`
     margin-right: auto;
     padding-right: 100px;
-`;
-
-const Button = styled.button`
-background: none!important;
-border: none;
-padding: 0!important;
-font-weight: bold;
-text-decoration: underline;
-cursor: pointer;
-font-family: Valera Round,sans-serif;
-font-size: 16px
 `;
 
 const QuestionItem = ({ question, productInfo }) => {
