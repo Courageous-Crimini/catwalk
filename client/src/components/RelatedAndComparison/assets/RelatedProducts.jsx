@@ -11,12 +11,14 @@ import {
   RightArrow,
   LeftArrow,
   CornerBtn,
-  Button,
+  StarBtn,
   Image,
   Card,
 } from '../styles.jsx';
 
-const RelatedProducts = ({ addOutfit, crossPrice, onSale, showLeftArrow, showRightArrow }) => {
+const RelatedProducts = ({
+  addOutfit, crossPrice, onSale, showLeftArrow, showRightArrow
+}) => {
   const state = useContext(StateContext);
   const { relatedDisplay } = state;
   const { setModalKey, setOpenModal } = useContext(RelatedContext);
@@ -42,7 +44,7 @@ const RelatedProducts = ({ addOutfit, crossPrice, onSale, showLeftArrow, showRig
     return (
       <Card key={styleID}>
         <ImageContainer>
-          <Button color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</Button>
+          <StarBtn color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</StarBtn>
           <CornerBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CornerBtn>
           <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
           {crossPrice(originalPrice, salePrice)}

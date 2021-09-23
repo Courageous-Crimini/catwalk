@@ -6,7 +6,7 @@ import Images from './Images.jsx';
 import Features from './Features.jsx';
 import StarRatings from './StarRatings.jsx';
 import {
-  Button, Background, ModalContainer, Compare, CompareCard, Description,
+  CloseBtn, Background, ModalContainer, Compare, CompareCard, Description,
 } from '../styles.jsx';
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
@@ -104,7 +104,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   return (
     <Background>
       <ModalContainer>
-        <Button onClick={() => { setOpenModal(false); }}>X</Button>
+        <CloseBtn onClick={() => { setOpenModal(false); }}>X</CloseBtn>
         <h2>Comparing</h2>
         <Compare>
           {compCards.slice(compCounter, compCounter + 1)}

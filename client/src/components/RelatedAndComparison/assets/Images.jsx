@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Image, ImageContainer, Button, CornerBtn,
+  Image, ImageContainer, CloseBtn, StarBtn, CornerBtn,
 } from '../styles.jsx';
 
 const Images = ({
@@ -22,7 +22,7 @@ const Images = ({
   if (removeOutfit) {
     return (
       <ImageContainer>
-        <Button color="#FF0000" onClick={() => { removeOutfit(id); }}>X</Button>
+        <CloseBtn onClick={() => { removeOutfit(id); }}>X</CloseBtn>
         {images.slice(counter, counter + 1)}
         {crossPrice(orig, sale)}
       </ImageContainer>
@@ -30,7 +30,7 @@ const Images = ({
   }
   return (
     <ImageContainer>
-      <Button color="#00CCCC" onClick={() => { addOutfit(id); }}>&#9733;</Button>
+      <StarBtn color="#0FF" onClick={() => { addOutfit(id); }}>&#9733;</StarBtn>
       <CornerBtn onClick={nextStyle}>styles</CornerBtn>
       {images.slice(counter, counter + 1)}
       {crossPrice(orig, sale)}
