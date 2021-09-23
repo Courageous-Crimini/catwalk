@@ -72,7 +72,7 @@ export const Image = styled.img`
 export const Button = styled.span`
   color: ${(props) => props.color};
   position: absolute;
-  right: 0em;
+  right: .5em;
   cursor: pointer;
   z-index: 10;
 
@@ -130,6 +130,8 @@ export const Description = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  font-size: ${(props) => props.size};
+
 `;
 /* --                                MODAL                                 -- */
 
@@ -142,8 +144,6 @@ export const Background = styled.section`
   justify-content: center;
   align-items: center;
   z-index: 11;
-
-  border: 1px solid black; // DELETE
   `;
 
 export const ModalContainer = styled.div`
@@ -162,10 +162,7 @@ export const Compare = styled.div`
   justify-content: space-between;
   padding: 25px;
   height: 75%;
-
-  border: 1px solid black; // Delete
-
-  `;
+`;
 export const CompareCard = styled.div`
   position: relative;
   display: flex;
@@ -175,6 +172,11 @@ export const CompareCard = styled.div`
 
   box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
   border: .1em solid #A9A9A9;
-  `;
+`;
+
+export const Stars = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
 
 export default styled;
