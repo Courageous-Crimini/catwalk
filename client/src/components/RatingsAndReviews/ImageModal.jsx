@@ -35,9 +35,10 @@ const ModalWrapper = styled.div`
 `;
 
 const ModalImg = styled.img`
-  margin: auto;
-  height: 100%;
-  max-height: 500px;
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  overflow: hidden;
   border-radius: 10px 0 0 10px;
   background: #000;
 `;

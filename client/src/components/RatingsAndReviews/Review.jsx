@@ -124,9 +124,7 @@ const Review = ({ review }) => {
         <div>
           {(review.photos.length !== 0)
         && (review.photos.map((photo) => (
-          <>
-            <ReviewImage url={photo.url} />
-          </>
+          <ReviewImage key={photo.id} url={photo.url} />
         ))) }
         </div>
         {(review.recommend) && <div>✓ I recommend this product</div>}
