@@ -9,41 +9,11 @@ import { Wrapper, Container, Price } from './styles.jsx';
 // Refactor to use the filter function instead of having an pIdx tracker later
 
 const RelatedAndComparison = () => {
-  // const state = useContext(StateContext);
-  // const { relatedStyles, styles, products, selectedProduct, selectedProductFeatures, reviewsMeta } = state;
+  const state = useContext(StateContext);
+  const { relatedStyles } = state;
   const [yourOutfit, setYourOutfit] = useState([]);
   const [modalKey, setModalKey] = useState('');
   const [openModal, setOpenModal] = useState(false);
-  // const [initialProductStyles, setInitialProductStyles] = ([]);
-
-  // console.log('Products', products); // DELETE
-  // console.log('Styles', styles); // DELETE
-  // console.log('Features', selectedProductFeatures); // DELETE
-  // console.log('Reviews Meta', reviewsMeta);
-  // for (let i = 0; i < products.length; i += 1) {
-  //   if (selectedProduct === products.id) {
-  //     const pIdx = products[i];
-  //     for (let k = 0; k < pIdx.styles.length; k += 1) {
-  //       const sIdx = pIdx.styles.length[k];
-  //       const initlalDataFormat = {
-  //         id: pIdx.id,
-  //         name: pIdx.name,
-  //         category: pIdx.category,
-  //         description: pIdx.description,
-  //         slogan: pIdx.slogan,
-
-  //         styleID: sIdx.style_id,
-  //         styleName: sIdx.name,
-  //         originalPrice: sIdx.original_price,
-  //         salePrice: sIdx.sale_price,
-  //         photos: sIdx.photos,
-  //         features: selectedProductFeatures,
-  //         ratings: reviewsMeta,
-  //       };
-  //       setInitialProductStyles(...initialProductStyles, initlalDataFormat);
-  //     }
-  //   }
-  // }
 
   const addOutfit = (id) => {
     let isThere = false;
@@ -79,8 +49,9 @@ const RelatedAndComparison = () => {
 
   const onSale = (price) => (price ? <span style={{ color: 'red' }}>SALE&#36;{price}</span> : null);
 
-  const showRightArrow = (cardLength) => (cardLength > 4 ? true : false);
   const showLeftArrow = (currentSpot) => (currentSpot != 0 ? true : false);
+  const showRightArrow = (cardLength, spot) =>
+    ((cardLength > 4 && spot < cardLength - 4) ? true : false)
 
   return (
     <Wrapper>

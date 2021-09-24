@@ -33,7 +33,7 @@ const Outfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArro
           removeOutfit={removeOutfit}
           sale={salePrice}
           orig={originalPrice}
-          id={styleID}
+          styleID={styleID}
         />
         <Description>
           <span>{category}</span>
@@ -53,7 +53,7 @@ const Outfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArro
           {showLeftArrow(currentCard) && <FaRegArrowAltCircleLeft onClick={prev} />}
         </LeftArrow>
         <RightArrow>
-          {showRightArrow(length) && <FaRegArrowAltCircleRight onClick={next} />}
+          {showRightArrow(length, currentCard) && <FaRegArrowAltCircleRight onClick={next} />}
         </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>

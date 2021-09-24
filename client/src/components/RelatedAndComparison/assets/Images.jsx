@@ -4,7 +4,7 @@ import {
 } from '../styles.jsx';
 
 const Images = ({
-  photos, crossPrice, removeOutfit, id, orig, sale, addOutfit, nextStyle,
+  photos, crossPrice, removeOutfit, id, styleID, orig, sale, addOutfit, nextStyle,
 }) => {
   const [counter, setCounter] = useState(0);
   const length = photos.length - 1;
@@ -22,7 +22,7 @@ const Images = ({
   if (removeOutfit) {
     return (
       <ImageContainer>
-        <CloseBtn onClick={() => { removeOutfit(id); }}>X</CloseBtn>
+        <CloseBtn onClick={() => { removeOutfit(styleID); }}>X</CloseBtn>
         {images.slice(counter, counter + 1)}
         {crossPrice(orig, sale)}
       </ImageContainer>
@@ -30,7 +30,7 @@ const Images = ({
   }
   return (
     <ImageContainer>
-      <StarBtn color="#0FF" onClick={() => { addOutfit(id); }}>&#9733;</StarBtn>
+      <StarBtn color="#0FF" onClick={() => { addOutfit(styleID); }}>&#9733;</StarBtn>
       <CornerBtn onClick={nextStyle}>styles</CornerBtn>
       {images.slice(counter, counter + 1)}
       {crossPrice(orig, sale)}

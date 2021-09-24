@@ -90,10 +90,6 @@ export const CloseBtn = styled.span`
   cursor: pointer;
   z-index: 10;
   border-radius: 100%;
-  &:hover {
-    background-color: #000;
-    box-shadow: 0em 0em .2em .2em #000;
-  }
 `;
 export const CornerBtn = styled.span`
   color: ${(props) => props.color};
@@ -195,6 +191,9 @@ export const CompareCard = styled.div`
 export const Stars = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const OverviewBtn = styled.button`
 `;
 
 export default styled;

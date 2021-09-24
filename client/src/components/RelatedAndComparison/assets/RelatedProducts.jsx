@@ -66,7 +66,7 @@ const RelatedProducts = ({
           {showLeftArrow(currentCard) && <FaRegArrowAltCircleLeft onClick={prev} />}
         </LeftArrow>
         <RightArrow>
-          {showRightArrow(length) && <FaRegArrowAltCircleRight onClick={next} />}
+          {showRightArrow(length, currentCard) && <FaRegArrowAltCircleRight onClick={next} />}
         </RightArrow>
         {cards.slice(currentCard, (currentCard + 5))}
       </CardsContainer>
