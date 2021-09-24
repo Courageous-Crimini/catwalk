@@ -27,7 +27,7 @@ const StyleSelector = () => {
     }}
     >
       <div style={{
-        marginBottom: '2%',
+        marginBottom: '3%',
         gridColumnStart: '1',
         gridColumnEnd: '5',
         gridRowStart: '1',
@@ -70,7 +70,7 @@ const StyleSelector = () => {
           flexWrap: 'wrap',
           justifyContent: 'flex-start',
           alignContent: 'center',
-          margin: '0 5%',
+          marginLeft: '3%',
         }}
       >
         {state.styles.map((style, index) => {
@@ -87,7 +87,8 @@ const StyleSelector = () => {
                   display: 'inline',
                   height: '40px',
                   width: '40px',
-                  margin: '10px',
+                  margin: '12px',
+                  marginBottom: '6px',
                   cursor: 'pointer',
                   // flexBasis: '15%',
                   // boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
@@ -112,7 +113,8 @@ const StyleSelector = () => {
                 display: 'inline',
                 height: '40px',
                 width: '40px',
-                margin: '15px',
+                margin: '17px',
+                marginBottom: '8.5px',
                 cursor: 'pointer',
                 boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
                 // flexBasis: '15%',
