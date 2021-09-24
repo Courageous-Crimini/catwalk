@@ -31,13 +31,13 @@ export const ACTIONS = {
   /* RELATED COMPARISON END ------------------------------------------------- */
   SET_LOADED: 'set-loaded',
 };
-// console.log(Location.pathname);
+console.log(Number(window.location.pathname.slice(1)));
 export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
-  selectedProduct: Number(Location.pathname)
-    ? Number(Location.pathname)
-    : 48432,
+  selectedProduct: Number(window.location.pathname.slice(1))
+    ? Number(window.location.pathname.slice(1))
+    : 48439,
   selectedProductInfo: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
