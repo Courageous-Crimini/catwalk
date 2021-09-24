@@ -4,7 +4,7 @@ import {
 } from '../styles.jsx';
 
 const Images = ({
-  photos, crossPrice, removeOutfit, id, styleID, orig, sale, addOutfit, nextStyle,
+  removeOutfit, addOutfit, crossPrice, nextStyle, styleID, orig, sale, photos,
 }) => {
   const [counter, setCounter] = useState(0);
   const length = photos.length - 1;

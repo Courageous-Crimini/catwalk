@@ -193,7 +193,6 @@ export const Stars = styled.div`
   flex-direction: row;
 `;
 
-export const OverviewBtn = styled.button`
-`;
+export const OverviewBtn = styled.button``;
 
 export default styled;

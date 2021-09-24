@@ -1,19 +1,19 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
-import { RelatedContext } from '../Context.jsx';
 import { ACTIONS, DispatchContext, StateContext } from '../../App.jsx';
-import Images from './Images.jsx';
-import Features from './Features.jsx';
+import { RelatedContext } from '../Context.jsx';
 import StarRatings from './StarRatings.jsx';
+import Features from './Features.jsx';
+import Images from './Images.jsx';
 import {
-  CloseBtn, Background, ModalContainer, Compare, CompareCard, Description, OverviewBtn,
+  Background, ModalContainer, CompareCard, Compare, Description, OverviewBtn, CloseBtn,
 } from '../styles.jsx';
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
   const {
-    relatedStyles, relatedIdx, styles, selectedProductInfo, reviewsMeta,
+    selectedProductInfo, styles, reviewsMeta, relatedStyles, relatedIdx,
   } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
   const [compCounter, setCompCounter] = useState(0);
@@ -49,22 +49,21 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
 
     return (
       <CompareCard key={styleID}>
+        <span>{name} &#40;{category}&#41;</span>
         <Images
           crossPrice={crossPrice}
           addOutfit={addOutfit}
           orig={originalPrice}
           nextStyle={nextComp}
+          styleID={styleID}
           sale={salePrice}
           photos={photos}
           id={id}
-          styleID={styleID}
         />
         <Description size="65%">
           {onSale(salePrice)}
-          <span>Style {compCounter + 1} of {compLength + 1}: {styleName}</span>
-          <span>{name}</span>
           <span>{slogan}</span>
-          <span>{category}</span>
+          <span>Style {compCounter + 1} of {compLength + 1}: {styleName}</span>
           <span>{description}</span>
           <Features features={features} />
           <StarRatings ratings={ratings} />
@@ -74,26 +73,27 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   });
 
   const prodCards = styles.map((item) => {
-    const { style_id, name, original_price, photos, sale_price } = item;
+    const {
+      style_id, name, original_price, sale_price, photos,
+    } = item;
 
     return (
       <CompareCard key={style_id}>
+        <span>{selectedProductInfo.name} &#40;{selectedProductInfo.category}&#41;</span>
         <Images
+          id={selectedProductInfo.id}
           crossPrice={crossPrice}
           addOutfit={addOutfit}
           orig={original_price}
           nextStyle={nextProd}
+          styleID={style_id}
           sale={sale_price}
           photos={photos}
-          id={selectedProductInfo.id}
-          styleID={style_id}
         />
         <Description size="65%">
           {onSale(sale_price)}
           <span>Style {prodCounter + 1} of {prodLength + 1}: {name}</span>
-          <span>{selectedProductInfo.name}</span>
           <span>{selectedProductInfo.slogan}</span>
-          <span>{selectedProductInfo.category}</span>
           <span>{selectedProductInfo.description}</span>
           <Features features={selectedProductInfo.features} />
           <StarRatings ratings={reviewsMeta} />
@@ -103,7 +103,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   });
 
   return (
-    <Background>
+    <Background className="compare-modal">
       <ModalContainer>
         <CloseBtn onClick={() => { setOpenModal(false); }}>X</CloseBtn>
         <h2>Comparing</h2>
