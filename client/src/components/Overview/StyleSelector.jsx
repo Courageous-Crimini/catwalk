@@ -93,10 +93,22 @@ const StyleSelector = () => {
                 cursor: 'pointer',
                 // flex: '0 1.2 18%',
                 boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
-                gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
-                gridColumnEnd: `${index <= 3 ? index + 2 : index - 2}`,
-                gridRowStart: `${index <= 3 ? 2 : 3}`,
-                gridRowEnd: `${index <= 3 ? 3 : 4}`,
+                gridColumnStart: `${index <= 3 ? index + 1
+                  : index > 7
+                    ? 1
+                    : (index - 3)}`,
+                gridColumnEnd: `${index <= 3 ? index + 2
+                  : index > 7
+                    ? 2
+                    : (index - 2)}`,
+                gridRowStart: `${index <= 3 ? 2
+                  : index > 7
+                    ? 4
+                    : 3}`,
+                gridRowEnd: `${index <= 3 ? 3
+                  : index > 7
+                    ? 5
+                    : 4}`,
               }}
               alt="Style"
             />
