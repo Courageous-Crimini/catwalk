@@ -4,7 +4,7 @@
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import StarRatings from './StarRatings.jsx';
-import { StateContext } from '../../App.jsx';
+import { ACTIONS, DispatchContext, StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
 import {
   CardsContainer,
@@ -21,11 +21,11 @@ import {
 const RelatedProducts = ({
   addOutfit, crossPrice, onSale, showLeftArrow, showRightArrow
 }) => {
+  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
   const { relatedDisplay } = state;
   const { setModalKey, setOpenModal } = useContext(RelatedContext);
 
-  // console.log('RelatedProducts', relatedDisplay.ratings);
   /* CHANGE BELOW AFTER REFACTOR ---------------------------------------------*/
   const [currentCard, setCurrentCard] = useState(0);
   const length = relatedDisplay.length - 1;
@@ -37,6 +37,9 @@ const RelatedProducts = ({
     setCurrentCard(currentCard === length ? 0 : currentCard + 1);
   };
   /* CHANGE ABOVE AFTER REFACTOR ---------------------------------------------*/
+  const changeOverview = (id) => {
+    dispatch({ type: ACTIONS.SET_PRODUCT, payload: id });
+  };
 
   const cards = relatedDisplay.map((item) => {
     const {
@@ -48,7 +51,9 @@ const RelatedProducts = ({
         <ImageContainer>
           <StarBtn color="#00CCCC" onClick={() => { addOutfit(styleID); }}>&#9733;</StarBtn>
           <CornerBtn onClick={() => { setModalKey(id); setOpenModal(true); }}>compare</CornerBtn>
-          <Image src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+          <a href="#Overview">
+            <Image onClick={() => changeOverview(id)} src={photo} alt="SORRY NO IMAGE AVAILABLE" />
+          </a>
           {crossPrice(originalPrice, salePrice)}
         </ImageContainer>
         <Description>

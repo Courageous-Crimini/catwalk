@@ -13,15 +13,12 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
   const {
-    relatedStyles, relatedIdx, styles, products,
-    selectedProduct, selectedProductInfo, reviewsMeta,
+    relatedStyles, relatedIdx, styles, selectedProductInfo, reviewsMeta,
   } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
   const [compCounter, setCompCounter] = useState(0);
   const [prodCounter, setProdCounter] = useState(0);
-  const selected = products.filter((item) => item.id === selectedProduct);
   const prodLength = styles.length - 1;
-
   let compLength;
   let compStart;
   let compFinish;
@@ -34,7 +31,6 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
     }
   }
   const changeOverview = () => {
-    console.log('clicked me');
     dispatch({ type: ACTIONS.SET_PRODUCT, payload: modalKey });
     setOpenModal(false);
   };
@@ -76,7 +72,6 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       </CompareCard>
     );
   });
-  console.log(selectedProductInfo);
 
   const prodCards = styles.map((item) => {
     const { style_id, name, original_price, photos, sale_price } = item;
