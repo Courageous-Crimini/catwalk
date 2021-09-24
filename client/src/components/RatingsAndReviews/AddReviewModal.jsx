@@ -178,6 +178,10 @@ export const Modal = ({ showModal, setShowModal }) => {
       setNewReview({
         ...newReview, [event.target.name]: curChars,
       });
+    } else if (event.target.value === 'true' || event.target.value === 'false') {
+      setNewReview({
+        ...newReview, [event.target.name]: (event.target.value === 'true'),
+      });
     } else {
       setNewReview({
         ...newReview, [event.target.name]: event.target.value,
