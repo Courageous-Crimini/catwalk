@@ -240,7 +240,18 @@ export const Modal = ({ showModal, setShowModal }) => {
                 {selectedChars.map((characteristic) => (
                   <Label key={characteristic[1].id}>
                     {`${characteristic[0]}: *`}
-                    <Input />
+                    <RadioDiv>
+                      {[...Array(5)].map((button, index) => {
+                        const ratingValue = index + 1;
+                        return (
+                          <StarLabel key={ratingValue}>
+                            <StarInput type="radio" name="rating" value={ratingValue} onChange={handleChange} />
+                            <FaStar color={ratingValue <= (starHover || newReview.rating) ? '#ffc107' : '#e4e5e9'} size={20} onMouseEnter={() => setStarHover(ratingValue)} onMouseLeave={() => setStarHover(null)} />
+                          </StarLabel>
+                        );
+                      })}
+                      {starmeaning[newReview.rating]}
+                    </RadioDiv>
                   </Label>
                 ))}
                 <Label>

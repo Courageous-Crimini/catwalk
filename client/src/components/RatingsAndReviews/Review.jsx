@@ -124,6 +124,7 @@ const Review = ({ review }) => {
           {(review.photos.length !== 0)
         && (review.photos.map((photo) => (<img src={photo.url} key={photo.url} alt="" height="50" />))) }
         </div>
+        {(review.recommend) && <div>✓ I recommend this product</div>}
         {(review.response !== null && review.response !== '')
         && <Response>{`Response: ${review.response}`}</Response>}
         <AlignLeft>
