@@ -11,25 +11,19 @@ import {
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const state = useContext(StateContext);
-  /* here */
-  const { selectedProduct, relatedIdx, relatedStyles, selectedProductFeatures, styles } = state;
-  /* here end */
-
+  const {
+    relatedStyles, relatedIdx, styles, products,
+    selectedProduct, selectedProductFeatures, reviewsMeta,
+  } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
-
-  /* here */
-  console.log('Features', selectedProductFeatures);
-  console.log('Styles', styles);
-  /* here end */
-
   const [compCounter, setCompCounter] = useState(0);
   const [prodCounter, setProdCounter] = useState(0);
+  const selected = products.filter((item) => item.id === selectedProduct);
+  const prodLength = styles.length - 1;
+
   let compLength;
-  let prodLength;
   let compStart;
-  let prodStart;
   let compFinish;
-  let prodFinish;
   for (let i = 0; i < relatedIdx.length; i += 1) {
     const currentRelatedIdx = relatedIdx[i];
     if (modalKey === currentRelatedIdx.id) {
@@ -37,16 +31,8 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       compFinish = currentRelatedIdx.end + 1;
       compLength = compFinish - compStart - 1;
     }
-    if (selectedProduct === currentRelatedIdx.id) {
-      prodStart = currentRelatedIdx.begin;
-      prodFinish = currentRelatedIdx.end + 1;
-      prodLength = prodFinish - prodStart - 1;
-    }
   }
 
-  /* here delete prod stuff after */
-
-  /* here end */
   const nextComp = () => {
     setCompCounter(compCounter === compLength ? 0 : compCounter + 1);
   };
@@ -83,32 +69,30 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       </CompareCard>
     );
   });
-  const prodCards = relatedStyles.slice(prodStart, prodFinish).map((item) => {
-    const {
-      category, name, description, photos, features, ratings,
-      slogan, styleID, styleName, originalPrice, salePrice,
-    } = item;
+
+  const prodCards = styles.map((item) => {
+    const { style_id, name, original_price, photos, sale_price } = item;
 
     return (
-      <CompareCard key={styleID}>
+      <CompareCard key={style_id}>
         <Images
           crossPrice={crossPrice}
           addOutfit={addOutfit}
-          orig={originalPrice}
+          orig={original_price}
           nextStyle={nextProd}
-          sale={salePrice}
+          sale={sale_price}
           photos={photos}
-          id={styleID}
+          id={style_id}
         />
         <Description size="65%">
-          {onSale(salePrice)}
-          <span>Style {prodCounter + 1} of {prodLength + 1}: {styleName}</span>
-          <span>{name}</span>
-          <span>{slogan}</span>
-          <span>{category}</span>
-          <span>{description}</span>
-          <Features features={features} />
-          <StarRatings ratings={ratings} />
+          {onSale(sale_price)}
+          <span>Style {prodCounter + 1} of {prodLength + 1}: {name}</span>
+          <span>{selected[0].name}</span>
+          <span>{selected[0].slogan}</span>
+          <span>{selected[0].category}</span>
+          <span>{selected[0].description}</span>
+          <Features features={selectedProductFeatures} />
+          <StarRatings ratings={reviewsMeta} />
         </Description>
       </CompareCard>
     );
