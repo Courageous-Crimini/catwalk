@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { RelatedContext } from '../Context.jsx';
 import Outfit from './Outfit.jsx';
 
-const YourOutfit = ({ removeOutfit, crossPrice, onSale }) => {
+const YourOutfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArrow }) => {
   const { yourOutfit } = useContext(RelatedContext);
 
   if (yourOutfit.length > 0) {
@@ -13,6 +13,8 @@ const YourOutfit = ({ removeOutfit, crossPrice, onSale }) => {
         removeOutfit={removeOutfit}
         crossPrice={crossPrice}
         onSale={onSale}
+        showLeftArrow={showLeftArrow}
+        showRightArrow={showRightArrow}
       />
     );
   }

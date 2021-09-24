@@ -5,12 +5,16 @@ display: flex;
   margin: 0;
   padding-left: 4em;
   padding-right: 4em;
+  width: 80%;
+
+
 `;
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   padding-left: 1em;
   padding-right: 1em;
+  width: 100%;
   `;
 export const LeftArrow = styled.div`
   position: absolute;
@@ -27,7 +31,7 @@ export const LeftArrow = styled.div`
 export const RightArrow = styled.div`
   position: absolute;
   padding-top: 10%;
-  right: 3em;
+  right: 7em;
   color: #000;
   font-size: 2em;
   opacity: .3;
@@ -44,21 +48,19 @@ export const CardsContainer = styled.section`
 export const Card = styled.section`
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 16%;
   height: 20em;
-  margin-right: 1em;
+  margin-right: 2%;
   position: relative;
   box-shadow: rgba(0, 0, 0, .3) -2px 1px 6px 1px;
   border: .1em solid #A9A9A9;
   &:hover {
-    width: 30%
+    width: 23%;
   }
 `;
 /* --                               IMAGES                                 -- */
 
 export const ImageContainer = styled.div`
-  /* display: flex;
-  justify-content: center; */
   position: relative;
   width: 100%;
   height: 70%;
@@ -69,13 +71,25 @@ export const Image = styled.img`
   object-fit: cover
 `;
 
-export const Button = styled.span`
+export const StarBtn = styled.span`
   color: ${(props) => props.color};
   position: absolute;
   right: .5em;
   cursor: pointer;
   z-index: 10;
-
+  border-radius: 100%;
+  &:hover {
+    background-color: #000;
+    box-shadow: 0em 0em .2em .2em #000;
+  }
+`;
+export const CloseBtn = styled.span`
+  color: #FF0000;
+  position: absolute;
+  right: .5em;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 100%;
 `;
 export const CornerBtn = styled.span`
   color: ${(props) => props.color};
@@ -136,7 +150,7 @@ export const Description = styled.div`
 /* --                                MODAL                                 -- */
 
 export const Background = styled.section`
-  width: 60%;
+  width: 80%;
   height: 50em;
   background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
@@ -177,6 +191,9 @@ export const CompareCard = styled.div`
 export const Stars = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+export const OverviewBtn = styled.button`
 `;
 
 export default styled;

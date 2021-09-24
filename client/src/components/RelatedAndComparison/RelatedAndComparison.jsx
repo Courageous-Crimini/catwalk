@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { StateContext } from '../App.jsx';
 import { RelatedContext } from './Context.jsx';
 import Modal from './assets/Modal.jsx';
@@ -9,7 +9,7 @@ import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
 
-// Refactor to use the filter function instead of having an idx tracker later
+// Refactor to use the filter function instead of having an pIdx tracker later
 
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
@@ -47,16 +47,17 @@ const RelatedAndComparison = () => {
       }
     }
   };
-  const crossPrice = (origPrice, newPrice) => newPrice ?
-    <Price cross="line-through">&#36;{origPrice}</Price> :
-    <Price>&#36;{origPrice}</Price>
+  const crossPrice = (origPrice, newPrice) =>
+    (newPrice ? <Price cross="line-through">&#36;{origPrice}</Price> : <Price>&#36;{origPrice}</Price>);
 
-  const onSale = (price) => price ?
-    <span style={{ color: 'red' }}>SALE &#36;{price}</span> :
-    null;
+  const onSale = (price) => (price ? <span style={{ color: 'red' }}>SALE&#36;{price}</span> : null);
+
+  const showLeftArrow = (currentSpot) => (currentSpot != 0 ? true : false);
+  const showRightArrow = (cardLength, spot) =>
+    ((cardLength > 4 && spot < cardLength - 4) ? true : false);
 
   return (
-    <Wrapper id="2">
+    <Wrapper>
       <RelatedContext.Provider
         value={{
           setModalKey,
@@ -72,9 +73,21 @@ const RelatedAndComparison = () => {
         />}
         <Container>
           <h2>Related Products</h2>
-          <RelatedProducts addOutfit={addOutfit} crossPrice={crossPrice} onSale={onSale} />
+          <RelatedProducts
+            addOutfit={addOutfit}
+            crossPrice={crossPrice}
+            onSale={onSale}
+            showLeftArrow={showLeftArrow}
+            showRightArrow={showRightArrow}
+          />
           <h2>Your Outfit</h2>
-          <YourOutfit removeOutfit={removeOutfit} crossPrice={crossPrice} onSale={onSale} />
+          <YourOutfit
+            removeOutfit={removeOutfit}
+            crossPrice={crossPrice}
+            onSale={onSale}
+            showLeftArrow={showLeftArrow}
+            showRightArrow={showRightArrow}
+          />
         </Container>
       </RelatedContext.Provider>
     </Wrapper>

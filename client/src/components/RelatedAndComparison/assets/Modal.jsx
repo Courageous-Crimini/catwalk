@@ -1,39 +1,40 @@
 /* eslint-disable react/prop-types */
 import React, { useContext, useState } from 'react';
 import { RelatedContext } from '../Context.jsx';
-import { StateContext } from '../../App.jsx';
+import { ACTIONS, DispatchContext, StateContext } from '../../App.jsx';
 import Images from './Images.jsx';
 import Features from './Features.jsx';
 import StarRatings from './StarRatings.jsx';
 import {
-  Button, Background, ModalContainer, Compare, CompareCard, Description,
+  CloseBtn, Background, ModalContainer, Compare, CompareCard, Description, OverviewBtn,
 } from '../styles.jsx';
 
 const Modal = ({ crossPrice, onSale, addOutfit }) => {
+  const dispatch = useContext(DispatchContext);
   const state = useContext(StateContext);
-  const { selectedProduct, relatedIdx, relatedStyles } = state;
+  const {
+    relatedStyles, relatedIdx, styles, selectedProductInfo, reviewsMeta,
+  } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
   const [compCounter, setCompCounter] = useState(0);
   const [prodCounter, setProdCounter] = useState(0);
+  const prodLength = styles.length - 1;
   let compLength;
-  let prodLength;
   let compStart;
-  let prodStart;
   let compFinish;
-  let prodFinish;
   for (let i = 0; i < relatedIdx.length; i += 1) {
     const currentRelatedIdx = relatedIdx[i];
     if (modalKey === currentRelatedIdx.id) {
       compStart = currentRelatedIdx.begin;
       compFinish = currentRelatedIdx.end + 1;
-      compLength = compFinish - compStart;
-    }
-    if (selectedProduct === currentRelatedIdx.id) {
-      prodStart = currentRelatedIdx.begin;
-      prodFinish = currentRelatedIdx.end + 1;
-      prodLength = compFinish - compStart;
+      compLength = compFinish - compStart - 1;
     }
   }
+  const changeOverview = () => {
+    dispatch({ type: ACTIONS.SET_PRODUCT, payload: modalKey });
+    setOpenModal(false);
+  };
+
   const nextComp = () => {
     setCompCounter(compCounter === compLength ? 0 : compCounter + 1);
   };
@@ -42,7 +43,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   };
   const compCards = relatedStyles.slice(compStart, compFinish).map((item) => {
     const {
-      category, name, description, photos, features, ratings,
+      id, category, name, description, photos, features, ratings,
       slogan, styleID, styleName, originalPrice, salePrice,
     } = item;
 
@@ -55,13 +56,14 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           nextStyle={nextComp}
           sale={salePrice}
           photos={photos}
-          id={styleID}
+          id={id}
+          styleID={styleID}
         />
         <Description size="65%">
           {onSale(salePrice)}
-          <span>{slogan}</span>
+          <span>Style {compCounter + 1} of {compLength + 1}: {styleName}</span>
           <span>{name}</span>
-          <span>{styleName}</span>
+          <span>{slogan}</span>
           <span>{category}</span>
           <span>{description}</span>
           <Features features={features} />
@@ -70,32 +72,31 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       </CompareCard>
     );
   });
-  const prodCards = relatedStyles.slice(prodStart, prodFinish).map((item) => {
-    const {
-      category, name, description, photos, features, ratings,
-      slogan, styleID, styleName, originalPrice, salePrice,
-    } = item;
+
+  const prodCards = styles.map((item) => {
+    const { style_id, name, original_price, photos, sale_price } = item;
 
     return (
-      <CompareCard key={styleID}>
+      <CompareCard key={style_id}>
         <Images
           crossPrice={crossPrice}
           addOutfit={addOutfit}
-          orig={originalPrice}
+          orig={original_price}
           nextStyle={nextProd}
-          sale={salePrice}
+          sale={sale_price}
           photos={photos}
-          id={styleID}
+          id={selectedProductInfo.id}
+          styleID={style_id}
         />
         <Description size="65%">
-          {onSale(salePrice)}
-          <span>{slogan}</span>
-          <span>{name}</span>
-          <span>{styleName}</span>
-          <span>{category}</span>
-          <span>{description}</span>
-          <Features features={features} />
-          <StarRatings ratings={ratings} />
+          {onSale(sale_price)}
+          <span>Style {prodCounter + 1} of {prodLength + 1}: {name}</span>
+          <span>{selectedProductInfo.name}</span>
+          <span>{selectedProductInfo.slogan}</span>
+          <span>{selectedProductInfo.category}</span>
+          <span>{selectedProductInfo.description}</span>
+          <Features features={selectedProductInfo.features} />
+          <StarRatings ratings={reviewsMeta} />
         </Description>
       </CompareCard>
     );
@@ -104,8 +105,11 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   return (
     <Background>
       <ModalContainer>
-        <Button onClick={() => { setOpenModal(false); }}>X</Button>
+        <CloseBtn onClick={() => { setOpenModal(false); }}>X</CloseBtn>
         <h2>Comparing</h2>
+        <a href="#Overview">
+          <OverviewBtn onClick={changeOverview}>VIEW PRODUCT</OverviewBtn>
+        </a>
         <Compare>
           {compCards.slice(compCounter, compCounter + 1)}
           {prodCards.slice(prodCounter, prodCounter + 1)}

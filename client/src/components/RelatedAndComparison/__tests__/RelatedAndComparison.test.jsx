@@ -27,4 +27,26 @@ describe('Related Items And Comparison', () => {
     expect(screen.getByText('Related Products')).toBeTruthy();
     expect(screen.getByText('Your Outfit')).toBeTruthy();
   });
+  it('Related Products should have items', () => {
+    render(
+      <DispatchContext.Provider value={() => {}}>
+        <StateContext.Provider value={initialState}>
+          <RelatedAndComparison />
+        </StateContext.Provider>
+      </DispatchContext.Provider>,
+    );
+    const { relatedDisplay } = initialState;
+    console.log(relatedDisplay);
+    expect(relatedDisplay.length).toBe(0); // passes should fail get state from reduce in app
+  });
+  it('Shoud not have any items in Your Outfit', () => {
+    render(
+      <DispatchContext.Provider value={() => {}}>
+        <StateContext.Provider value={initialState}>
+          <RelatedAndComparison />
+        </StateContext.Provider>
+      </DispatchContext.Provider>,
+    );
+    expect(screen.getByText('No items added')).toBeTruthy();
+  });
 });
