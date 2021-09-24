@@ -98,8 +98,7 @@ const Button = styled.button`
 
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
-  // const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
-  const selected = state.selectedProductInfo;
+  const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const productName = selected.name;
   const [newReview, setNewReview] = useState(
     {
