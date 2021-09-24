@@ -35,9 +35,9 @@ console.log(Number(window.location.pathname.slice(1)));
 export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
-  selectedProduct: Number(window.location.pathname.slice(1))
+  selectedProduct: Number(window.location.pathname.slice(1)) > 40000
     ? Number(window.location.pathname.slice(1))
-    : 48439,
+    : 48432,
   selectedProductInfo: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
