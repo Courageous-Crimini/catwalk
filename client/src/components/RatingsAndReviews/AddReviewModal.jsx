@@ -138,6 +138,7 @@ export const Modal = ({ showModal, setShowModal }) => {
   const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
   const starmeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const [error, setError] = useState(null);
   const [starHover, setStarHover] = useState(null);
   const [newReview, setNewReview] = useState(
     {
@@ -167,13 +168,19 @@ export const Modal = ({ showModal, setShowModal }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/reviews', newReview)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        throw err;
-      });
+    if (newReview.rating === 0) {
+      setError('No rating selected');
+    } else if (newReview.body.length < 50) {
+      setError('Review Body too short');
+    } else if (newReview.name === '') {
+      setError('Please enter a nickname');
+    } else {
+      axios.post('/api/reviews', newReview)
+        .then(({ data }) => setError('Submitted'))
+        .catch((err) => {
+          throw err;
+        });
+    }
   };
 
   const modalRef = useRef();
@@ -256,6 +263,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                 <P> For authentication reasons, you will not be emailed</P>
                 <Button> Submit </Button>
               </Form>
+              {error}
             </ModalContent>
             <CloseModalButton
               area-label="Close modal"
