@@ -139,7 +139,8 @@ function validateEmail(email) {
 
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
-  const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  //const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const selected = state.selectedProduct;
   const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
   const starMeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
