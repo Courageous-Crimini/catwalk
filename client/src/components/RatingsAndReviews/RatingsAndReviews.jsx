@@ -23,7 +23,7 @@ justify-content: center;
 
 margin: 0;
 height: 100%;
-padding: 0 50px 50px 100px;
+padding: 50px 100px;
 background: white;
 `;
 

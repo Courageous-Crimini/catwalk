@@ -31,18 +31,21 @@ font-size: 2.6em;
 
 const AlignRight = styled.div`
 float: right;
+font-size: 0.8em;
 text-align: right;
 width: 33%;
 `;
 
 const AlignMiddle = styled.div`
 float: left;
+font-size: 0.8em;
 text-align: center;
 width: 33%;
 `;
 
 const AlignLeft = styled.div`
 float: left;
+font-size: 0.8em;
 width: 33%;
 `;
 
