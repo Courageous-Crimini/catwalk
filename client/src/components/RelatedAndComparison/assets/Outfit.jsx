@@ -1,14 +1,15 @@
-/* eslint-disable prefer-destructuring */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
 import { RelatedContext } from '../Context.jsx';
-import Images from './Images.jsx';
 import StarRatings from './StarRatings.jsx';
+import Images from './Images.jsx';
 import {
   CardsContainer, Card, LeftArrow, RightArrow, Description,
 } from '../styles.jsx';
 
-const Outfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArrow }) => {
+const Outfit = ({
+  showRightArrow, showLeftArrow, removeOutfit, crossPrice, onSale,
+}) => {
   const [currentCard, setCurrentCard] = useState(0);
   const { yourOutfit } = useContext(RelatedContext);
   const length = yourOutfit.length - 1;
@@ -22,18 +23,18 @@ const Outfit = ({ removeOutfit, crossPrice, onSale, showLeftArrow, showRightArro
 
   const cards = yourOutfit.map((item) => {
     const {
-      salePrice, category, name, photos, styleName, styleID, originalPrice, ratings,
+      styleID, category, name, styleName, originalPrice, salePrice, photos, ratings,
     } = item;
 
     return (
       <Card key={item.styleID}>
         <Images
-          photos={photos}
-          crossPrice={crossPrice}
           removeOutfit={removeOutfit}
-          sale={salePrice}
+          crossPrice={crossPrice}
           orig={originalPrice}
           styleID={styleID}
+          sale={salePrice}
+          photos={photos}
         />
         <Description>
           <span>{category}</span>

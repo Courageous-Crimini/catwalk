@@ -1,15 +1,10 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { StateContext } from '../App.jsx';
+import React, { useState, useContext } from 'react';
 import { RelatedContext } from './Context.jsx';
-import Modal from './assets/Modal.jsx';
-/* eslint-disable prefer-destructuring */
-/* eslint-disable no-plusplus */
-import axios from 'axios';
+import { StateContext } from '../App.jsx';
 import RelatedProducts from './assets/RelatedProducts.jsx';
+import Modal from './assets/Modal.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
-
-// Refactor to use the filter function instead of having an pIdx tracker later
 
 const RelatedAndComparison = () => {
   const state = useContext(StateContext);
@@ -17,6 +12,16 @@ const RelatedAndComparison = () => {
   const [yourOutfit, setYourOutfit] = useState([]);
   const [modalKey, setModalKey] = useState('');
   const [openModal, setOpenModal] = useState(false);
+
+  // document.addEventListener('click', (event) => {
+  //   console.log(1, openModal);
+  //   if (openModal === true) {
+  //     console.log('got here');
+  //     setOpenModal(false);
+  //     console.log(2, openModal);
+  //   }
+  //   console.log(3, openModal);
+  // });
 
   const addOutfit = (id) => {
     let isThere = false;
@@ -68,25 +73,25 @@ const RelatedAndComparison = () => {
       >
         {openModal && <Modal
           crossPrice={crossPrice}
-          onSale={onSale}
           addOutfit={addOutfit}
+          onSale={onSale}
         />}
         <Container>
           <h2>Related Products</h2>
           <RelatedProducts
-            addOutfit={addOutfit}
-            crossPrice={crossPrice}
-            onSale={onSale}
-            showLeftArrow={showLeftArrow}
             showRightArrow={showRightArrow}
+            showLeftArrow={showLeftArrow}
+            crossPrice={crossPrice}
+            addOutfit={addOutfit}
+            onSale={onSale}
           />
           <h2>Your Outfit</h2>
           <YourOutfit
+            showRightArrow={showRightArrow}
+            showLeftArrow={showLeftArrow}
             removeOutfit={removeOutfit}
             crossPrice={crossPrice}
             onSale={onSale}
-            showLeftArrow={showLeftArrow}
-            showRightArrow={showRightArrow}
           />
         </Container>
       </RelatedContext.Provider>
@@ -95,10 +100,3 @@ const RelatedAndComparison = () => {
 };
 
 export default RelatedAndComparison;
-
-/* Notes
-Tests:
-- check api and make sure the correct images are stores for each style
-- check api and make sure the correct price for each style renders to the page
-- make sure only 5 items can render to page at a time under all circumstances
-*/

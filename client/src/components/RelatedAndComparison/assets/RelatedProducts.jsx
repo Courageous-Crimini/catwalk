@@ -3,9 +3,9 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useContext } from 'react';
 import { FaRegArrowAltCircleLeft, FaRegArrowAltCircleRight } from 'react-icons/fa';
-import StarRatings from './StarRatings.jsx';
 import { ACTIONS, DispatchContext, StateContext } from '../../App.jsx';
 import { RelatedContext } from '../Context.jsx';
+import StarRatings from './StarRatings.jsx';
 import {
   CardsContainer,
   ImageContainer,
