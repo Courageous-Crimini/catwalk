@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import moment from 'moment';
+import ReviewImage from './ReviewImage.jsx';
 
 const Wrapper = styled.section`
 height: 100%;
@@ -122,7 +123,11 @@ const Review = ({ review }) => {
       )}
         <div>
           {(review.photos.length !== 0)
-        && (review.photos.map((photo) => (<img src={photo.url} key={photo.url} alt="" height="50" />))) }
+        && (review.photos.map((photo) => (
+          <>
+            <ReviewImage url={photo.url} />
+          </>
+        ))) }
         </div>
         {(review.recommend) && <div>✓ I recommend this product</div>}
         {(review.response !== null && review.response !== '')
