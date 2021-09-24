@@ -154,9 +154,15 @@ export const Modal = ({ showModal, setShowModal }) => {
   );
 
   const handleChange = (event) => {
-    setNewReview({
-      ...newReview, [event.target.name]: event.target.value,
-    });
+    if (event.target.name === 'rating') {
+      setNewReview({
+        ...newReview, [event.target.name]: Number(event.target.value),
+      });
+    } else {
+      setNewReview({
+        ...newReview, [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
