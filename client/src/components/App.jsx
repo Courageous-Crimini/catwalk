@@ -31,11 +31,13 @@ export const ACTIONS = {
   /* RELATED COMPARISON END ------------------------------------------------- */
   SET_LOADED: 'set-loaded',
 };
-
+console.log(Location.pathname);
 export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
-  selectedProduct: null, // integer
+  selectedProduct: Number(Location.pathname)
+    ? Number(Location.pathname)
+    : 48432,
   selectedProductFeatures: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
@@ -114,20 +116,20 @@ const App = () => {
     axios.get('/api/products')
       .then((response) => {
         dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
-        return response.data[0].id;
+        // return response.data[0].id;
       })
-      .then((id) => {
-        axios.get(`/api/products/${id}/styles`)
+      .then(() => {
+        axios.get(`/api/products/${state.selectedProduct}/styles`)
           .then((response) => {
             dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
           })
           .then(() => {
-            axios.get(`/api/products/${id}`)
+            axios.get(`/api/products/${state.selectedProduct}`)
               .then((response) => {
                 dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
               })
               .then(() => {
-                axios.get(`/api/reviews/meta?product_id=${id}`)
+                axios.get(`/api/reviews/meta?product_id=${state.selectedProduct}`)
                   .then((response) => {
                     dispatch({ type: ACTIONS.REVIEWS_META_SUCCESS, payload: response.data });
                   })
