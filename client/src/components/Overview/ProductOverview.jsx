@@ -16,7 +16,8 @@ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 const ProductOverview = () => {
   const state = useContext(StateContext);
 
-  const productInfo = state.products.filter((product) => product.id === state.selectedProduct);
+  // const productInfo = state.products.filter((product) => product.id === state.selectedProduct);
+  const productInfo = state.selectedProductInfo;
 
   return (
     <Wrapper style={{
@@ -36,8 +37,8 @@ const ProductOverview = () => {
         width: '69%',
       }}
       >
-        <h2 style={{ margin: '0' }}>{productInfo[0].slogan}</h2>
-        <p style={{ width: '90%' }}>{productInfo[0].description}</p>
+        <h2 style={{ margin: '0' }}>{productInfo.slogan}</h2>
+        <p style={{ width: '90%' }}>{productInfo.description}</p>
       </div>
       <div style={{
         gridColumnStart: '2',
@@ -56,7 +57,7 @@ const ProductOverview = () => {
           width: '100%',
         }}
         >
-          {state.selectedProductFeatures.map((feature, index) => (
+          {productInfo.features.map((feature, index) => (
             <li
               key={`Feature${index + 1}`}
               style={{ padding: '1.5% 0 1.5% 20px' }}

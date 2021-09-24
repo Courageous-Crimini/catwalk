@@ -19,7 +19,7 @@ align-items: center;
 font-family: Valera Round, sans-serif;`;
 
 export const ACTIONS = {
-  PRODUCTS_SUCCESS: 'products-success',
+  SET_PRODUCT: 'set-product',
   STYLES_SUCCESS: 'styles-success',
   FEATURES_SUCCESS: 'features-success',
   REVIEWS_META_SUCCESS: 'reviews-meta-success',
@@ -31,14 +31,14 @@ export const ACTIONS = {
   /* RELATED COMPARISON END ------------------------------------------------- */
   SET_LOADED: 'set-loaded',
 };
-console.log(Location.pathname);
+// console.log(Location.pathname);
 export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
   selectedProduct: Number(Location.pathname)
     ? Number(Location.pathname)
     : 48432,
-  selectedProductFeatures: [], // array
+  selectedProductInfo: [], // array
   styles: [], // array of objects
   selectedStyle: null, // now integer; was object
 
@@ -51,12 +51,11 @@ export const initialState = {
 };
 
 const reducer = (state, action) => {
-  switch (action.type) {
-    case ACTIONS.PRODUCTS_SUCCESS:
+  switch (action.type) { // dispatch({type: ACTIONS.SET_PRODUCT, payload: ######})
+    case ACTIONS.SET_PRODUCT:
       return {
         ...state,
-        products: action.payload,
-        selectedProduct: action.payload[0].id,
+        selectedProduct: action.payload,
       };
     case ACTIONS.STYLES_SUCCESS:
       return {
@@ -72,7 +71,7 @@ const reducer = (state, action) => {
     case ACTIONS.FEATURES_SUCCESS:
       return {
         ...state,
-        selectedProductFeatures: action.payload,
+        selectedProductInfo: action.payload,
       };
     case ACTIONS.REVIEWS_META_SUCCESS:
       return {
@@ -113,33 +112,33 @@ const App = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
-    axios.get('/api/products')
+    // axios.get('/api/products')
+    //   .then((response) => {
+    //     dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
+    //     // return response.data[0].id;
+    //   })
+    //   .then(() => {
+    axios.get(`/api/products/${state.selectedProduct}/styles`)
       .then((response) => {
-        dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
-        // return response.data[0].id;
+        dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
       })
       .then(() => {
-        axios.get(`/api/products/${state.selectedProduct}/styles`)
+        axios.get(`/api/products/${state.selectedProduct}`)
           .then((response) => {
-            dispatch({ type: ACTIONS.STYLES_SUCCESS, payload: response.data.results });
+            dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data });
           })
           .then(() => {
-            axios.get(`/api/products/${state.selectedProduct}`)
+            axios.get(`/api/reviews/meta?product_id=${state.selectedProduct}`)
               .then((response) => {
-                dispatch({ type: ACTIONS.FEATURES_SUCCESS, payload: response.data.features });
+                dispatch({ type: ACTIONS.REVIEWS_META_SUCCESS, payload: response.data });
               })
               .then(() => {
-                axios.get(`/api/reviews/meta?product_id=${state.selectedProduct}`)
-                  .then((response) => {
-                    dispatch({ type: ACTIONS.REVIEWS_META_SUCCESS, payload: response.data });
-                  })
-                  .then(() => {
-                    dispatch({ type: ACTIONS.SET_LOADED });
-                  });
+                dispatch({ type: ACTIONS.SET_LOADED });
               });
           });
       });
-  }, []);
+  // });
+  }, [state.selectedProduct]);
   /* RELATED COMPARISON START ----------------------------------------------- */
   useEffect(() => {
     if (state.selectedProduct) {

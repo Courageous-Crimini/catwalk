@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import axios from 'axios';
 /* eslint-disable react/prop-types */
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
@@ -18,21 +18,10 @@ padding: 3% 5%;
 
 const ProductInfo = () => {
   const state = useContext(StateContext);
-  const productInfo = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  // eslint-disable-next-line max-len
+  // const productInfo = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const productInfo = state.selectedProductInfo;
   const styleInfo = state.styles.filter((style) => style.style_id === state.selectedStyle)[0];
-
-  // const [reviewsMeta, setReviewsMeta] = useState({});
-  // const [loaded, setLoaded] = useState(false);
-
-  // useEffect(() => {
-  //   axios.get(`/api/reviews/meta?product_id=${state.selectedProduct}`)
-  //     .then((response) => {
-  //       setReviewsMeta(response.data);
-  //     })
-  //     .then(() => {
-  //       setLoaded(true);
-  //     });
-  // }, []);
 
   return (
 
