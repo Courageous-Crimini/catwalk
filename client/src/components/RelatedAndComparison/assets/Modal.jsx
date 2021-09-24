@@ -112,7 +112,9 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       <ModalContainer>
         <CloseBtn onClick={() => { setOpenModal(false); }}>X</CloseBtn>
         <h2>Comparing</h2>
-        <OverviewBtn onClick={changeOverview}>VIEW PRODUCT</OverviewBtn>
+        <a href="#Overview">
+          <OverviewBtn onClick={changeOverview}>VIEW PRODUCT</OverviewBtn>
+        </a>
         <Compare>
           {compCards.slice(compCounter, compCounter + 1)}
           {prodCards.slice(prodCounter, prodCounter + 1)}

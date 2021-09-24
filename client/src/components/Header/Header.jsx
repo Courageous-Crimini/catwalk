@@ -15,7 +15,7 @@ justify-items: start;
 `;
 
 const Header = () => (
-  <Wrapper>
+  <Wrapper id="Overview">
     <img
       src="./logo.png"
       alt="logo"
