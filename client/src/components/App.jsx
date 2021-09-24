@@ -31,7 +31,7 @@ export const ACTIONS = {
   /* RELATED COMPARISON END ------------------------------------------------- */
   SET_LOADED: 'set-loaded',
 };
-console.log(Number(window.location.pathname.slice(1)));
+// console.log(Number(window.location.pathname.slice(1)));
 export const initialState = {
   loaded: false, // boolean
   products: [], // array of objects
