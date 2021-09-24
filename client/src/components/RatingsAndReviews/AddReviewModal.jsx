@@ -142,7 +142,15 @@ export const Modal = ({ showModal, setShowModal }) => {
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
-  const starmeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const starMeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const charMeaning = {
+    Size: ['', 'A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+    Width: ['', 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['', 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['', 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['', 'Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['', 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+  };
   const [error, setError] = useState(null);
   const [starHover, setStarHover] = useState(null);
   const [newReview, setNewReview] = useState(
@@ -163,6 +171,12 @@ export const Modal = ({ showModal, setShowModal }) => {
     if (event.target.name === 'rating') {
       setNewReview({
         ...newReview, [event.target.name]: Number(event.target.value),
+      });
+    } else if (event.target.name === 'characteristics') {
+      const curChars = newReview.characteristics;
+      curChars[event.target.id] = Number(event.target.value);
+      setNewReview({
+        ...newReview, [event.target.name]: curChars,
       });
     } else {
       setNewReview({
@@ -221,7 +235,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                         </StarLabel>
                       );
                     })}
-                    {starmeaning[newReview.rating]}
+                    {starMeaning[newReview.rating]}
                   </RadioDiv>
                 </Label>
                 <Label>
@@ -237,20 +251,20 @@ export const Modal = ({ showModal, setShowModal }) => {
                     </label>
                   </RadioDiv>
                 </Label>
-                {selectedChars.map((characteristic) => (
-                  <Label key={characteristic[1].id}>
-                    {`${characteristic[0]}: *`}
+                {selectedChars.map((char) => (
+                  <Label key={char[1].id}>
+                    {`${char[0]}: *`}
                     <RadioDiv>
                       {[...Array(5)].map((button, index) => {
-                        const ratingValue = index + 1;
+                        const charValue = index + 1;
                         return (
-                          <StarLabel key={ratingValue}>
-                            <StarInput type="radio" name="rating" value={ratingValue} onChange={handleChange} />
-                            <FaStar color={ratingValue <= (starHover || newReview.rating) ? '#ffc107' : '#e4e5e9'} size={20} onMouseEnter={() => setStarHover(ratingValue)} onMouseLeave={() => setStarHover(null)} />
+                          <StarLabel key={charValue}>
+                            <StarInput type="radio" name="characteristics" value={charValue} id={char[1].id} onChange={handleChange} />
+                            <FaStar color={charValue <= newReview.characteristics[char[1].id] ? '#ffc107' : '#e4e5e9'} size={20} />
                           </StarLabel>
                         );
                       })}
-                      {starmeaning[newReview.rating]}
+                      {charMeaning[char[0]][newReview.characteristics[char[1].id]]}
                     </RadioDiv>
                   </Label>
                 ))}
