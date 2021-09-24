@@ -7,6 +7,7 @@ import React, { useState, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
+import { FaStar } from 'react-icons/fa';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
 
@@ -85,6 +86,37 @@ const Input = styled.input`
   margin-left: 10px;
 `;
 
+const StarLabel = styled.label`
+cursor: pointer;
+`;
+
+const StarInput = styled.input`
+display: none;
+`;
+
+const TextArea = styled.textarea`
+padding: 0.1em;
+background: white;
+border: solid;
+border-color: black;
+border-width: 1px;
+width: 80%;
+height: auto;
+flex: 0 0 65%;
+margin-left: 10px;
+resize:none;
+`;
+
+const RadioDiv = styled.div`
+padding: 0.1em;
+background: white;
+border-width: 1px;
+width: 80%;
+height: 20px;
+flex: 0 0 65%;
+margin-left: 10px;
+`;
+
 const Button = styled.button`
   background: black;
   color: white;
@@ -96,14 +128,36 @@ const Button = styled.button`
   border-radius: 1.5px;
 `;
 
+const P = styled.p`
+margin: 5px;
+`;
+
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
-  const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  //const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
+  const selected = state.selectedProduct;
+  const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
+  const starMeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const charMeaning = {
+    Size: ['', 'A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
+    Width: ['', 'Too narrow', 'Slightly narrow', 'Perfect', 'Slightly wide', 'Too wide'],
+    Comfort: ['', 'Uncomfortable', 'Slightly uncomfortable', 'Ok', 'Comfortable', 'Perfect'],
+    Quality: ['', 'Poor', 'Below average', 'What I expected', 'Pretty great', 'Perfect'],
+    Length: ['', 'Runs short', 'Runs slightly short', 'Perfect', 'Runs slightly long', 'Runs long'],
+    Fit: ['', 'Runs tight', 'Runs slightly tight', 'Perfect', 'Runs slightly long', 'Runs long'],
+  };
+  const [error, setError] = useState(null);
+  const [starHover, setStarHover] = useState(null);
   const [newReview, setNewReview] = useState(
     {
       product_id: state.selectedProduct,
-      rating: 1,
+      rating: 0,
       recommend: false,
       characteristics: {},
       summary: '',
@@ -115,20 +169,46 @@ export const Modal = ({ showModal, setShowModal }) => {
   );
 
   const handleChange = (event) => {
-    setNewReview({
-      ...newReview, [event.target.name]: event.target.value,
-    });
+    if (event.target.name === 'rating') {
+      setNewReview({
+        ...newReview, [event.target.name]: Number(event.target.value),
+      });
+    } else if (event.target.name === 'characteristics') {
+      const curChars = newReview.characteristics;
+      curChars[event.target.id] = Number(event.target.value);
+      setNewReview({
+        ...newReview, [event.target.name]: curChars,
+      });
+    } else if (event.target.value === 'true' || event.target.value === 'false') {
+      setNewReview({
+        ...newReview, [event.target.name]: (event.target.value === 'true'),
+      });
+    } else {
+      setNewReview({
+        ...newReview, [event.target.name]: event.target.value,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/reviews', newReview)
-      .then(({ data }) => {
-        console.log(data);
-      })
-      .catch((err) => {
-        throw err;
-      });
+    if (newReview.rating === 0) {
+      setError('No rating selected');
+    } else if (newReview.body.length < 50) {
+      setError('Review Body too short');
+    } else if (newReview.name === '') {
+      setError('Please enter a nickname');
+    } else if (newReview.email === '') {
+      setError('Please enter an email');
+    } else if (!validateEmail(newReview.email)) {
+      setError('Email not in correct format');
+    } else {
+      axios.post('/api/reviews', newReview)
+        .then(({ data }) => setError('Submitted'))
+        .catch((err) => {
+          throw err;
+        });
+    }
   };
 
   const modalRef = useRef();
@@ -150,31 +230,62 @@ export const Modal = ({ showModal, setShowModal }) => {
               <Form onSubmit={handleSubmit}>
                 <Label>
                   Overall rating: *
-                  <Input name="rating" value={newReview.rating} onChange={handleChange} />
+                  <RadioDiv>
+                    {[...Array(5)].map((star, index) => {
+                      const ratingValue = index + 1;
+                      return (
+                        <StarLabel key={ratingValue}>
+                          <StarInput type="radio" name="rating" value={ratingValue} onChange={handleChange} />
+                          <FaStar color={ratingValue <= (starHover || newReview.rating) ? '#ffc107' : '#e4e5e9'} size={20} onMouseEnter={() => setStarHover(ratingValue)} onMouseLeave={() => setStarHover(null)} />
+                        </StarLabel>
+                      );
+                    })}
+                    {starMeaning[newReview.rating]}
+                  </RadioDiv>
                 </Label>
-                <div className="rating">
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                  <span>☆</span>
-                </div>
                 <Label>
                   Do you recommend this product? *
-                  <Input name="recommend" value={newReview.recommend} onChange={handleChange} />
+                  <RadioDiv>
+                    <label>
+                      <input type="radio" id="yes" name="recommend" value="true" onChange={handleChange} />
+                      Yes
+                    </label>
+                    <label>
+                      <input type="radio" id="no" name="recommend" value="false" onChange={handleChange} defaultChecked />
+                      No
+                    </label>
+                  </RadioDiv>
                 </Label>
-                <Label>
-                  Characteristics: *
-                  <Input name="characteristics" value={newReview.characteristics} onChange={handleChange} />
-                </Label>
+                {selectedChars.map((char) => (
+                  <Label key={char[1].id}>
+                    {`${char[0]}: *`}
+                    <RadioDiv>
+                      {[...Array(5)].map((button, index) => {
+                        const charValue = index + 1;
+                        return (
+                          <StarLabel key={charValue}>
+                            <StarInput type="radio" name="characteristics" value={charValue} id={char[1].id} onChange={handleChange} />
+                            <FaStar color={charValue <= newReview.characteristics[char[1].id] ? '#ffc107' : '#e4e5e9'} size={20} />
+                          </StarLabel>
+                        );
+                      })}
+                      {charMeaning[char[0]][newReview.characteristics[char[1].id]]}
+                    </RadioDiv>
+                  </Label>
+                ))}
                 <Label>
                   Review Summary:
                   <Input name="summary" placeholder="Example: Best purchase ever!" value={newReview.summary} onChange={handleChange} />
                 </Label>
                 <Label>
                   Review Body: *
-                  <Input name="body" placeholder="Why did you like the product or not?" maxLength="1000" value={newReview.body} onChange={handleChange} />
+                  <TextArea name="body" placeholder="Why did you like the product or not?" rows="6" maxLength="1000" value={newReview.body} onChange={handleChange} />
                 </Label>
+                <P>
+                  {(newReview.body.length >= 50)
+                    ? 'Minimum reached'
+                    : `Minimum required characters left: [${50 - newReview.body.length}]`}
+                </P>
                 <Label>
                   Photos
                   <Input name="photos" value={newReview.photos} onChange={handleChange} />
@@ -183,14 +294,15 @@ export const Modal = ({ showModal, setShowModal }) => {
                   Nickname: *
                   <Input name="name" placeholder="Example: jackson11!" maxLength="60" value={newReview.name} onChange={handleChange} />
                 </Label>
-                <p> For privacy reasons, do not use your full name or email address </p>
+                <P> For privacy reasons, do not use your full name or email address </P>
                 <Label>
-                  Email:
+                  Email: *
                   <Input name="email" maxLength="60" value={newReview.email} onChange={handleChange} />
                 </Label>
-                <p> For authentication reasons, you will not be emailed</p>
+                <P> For authentication reasons, you will not be emailed</P>
                 <Button> Submit </Button>
               </Form>
+              {error}
             </ModalContent>
             <CloseModalButton
               area-label="Close modal"

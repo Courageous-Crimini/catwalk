@@ -59,56 +59,73 @@ const StyleSelector = () => {
           {state.styles.filter((style) => style.style_id === state.selectedStyle)[0].name}
         </p>
       </div>
-      {state.styles.map((style, index) => {
-        if (style.style_id === state.selectedStyle) {
+      <div
+        style={{
+          gridColumnStart: '1',
+          gridColumnEnd: '5',
+          gridRowStart: '2',
+          gridRowEnd: '4',
+          height: 'auto',
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'flex-start',
+          alignContent: 'center',
+          margin: '0 5%',
+        }}
+      >
+        {state.styles.map((style, index) => {
+          if (style.style_id === state.selectedStyle) {
+            return (
+              <img
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                src={style.photos[0].thumbnail_url}
+                style={{
+                  borderRadius: '50%',
+                  padding: '3px',
+                  border: '2px solid black',
+                  display: 'inline',
+                  height: '40px',
+                  width: '40px',
+                  margin: '10px',
+                  cursor: 'pointer',
+                  // flexBasis: '15%',
+                  // boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
+                  // gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
+                  // gridColumnEnd: `${index <= 3 ? index + 2 : index - 2}`,
+                  // gridRowStart: `${index <= 3 ? 2 : 3}`,
+                  // gridRowEnd: `${index <= 3 ? 3 : 4}`,
+                }}
+                alt="Style"
+              />
+            );
+          }
           return (
             <img
+              // eslint-disable-next-line max-len
+              onClick={() => { dispatch({ type: ACTIONS.SET_STYLE, payload: style.style_id }); }}
               // eslint-disable-next-line react/no-array-index-key
               key={index}
               src={style.photos[0].thumbnail_url}
               style={{
                 borderRadius: '50%',
-                padding: '3px',
-                border: '2px solid black',
                 display: 'inline',
                 height: '40px',
                 width: '40px',
-                margin: '10px',
+                margin: '15px',
                 cursor: 'pointer',
                 boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
-                gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
-                gridColumnEnd: `${index <= 3 ? index + 2 : index - 2}`,
-                gridRowStart: `${index <= 3 ? 2 : 3}`,
-                gridRowEnd: `${index <= 3 ? 3 : 4}`,
+                // flexBasis: '15%',
+                // gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
+                // gridColumnEnd: `${index <= 3 ? index + 2 : index - 2}`,
+                // gridRowStart: `${index <= 3 ? 2 : 3}`,
+                // gridRowEnd: `${index <= 3 ? 3 : 4}`,
               }}
               alt="Style"
             />
           );
-        }
-        return (
-          <img
-            // eslint-disable-next-line max-len
-            onClick={() => { dispatch({ type: ACTIONS.SET_STYLE, payload: style.style_id }); }}
-            // eslint-disable-next-line react/no-array-index-key
-            key={index}
-            src={style.photos[0].thumbnail_url}
-            style={{
-              borderRadius: '50%',
-              display: 'inline',
-              height: '40px',
-              width: '40px',
-              margin: '10px',
-              cursor: 'pointer',
-              boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
-              gridColumnStart: `${index <= 3 ? index + 1 : index - 3}`,
-              gridColumnEnd: `${index <= 3 ? index + 2 : index - 2}`,
-              gridRowStart: `${index <= 3 ? 2 : 3}`,
-              gridRowEnd: `${index <= 3 ? 3 : 4}`,
-            }}
-            alt="Style"
-          />
-        );
-      })}
+        })}
+      </div>
     </Wrapper>
   );
 };

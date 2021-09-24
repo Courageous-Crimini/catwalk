@@ -2,6 +2,9 @@ import React, { useState, useContext, useEffect } from 'react';
 import { StateContext } from '../App.jsx';
 import { RelatedContext } from './Context.jsx';
 import Modal from './assets/Modal.jsx';
+/* eslint-disable prefer-destructuring */
+/* eslint-disable no-plusplus */
+import axios from 'axios';
 import RelatedProducts from './assets/RelatedProducts.jsx';
 import YourOutfit from './assets/YourOutfit.jsx';
 import { Wrapper, Container, Price } from './styles.jsx';
@@ -51,7 +54,7 @@ const RelatedAndComparison = () => {
 
   const showLeftArrow = (currentSpot) => (currentSpot != 0 ? true : false);
   const showRightArrow = (cardLength, spot) =>
-    ((cardLength > 4 && spot < cardLength - 4) ? true : false)
+    ((cardLength > 4 && spot < cardLength - 4) ? true : false);
 
   return (
     <Wrapper>
@@ -92,3 +95,10 @@ const RelatedAndComparison = () => {
 };
 
 export default RelatedAndComparison;
+
+/* Notes
+Tests:
+- check api and make sure the correct images are stores for each style
+- check api and make sure the correct price for each style renders to the page
+- make sure only 5 items can render to page at a time under all circumstances
+*/

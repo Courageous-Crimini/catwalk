@@ -14,7 +14,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
   const state = useContext(StateContext);
   const {
     relatedStyles, relatedIdx, styles, products,
-    selectedProduct, selectedProductFeatures, reviewsMeta, /* selectedProductInfo */
+    selectedProduct, selectedProductInfo, reviewsMeta,
   } = state;
   const { modalKey, setOpenModal } = useContext(RelatedContext);
   const [compCounter, setCompCounter] = useState(0);
@@ -34,7 +34,9 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
     }
   }
   const changeOverview = () => {
-    // dispatch({ type: ACTIONS.SET_PRODUCT, payload: modalKey });
+    console.log('clicked me');
+    dispatch({ type: ACTIONS.SET_PRODUCT, payload: modalKey });
+    setOpenModal(false);
   };
 
   const nextComp = () => {
@@ -74,6 +76,7 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
       </CompareCard>
     );
   });
+  console.log(selectedProductInfo);
 
   const prodCards = styles.map((item) => {
     const { style_id, name, original_price, photos, sale_price } = item;
@@ -87,23 +90,17 @@ const Modal = ({ crossPrice, onSale, addOutfit }) => {
           nextStyle={nextProd}
           sale={sale_price}
           photos={photos}
-          id={selected[0].id}
-          // id={selectedProductInfo.id}
+          id={selectedProductInfo.id}
           styleID={style_id}
         />
         <Description size="65%">
           {onSale(sale_price)}
           <span>Style {prodCounter + 1} of {prodLength + 1}: {name}</span>
-          <span>{selected[0].name}</span>
-          <span>{selected[0].slogan}</span>
-          <span>{selected[0].category}</span>
-          <span>{selected[0].description}</span>
-          <Features features={selectedProductFeatures} />
-          {/* <span>{selectedProductInfo.name}</span> */}
-          {/* <span>{selectedProductInfo.slogan}</span> */}
-          {/* <span>{selectedProductInfo.category}</span> */}
-          {/* <span>{selectedProductInfo.description}</span> */}
-          {/* <Features features={selectedProductInfo.features} /> */}
+          <span>{selectedProductInfo.name}</span>
+          <span>{selectedProductInfo.slogan}</span>
+          <span>{selectedProductInfo.category}</span>
+          <span>{selectedProductInfo.description}</span>
+          <Features features={selectedProductInfo.features} />
           <StarRatings ratings={reviewsMeta} />
         </Description>
       </CompareCard>

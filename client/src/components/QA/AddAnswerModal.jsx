@@ -28,7 +28,6 @@ const ModalWrapper = styled.div`
     background: #fff;
     color: #000;
     display: grid;
-    // grid-template-columns: 1fr 1fr;
     position: relative;
     z-index: 1000;
     border-radius: 10px;
@@ -141,7 +140,7 @@ export const Modal = ({ showModal, setShowModal, questionId, productInfo }) => {
                 </Label>
                 <Label>
                   Email:
-                  <Input name="email" maxLength="60" placeholder="Example: Jacques@jacques.com" value={newAnswer.email} onChange={handleChange} />
+                  <Input name="email" maxLength="60" placeholder="Example: Jacques@tim.com" value={newAnswer.email} onChange={handleChange} />
                 </Label>
                 <Label>
                   Photos:
