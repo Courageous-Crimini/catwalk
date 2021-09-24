@@ -143,7 +143,33 @@ const ImageGallery = () => {
             data-testid="arrowD"
           />
           {imageState.imageCollection.map((photo, index) => {
-            if (photo.url === imageState.imageCollection[imageState.currentImageIndex].url) {
+            if (index < 6) {
+              if (photo.url === imageState.imageCollection[imageState.currentImageIndex].url) {
+                return (
+                  <img
+                    src={photo.thumbnail_url}
+                    key={index}
+                    onClick={() => {
+                      imageDispatch({
+                        type: IMAGE_ACTIONS.SET_ITEM,
+                        payload: index,
+                      });
+                    }}
+                    style={{
+                      borderRadius: '25%',
+                      order: `${index + 2}`,
+                      width: '50%',
+                      height: '11%',
+                      margin: '5%',
+                      padding: '3px',
+                      border: '2px solid black',
+                      cursor: 'pointer',
+                      boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
+                    }}
+                    alt="Thumbnail"
+                  />
+                );
+              }
               return (
                 <img
                   src={photo.thumbnail_url}
@@ -160,37 +186,14 @@ const ImageGallery = () => {
                     width: '50%',
                     height: '11%',
                     margin: '5%',
-                    padding: '3px',
-                    border: '2px solid black',
                     cursor: 'pointer',
-                    boxShadow: '0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19)',
+                    boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
                   }}
                   alt="Thumbnail"
                 />
               );
             }
-            return (
-              <img
-                src={photo.thumbnail_url}
-                key={index}
-                onClick={() => {
-                  imageDispatch({
-                    type: IMAGE_ACTIONS.SET_ITEM,
-                    payload: index,
-                  });
-                }}
-                style={{
-                  borderRadius: '25%',
-                  order: `${index + 2}`,
-                  width: '50%',
-                  height: '11%',
-                  margin: '5%',
-                  cursor: 'pointer',
-                  boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-                }}
-                alt="Thumbnail"
-              />
-            );
+            return null;
           })}
         </div>
         <IoIosArrowBack

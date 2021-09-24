@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
@@ -70,8 +71,8 @@ const ProductOverview = () => {
               {`${feature.value}`}
             </li>
           ))}
-          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; GMO and Pesticide Free</li>
-          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; Made with 100% Synthetic Materials</li>
+          {/* <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; GMO and Pesticide Free</li>
+          <li style={{ padding: '1.5% 0 1.5% 20px' }}>&#10003; Made with 100% Synthetic Materials</li> */}
         </ul>
       </div>
     </Wrapper>
