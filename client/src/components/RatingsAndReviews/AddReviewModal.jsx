@@ -7,6 +7,7 @@ import React, { useState, useRef, useContext } from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
+import { FaStar } from 'react-icons/fa';
 // eslint-disable-next-line import/no-cycle
 import { StateContext } from '../App.jsx';
 
@@ -85,6 +86,14 @@ const Input = styled.input`
   margin-left: 10px;
 `;
 
+const StarLabel = styled.label`
+cursor: pointer;
+`;
+
+const StarInput = styled.input`
+display: none;
+`;
+
 const TextArea = styled.textarea`
 padding: 0.1em;
 background: white;
@@ -128,10 +137,12 @@ export const Modal = ({ showModal, setShowModal }) => {
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
   const selectedChars = Object.entries(state.reviewsMeta.characteristics);
   const productName = selected.name;
+  const starmeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
+  const [starHover, setStarHover] = useState(null);
   const [newReview, setNewReview] = useState(
     {
       product_id: state.selectedProduct,
-      rating: 1,
+      rating: 0,
       recommend: false,
       characteristics: {},
       summary: '',
@@ -178,19 +189,17 @@ export const Modal = ({ showModal, setShowModal }) => {
               <Form onSubmit={handleSubmit}>
                 <Label>
                   Overall rating: *
-                  <Input name="rating" value={newReview.rating} onChange={handleChange} />
-                </Label>
-                <Label>
-                  Overall rating: *
                   <RadioDiv>
-                    <span className="star-cb-group">
-                      <input type="radio" id="rating-0" name="rating" value="0" className="star-cb-clear" defaultChecked />
-                      <input type="radio" id="rating-1" name="rating" value="1" />
-                      <input type="radio" id="rating-2" name="rating" value="2" />
-                      <input type="radio" id="rating-3" name="rating" value="3" />
-                      <input type="radio" id="rating-4" name="rating" value="4" />
-                      <input type="radio" id="rating-5" name="rating" value="5" />
-                    </span>
+                    {[...Array(5)].map((star, index) => {
+                      const ratingValue = index + 1;
+                      return (
+                        <StarLabel key={ratingValue}>
+                          <StarInput type="radio" name="rating" value={ratingValue} onChange={handleChange} />
+                          <FaStar color={ratingValue <= (starHover || newReview.rating) ? '#ffc107' : '#e4e5e9'} size={20} onMouseEnter={() => setStarHover(ratingValue)} onMouseLeave={() => setStarHover(null)} />
+                        </StarLabel>
+                      );
+                    })}
+                    {starmeaning[newReview.rating]}
                   </RadioDiv>
                 </Label>
                 <Label>

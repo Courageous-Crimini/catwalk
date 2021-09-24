@@ -114,7 +114,7 @@ const App = () => {
     axios.get('/api/products')
       .then((response) => {
         dispatch({ type: ACTIONS.PRODUCTS_SUCCESS, payload: response.data });
-        return response.data[6].id;
+        return response.data[0].id;
       })
       .then((id) => {
         axios.get(`/api/products/${id}/styles`)
