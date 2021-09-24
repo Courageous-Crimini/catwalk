@@ -132,6 +132,11 @@ const P = styled.p`
 margin: 5px;
 `;
 
+function validateEmail(email) {
+  const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  return re.test(String(email).toLowerCase());
+}
+
 export const Modal = ({ showModal, setShowModal }) => {
   const state = useContext(StateContext);
   const selected = state.products.filter((product) => product.id === state.selectedProduct)[0];
@@ -174,6 +179,10 @@ export const Modal = ({ showModal, setShowModal }) => {
       setError('Review Body too short');
     } else if (newReview.name === '') {
       setError('Please enter a nickname');
+    } else if (newReview.email === '') {
+      setError('Please enter an email');
+    } else if (!validateEmail(newReview.email)) {
+      setError('Email not in correct format');
     } else {
       axios.post('/api/reviews', newReview)
         .then(({ data }) => setError('Submitted'))
@@ -257,7 +266,7 @@ export const Modal = ({ showModal, setShowModal }) => {
                 </Label>
                 <P> For privacy reasons, do not use your full name or email address </P>
                 <Label>
-                  Email:
+                  Email: *
                   <Input name="email" maxLength="60" value={newReview.email} onChange={handleChange} />
                 </Label>
                 <P> For authentication reasons, you will not be emailed</P>
