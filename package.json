@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest --coverage",
     "start": "nodemon server/index.js",
+    "launch": "node server/index.js",
     "react-dev": "webpack --config ./webpack.config.js",
     "overview-test": "./client/src/components/Overview/__tests__/AddToCart.test.jsx"
   },
@@ -46,6 +47,7 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
     "@testing-library/user-event": "^13.2.1",
+    "compression-webpack-plugin": "^9.0.0",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^18.2.1",
     "eslint-plugin-import": "^2.24.2",
