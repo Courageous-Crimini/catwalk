@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import React from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-cycle
 import Ratings from './Ratings.jsx';
 // eslint-disable-next-line import/no-cycle
 import Reviews from './Reviews.jsx';
-// eslint-disable-next-line import/no-cycle
-import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 display: grid;
@@ -27,57 +24,14 @@ padding: 50px 100px;
 background: white;
 `;
 
-const RatingsAndReviews = () => {
-  const state = useContext(StateContext);
-  const id = state.selectedProduct;
-  const [reviewsMeta, setReviewsMeta] = useState({});
-  const [reviews, setReviews] = useState({});
-  const [ratingsLoaded, setRatingsLoaded] = useState(false);
-  const [reviewsLoaded, setReviewsLoaded] = useState(false);
-  useEffect(() => {
-    axios.get(`/api/reviews/meta?product_id=${id}`)
-      .then((response) => {
-        setReviewsMeta(response.data);
-      })
-      .catch((err) => {
-        throw err;
-      })
-      .then(() => {
-        setRatingsLoaded(true);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }, []);
-  useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}&count=100&sort=helpful`)
-      .then((response) => {
-        setReviews(response.data);
-      })
-      .catch((err) => {
-        throw err;
-      })
-      .then(() => {
-        setReviewsLoaded(true);
-      })
-      .catch((err) => {
-        throw err;
-      });
-  }, []);
-
-  return (
-    <div id="RatingsAndReviews">
-      <Wrapper>
-        <h2> Ratings & Reviews</h2>
-        {ratingsLoaded
-          ? <Ratings meta={reviewsMeta} />
-          : <h4>Loading...</h4>}
-        {reviewsLoaded
-          ? <Reviews reviews={reviews} />
-          : <h4>Loading...</h4>}
-      </Wrapper>
-    </div>
-  );
-};
+const RatingsAndReviews = () => (
+  <div id="RatingsAndReviews">
+    <Wrapper>
+      <h2> Ratings & Reviews</h2>
+      <Ratings />
+      <Reviews />
+    </Wrapper>
+  </div>
+);
 
 export default RatingsAndReviews;
