@@ -1,13 +1,17 @@
 /* eslint-disable react/prop-types */
-import React, { useState /* , useEffect, useContext */ } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 // import axios from 'axios';
 import Review from './Review.jsx';
 // eslint-disable-next-line import/no-cycle
 import AddReview from './AddReview.jsx';
+// eslint-disable-next-line import/no-cycle
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 height: auto;
+max-width: 940px;
 grid-column-start: 2;
 grid-column-end: 3;
 grid-row-start: 2
@@ -42,11 +46,24 @@ const Button = styled.button`
 `;
 
 const ReviewsList = ({ reviews }) => {
+  const state = useContext(StateContext);
+  const id = state.selectedProduct;
+  const [curReviews, setCurReviews] = useState([]);
   const numReviews = reviews.length;
-  // const state = useContext(StateContext);
-  // const id = state.selectedProduct;
-  const [currentReviews, setReviews] = useState(reviews.slice(0, 2));
+  const [currentReviews, setReviews] = useState([]);
   const [limit, setLimit] = useState(2);
+
+  useEffect(() => {
+    axios.get(`/api/reviews?product_id=${id}&count=100&sort=helpful`)
+      .then((response) => {
+        setCurReviews(response.data.results);
+        setReviews(response.data.results.slice(0, 2));
+        setLimit(2);
+      })
+      .catch((err) => {
+        throw err;
+      });
+  }, [state.selectedProduct]);
 
   //  useEffect(() => {
   //    axios.get(`/api/reviews?product_id=${id}&count=${limit}&sort=helpful`)

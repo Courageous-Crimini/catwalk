@@ -30,9 +30,9 @@ background: white;
 const RatingsAndReviews = () => {
   const state = useContext(StateContext);
   const id = state.selectedProduct;
-  const [reviewsMeta, setReviewsMeta] = useState({});
   const [reviews, setReviews] = useState({});
   const [ratingsLoaded, setRatingsLoaded] = useState(false);
+  const [reviewsMeta, setReviewsMeta] = useState({});
   const [reviewsLoaded, setReviewsLoaded] = useState(false);
   useEffect(() => {
     axios.get(`/api/reviews/meta?product_id=${id}`)
