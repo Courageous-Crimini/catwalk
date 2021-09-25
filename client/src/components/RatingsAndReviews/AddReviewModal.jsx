@@ -3,7 +3,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /* eslint-disable import/prefer-default-export */
-import React, { useState, useRef, useContext } from 'react';
+import React, {
+  useState, useRef, useContext, useEffect,
+} from 'react';
 import styled from 'styled-components';
 import { MdClose } from 'react-icons/md';
 import axios from 'axios';
@@ -168,6 +170,12 @@ export const Modal = ({ showModal, setShowModal }) => {
       body: '',
     },
   );
+
+  useEffect(() => {
+    setNewReview({
+      ...newReview, product_id: state.selectedProduct,
+    });
+  }, [state.selectedProduct]);
 
   const handleChange = (event) => {
     if (event.target.name === 'rating') {

@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+// eslint-disable-next-line import/no-cycle
+import { StateContext } from '../App.jsx';
 
 const Wrapper = styled.section`
 height: auto;
@@ -101,6 +103,7 @@ export const generateStar = (rating, width, height, index) => {
     </svg>
   );
 };
+
 export const generateStars = (rating, width, height) => {
   const starsArray = [];
   let num = rating;
@@ -149,69 +152,74 @@ export const getRecommendPercent = (recObj) => {
   return 100 * (recTrue / (recTrue + recFalse));
 };
 
-const Ratings = ({ meta }) => (
-  <Wrapper>
-    <div>
+const Ratings = () => {
+  const state = useContext(StateContext);
+  const meta = state.reviewsMeta;
+
+  return (
+    <Wrapper>
       <div>
-        { (getAverageRating(meta.ratings) === 'No ratings')
-          ? 'No ratings yet'
-          : (
-            <RatingNumber>
-              {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
-              {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
-            </RatingNumber>
-          )}
-      </div>
-      <div>
-        { (getRecommendPercent(meta.recommended) === 'None')
-          ? 'No recommendations yet'
-          : `${Math.round(getRecommendPercent(meta.recommended))}% of reviews recommend this product`}
-      </div>
-      {Array.from(Array(5).keys()).map((num) => (
-        <div key={5 - num}>
-          {5 - num}
-          {' stars '}
-          <meter
-            min="0"
-            max={getAverageRating(meta.ratings)[1]}
-            value={meta.ratings[5 - num]}
-          />
-          {` ${meta.ratings[5 - num] || 0}`}
+        <div>
+          { (getAverageRating(meta.ratings) === 'No ratings')
+            ? 'No ratings yet'
+            : (
+              <RatingNumber>
+                {`${Math.round(getAverageRating(meta.ratings)[0] * 10) / 10} `}
+                {generateStars(getAverageRating(meta.ratings)[0], 34, 32)}
+              </RatingNumber>
+            )}
         </div>
-      ))}
-      {Object.entries(meta.characteristics).map((characteristic) => {
-        if (characteristic[1].value !== null) {
-          return (
-            <div key={characteristic[1].id}>
-              <div>
-                <CharTitle>{`${characteristic[0]}: `}</CharTitle>
-                <CharacteristicBar>
-                  <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
-                    ▼
-                  </Indicator>
-                  {/*
+        <div>
+          { (getRecommendPercent(meta.recommended) === 'None')
+            ? 'No recommendations yet'
+            : `${Math.round(getRecommendPercent(meta.recommended))}% of reviews recommend this product`}
+        </div>
+        {Array.from(Array(5).keys()).map((num) => (
+          <div key={5 - num}>
+            {5 - num}
+            {' stars '}
+            <meter
+              min="0"
+              max={getAverageRating(meta.ratings)[1]}
+              value={meta.ratings[5 - num]}
+            />
+            {` ${meta.ratings[5 - num] || 0}`}
+          </div>
+        ))}
+        {Object.entries(meta.characteristics).map((characteristic) => {
+          if (characteristic[1].value !== null) {
+            return (
+              <div key={characteristic[1].id}>
+                <div>
+                  <CharTitle>{`${characteristic[0]}: `}</CharTitle>
+                  <CharacteristicBar>
+                    <Indicator distance={`${String((Number(characteristic[1].value) / 5) * 94)}%`}>
+                      ▼
+                    </Indicator>
+                    {/*
               <Indicator distance={'94%'}>
                 ▼
               </Indicator>
               */}
-                </CharacteristicBar>
-                <AlignLeft>
-                  {CharMarkers[characteristic[0]][0]}
-                </AlignLeft>
-                <AlignMiddle>
-                  {CharMarkers[characteristic[0]][1]}
-                </AlignMiddle>
-                <AlignRight>
-                  {CharMarkers[characteristic[0]][2]}
-                </AlignRight>
+                  </CharacteristicBar>
+                  <AlignLeft>
+                    {CharMarkers[characteristic[0]][0]}
+                  </AlignLeft>
+                  <AlignMiddle>
+                    {CharMarkers[characteristic[0]][1]}
+                  </AlignMiddle>
+                  <AlignRight>
+                    {CharMarkers[characteristic[0]][2]}
+                  </AlignRight>
+                </div>
               </div>
-            </div>
-          );
-        }
-        return null;
-      })}
-    </div>
-  </Wrapper>
-);
+            );
+          }
+          return null;
+        })}
+      </div>
+    </Wrapper>
+  );
+};
 
 export default Ratings;

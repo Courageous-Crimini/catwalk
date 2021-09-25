@@ -45,11 +45,11 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-const ReviewsList = ({ reviews }) => {
+const ReviewsList = () => {
   const state = useContext(StateContext);
   const id = state.selectedProduct;
   const [curReviews, setCurReviews] = useState([]);
-  const numReviews = reviews.length;
+  const [numReviews, setNumReviews] = useState(0);
   const [currentReviews, setReviews] = useState([]);
   const [limit, setLimit] = useState(2);
 
@@ -57,6 +57,7 @@ const ReviewsList = ({ reviews }) => {
     axios.get(`/api/reviews?product_id=${id}&count=100&sort=helpful`)
       .then((response) => {
         setCurReviews(response.data.results);
+        setNumReviews(response.data.results.length);
         setReviews(response.data.results.slice(0, 2));
         setLimit(2);
       })
@@ -64,16 +65,6 @@ const ReviewsList = ({ reviews }) => {
         throw err;
       });
   }, [state.selectedProduct]);
-
-  //  useEffect(() => {
-  //    axios.get(`/api/reviews?product_id=${id}&count=${limit}&sort=helpful`)
-  //      .then(({ data }) => {
-  //        setReviews(data.results);
-  //      })
-  //      .catch((err) => {
-  //        throw err;
-  //      });
-  //  }, [limit]);
 
   return (
     <div className="reviewslist">
@@ -90,7 +81,7 @@ const ReviewsList = ({ reviews }) => {
       <Button
         className="toggle"
         onClick={() => {
-          setReviews(reviews.slice(0, limit + 2));
+          setReviews(curReviews.slice(0, limit + 2));
           setLimit((prevState) => prevState + 2);
         }}
       >
@@ -129,11 +120,11 @@ class SortByDropdown extends React.Component {
   }
 }
 
-const Reviews = ({ reviews }) => (
+const Reviews = () => (
   <Wrapper>
     <div>
       <SortByDropdown />
-      <ReviewsList reviews={reviews.results} />
+      <ReviewsList />
     </div>
   </Wrapper>
 );
