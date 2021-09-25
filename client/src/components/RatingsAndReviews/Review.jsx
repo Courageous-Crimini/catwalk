@@ -22,6 +22,10 @@ font-family: Valera Round,sans-serif;
 font-size: 16px
 `;
 
+const BodyDiv = styled.div`
+overflow-wrap: break-word;
+`;
+
 const Row = styled.div`
     display: flex;
     align-items: center;
@@ -108,10 +112,10 @@ const Review = ({ review }) => {
         <AlignLeft style={{ fontWeight: 'bold' }}>
           {review.summary}
         </AlignLeft>
-        <span>
+        <BodyDiv>
           {body}
           <br />
-        </span>
+        </BodyDiv>
         {(showMore)
       && (
       <Button

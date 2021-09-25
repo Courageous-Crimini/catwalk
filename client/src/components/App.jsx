@@ -153,7 +153,7 @@ const App = () => {
                 .then(({ data }) => data));
               Promise.all(relatedStylesData)
                 .then((responseStyles) => {
-                  const relatedRatingsData = idResponse.map((item) => axios.get(`api/reviews/meta?product_id=${state.selectedProduct}`)
+                  const relatedRatingsData = idResponse.map((item) => axios.get(`api/reviews/meta?product_id=${item}`)
                     .then(({ data }) => data));
                   Promise.all(relatedRatingsData)
                     .then((responseRatings) => {
