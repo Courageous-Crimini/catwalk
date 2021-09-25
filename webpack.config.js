@@ -1,4 +1,5 @@
 const path = require('path');
+require('compression-webpack-plugin');
 
 const SRC_DIR = '/client';
 const DIST_DIR = './public';
@@ -9,9 +10,9 @@ module.exports = {
     filename: 'bundle.js',
     path: path.join(__dirname, SRC_DIR, DIST_DIR),
   },
-  devtool: 'eval-source-map',
+  devtool: false,
   watch: true,
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
@@ -27,8 +28,10 @@ module.exports = {
             plugins: [
               ['@babel/plugin-transform-runtime',
                 {
-                  "regenerator": true
+                  regenerator: true,
                 },
+                // new CompressionPlugin(),
+                'compression-webpack-plugin',
               ],
             ],
           },
