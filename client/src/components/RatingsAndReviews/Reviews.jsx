@@ -54,7 +54,7 @@ const ReviewsList = () => {
   const [limit, setLimit] = useState(2);
 
   useEffect(() => {
-    axios.get(`/api/reviews?product_id=${id}&count=100&sort=helpful`)
+    axios.get(`/api/reviews?product_id=${id}&count=100&sort=relevant`)
       .then((response) => {
         setCurReviews(response.data.results);
         setNumReviews(response.data.results.length);
