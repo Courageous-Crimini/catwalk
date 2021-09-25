@@ -145,7 +145,7 @@ export const Modal = ({ showModal, setShowModal }) => {
   const selected = state.selectedProductInfo;
   const selectedChars = Object.entries(state.reviewsMeta.characteristics);
 
-  const productName = selected.name;
+  const productName = state.selectedProductInfo.name;
   const starMeaning = ['', 'Poor', 'Fair', 'Average', 'Good', 'Great'];
   const charMeaning = {
     Size: ['', 'A size too small', '1/2 a size too small', 'Perfect', '1/2 a size too big', 'A size too wide'],
